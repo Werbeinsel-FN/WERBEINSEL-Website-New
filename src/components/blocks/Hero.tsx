@@ -34,11 +34,11 @@ export function Hero({
         style={hintergrund ? { backgroundColor: hintergrund } : undefined}
       >
         <div className="container-site text-center">
-          <h1 className="mx-auto max-w-[18ch] whitespace-pre-line font-unbounded text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.15] text-brand-black">
+          <h1 className="heading-hero mx-auto max-w-[18ch] whitespace-pre-line text-brand-black">
             {titel}
           </h1>
           {untertitel ? (
-            <p className="mx-auto mt-6 max-w-[42ch] whitespace-pre-line font-poppins text-lg leading-relaxed text-brand-black/80 md:text-xl">
+            <p className="body-lead mx-auto mt-6 max-w-[42ch] whitespace-pre-line text-brand-black/80">
               {untertitel}
             </p>
           ) : null}
@@ -62,8 +62,9 @@ export function Hero({
     )
   }
 
+  /* Figma Section / Hero: Höhe ~771, Karte radius 40, padding 64, width 1100 */
   return (
-    <section className="relative min-h-[min(92svh,900px)] overflow-hidden">
+    <section className="relative h-[min(92svh,771px)] min-h-[420px] overflow-hidden md:min-h-[560px]">
       {media ? (
         <Image
           src={media.url}
@@ -83,20 +84,18 @@ export function Hero({
           aria-hidden
         />
       )}
-      <div className="absolute inset-0 bg-black/40" aria-hidden />
+      <div className="absolute inset-0 bg-black/45" aria-hidden />
 
-      <div className="relative z-10 flex min-h-[min(92svh,900px)] items-center justify-center px-5 py-16 sm:px-6 lg:px-8">
-        <div className="w-full max-w-[42rem] rounded-[1.75rem] bg-brand-yellow px-7 py-10 text-center sm:rounded-[2rem] sm:px-14 sm:py-14 md:px-16 md:py-16">
-          <h1 className="whitespace-pre-line font-unbounded text-[clamp(1.85rem,4.8vw,3.75rem)] font-extrabold leading-[1.12] tracking-tight text-brand-black">
-            {titel}
-          </h1>
+      <div className="relative z-10 flex h-full items-center justify-center px-5 py-12 sm:px-8 md:py-24">
+        <div className="w-full max-w-[1100px] rounded-[40px] bg-brand-yellow px-6 py-10 text-center sm:px-12 sm:py-12 md:px-16 md:py-16">
+          <h1 className="heading-hero whitespace-pre-line text-brand-black">{titel}</h1>
           {untertitel ? (
-            <p className="mx-auto mt-5 max-w-[34ch] whitespace-pre-line font-poppins text-base leading-relaxed text-brand-black/85 md:text-lg">
+            <p className="body-lead mx-auto mt-6 max-w-[600px] whitespace-pre-line text-brand-black">
               {untertitel}
             </p>
           ) : null}
           {buttons?.length ? (
-            <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:mt-12 sm:flex-row sm:items-center sm:gap-4">
               {buttons.map((btn) => (
                 <Button
                   key={`${btn.label}-${btn.url}`}

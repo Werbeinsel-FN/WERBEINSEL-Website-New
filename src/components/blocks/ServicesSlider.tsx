@@ -67,7 +67,7 @@ export function ServicesSlider({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold text-brand-black">
+          <h2 className="heading-section text-brand-black">
             {ueberschrift || 'Was wir machen'}
           </h2>
           <div className="mt-8 hidden justify-center gap-3 sm:flex">
@@ -100,7 +100,7 @@ export function ServicesSlider({
               const media = resolveMedia(slide.bild, slide.titel)
               const card = (
                 <article
-                  className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-brand-black"
+                  className="relative aspect-[3/4] overflow-hidden rounded-[24px] bg-brand-black"
                   role="group"
                   aria-roledescription="slide"
                   aria-label={`${i + 1} von ${slides.length}: ${slide.titel}`}
@@ -118,12 +118,12 @@ export function ServicesSlider({
                     <div className="absolute inset-0 bg-brand-card-dark" />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-6">
-                    <h3 className="font-unbounded text-xl font-extrabold text-brand-yellow md:text-2xl">
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-center md:p-8">
+                    <h3 className="font-unbounded text-[1.35rem] font-extrabold leading-[1.1] text-brand-yellow md:text-[1.75rem]">
                       {slide.titel}
                     </h3>
                     {slide.kurztext ? (
-                      <p className="mt-2 line-clamp-2 font-poppins text-sm text-white md:text-base">
+                      <p className="mt-2 line-clamp-2 font-poppins text-sm font-medium leading-snug text-white md:text-base">
                         {slide.kurztext}
                       </p>
                     ) : null}

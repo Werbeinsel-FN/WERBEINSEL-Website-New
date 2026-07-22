@@ -15,7 +15,7 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
     <section className={`section-pad ${isYellow ? 'bg-brand-yellow' : 'bg-brand-black'}`}>
       <div className="container-site text-center">
         <h2
-          className={`mx-auto max-w-[18ch] whitespace-pre-line font-unbounded text-[clamp(2rem,5.5vw,4rem)] font-extrabold leading-[1.15] ${
+          className={`heading-section mx-auto max-w-[18ch] whitespace-pre-line ${
             isYellow ? 'text-brand-black' : 'text-brand-yellow'
           }`}
         >
@@ -23,7 +23,7 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
         </h2>
         {text ? (
           <p
-            className={`mx-auto mt-6 max-w-[40ch] font-poppins text-lg leading-relaxed md:text-xl ${
+            className={`body-lead mx-auto mt-6 max-w-[40ch] ${
               isYellow ? 'text-brand-black/80' : 'text-white/70'
             }`}
           >

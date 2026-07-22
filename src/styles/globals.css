@@ -21,11 +21,15 @@
     @apply bg-white font-poppins text-brand-black antialiased;
   }
 
+  /* Figma: Display/Hero + Heading/Section → textCase UPPER */
   h1,
-  h2,
+  h2 {
+    @apply font-unbounded font-extrabold uppercase leading-[1.1] tracking-[-0.01em];
+  }
+
   h3,
   h4 {
-    @apply font-unbounded font-extrabold leading-[1.2];
+    @apply font-unbounded font-extrabold leading-[1.15];
   }
 
   :focus-visible {
@@ -51,7 +55,26 @@
   }
 
   .container-site {
-    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-6 lg:px-8;
+    /* Figma content width ~1780 within 2908 artboard */
+    @apply mx-auto w-full max-w-[1112px] px-5 sm:px-6 lg:px-8 xl:max-w-[1280px] 2xl:max-w-[1780px];
+  }
+
+  .heading-hero {
+    font-size: var(--text-hero);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .heading-section {
+    font-size: var(--text-section);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .body-lead {
+    font-size: var(--text-lead);
+    line-height: 1.6;
+    font-weight: 500;
   }
 
   /* Icon-/Nummern-Kreise immer quadratisch halten */

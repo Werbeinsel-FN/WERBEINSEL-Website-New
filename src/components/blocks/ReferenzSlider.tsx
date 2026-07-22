@@ -69,11 +69,11 @@ export function ReferenzSlider({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="whitespace-pre-line text-center font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold text-brand-black">
+          <h2 className="heading-section whitespace-pre-line text-center text-brand-black">
             {ueberschrift}
           </h2>
           {untertitel ? (
-            <p className="mx-auto mt-4 max-w-[42ch] whitespace-pre-line text-center font-poppins text-base text-brand-black/70 md:text-lg">
+            <p className="body-lead mx-auto mt-4 max-w-[42ch] whitespace-pre-line text-center text-brand-black/80">
               {untertitel}
             </p>
           ) : null}
@@ -106,7 +106,7 @@ export function ReferenzSlider({
             {slides.map((slide, i) => {
               const media = resolveMedia(slide.bild, slide.titel)
               const inner = (
-                <article className="overflow-hidden rounded-3xl bg-brand-card-light">
+                <article className="overflow-hidden rounded-[24px] bg-brand-card-light">
                   <div className="relative aspect-[3/4] overflow-hidden bg-brand-muted/30">
                     {media ? (
                       <Image

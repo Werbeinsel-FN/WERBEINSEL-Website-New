@@ -20,7 +20,7 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
             {eyebrow}
           </p>
         ) : null}
-        <h2 className="max-w-[18ch] font-unbounded text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold text-white">
+        <h2 className="heading-section max-w-[18ch] text-white">
           {ueberschrift}
         </h2>
         {typeof text === 'string' && text ? (

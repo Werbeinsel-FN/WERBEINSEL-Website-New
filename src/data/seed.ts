@@ -137,7 +137,8 @@ export const home = {
   kunden: {
     blockType: 'marquee' as const,
     ueberschrift: 'Unsere Kunden',
-    untertitel: 'Von Kultur bis Industrie – Marken, die in der Region sichtbar sein wollen.',
+    untertitel:
+      'Von Kultur bis Industrie – Marken,\ndie in der Region sichtbar sein wollen.',
     names: [
       'STADTWERKE REGIONAL',
       'MÜLLER BÄCKEREI',

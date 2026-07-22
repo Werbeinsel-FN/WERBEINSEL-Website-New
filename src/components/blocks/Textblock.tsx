@@ -35,19 +35,17 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
 
   return (
     <section className="section-pad bg-white">
-      <div className="container-site mx-auto max-w-3xl text-center">
+      <div className="container-site mx-auto max-w-[840px] text-center">
         {eyebrow ? (
           <p className="mb-4 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
             {eyebrow}
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="whitespace-pre-line font-unbounded text-[clamp(1.85rem,4.5vw,3.5rem)] font-extrabold leading-[1.15] text-brand-black">
-            {ueberschrift}
-          </h2>
+          <h2 className="heading-section whitespace-pre-line text-brand-black">{ueberschrift}</h2>
         ) : null}
         {body ? (
-          <div className="mt-6 space-y-4 whitespace-pre-line text-base leading-relaxed text-brand-black/80 md:text-xl">
+          <div className="mt-6 space-y-4 whitespace-pre-line font-poppins text-base leading-relaxed text-brand-black/80 md:mt-8 md:text-lg">
             {body}
           </div>
         ) : null}

@@ -18,7 +18,8 @@ export type ButtonProps = {
 const sizeClasses: Record<Size, string> = {
   sm: 'px-5 py-2 text-sm',
   md: 'px-7 py-3 text-base',
-  lg: 'px-9 py-4 text-lg',
+  /* Figma Label/Button: 20px / 700, padding 16×32 */
+  lg: 'px-8 py-4 text-xl font-bold',
 }
 
 function variantClasses(variant: Variant, onYellow: boolean): string {
@@ -31,7 +32,7 @@ function variantClasses(variant: Variant, onYellow: boolean): string {
     case 'secondary':
       // Figma Hero: weißer Pill mit schwarzem Text
       return onYellow
-        ? 'border-2 border-brand-black bg-white text-brand-black hover:bg-brand-black hover:text-white'
+        ? 'border border-brand-black bg-white text-brand-black hover:bg-brand-black hover:text-white'
         : 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-brand-black'
     case 'ghost':
       return onYellow

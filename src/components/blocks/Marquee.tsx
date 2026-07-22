@@ -5,6 +5,9 @@ export type MarqueeProps = {
   names?: string[] | null
 }
 
+/** Figma: Section / Clients → genau 3 Marquee-Reihen (Desktop + Mobile). */
+const ROW_COUNT = 3
+
 function chunkRows(names: string[], rowCount: number): string[][] {
   if (!names.length) return Array.from({ length: rowCount }, () => [])
   const rows: string[][] = Array.from({ length: rowCount }, () => [])
@@ -14,7 +17,7 @@ function chunkRows(names: string[], rowCount: number): string[][] {
   return rows.map((row) => {
     if (row.length === 0) return names
     const filled = [...row]
-    while (filled.length < 6) filled.push(...row)
+    while (filled.length < 8) filled.push(...row)
     return filled
   })
 }
@@ -32,19 +35,20 @@ function MarqueeRow({
 }) {
   const doubled = [...names, ...names]
   return (
-    <div className="overflow-hidden py-2">
+    /* Horizontal clip + vertikales Padding, damit Pills nicht oben/unten abgeschnitten werden */
+    <div className="overflow-hidden py-2 md:py-3">
       <div
-        className={`flex w-max gap-3 ${reverse ? 'marquee-track-reverse' : 'marquee-track'} ${offset ? 'marquee-track-offset' : ''}`}
+        className={`flex w-max items-center gap-6 md:gap-[clamp(2rem,2.5vw,4.5rem)] ${
+          reverse ? 'marquee-track-reverse' : 'marquee-track'
+        } ${offset ? 'marquee-track-offset' : ''}`}
       >
         {doubled.map((name, i) => {
           const dark = (startIndex + i) % 2 === 0
           return (
             <span
               key={`${name}-${i}`}
-              className={`inline-flex aspect-[1.9/1] min-w-[9.5rem] items-center justify-center rounded-full px-6 font-poppins text-sm font-semibold tracking-wide sm:min-w-[11rem] sm:text-base ${
-                dark
-                  ? 'bg-brand-black text-white'
-                  : 'bg-white text-brand-black ring-1 ring-brand-black/10'
+              className={`box-border inline-flex h-[120px] w-[240px] shrink-0 items-center justify-center rounded-full border border-brand-black px-[22px] text-center font-poppins text-[15px] font-bold leading-tight tracking-[0.03em] uppercase md:h-[clamp(95px,6.53vw,190px)] md:w-[clamp(180px,12.38vw,360px)] md:px-8 md:text-[clamp(0.875rem,0.6vw+0.5rem,1.125rem)] ${
+                dark ? 'bg-brand-black text-white' : 'bg-white text-brand-black'
               }`}
             >
               {name}
@@ -60,48 +64,34 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names }: MarqueePro
   const list = names?.filter(Boolean) ?? []
   if (!list.length) return null
 
-  const mobileRows = chunkRows(list, 3)
-  const desktopRows = chunkRows(list, 5)
+  const rows = chunkRows(list, ROW_COUNT)
 
   return (
-    <section className="section-pad overflow-hidden bg-brand-yellow">
-      <div className="container-site mb-10 text-center">
+    <section className="bg-brand-yellow py-14 md:py-24">
+      <div className="container-site mb-6 text-center md:mb-10">
         {eyebrow ? (
           <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/55 uppercase">
             {eyebrow}
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold text-brand-black">
-            {ueberschrift}
-          </h2>
+          <h2 className="heading-section text-brand-black">{ueberschrift}</h2>
         ) : null}
         {untertitel ? (
-          <p className="mx-auto mt-4 max-w-[40ch] font-poppins text-base text-brand-black/75 md:text-lg">
+          <p className="body-lead mx-auto mt-4 max-w-[36ch] whitespace-pre-line text-brand-black md:mt-6">
             {untertitel}
           </p>
         ) : null}
       </div>
 
-      <div className="space-y-1 md:hidden" aria-hidden>
-        {mobileRows.map((row, i) => (
+      {/* Mobile: gap 24px · Desktop: gap skaliert zu 72px */}
+      <div className="mt-6 flex flex-col gap-6 md:mt-20 md:gap-[clamp(2rem,2.5vw,4.5rem)]" aria-hidden>
+        {rows.map((row, i) => (
           <MarqueeRow
-            key={`m-${i}`}
+            key={`row-${i}`}
             names={row}
             reverse={i % 2 === 1}
             offset={i === 1}
-            startIndex={i}
-          />
-        ))}
-      </div>
-
-      <div className="hidden space-y-1 md:block" aria-hidden>
-        {desktopRows.map((row, i) => (
-          <MarqueeRow
-            key={`d-${i}`}
-            names={row}
-            reverse={i % 2 === 1}
-            offset={i === 1 || i === 3}
             startIndex={i}
           />
         ))}

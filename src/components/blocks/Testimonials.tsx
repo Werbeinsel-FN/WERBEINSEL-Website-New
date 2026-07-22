@@ -57,9 +57,7 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
     >
       <div className="container-site">
         {ueberschrift ? (
-          <h2 className="mb-12 text-center font-unbounded text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold">
-            {ueberschrift}
-          </h2>
+          <h2 className="heading-section mb-12 text-center text-white">{ueberschrift}</h2>
         ) : null}
 
         <div className="relative mx-auto max-w-3xl">

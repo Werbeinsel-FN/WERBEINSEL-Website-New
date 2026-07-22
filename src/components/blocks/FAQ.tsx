@@ -89,7 +89,7 @@ export function FAQ({
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="max-w-[18ch] font-unbounded text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold text-white">
+          <h2 className="max-w-[18ch] heading-section text-white">
             {ueberschrift}
           </h2>
         ) : null}

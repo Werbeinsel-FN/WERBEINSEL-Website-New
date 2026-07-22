@@ -30,7 +30,7 @@ export function FormateMaterial({
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="max-w-[16ch] font-unbounded text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold">
+          <h2 className="max-w-[16ch] heading-section">
             {ueberschrift}
           </h2>
         ) : null}
