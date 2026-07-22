@@ -3,25 +3,23 @@ import Link from 'next/link'
 type Props = {
   className?: string
   href?: string | null
-  /** Wordmark color – circle stays yellow. */
+  /** dark = white wordmark (auf Schwarz), light = black wordmark */
   tone?: 'light' | 'dark'
 }
 
 export function Logo({ className = '', href = '/', tone = 'light' }: Props) {
-  const word = tone === 'dark' ? 'text-white' : 'text-brand-black'
+  const src =
+    tone === 'dark' ? '/brand/logo-wordmark-dark.svg' : '/brand/logo-wordmark.svg'
 
   const mark = (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <span
-        className="circle grid h-9 w-9 place-items-center rounded-full bg-brand-yellow font-unbounded text-base font-black text-brand-black sm:h-10 sm:w-10 sm:text-lg"
-        aria-hidden
-      >
-        W
-      </span>
-      <span className={`font-unbounded text-base font-extrabold tracking-tight sm:text-lg ${word}`}>
-        WERBEINSEL
-      </span>
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt="WERBEINSEL"
+      width={200}
+      height={36}
+      className={`h-8 w-auto sm:h-9 ${className}`}
+    />
   )
 
   if (!href) return mark

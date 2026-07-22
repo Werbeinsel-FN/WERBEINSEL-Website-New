@@ -35,20 +35,20 @@ export default function JobsPage() {
       ))}
 
       <section className="bg-brand-yellow text-black">
-        <div className="container-site section-pad">
-          <h1 className="font-unbounded text-4xl font-extrabold uppercase leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
+        <div className="container-site pb-14 pt-6 text-center sm:pb-16 sm:pt-8 md:pb-20">
+          <h1 className="font-unbounded text-[clamp(2.1rem,6.5vw,5rem)] font-extrabold uppercase leading-[1.08]">
             {jobs.hero.titel}
           </h1>
-          <p className="mt-6 max-w-2xl font-poppins text-lg md:text-xl">
+          <p className="mx-auto mt-5 max-w-2xl font-poppins text-base leading-relaxed text-black/80 md:text-xl">
             {jobs.hero.untertitel}
           </p>
         </div>
       </section>
 
       <section className="section-pad bg-white">
-        <div className="container-site">
-          <h2 className="mb-8 font-unbounded text-3xl font-extrabold md:text-4xl">
-            Offene Stellen
+        <div className="container-site max-w-4xl">
+          <h2 className="mb-10 text-center font-unbounded text-[clamp(1.75rem,4vw,3rem)] font-extrabold uppercase">
+            {jobs.openingsTitle}
           </h2>
           <JobAccordion jobs={active} />
         </div>
@@ -56,20 +56,17 @@ export default function JobsPage() {
 
       <section className="section-pad bg-brand-black text-white">
         <div className="container-site">
-          <p className="mb-3 font-poppins text-xs font-bold tracking-[0.2em] text-brand-yellow">
-            {jobs.process.eyebrow}
-          </p>
-          <h2 className="mb-12 font-unbounded text-3xl font-extrabold md:text-4xl">
+          <h2 className="mb-12 text-center font-unbounded text-[clamp(1.75rem,4vw,3rem)] font-extrabold uppercase">
             {jobs.process.ueberschrift}
           </h2>
-          <ol className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {jobs.process.schritte.map((s, i) => (
-              <li key={s.titel}>
-                <span className="circle mb-4 grid size-14 place-items-center rounded-full bg-brand-yellow font-unbounded text-lg font-extrabold text-black">
+              <li key={s.titel} className="text-center lg:text-left">
+                <span className="circle mx-auto mb-5 grid size-16 place-items-center rounded-full bg-brand-yellow font-unbounded text-xl font-extrabold text-black lg:mx-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="font-unbounded text-xl font-extrabold">{s.titel}</h3>
-                <p className="mt-3 font-poppins text-sm leading-relaxed text-white/65">
+                <p className="mt-3 font-poppins text-sm leading-relaxed text-white/65 md:text-base">
                   {s.kurztext}
                 </p>
               </li>
@@ -78,9 +75,14 @@ export default function JobsPage() {
         </div>
       </section>
 
-      <section className="section-pad bg-white">
+      <section className="section-pad bg-white" id="bewerbung">
         <div className="container-site max-w-3xl">
-          <h2 className="mb-8 font-unbounded text-3xl font-extrabold md:text-4xl">Bewerbung</h2>
+          <h2 className="text-center font-unbounded text-[clamp(1.75rem,4vw,3rem)] font-extrabold uppercase">
+            {jobs.formTitle}
+          </h2>
+          <p className="mx-auto mt-3 mb-10 max-w-xl text-center font-poppins text-base text-black/65">
+            {jobs.formSubtitle}
+          </p>
           <ApplicationForm positions={positions} />
         </div>
       </section>

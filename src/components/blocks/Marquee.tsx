@@ -1,6 +1,7 @@
 export type MarqueeProps = {
   eyebrow?: string | null
   ueberschrift?: string | null
+  untertitel?: string | null
   names?: string[] | null
 }
 
@@ -55,7 +56,7 @@ function MarqueeRow({
   )
 }
 
-export function Marquee({ eyebrow, ueberschrift, names }: MarqueeProps) {
+export function Marquee({ eyebrow, ueberschrift, untertitel, names }: MarqueeProps) {
   const list = names?.filter(Boolean) ?? []
   if (!list.length) return null
 
@@ -63,17 +64,22 @@ export function Marquee({ eyebrow, ueberschrift, names }: MarqueeProps) {
   const desktopRows = chunkRows(list, 5)
 
   return (
-    <section className="section-pad overflow-hidden bg-brand-card-light">
+    <section className="section-pad overflow-hidden bg-brand-yellow">
       <div className="container-site mb-10 text-center">
         {eyebrow ? (
-          <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
+          <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/55 uppercase">
             {eyebrow}
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold text-brand-black">
+          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold uppercase text-brand-black">
             {ueberschrift}
           </h2>
+        ) : null}
+        {untertitel ? (
+          <p className="mx-auto mt-4 max-w-[40ch] font-poppins text-base text-brand-black/75 md:text-lg">
+            {untertitel}
+          </p>
         ) : null}
       </div>
 

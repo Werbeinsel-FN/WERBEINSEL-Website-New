@@ -37,7 +37,7 @@ export function ApplicationForm({ positions }: Props) {
 
       <fieldset>
         <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
-          Position *
+          Gewünschte Position *
         </legend>
         <div className="flex flex-wrap gap-2">
           {allPositions.map((p) => {

@@ -38,7 +38,7 @@ export function ContactForm() {
 
       <fieldset>
         <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
-          Interessierte Leistungen
+          Welche Services interessieren Sie?
         </legend>
         <div className="flex flex-wrap gap-2">
           {formOptions.services.map((s) => {
@@ -68,7 +68,9 @@ export function ContactForm() {
       </fieldset>
 
       <fieldset>
-        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">Budget</legend>
+        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
+          Geplantes Budget
+        </legend>
         <div className="flex flex-wrap gap-2">
           {formOptions.budgets.map((b) => {
             const active = budget === b
@@ -97,7 +99,9 @@ export function ContactForm() {
       </fieldset>
 
       <fieldset>
-        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">Zeitraum</legend>
+        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
+          Gewünschter Zeitrahmen
+        </legend>
         <div className="flex flex-wrap gap-2">
           {formOptions.zeitraeume.map((z) => {
             const active = zeitraum === z
@@ -127,7 +131,7 @@ export function ContactForm() {
 
       <textarea
         name="nachricht"
-        placeholder="Ihre Nachricht"
+        placeholder="Ihre Nachricht an uns (optional)"
         rows={5}
         className="rounded-2xl border border-black/15 bg-white p-4 font-poppins outline-none focus:border-black"
       />
@@ -158,7 +162,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 self-center rounded-full bg-black px-10 py-4 font-poppins text-sm font-bold tracking-wide text-brand-yellow transition hover:scale-[1.02] disabled:opacity-50"
+        className="mt-2 self-center rounded-full bg-black px-10 py-4 font-poppins text-sm font-bold tracking-wide text-white transition hover:scale-[1.02] disabled:opacity-50"
       >
         {pending ? 'WIRD GESENDET …' : 'ANFRAGE SENDEN'}
       </button>

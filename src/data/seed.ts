@@ -19,31 +19,35 @@ export const navigation = {
 }
 
 export const einstellungen = {
-  telefon: '+49 000 0000000',
+  telefon: '+49 (0) 123 456 789',
   email: 'info@werbeinsel.de',
-  whatsapp: '+490000000000',
+  whatsapp: '+49123456789',
   adresse: {
-    strasse: 'Musterstraße 1',
-    plz: '00000',
+    strasse: 'Musterstraße 123',
+    plz: '12345',
     ort: 'Musterstadt',
   },
   socials: [
     { plattform: 'Instagram', url: 'https://instagram.com/' },
-    { plattform: 'LinkedIn', url: 'https://linkedin.com/' },
     { plattform: 'Facebook', url: 'https://facebook.com/' },
+    { plattform: 'TikTok', url: 'https://tiktok.com/' },
   ],
   firma: 'WERBEINSEL',
   url: 'https://werbeinsel.de',
 }
 
 export const footer = {
-  tagline: 'Sichtbarkeit, die bleibt.',
+  tagline: 'Ihre Agentur für klassische Werbung und moderne Sichtbarkeit.',
   spalten: [
     {
       titel: 'Navigation',
       links: [
-        { label: 'Startseite', url: '/' },
-        { label: 'Leistungen', url: '/leistungen/plakatwerbung' },
+        { label: 'Services', url: '/leistungen/plakatwerbung' },
+        { label: 'Plakatwerbung', url: '/leistungen/plakatwerbung' },
+        { label: 'Folierung', url: '/leistungen/folierung' },
+        { label: 'Foto & Video', url: '/leistungen/foto-video' },
+        { label: 'Grafikdesign', url: '/leistungen/grafikdesign' },
+        { label: 'Social Media', url: '/leistungen/social-media' },
         { label: 'Jobs', url: '/jobs' },
         { label: 'Kontakt', url: '/kontakt' },
       ],
@@ -53,6 +57,7 @@ export const footer = {
       links: [
         { label: 'Impressum', url: '/impressum' },
         { label: 'Datenschutz', url: '/datenschutz' },
+        { label: 'Jobs', url: '/jobs' },
       ],
     },
   ],
@@ -60,190 +65,212 @@ export const footer = {
     { label: 'Impressum', url: '/impressum' },
     { label: 'Datenschutz', url: '/datenschutz' },
   ],
-  socials: einstellungen.socials,
+  socials: [
+    { plattform: 'Instagram', url: 'https://instagram.com/' },
+    { plattform: 'Facebook', url: 'https://facebook.com/' },
+    { plattform: 'TikTok', url: 'https://tiktok.com/' },
+  ],
 }
 
 export const home = {
   hero: {
     blockType: 'hero' as const,
     variante: 'bildKarte' as const,
-    titel: 'WERBEINSEL',
-    untertitel: 'Außenwerbung, Design und Produktion – aus einer Hand.',
+    titel: 'IHRE WERBUNG. UNSER HANDWERK.',
+    untertitel: 'Plakat. Folie. Digital. Sichtbarkeit für Marken in der Region.',
     buttons: [
       { label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' as const },
-      { label: 'Leistungen entdecken', url: '/leistungen/plakatwerbung', stil: 'secondary' as const },
+      { label: 'Termin vereinbaren', url: '/kontakt', stil: 'secondary' as const },
     ],
   },
   about: {
     blockType: 'textblock' as const,
-    eyebrow: 'ÜBER UNS',
-    ueberschrift: 'Wir machen Marken sichtbar.',
-    text: 'WERBEINSEL plant, gestaltet und produziert Werbung, die im Alltag wirkt – von Plakatflächen über Folierung bis zu Foto, Video und Social Content. Klar, schnell und nah am Kunden.',
+    ueberschrift: 'IHRE AGENTUR FÜR KLASSISCHE WERBUNG',
+    text: 'Wir planen, gestalten und produzieren Werbung, die im Alltag wirkt – klar, präsent und nah an Ihrer Marke.\n\nVon Plakatflächen über Folierung bis zu Foto, Video und Social Content: ein Partner für Sichtbarkeit in der Region Friedrichshafen / Bodensee.',
   },
   services: {
     blockType: 'servicesSlider' as const,
-    eyebrow: 'LEISTUNGEN',
-    ueberschrift: 'Was wir für Sie tun',
+    ueberschrift: 'WAS WIR MACHEN',
     items: [
       {
         titel: 'Plakatwerbung',
-        kurztext: 'Flächen, Genehmigungen und Kampagnen – lokal stark sichtbar.',
+        kurztext: 'auffällig, präsent, wirkungsvoll.',
         link: '/leistungen/plakatwerbung',
       },
       {
+        titel: 'Folierung & Beschriftung',
+        kurztext: 'Fahrzeuge und Flächen, die mitfahren.',
+        link: '/leistungen/folierung',
+      },
+      {
         titel: 'Foto & Video',
-        kurztext: 'Motive und Clips, die Ihre Marke greifbar machen.',
+        kurztext: 'Motive und Clips mit Haltung.',
         link: '/leistungen/foto-video',
       },
       {
         titel: 'Grafikdesign',
-        kurztext: 'Corporate Design, Print und digitale Assets.',
+        kurztext: 'Vom Motiv bis zum Erscheinungsbild.',
         link: '/leistungen/grafikdesign',
       },
       {
-        titel: 'Folierung',
-        kurztext: 'Fahrzeuge, Schaufenster und Flächen – präzise verklebt.',
-        link: '/leistungen/folierung',
-      },
-      {
         titel: 'Social Media',
-        kurztext: 'Content und Kampagnen für Reichweite und Wiedererkennung.',
+        kurztext: 'Content, der sichtbar bleibt.',
         link: '/leistungen/social-media',
       },
     ],
   },
   referenzen: {
     blockType: 'referenzSlider' as const,
-    eyebrow: 'REFERENZEN',
-    ueberschrift: 'Ausgewählte Arbeiten',
+    ueberschrift: 'UNSERE ARBEITEN',
+    untertitel: 'Von Fahrzeugbeschriftung bis Großflächenplakat – Ihre Marke im Mittelpunkt.',
     items: [
-      { titel: 'Kampagne City Light', kategorie: 'Plakat', ort: 'Musterstadt' },
-      { titel: 'Fahrzeugflotte Folierung', kategorie: 'Folierung', ort: 'Region' },
-      { titel: 'Brand Film Launch', kategorie: 'Foto & Video', ort: 'Studio' },
-      { titel: 'Corporate Redesign', kategorie: 'Grafik', ort: 'Remote' },
+      { titel: 'Großfläche Innenstadt', kategorie: 'Plakat' },
+      { titel: 'Fahrzeugflotte', kategorie: 'Folierung' },
+      { titel: 'Storefront Branding', kategorie: 'Beschriftung' },
+      { titel: 'Kampagnenmotiv', kategorie: 'Grafik' },
+      { titel: 'Event Visibility', kategorie: 'Plakat' },
     ],
   },
   kunden: {
     blockType: 'marquee' as const,
-    eyebrow: 'KUNDEN',
-    ueberschrift: 'Marken, mit denen wir arbeiten',
+    ueberschrift: 'UNSERE KUNDEN',
+    untertitel: 'Von Kultur bis Industrie – Marken, die in der Region sichtbar sein wollen.',
     names: [
-      'Alpha GmbH',
-      'Beta AG',
-      'Gamma Events',
-      'Delta Retail',
-      'Epsilon Media',
-      'Zeta Mobility',
-      'Eta Food',
-      'Theta Tech',
+      'MENSCH & NATUR',
+      'STADTWERKE',
+      'LANDRATSAMT',
+      'LIVING-RAUM',
+      'BODENSEE EVENTS',
+      'KULTURFORUM',
+      'OPEN AIR',
+      'MESSE REGION',
+      'SPORTCLUB',
+      'GASTRO GRUPPE',
     ],
   },
   testimonials: {
     blockType: 'testimonialsBlock' as const,
-    ueberschrift: 'Was Kund:innen sagen',
     items: [
       {
-        zitat: 'Schnelle Abstimmung, starke Umsetzung – unsere Plakatkampagne war in wenigen Wochen live.',
-        name: 'Alex Müller',
-        rolle: 'Marketing, Alpha GmbH',
+        zitat:
+          'Exzellente Standortwahl und perfekte Ausführung. Unsere Markenbekanntheit ist durch die strategisch platzierten Plakate enorm gestiegen. Absolut empfehlenswert!',
+        name: 'Gerold Müller',
+        rolle: 'Bodensee Events AG',
       },
       {
-        zitat: 'Von Konzept bis Folierung alles aus einer Hand. Genau so wollten wir arbeiten.',
-        name: 'Samira Khan',
-        rolle: 'Geschäftsführung, Beta AG',
+        zitat:
+          'Von der Idee bis zur Montage alles aus einer Hand – klar, schnell und sichtbar auf der Straße.',
+        name: 'Sandra Keller',
+        rolle: 'Marketingleitung (Platzhalter)',
       },
       {
-        zitat: 'Klare Kommunikation und Ergebnisse, die man auf der Straße sieht.',
-        name: 'Jonas Weber',
-        rolle: 'Projektleitung, Gamma Events',
+        zitat:
+          'Professionelle Beratung und Umsetzung. Genau die Präsenz, die wir für unsere Kampagne gebraucht haben.',
+        name: 'Thomas Berger',
+        rolle: 'Geschäftsführung (Platzhalter)',
       },
     ],
   },
   cta: {
     blockType: 'cta' as const,
-    ueberschrift: 'Bereit für mehr Sichtbarkeit?',
-    text: 'Erzählen Sie uns kurz von Ihrem Vorhaben – wir melden uns zeitnah mit einem konkreten Vorschlag.',
-    button: { label: 'Kampagne anfragen', url: '/kontakt' },
+    ueberschrift: 'BEREIT FÜR IHR NÄCHSTES PROJEKT?',
+    text: 'Lassen Sie uns über Ihre Werbeziele sprechen. Gemeinsam machen wir Ihre Marke sichtbar.',
+    button: { label: 'JETZT ANFRAGEN', url: '/kontakt' },
   },
 }
 
 export const jobs = {
   hero: {
-    titel: 'JOBS',
-    untertitel: 'Werden Sie Teil von WERBEINSEL – kreativ, handfest und nah am Kunden.',
+    titel: 'WERDE TEIL DES TEAMS',
+    untertitel:
+      'Kreative Köpfe gesucht! Wir sind eine Werbeagentur mit Leidenschaft für mutige Kampagnen und außergewöhnliches Design.',
   },
+  openingsTitle: 'HIER IST PLATZ FÜR DICH',
+  formTitle: 'BEWIRB DICH JETZT',
+  formSubtitle: 'Fülle das Formular aus – dauert keine 3 Minuten.',
   process: {
-    eyebrow: 'SO BEWERBEN SIE SICH',
-    ueberschrift: 'In vier Schritten',
+    ueberschrift: 'IN 4 SCHRITTEN ZUM NEUEN JOB',
     schritte: [
-      { titel: 'Stelle wählen', kurztext: 'Offene Positionen prüfen oder Initiativbewerbung senden.' },
-      { titel: 'Unterlagen hochladen', kurztext: 'Lebenslauf und optional Portfolio – PDF, JPG, PNG oder ZIP.' },
-      { titel: 'Kurz vorstellen', kurztext: 'Ein paar Sätze reichen – wir freuen uns auf Sie.' },
-      { titel: 'Gespräch', kurztext: 'Passt es? Dann lernen wir uns persönlich kennen.' },
+      {
+        titel: 'Bewerbung',
+        kurztext: 'Formular ausfüllen und Unterlagen hochladen – unkompliziert und digital.',
+      },
+      {
+        titel: 'Rückmeldung',
+        kurztext: 'Wir prüfen deine Unterlagen und melden uns zeitnah bei dir.',
+      },
+      {
+        titel: 'Kennenlernen',
+        kurztext: 'Persönliches Gespräch – wir lernen uns kennen und prüfen, ob es passt.',
+      },
+      {
+        titel: 'Willkommen!',
+        kurztext: 'Passt alles? Dann heißen wir dich herzlich im Team willkommen.',
+      },
     ],
   },
   cta: {
-    ueberschrift: 'Keine passende Stelle?',
-    text: 'Schicken Sie uns eine Initiativbewerbung – wir melden uns, sobald etwas passt.',
-    button: { label: 'Initiativ bewerben', url: '#bewerbung' },
+    ueberschrift: 'WORAUF WARTEST DU?',
+    text: 'Keine passende Stelle gefunden? Schick uns eine Initiativbewerbung – wir freuen uns auf dich.',
+    button: { label: 'JETZT BEWERBEN', url: '#bewerbung' },
   },
   list: [
     {
-      id: 'mediengestalter',
-      titel: 'Mediengestalter:in Digital & Print (m/w/d)',
-      badges: ['Vollzeit', 'Vor Ort', 'Sofort'],
-      standort: 'Musterstadt',
+      id: 'plakatierer',
+      titel: 'Plakatierer/in',
+      badges: ['Vollzeit', 'Vor Ort', 'ab sofort'],
+      standort: 'Friedrichshafen',
       pensum: '100 %',
       aktiv: true,
       aufgaben: [
-        'Gestaltung von Print- und Digitalmotiven',
-        'Umsetzung von Kundenbriefings',
-        'Datenaufbereitung für Produktion',
+        'Auf- und Abhängen von Plakaten im Außendienst',
+        'Pflege und Dokumentation der Standorte',
+        'Zusammenarbeit mit Disposition und Produktion',
       ],
       anforderungen: [
-        'Ausbildung oder Studium im Bereich Mediengestaltung',
-        'Sichere Adobe-CC-Kenntnisse',
+        'Zuverlässigkeit und körperliche Fitness',
+        'Führerschein Klasse B',
         'Teamfähigkeit und Termintreue',
       ],
-      benefits: ['Moderne Tools', 'Kurze Wege', 'Eigenverantwortung'],
+      benefits: ['Arbeit im Freien', 'Fester Ansprechpartner', 'Regionale Einsätze'],
     },
     {
-      id: 'projektleitung',
-      titel: 'Projektleitung Außenwerbung (m/w/d)',
+      id: 'marketing-manager',
+      titel: 'Marketing Manager/in',
       badges: ['Vollzeit', 'Hybrid'],
-      standort: 'Musterstadt / Region',
+      standort: 'Friedrichshafen',
       pensum: '80–100 %',
       aktiv: true,
       aufgaben: [
-        'Koordination von Plakat- und Folierungsprojekten',
-        'Kundenkommunikation und Terminplanung',
-        'Abstimmung mit Produktion und Montage',
+        'Kundenberatung und Kampagnenplanung',
+        'Koordination von Gestaltung und Umsetzung',
+        'Abstimmung mit Partnern und Flächen',
       ],
       anforderungen: [
-        'Erfahrung in Projektleitung oder Agentur',
-        'Organisationsstärke',
-        'Führerschein Klasse B von Vorteil',
+        'Erfahrung in Agentur oder Marketing',
+        'Kommunikationsstärke',
+        'Strukturierte Arbeitsweise',
       ],
-      benefits: ['Verantwortung', 'Vielfältige Projekte', 'Flache Hierarchien'],
+      benefits: ['Vielfältige Projekte', 'Flache Hierarchien', 'Eigenverantwortung'],
     },
     {
       id: 'praktikum',
-      titel: 'Praktikum / Werkstudent:in Marketing (m/w/d)',
-      badges: ['Teilzeit', 'Flexibel'],
-      standort: 'Musterstadt',
+      titel: 'Praktikant/in',
+      badges: ['Praktikum', '3–6 Monate', 'Vor Ort'],
+      standort: 'Friedrichshafen',
       pensum: 'nach Absprache',
       aktiv: true,
       aufgaben: [
-        'Unterstützung bei Social-Content und Kampagnen',
-        'Recherche und Dokumentation',
-        'Mitarbeit an internen Projekten',
+        'Unterstützung bei Kampagnen und Content',
+        'Mitarbeit an Design- und Produktionsaufgaben',
+        'Einblick in alle Agenturbereiche',
       ],
       anforderungen: [
         'Interesse an Werbung und Medien',
         'Grundkenntnisse in Design-Tools von Vorteil',
-        'Zuverlässigkeit',
+        'Motivation und Zuverlässigkeit',
       ],
-      benefits: ['Einblick in alle Bereiche', 'Mentoring', 'Flexible Zeiten'],
+      benefits: ['Mentoring', 'Praxisnah', 'Übernahmechance'],
     },
   ],
 }
@@ -251,16 +278,16 @@ export const jobs = {
 export const kontakt = {
   hero: {
     titel: 'PROJEKT ANFRAGEN',
-    untertitel: 'Kurz beschreiben, was Sie vorhaben – wir melden uns mit dem nächsten Schritt.',
+    untertitel:
+      'Lassen Sie uns gemeinsam Ihre Marke sichtbar machen. Wir melden uns innerhalb von 24 Stunden bei Ihnen.',
   },
-  intro:
-    'Ob Plakatkampagne, Folierung oder gesamtes Erscheinungsbild: Schreiben Sie uns. Je konkreter Ihr Briefing, desto schneller können wir helfen.',
+  contactTitle: 'DIREKT KONTAKT AUFNEHMEN',
   cards: {
-    telefonLabel: 'Telefon',
-    emailLabel: 'E-Mail',
-    whatsappLabel: 'WhatsApp',
+    telefonLabel: 'TELEFON',
+    emailLabel: 'E-MAIL',
+    whatsappLabel: 'WHATSAPP',
     whatsappCta: 'Chat starten',
-    adresseLabel: 'Adresse',
+    adresseLabel: 'ADRESSE',
   },
 }
 
@@ -600,16 +627,8 @@ export const leistungen: Record<
 }
 
 export const formOptions = {
-  services: [
-    'Außenwerbung',
-    'Beschriftung',
-    'Grafikdesign',
-    'Webdesign',
-    'Foto & Video',
-    'Folierung',
-    'Social Media',
-  ],
-  budgets: ['< 1.000€', '1.000€ – 5.000€', '5.000€ – 15.000€', '15.000€+', 'Noch offen'],
-  zeitraeume: ['So schnell wie möglich', '1–3 Monate', '3–6 Monate', 'Später / flexibel'],
-  verfuegbarAb: ['Sofort', 'In 2 Wochen', 'In 1 Monat', 'Später / flexibel'],
+  services: ['Außenwerbung', 'Beschriftung', 'Grafikdesign', 'Webdesign'],
+  budgets: ['< 1.000€', '1.000€ - 5.000€', '5.000€ - 10.000€', '> 10.000€'],
+  zeitraeume: ['sofort', 'innerhalb 1 Monat', '1-2 Monate', '> 3 Monate'],
+  verfuegbarAb: ['sofort', 'in 2 Wochen', 'in 1 Monat', 'flexibel'],
 }

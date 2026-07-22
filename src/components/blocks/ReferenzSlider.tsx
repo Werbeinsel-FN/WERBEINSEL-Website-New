@@ -17,13 +17,15 @@ export type ReferenzSlideItem = {
 export type ReferenzSliderProps = {
   eyebrow?: string | null
   ueberschrift?: string | null
+  untertitel?: string | null
   kategorie?: string | null
   items?: ReferenzSlideItem[] | null
 }
 
 export function ReferenzSlider({
   eyebrow,
-  ueberschrift = 'Unsere Arbeiten',
+  ueberschrift = 'UNSERE ARBEITEN',
+  untertitel,
   items,
 }: ReferenzSliderProps) {
   const slides = items?.filter((i) => i?.titel) ?? []
@@ -60,22 +62,27 @@ export function ReferenzSlider({
       aria-label={ueberschrift || 'Referenzen'}
     >
       <div className="container-site">
-        {eyebrow ? (
-          <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
-            {eyebrow}
-          </p>
-        ) : null}
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold text-brand-black">
+        <div className="mb-10">
+          {eyebrow ? (
+            <p className="mb-3 text-center font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
+              {eyebrow}
+            </p>
+          ) : null}
+          <h2 className="text-center font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold uppercase text-brand-black">
             {ueberschrift}
           </h2>
-          <div className="hidden shrink-0 gap-3 sm:flex">
+          {untertitel ? (
+            <p className="mx-auto mt-4 max-w-[42ch] text-center font-poppins text-base text-brand-black/70 md:text-lg">
+              {untertitel}
+            </p>
+          ) : null}
+          <div className="mt-8 hidden justify-center gap-3 sm:flex">
             <button
               type="button"
               onClick={() => emblaApi?.scrollPrev()}
               disabled={!canPrev}
               aria-label="Vorherige Referenz"
-              className="circle grid h-12 w-12 place-items-center rounded-full border-2 border-brand-black text-brand-black disabled:opacity-40"
+              className="circle grid h-12 w-12 place-items-center rounded-full bg-brand-yellow text-brand-black disabled:opacity-40"
             >
               ‹
             </button>
@@ -84,7 +91,7 @@ export function ReferenzSlider({
               onClick={() => emblaApi?.scrollNext()}
               disabled={!canNext}
               aria-label="Nächste Referenz"
-              className="circle grid h-12 w-12 place-items-center rounded-full bg-brand-black text-brand-yellow disabled:opacity-40"
+              className="circle grid h-12 w-12 place-items-center rounded-full bg-brand-yellow text-brand-black disabled:opacity-40"
             >
               ›
             </button>

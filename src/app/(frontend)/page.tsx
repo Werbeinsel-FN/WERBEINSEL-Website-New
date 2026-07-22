@@ -11,7 +11,7 @@ import { buildMetadata } from '@/lib/seo'
 export const metadata = buildMetadata({
   title: 'Startseite',
   description:
-    'WERBEINSEL – Sichtbarkeit, die bleibt. Außenwerbung, Design und Produktion aus einer Hand.',
+    'WERBEINSEL – Ihre Agentur für klassische Werbung. Plakat, Folie, Digital – Sichtbarkeit für Marken in der Region.',
   path: '/',
 })
 

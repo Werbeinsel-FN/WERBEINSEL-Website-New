@@ -60,16 +60,16 @@ export function ServicesSlider({
       aria-label={ueberschrift || 'Leistungen'}
     >
       <div className="container-site">
-        {eyebrow ? (
-          <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/60 uppercase">
-            {eyebrow}
-          </p>
-        ) : null}
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold text-brand-black">
+        <div className="mb-10 text-center">
+          {eyebrow ? (
+            <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/60 uppercase">
+              {eyebrow}
+            </p>
+          ) : null}
+          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold uppercase text-brand-black">
             {ueberschrift || 'WAS WIR MACHEN'}
           </h2>
-          <div className="hidden shrink-0 gap-3 sm:flex">
+          <div className="mt-8 hidden justify-center gap-3 sm:flex">
             <button
               type="button"
               onClick={() => emblaApi?.scrollPrev()}

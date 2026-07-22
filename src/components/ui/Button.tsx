@@ -24,10 +24,14 @@ const sizeClasses: Record<Size, string> = {
 function variantClasses(variant: Variant, onYellow: boolean): string {
   switch (variant) {
     case 'primary':
-      return 'bg-brand-black text-brand-yellow hover:bg-black/90'
-    case 'secondary':
+      // Figma: schwarzer Pill mit weißem Text (auf Gelb)
       return onYellow
-        ? 'border-2 border-brand-black bg-transparent text-brand-black hover:bg-brand-black hover:text-brand-yellow'
+        ? 'bg-brand-black text-white hover:bg-black/90'
+        : 'bg-brand-yellow text-brand-black hover:bg-brand-yellow/90'
+    case 'secondary':
+      // Figma Hero: weißer Pill mit schwarzem Text
+      return onYellow
+        ? 'border-2 border-brand-black bg-white text-brand-black hover:bg-brand-black hover:text-white'
         : 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-brand-black'
     case 'ghost':
       return onYellow

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 type Job = {
   id: string
@@ -14,52 +15,68 @@ type Job = {
 }
 
 export function JobAccordion({ jobs }: { jobs: Job[] }) {
-  const [open, setOpen] = useState<string | null>(jobs[0]?.id ?? null)
+  const [open, setOpen] = useState<string | null>(
+    jobs.find((j) => j.id === 'praktikum')?.id ?? jobs[0]?.id ?? null,
+  )
 
   return (
-    <div className="divide-y divide-black/10 border-y border-black/10">
+    <div className="space-y-4">
       {jobs.map((job) => {
         const isOpen = open === job.id
         return (
-          <article key={job.id} className="py-2">
+          <article
+            key={job.id}
+            className="overflow-hidden rounded-2xl border border-black/15 bg-white"
+          >
             <button
               type="button"
-              className="flex w-full items-start justify-between gap-4 py-6 text-left"
+              className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? null : job.id)}
             >
-              <div>
-                <h3 className="font-unbounded text-xl font-extrabold md:text-2xl">{job.titel}</h3>
+              <div className="min-w-0">
+                <h3 className="font-unbounded text-lg font-extrabold sm:text-xl md:text-2xl">
+                  {job.titel}
+                </h3>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {job.badges?.map((b) => (
+                  {job.badges?.map((b, i) => (
                     <span
                       key={b}
-                      className="rounded-full bg-brand-yellow px-3 py-1 font-poppins text-xs font-bold"
+                      className={`rounded-full px-3 py-1 font-poppins text-xs font-semibold ${
+                        i === 0
+                          ? 'bg-brand-yellow text-brand-black'
+                          : 'bg-brand-card-light text-brand-black/70'
+                      }`}
                     >
                       {b}
                     </span>
                   ))}
-                  {job.standort && (
-                    <span className="rounded-full border border-black/15 px-3 py-1 font-poppins text-xs">
-                      {job.standort}
-                    </span>
-                  )}
                 </div>
               </div>
               <span
-                className="circle grid size-10 shrink-0 place-items-center rounded-full bg-black font-unbounded text-lg text-brand-yellow"
+                className={`shrink-0 text-2xl leading-none text-brand-black transition ${isOpen ? 'rotate-180' : ''}`}
                 aria-hidden
               >
-                {isOpen ? '−' : '+'}
+                ⌄
               </span>
             </button>
-            {isOpen && (
-              <div className="grid gap-8 pb-8 md:grid-cols-3">
-                <List title="Aufgaben" items={job.aufgaben} />
-                <List title="Anforderungen" items={job.anforderungen} />
-                <List title="Benefits" items={job.benefits} />
+
+            {isOpen ? (
+              <div className="border-t border-black/10 px-5 pb-6 pt-2 sm:px-6">
+                <div className="grid gap-8 md:grid-cols-2">
+                  <List title="Deine Aufgaben" items={job.aufgaben} />
+                  <List title="Das bringst du mit" items={job.anforderungen} />
+                </div>
+                <div className="mt-8">
+                  <Link
+                    href="#bewerbung"
+                    className="inline-flex rounded-full bg-brand-black px-7 py-3.5 font-poppins text-sm font-bold tracking-wide text-white transition hover:scale-[1.02]"
+                  >
+                    JETZT BEWERBEN
+                  </Link>
+                </div>
               </div>
-            )}
+            ) : null}
           </article>
         )
       })}
@@ -71,11 +88,11 @@ function List({ title, items }: { title: string; items?: string[] }) {
   if (!items?.length) return null
   return (
     <div>
-      <p className="font-poppins text-xs font-bold tracking-[0.15em] text-black/45">{title}</p>
+      <p className="font-poppins text-sm font-bold text-brand-black">{title}</p>
       <ul className="mt-3 space-y-2">
         {items.map((item) => (
-          <li key={item} className="flex gap-2 font-poppins text-sm leading-relaxed">
-            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-yellow" aria-hidden />
+          <li key={item} className="flex gap-2 font-poppins text-sm leading-relaxed text-black/75">
+            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-brand-yellow" aria-hidden />
             {item}
           </li>
         ))}

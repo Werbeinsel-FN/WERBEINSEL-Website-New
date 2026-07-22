@@ -75,7 +75,7 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
                   aria-hidden={i !== selected}
                 >
                   <blockquote className="text-center">
-                    <p className="font-unbounded text-[clamp(1.25rem,3vw,1.85rem)] font-extrabold leading-[1.35] text-white">
+                    <p className="font-poppins text-[clamp(1.25rem,3vw,1.85rem)] font-medium leading-[1.45] text-white">
                       „{item.zitat}“
                     </p>
                     <footer className="mt-8">
