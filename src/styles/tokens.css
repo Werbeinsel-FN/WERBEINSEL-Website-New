@@ -1,0 +1,19 @@
+:root {
+  /* Farben */
+  --color-yellow: #FFED00;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-whatsapp: #25D366;
+  --color-text-muted: #B7B7B7;
+  --color-card-dark: #1A1A1A;
+  --color-card-light: #F5F5F5;
+
+  /* Abstände (Section-Polster) */
+  --space-section-mobile: 56px;
+  --space-section-tablet: 96px;
+  --space-section-desktop: 128px;
+}
+
+/* Überschriften: 120% Zeilenabstand (Unbounded/Umlaute) */
+.font-unbounded { font-family: var(--font-unbounded), system-ui, sans-serif; }
+.font-poppins { font-family: var(--font-poppins), system-ui, sans-serif; }

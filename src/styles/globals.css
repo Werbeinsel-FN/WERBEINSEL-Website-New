@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+@theme inline {
+  --color-brand-yellow: var(--color-yellow);
+  --color-brand-black: var(--color-black);
+  --color-brand-whatsapp: var(--color-whatsapp);
+  --color-brand-muted: var(--color-text-muted);
+  --color-brand-card-dark: var(--color-card-dark);
+  --color-brand-card-light: var(--color-card-light);
+  --font-unbounded: var(--font-unbounded);
+  --font-poppins: var(--font-poppins);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-poppins text-brand-black antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-unbounded font-extrabold leading-[1.2];
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-yellow;
+  }
+}
+
+@layer utilities {
+  .section-pad {
+    padding-block: var(--space-section-mobile);
+  }
+
+  @media (min-width: 641px) {
+    .section-pad {
+      padding-block: var(--space-section-tablet);
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .section-pad {
+      padding-block: var(--space-section-desktop);
+    }
+  }
+
+  .container-site {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Icon-/Nummern-Kreise immer quadratisch halten */
+  .circle {
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+  }
+}
+
+/* Marquee */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-track {
+  animation: marquee-left 40s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation: marquee-right 40s linear infinite;
+}
+
+.marquee-track-offset {
+  animation-delay: -20s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .marquee-track-reverse {
+    animation: none;
+  }
+}
