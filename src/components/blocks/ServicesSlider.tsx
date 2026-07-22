@@ -55,6 +55,7 @@ export function ServicesSlider({
 
   return (
     <section
+      id="leistungen"
       className="section-pad bg-brand-yellow"
       aria-roledescription="carousel"
       aria-label={ueberschrift || 'Leistungen'}
@@ -118,11 +119,11 @@ export function ServicesSlider({
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6">
-                    <h3 className="font-unbounded text-xl font-extrabold text-white md:text-2xl">
+                    <h3 className="font-unbounded text-xl font-extrabold text-brand-yellow md:text-2xl">
                       {slide.titel}
                     </h3>
                     {slide.kurztext ? (
-                      <p className="mt-2 line-clamp-2 font-poppins text-sm text-white/70">
+                      <p className="mt-2 line-clamp-2 font-poppins text-sm text-white md:text-base">
                         {slide.kurztext}
                       </p>
                     ) : null}

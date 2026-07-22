@@ -57,6 +57,7 @@ export function ReferenzSlider({
 
   return (
     <section
+      id="arbeiten"
       className="section-pad bg-white"
       aria-roledescription="carousel"
       aria-label={ueberschrift || 'Referenzen'}
@@ -115,22 +116,9 @@ export function ReferenzSlider({
                         sizes="(max-width: 640px) 75vw, (max-width: 1024px) 40vw, 28vw"
                         className="object-cover"
                       />
-                    ) : null}
-                  </div>
-                  <div className="p-5">
-                    {slide.kategorie ? (
-                      <p className="mb-1 font-poppins text-xs font-bold tracking-widest text-brand-muted uppercase">
-                        {slide.kategorie}
-                      </p>
-                    ) : null}
-                    <h3 className="font-unbounded text-lg font-extrabold text-brand-black">
-                      {slide.titel}
-                    </h3>
-                    {slide.kurztext ? (
-                      <p className="mt-2 line-clamp-2 font-poppins text-sm text-brand-black/65">
-                        {slide.kurztext}
-                      </p>
-                    ) : null}
+                    ) : (
+                      <div className="absolute inset-0 bg-brand-card-dark" />
+                    )}
                   </div>
                 </article>
               )

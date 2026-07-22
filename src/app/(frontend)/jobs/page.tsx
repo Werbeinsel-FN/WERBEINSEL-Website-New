@@ -87,7 +87,7 @@ export default function JobsPage() {
         </div>
       </section>
 
-      <CTA {...jobs.cta} yellow />
+      <CTA {...jobs.cta} yellow={false} />
     </>
   )
 }

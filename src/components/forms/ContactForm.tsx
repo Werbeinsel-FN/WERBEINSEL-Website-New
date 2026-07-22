@@ -162,7 +162,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 self-center rounded-full bg-black px-10 py-4 font-poppins text-sm font-bold tracking-wide text-white transition hover:scale-[1.02] disabled:opacity-50"
+        className="mt-2 self-center rounded-full bg-black px-10 py-4 font-poppins text-sm font-bold tracking-wide text-brand-yellow transition hover:scale-[1.02] disabled:opacity-50"
       >
         {pending ? 'WIRD GESENDET …' : 'ANFRAGE SENDEN'}
       </button>

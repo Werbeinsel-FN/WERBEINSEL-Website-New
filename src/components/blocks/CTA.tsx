@@ -15,8 +15,8 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
     <section className={`section-pad ${isYellow ? 'bg-brand-yellow' : 'bg-brand-black'}`}>
       <div className="container-site text-center">
         <h2
-          className={`mx-auto max-w-[16ch] font-unbounded text-[clamp(2rem,5.5vw,4rem)] font-extrabold leading-[1.15] ${
-            isYellow ? 'text-brand-black' : 'text-white'
+          className={`mx-auto max-w-[16ch] font-unbounded text-[clamp(2rem,5.5vw,4rem)] font-extrabold leading-[1.15] uppercase ${
+            isYellow ? 'text-brand-black' : 'text-brand-yellow'
           }`}
         >
           {ueberschrift}

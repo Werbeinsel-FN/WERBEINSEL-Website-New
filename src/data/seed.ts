@@ -39,27 +39,28 @@ export const einstellungen = {
 export const footer = {
   tagline: 'Ihre Agentur für klassische Werbung und moderne Sichtbarkeit.',
   spalten: [
-    {
-      titel: 'Navigation',
-      links: [
-        { label: 'Services', url: '/leistungen/plakatwerbung' },
-        { label: 'Plakatwerbung', url: '/leistungen/plakatwerbung' },
-        { label: 'Folierung', url: '/leistungen/folierung' },
-        { label: 'Foto & Video', url: '/leistungen/foto-video' },
-        { label: 'Grafikdesign', url: '/leistungen/grafikdesign' },
-        { label: 'Social Media', url: '/leistungen/social-media' },
-        { label: 'Jobs', url: '/jobs' },
-        { label: 'Kontakt', url: '/kontakt' },
-      ],
-    },
-    {
-      titel: 'Rechtliches',
-      links: [
-        { label: 'Impressum', url: '/impressum' },
-        { label: 'Datenschutz', url: '/datenschutz' },
-        { label: 'Jobs', url: '/jobs' },
-      ],
-    },
+        {
+          titel: 'Navigation',
+          links: [
+            { label: 'Services', url: '/#leistungen' },
+            { label: 'Plakatwerbung', url: '/leistungen/plakatwerbung' },
+            { label: 'Folierung', url: '/leistungen/folierung' },
+            { label: 'Digitale Werbemittel', url: '/leistungen/foto-video' },
+            { label: 'Drucksachen', url: '/leistungen/grafikdesign' },
+            { label: 'Arbeiten', url: '/#arbeiten' },
+            { label: 'Jobs', url: '/jobs' },
+            { label: 'Kontakt', url: '/kontakt' },
+          ],
+        },
+        {
+          titel: 'Rechtliches',
+          links: [
+            { label: 'Impressum', url: '/impressum' },
+            { label: 'Datenschutz', url: '/datenschutz' },
+            { label: 'AGB', url: '/impressum' },
+            { label: 'Jobs', url: '/jobs' },
+          ],
+        },
   ],
   rechtslinks: [
     { label: 'Impressum', url: '/impressum' },
@@ -76,17 +77,18 @@ export const home = {
   hero: {
     blockType: 'hero' as const,
     variante: 'bildKarte' as const,
+    bild: { url: '/images/home/hero-bg.jpg', alt: 'WERBEINSEL Außenwerbung' },
     titel: 'IHRE WERBUNG. UNSER HANDWERK.',
     untertitel: 'Plakat. Folie. Digital. Sichtbarkeit für Marken in der Region.',
     buttons: [
       { label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' as const },
-      { label: 'Termin vereinbaren', url: '/kontakt', stil: 'secondary' as const },
+      { label: 'Services ansehen', url: '#leistungen', stil: 'secondary' as const },
     ],
   },
   about: {
     blockType: 'textblock' as const,
     ueberschrift: 'IHRE AGENTUR FÜR KLASSISCHE WERBUNG',
-    text: 'Wir planen, gestalten und produzieren Werbung, die im Alltag wirkt – klar, präsent und nah an Ihrer Marke.\n\nVon Plakatflächen über Folierung bis zu Foto, Video und Social Content: ein Partner für Sichtbarkeit in der Region Friedrichshafen / Bodensee.',
+    text: 'WERBEINSEL steht für klare Kommunikation und starke visuelle Präsenz. Wir entwickeln, produzieren und montieren klassische Außenwerbung – regional verankert, professionell umgesetzt.\n\nVon der Idee bis zur Montage: Plakat, Folierung, digitale Werbemittel und Drucksachen – Sichtbarkeit, die bleibt.',
   },
   services: {
     blockType: 'servicesSlider' as const,
@@ -94,28 +96,27 @@ export const home = {
     items: [
       {
         titel: 'Plakatwerbung',
-        kurztext: 'auffällig, präsent, wirkungsvoll.',
+        kurztext: 'Auffällig. Präsent. Wirkungsvoll.',
         link: '/leistungen/plakatwerbung',
+        bild: { url: '/images/home/service-1.jpg', alt: 'Plakatwerbung' },
       },
       {
         titel: 'Folierung & Beschriftung',
-        kurztext: 'Fahrzeuge und Flächen, die mitfahren.',
+        kurztext: 'Fahrzeuge. Schaufenster. Fassaden.',
         link: '/leistungen/folierung',
+        bild: { url: '/images/home/service-2.jpg', alt: 'Folierung & Beschriftung' },
       },
       {
-        titel: 'Foto & Video',
-        kurztext: 'Motive und Clips mit Haltung.',
+        titel: 'Digitale Werbemittel',
+        kurztext: 'Screens. Displays. Bewegung.',
         link: '/leistungen/foto-video',
+        bild: { url: '/images/home/service-3.jpg', alt: 'Digitale Werbemittel' },
       },
       {
-        titel: 'Grafikdesign',
-        kurztext: 'Vom Motiv bis zum Erscheinungsbild.',
+        titel: 'Drucksachen',
+        kurztext: 'Print. Präzise. Greifbar.',
         link: '/leistungen/grafikdesign',
-      },
-      {
-        titel: 'Social Media',
-        kurztext: 'Content, der sichtbar bleibt.',
-        link: '/leistungen/social-media',
+        bild: { url: '/images/home/service-4.jpg', alt: 'Drucksachen' },
       },
     ],
   },
@@ -124,11 +125,11 @@ export const home = {
     ueberschrift: 'UNSERE ARBEITEN',
     untertitel: 'Von Fahrzeugbeschriftung bis Großflächenplakat – Ihre Marke im Mittelpunkt.',
     items: [
-      { titel: 'Großfläche Innenstadt', kategorie: 'Plakat' },
-      { titel: 'Fahrzeugflotte', kategorie: 'Folierung' },
-      { titel: 'Storefront Branding', kategorie: 'Beschriftung' },
-      { titel: 'Kampagnenmotiv', kategorie: 'Grafik' },
-      { titel: 'Event Visibility', kategorie: 'Plakat' },
+      { titel: 'Projekt 01', kategorie: 'Plakat', bild: { url: '/images/home/work-1.jpg', alt: 'Referenz 1' } },
+      { titel: 'Projekt 02', kategorie: 'Plakat', bild: { url: '/images/home/work-2.jpg', alt: 'Referenz 2' } },
+      { titel: 'Projekt 03', kategorie: 'Folierung', bild: { url: '/images/home/work-3.jpg', alt: 'Referenz 3' } },
+      { titel: 'Projekt 04', kategorie: 'Beschriftung', bild: { url: '/images/home/work-4.jpg', alt: 'Referenz 4' } },
+      { titel: 'Projekt 05', kategorie: 'Kampagne', bild: { url: '/images/home/work-5.jpg', alt: 'Referenz 5' } },
     ],
   },
   kunden: {
@@ -136,16 +137,18 @@ export const home = {
     ueberschrift: 'UNSERE KUNDEN',
     untertitel: 'Von Kultur bis Industrie – Marken, die in der Region sichtbar sein wollen.',
     names: [
-      'MENSCH & NATUR',
-      'STADTWERKE',
-      'LANDRATSAMT',
-      'LIVING-RAUM',
-      'BODENSEE EVENTS',
-      'KULTURFORUM',
-      'OPEN AIR',
-      'MESSE REGION',
-      'SPORTCLUB',
-      'GASTRO GRUPPE',
+      'Restaurant zur Post',
+      'Weingut Herr',
+      'Haar Boutique Anja',
+      'Immobilien Partner',
+      'Stadtwerke',
+      'Landratsamt',
+      'Bodensee Events',
+      'Kulturforum',
+      'Open Air',
+      'Messe Region',
+      'Sportclub',
+      'Fahrrad-Shop',
     ],
   },
   testimonials: {
@@ -154,14 +157,14 @@ export const home = {
       {
         zitat:
           'Exzellente Standortwahl und perfekte Ausführung. Unsere Markenbekanntheit ist durch die strategisch platzierten Plakate enorm gestiegen. Absolut empfehlenswert!',
-        name: 'Gerold Müller',
+        name: 'Sandra Müller',
         rolle: 'Bodensee Events AG',
       },
       {
         zitat:
           'Von der Idee bis zur Montage alles aus einer Hand – klar, schnell und sichtbar auf der Straße.',
-        name: 'Sandra Keller',
-        rolle: 'Marketingleitung (Platzhalter)',
+        name: 'Gerold Müller',
+        rolle: 'Marketing-Leiter (Platzhalter)',
       },
       {
         zitat:
