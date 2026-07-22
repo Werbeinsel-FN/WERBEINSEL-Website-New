@@ -42,12 +42,12 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="font-unbounded text-[clamp(1.85rem,4.5vw,3.5rem)] font-extrabold uppercase leading-[1.15] text-brand-black">
+          <h2 className="whitespace-pre-line font-unbounded text-[clamp(1.85rem,4.5vw,3.5rem)] font-extrabold leading-[1.15] text-brand-black">
             {ueberschrift}
           </h2>
         ) : null}
         {body ? (
-          <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-black/80 md:text-xl">
+          <div className="mt-6 space-y-4 whitespace-pre-line text-base leading-relaxed text-brand-black/80 md:text-xl">
             {body}
           </div>
         ) : null}

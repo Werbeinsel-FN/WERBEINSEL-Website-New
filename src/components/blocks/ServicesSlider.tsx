@@ -67,8 +67,8 @@ export function ServicesSlider({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold uppercase text-brand-black">
-            {ueberschrift || 'WAS WIR MACHEN'}
+          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold text-brand-black">
+            {ueberschrift || 'Was wir machen'}
           </h2>
           <div className="mt-8 hidden justify-center gap-3 sm:flex">
             <button

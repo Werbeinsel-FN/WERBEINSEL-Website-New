@@ -3,22 +3,21 @@ import Link from 'next/link'
 type Props = {
   className?: string
   href?: string | null
-  /** dark = white wordmark (auf Schwarz), light = black wordmark */
+  /** dark = footer/logo on black, light = logo on yellow/white */
   tone?: 'light' | 'dark'
 }
 
 export function Logo({ className = '', href = '/', tone = 'light' }: Props) {
-  const src =
-    tone === 'dark' ? '/brand/logo-wordmark-dark.svg' : '/brand/logo-wordmark.svg'
+  const src = tone === 'dark' ? '/brand/logo-footer.png' : '/brand/logo-header.png'
 
   const mark = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt="WERBEINSEL"
-      width={200}
-      height={36}
-      className={`h-8 w-auto sm:h-9 ${className}`}
+      width={204}
+      height={48}
+      className={`h-9 w-auto sm:h-10 ${className}`}
     />
   )
 

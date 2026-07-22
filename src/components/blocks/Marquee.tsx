@@ -72,7 +72,7 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names }: MarqueePro
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold uppercase text-brand-black">
+          <h2 className="font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold text-brand-black">
             {ueberschrift}
           </h2>
         ) : null}

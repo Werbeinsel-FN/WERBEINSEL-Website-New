@@ -69,11 +69,11 @@ export function ReferenzSlider({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="text-center font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold uppercase text-brand-black">
+          <h2 className="whitespace-pre-line text-center font-unbounded text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold text-brand-black">
             {ueberschrift}
           </h2>
           {untertitel ? (
-            <p className="mx-auto mt-4 max-w-[42ch] text-center font-poppins text-base text-brand-black/70 md:text-lg">
+            <p className="mx-auto mt-4 max-w-[42ch] whitespace-pre-line text-center font-poppins text-base text-brand-black/70 md:text-lg">
               {untertitel}
             </p>
           ) : null}
