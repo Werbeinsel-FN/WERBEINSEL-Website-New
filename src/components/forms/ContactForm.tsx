@@ -1,11 +1,23 @@
 'use client'
 
 import { useActionState, useState } from 'react'
-import Link from 'next/link'
 import { sendContact, type FormState } from '@/app/actions'
 import { formOptions } from '@/data/seed'
 
 const initial: FormState = { ok: false }
+
+const inputClass =
+  'h-[70px] w-full rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
+
+const chipClass = (active: boolean) =>
+  `cursor-pointer rounded-full border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
+    active
+      ? 'bg-brand-black text-brand-yellow'
+      : 'bg-white text-brand-black hover:bg-brand-black hover:text-brand-yellow'
+  }`
+
+const sectionTitleClass =
+  'text-center font-unbounded text-[clamp(1.5rem,3vw,2rem)] font-extrabold leading-[1.2] text-brand-black'
 
 export function ContactForm() {
   const [state, action, pending] = useActionState(sendContact, initial)
@@ -15,7 +27,7 @@ export function ContactForm() {
 
   if (state.ok) {
     return (
-      <div className="rounded-3xl bg-brand-yellow p-8 text-black">
+      <div className="rounded-[24px] bg-brand-yellow p-8 text-brand-black">
         <p className="font-poppins text-lg font-semibold">{state.message}</p>
       </div>
     )
@@ -28,29 +40,27 @@ export function ContactForm() {
   }
 
   return (
-    <form action={action} className="flex flex-col gap-6">
-      <div className="grid gap-4 md:grid-cols-2">
+    <form action={action} className="mx-auto flex w-full max-w-[900px] flex-col items-center">
+      <div className="grid w-full gap-6 md:grid-cols-2">
         <Field name="name" label="Name *" error={state.errors?.name} />
         <Field name="email" type="email" label="E-Mail *" error={state.errors?.email} />
         <Field name="unternehmen" label="Unternehmen" />
         <Field name="telefon" label="Telefon *" error={state.errors?.telefon} />
       </div>
 
-      <fieldset>
-        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
-          Welche Services interessieren Sie?
+      <fieldset className="mt-12 flex w-full flex-col items-center">
+        <legend className={`${sectionTitleClass} w-full whitespace-pre-line md:mb-6`}>
+          {'Welche Services\ninteressieren Sie?'}
         </legend>
-        <div className="flex flex-wrap gap-2">
-          {formOptions.services.map((s) => {
+        {/* Mobile Figma: 1 / 2 / 1, gap 12, pt 32 · Desktop: wrap row */}
+        <div className="grid w-full max-w-[326px] grid-cols-2 items-start justify-items-center gap-3 pt-8 md:flex md:max-w-none md:flex-wrap md:items-center md:justify-center md:pt-0">
+          {formOptions.services.map((s, i) => {
             const active = services.includes(s)
+            const alone = i === 0 || i === formOptions.services.length - 1
             return (
               <label
                 key={s}
-                className={`cursor-pointer rounded-full border px-4 py-2 font-poppins text-sm font-medium transition ${
-                  active
-                    ? 'border-black bg-black text-brand-yellow'
-                    : 'border-black/20 bg-white text-black hover:border-black'
-                }`}
+                className={`${chipClass(active)} ${alone ? 'col-span-2' : ''}`}
               >
                 <input
                   type="checkbox"
@@ -67,22 +77,13 @@ export function ContactForm() {
         </div>
       </fieldset>
 
-      <fieldset>
-        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
-          Geplantes Budget
-        </legend>
-        <div className="flex flex-wrap gap-2">
+      <fieldset className="mt-12 flex w-full flex-col items-center">
+        <legend className={`${sectionTitleClass} mb-6 w-full`}>Geplantes Budget</legend>
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {formOptions.budgets.map((b) => {
             const active = budget === b
             return (
-              <label
-                key={b}
-                className={`cursor-pointer rounded-full border px-4 py-2 font-poppins text-sm font-medium transition ${
-                  active
-                    ? 'border-black bg-black text-brand-yellow'
-                    : 'border-black/20 bg-white text-black hover:border-black'
-                }`}
-              >
+              <label key={b} className={chipClass(active)}>
                 <input
                   type="radio"
                   name="budget"
@@ -98,22 +99,13 @@ export function ContactForm() {
         </div>
       </fieldset>
 
-      <fieldset>
-        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
-          Gewünschter Zeitrahmen
-        </legend>
-        <div className="flex flex-wrap gap-2">
+      <fieldset className="mt-14 flex w-full flex-col items-center pt-8">
+        <legend className={`${sectionTitleClass} mb-6 w-full`}>Gewünschter Zeitrahmen</legend>
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {formOptions.zeitraeume.map((z) => {
             const active = zeitraum === z
             return (
-              <label
-                key={z}
-                className={`cursor-pointer rounded-full border px-4 py-2 font-poppins text-sm font-medium transition ${
-                  active
-                    ? 'border-black bg-black text-brand-yellow'
-                    : 'border-black/20 bg-white text-black hover:border-black'
-                }`}
-              >
+              <label key={z} className={chipClass(active)}>
                 <input
                   type="radio"
                   name="zeitraum"
@@ -129,40 +121,43 @@ export function ContactForm() {
         </div>
       </fieldset>
 
-      <textarea
-        name="nachricht"
-        placeholder="Ihre Nachricht an uns (optional)"
-        rows={5}
-        className="rounded-2xl border border-black/15 bg-white p-4 font-poppins outline-none focus:border-black"
-      />
+      <div className="mt-12 w-full">
+        <textarea
+          name="nachricht"
+          placeholder="Ihre Nachricht an uns (optional)"
+          rows={8}
+          className="min-h-[260px] w-full resize-y rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black"
+        />
+      </div>
 
-      <label className="flex items-start gap-3 font-poppins text-sm">
-        <input type="checkbox" name="consent" className="mt-1 size-4 accent-black" />
+      <label className="mt-8 flex w-full max-w-[560px] items-start gap-3 font-poppins text-base font-normal leading-[1.5] text-brand-black">
+        <input
+          type="checkbox"
+          name="consent"
+          className="mt-1 size-4 shrink-0 accent-brand-black"
+        />
         <span>
-          Ich habe die{' '}
-          <Link href="/datenschutz" className="underline underline-offset-2">
-            Datenschutzerklärung
-          </Link>{' '}
-          gelesen und stimme der Verarbeitung zu. *
+          Ich habe die Datenschutzerklärung gelesen und akzeptiere sie. Ich bin damit
+          einverstanden, dass meine Daten zur Bearbeitung meiner Anfrage verwendet werden.
         </span>
       </label>
       {state.errors?.consent && (
-        <p className="text-sm text-red-600">{state.errors.consent[0]}</p>
+        <p className="mt-2 text-sm text-red-600">{state.errors.consent[0]}</p>
       )}
 
       <div
-        className="cf-turnstile"
+        className="mt-6 cf-turnstile"
         data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
       />
 
       {state.message && !state.ok && (
-        <p className="text-sm text-red-600">{state.message}</p>
+        <p className="mt-4 text-sm text-red-600">{state.message}</p>
       )}
 
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 self-center rounded-full bg-black px-10 py-4 font-poppins text-sm font-bold tracking-wide text-brand-yellow transition hover:scale-[1.02] disabled:opacity-50"
+        className="mt-8 inline-flex h-[62px] items-center justify-center rounded-full bg-brand-black px-12 font-poppins text-xl font-bold text-brand-yellow transition hover:bg-black/90 disabled:opacity-50"
       >
         {pending ? 'WIRD GESENDET …' : 'ANFRAGE SENDEN'}
       </button>
@@ -182,13 +177,13 @@ function Field({
   error?: string[]
 }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
       <input
         name={name}
         type={type}
         placeholder={label}
         aria-label={label}
-        className="rounded-2xl border border-black/15 bg-white p-4 font-poppins outline-none focus:border-black"
+        className={inputClass}
       />
       {error && <p className="text-sm text-red-600">{error[0]}</p>}
     </div>

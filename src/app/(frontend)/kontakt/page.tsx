@@ -10,37 +10,39 @@ export const metadata = buildMetadata({
 
 export default function KontaktPage() {
   const wa = einstellungen.whatsapp.replace(/\D/g, '')
-  const address = `${einstellungen.adresse.strasse}, ${einstellungen.adresse.plz} ${einstellungen.adresse.ort}`
-  const mapsQuery = encodeURIComponent(address)
+  const mapsQuery = encodeURIComponent(
+    `${einstellungen.adresse.strasse}, ${einstellungen.adresse.plz} ${einstellungen.adresse.ort}`,
+  )
 
   return (
     <>
-      {/* Hero – gelb, schließt an Header an */}
-      <section className="bg-brand-yellow text-black">
-        <div className="container-site pb-14 pt-6 text-center sm:pb-16 sm:pt-8 md:pb-20">
-          <h1 className="font-unbounded text-[clamp(2.25rem,7vw,5.5rem)] font-extrabold uppercase leading-[1.08]">
+      {/* Hero – gelb, Display/Hero + Body/Lead (Figma) */}
+      <section className="flex flex-col items-stretch bg-brand-yellow py-20 text-brand-black md:py-32">
+        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8 text-center">
+          <h1 className="heading-hero mx-auto max-w-[640px] whitespace-pre-line uppercase text-brand-black md:text-[88px] md:leading-[0.95] md:tracking-[-1.76px]">
             {kontakt.hero.titel}
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl font-poppins text-base leading-relaxed text-black/80 md:text-xl">
+          <p className="body-lead mx-auto mt-6 max-w-[625px] whitespace-pre-line text-brand-black md:text-[22px]">
             {kontakt.hero.untertitel}
           </p>
         </div>
       </section>
 
-      {/* Formular – zentriert, volle Breite wie Figma */}
-      <section className="section-pad bg-white">
-        <div className="container-site mx-auto max-w-3xl">
+      {/* Formular – Figma: max 1700, padding 0 32 */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
           <ContactForm />
         </div>
       </section>
 
-      {/* Direktkontakt – schwarzer Block mit 4 Spalten */}
-      <section className="bg-brand-black text-white">
-        <div className="container-site section-pad !pb-16">
-          <h2 className="mb-12 text-center font-unbounded text-[clamp(1.75rem,4vw,3rem)] font-extrabold uppercase text-brand-yellow">
+      {/* Direktkontakt – Figma: padding 128, icons 80, Label/Meta + Body/Lead */}
+      <section className="flex flex-col items-stretch bg-brand-black py-20 text-white md:py-32">
+        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
+          <h2 className="heading-section mb-12 whitespace-pre-line text-center text-brand-yellow md:mb-16 md:text-[56px] md:leading-none md:tracking-[-0.56px]">
             {kontakt.contactTitle}
           </h2>
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+
+          <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             <ContactCol
               label={kontakt.cards.telefonLabel}
               href={`tel:${einstellungen.telefon}`}
@@ -53,18 +55,18 @@ export default function KontaktPage() {
               value={einstellungen.email}
               icon="mail"
             />
-            <div className="flex flex-col items-center text-center">
-              <span className="circle mb-4 grid size-16 place-items-center rounded-full bg-[#25D366] text-white">
-                <WhatsAppIcon />
+            <div className="flex flex-col items-center gap-4 text-center">
+              <span className="circle grid size-20 shrink-0 place-items-center rounded-full bg-[#25D366] text-white">
+                <ChatBubbleIcon />
               </span>
-              <p className="mb-3 font-poppins text-xs font-bold tracking-[0.18em] text-white/60">
+              <p className="font-unbounded text-lg font-extrabold leading-[1.5] uppercase text-brand-yellow">
                 {kontakt.cards.whatsappLabel}
               </p>
               <a
                 href={`https://wa.me/${wa}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex rounded-full bg-[#25D366] px-6 py-3 font-poppins text-sm font-bold text-white transition hover:brightness-110"
+                className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-3 font-poppins text-base font-semibold text-white transition hover:brightness-110"
               >
                 {kontakt.cards.whatsappCta}
               </a>
@@ -72,7 +74,7 @@ export default function KontaktPage() {
             <ContactCol
               label={kontakt.cards.adresseLabel}
               href={`https://www.openstreetmap.org/search?query=${mapsQuery}`}
-              value={address}
+              value={`${einstellungen.adresse.strasse}\n${einstellungen.adresse.plz} ${einstellungen.adresse.ort}`}
               icon="pin"
               external
             />
@@ -100,15 +102,17 @@ function ContactCol({
     <a
       href={href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className="flex flex-col items-center text-center transition hover:opacity-90"
+      className="flex flex-col items-center gap-4 text-center transition hover:opacity-90"
     >
-      <span className="circle mb-4 grid size-16 place-items-center rounded-full bg-brand-yellow text-brand-black">
+      <span className="circle grid size-20 shrink-0 place-items-center rounded-full bg-brand-yellow text-brand-black">
         {icon === 'phone' && <PhoneIcon />}
         {icon === 'mail' && <MailIcon />}
         {icon === 'pin' && <PinIcon />}
       </span>
-      <p className="mb-2 font-poppins text-xs font-bold tracking-[0.18em] text-white/60">{label}</p>
-      <p className="max-w-[16ch] font-poppins text-base font-semibold leading-snug text-white">
+      <p className="font-unbounded text-lg font-extrabold leading-[1.5] uppercase text-brand-yellow">
+        {label}
+      </p>
+      <p className="whitespace-pre-line font-poppins text-[22px] font-medium leading-[1.6] text-white">
         {value}
       </p>
     </a>
@@ -117,7 +121,7 @@ function ContactCol({
 
 function PhoneIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
+    <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor" aria-hidden>
       <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z" />
     </svg>
   )
@@ -125,7 +129,7 @@ function PhoneIcon() {
 
 function MailIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
+    <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor" aria-hidden>
       <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
     </svg>
   )
@@ -133,16 +137,16 @@ function MailIcon() {
 
 function PinIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
+    <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor" aria-hidden>
       <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
     </svg>
   )
 }
 
-function WhatsAppIcon() {
+function ChatBubbleIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
-      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.82c4.46 0 8.09 3.63 8.09 8.09 0 4.46-3.63 8.09-8.09 8.09-1.42 0-2.8-.37-4.01-1.06l-.29-.17-3.12.82.83-3.04-.18-.31a8.05 8.05 0 0 1-1.23-4.33c0-4.46 3.63-8.09 8.09-8.09zm4.5 10.4c-.22-.11-1.3-.64-1.5-.71-.2-.08-.35-.11-.5.11-.15.22-.57.71-.7.86-.13.15-.26.16-.48.05-.22-.11-.93-.34-1.77-1.09-.65-.58-1.1-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.08-.15.04-.28-.02-.39-.05-.11-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.38h-.42c-.15 0-.39.05-.59.28-.2.22-.78.76-.78 1.86s.8 2.16.91 2.31c.11.15 1.57 2.4 3.8 3.36 2.24.97 2.24.65 2.64.61.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.1-.2-.15-.42-.26z" />
+    <svg viewBox="0 0 24 24" className="h-9 w-9" fill="currentColor" aria-hidden>
+      <path d="M12 3c-4.97 0-9 3.58-9 8 0 2.4 1.2 4.55 3.1 6.05L5 21l4.35-1.75c.85.25 1.73.4 2.65.4 4.97 0 9-3.58 9-8s-4.03-8-9-8z" />
     </svg>
   )
 }

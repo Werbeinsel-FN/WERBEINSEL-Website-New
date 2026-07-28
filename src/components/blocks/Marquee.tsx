@@ -5,7 +5,7 @@ export type MarqueeProps = {
   names?: string[] | null
 }
 
-/** Figma: Section / Clients → genau 3 Marquee-Reihen (Desktop + Mobile). */
+/** Figma: Section / Clients → genau 3 Marquee-Reihen. */
 const ROW_COUNT = 3
 
 function chunkRows(names: string[], rowCount: number): string[][] {
@@ -35,10 +35,9 @@ function MarqueeRow({
 }) {
   const doubled = [...names, ...names]
   return (
-    /* Horizontal clip + vertikales Padding, damit Pills nicht oben/unten abgeschnitten werden */
-    <div className="overflow-hidden py-2 md:py-3">
+    <div className="overflow-hidden py-1">
       <div
-        className={`flex w-max items-center gap-6 md:gap-[clamp(2rem,2.5vw,4.5rem)] ${
+        className={`flex w-max items-center gap-6 md:gap-[72px] ${
           reverse ? 'marquee-track-reverse' : 'marquee-track'
         } ${offset ? 'marquee-track-offset' : ''}`}
       >
@@ -47,8 +46,10 @@ function MarqueeRow({
           return (
             <span
               key={`${name}-${i}`}
-              className={`box-border inline-flex h-[120px] w-[240px] shrink-0 items-center justify-center rounded-full border border-brand-black px-[22px] text-center font-poppins text-[15px] font-bold leading-tight tracking-[0.03em] uppercase md:h-[clamp(95px,6.53vw,190px)] md:w-[clamp(180px,12.38vw,360px)] md:px-8 md:text-[clamp(0.875rem,0.6vw+0.5rem,1.125rem)] ${
-                dark ? 'bg-brand-black text-white' : 'bg-white text-brand-black'
+              className={`inline-flex h-[95px] w-[180px] shrink-0 items-center justify-center rounded-full px-5 text-center font-poppins text-[13px] font-bold leading-[1.2] tracking-[0.03em] uppercase sm:h-[120px] sm:w-[240px] sm:px-8 sm:text-[15px] md:h-[190px] md:w-[360px] md:px-10 md:text-lg ${
+                dark
+                  ? 'bg-brand-black text-white'
+                  : 'bg-white text-brand-black ring-1 ring-brand-black'
               }`}
             >
               {name}
@@ -66,26 +67,33 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names }: MarqueePro
 
   const rows = chunkRows(list, ROW_COUNT)
 
+  /*
+   * Figma Section / Clients:
+   * - padding 96px, bg yellow
+   * - Heading/Section 56 · Body/Lead 22, gap 24 title→lead, 80 to pills
+   * - 3 rows · Label/Client Poppins 18/700 · pill padding 32×40
+   */
   return (
-    <section className="bg-brand-yellow py-14 md:py-24">
-      <div className="container-site mb-6 text-center md:mb-10">
+    <section className="overflow-hidden bg-brand-yellow py-14 md:py-24">
+      <div className="mx-auto w-full max-w-[1780px] px-5 text-center sm:px-8">
         {eyebrow ? (
           <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/55 uppercase">
             {eyebrow}
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="heading-section text-brand-black">{ueberschrift}</h2>
+          <h2 className="heading-section text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+            {ueberschrift}
+          </h2>
         ) : null}
         {untertitel ? (
-          <p className="body-lead mx-auto mt-4 max-w-[36ch] whitespace-pre-line text-brand-black md:mt-6">
+          <p className="body-lead mx-auto mt-6 max-w-[480px] whitespace-pre-line text-brand-black md:text-[22px]">
             {untertitel}
           </p>
         ) : null}
       </div>
 
-      {/* Mobile: gap 24px · Desktop: gap skaliert zu 72px */}
-      <div className="mt-6 flex flex-col gap-6 md:mt-20 md:gap-[clamp(2rem,2.5vw,4.5rem)]" aria-hidden>
+      <div className="mt-10 flex flex-col gap-5 md:mt-20 md:gap-8" aria-hidden>
         {rows.map((row, i) => (
           <MarqueeRow
             key={`row-${i}`}

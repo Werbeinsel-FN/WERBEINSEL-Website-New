@@ -19,6 +19,69 @@ export type ServicesSliderProps = {
   items?: ServiceSlideItem[] | null
 }
 
+function ServiceCard({
+  slide,
+  index,
+  total,
+  selected,
+}: {
+  slide: ServiceSlideItem
+  index: number
+  total: number
+  selected?: boolean
+}) {
+  const media = resolveMedia(slide.bild, slide.titel)
+  const card = (
+    <article
+      className="relative h-full w-full overflow-hidden rounded-[24px] bg-brand-black"
+      role="group"
+      aria-roledescription="slide"
+      aria-label={`${index + 1} von ${total}: ${slide.titel}`}
+      aria-hidden={selected === false}
+    >
+      {media ? (
+        <Image
+          src={media.url}
+          alt={media.alt}
+          fill
+          sizes="(max-width: 1024px) 70vw, 382px"
+          className="object-cover transition duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-brand-card-dark" />
+      )}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%)',
+        }}
+        aria-hidden
+      />
+      {/* Figma: padding 32, flex-end, Heading/Card 28 yellow · Label/Card 16 white */}
+      <div className="absolute inset-0 flex flex-col items-start justify-end p-5 md:p-6 xl:p-8">
+        <h3 className="w-full whitespace-pre-line text-center font-unbounded text-[clamp(1.1rem,1.5vw,1.75rem)] font-extrabold leading-[1.1] text-brand-yellow">
+          {slide.titel}
+        </h3>
+        {slide.kurztext ? (
+          <p className="mt-1 w-full text-center font-poppins text-[clamp(0.8rem,1vw,1rem)] font-medium leading-[1.3] text-white">
+            {slide.kurztext}
+          </p>
+        ) : null}
+      </div>
+    </article>
+  )
+
+  if (slide.link) {
+    return (
+      <Link href={slide.link} className="group block h-full focus-visible:outline-offset-4">
+        {card}
+      </Link>
+    )
+  }
+  return card
+}
+
 export function ServicesSlider({
   eyebrow,
   ueberschrift = 'WAS WIR MACHEN',
@@ -30,14 +93,10 @@ export function ServicesSlider({
     containScroll: 'trimSnaps',
   })
   const [selected, setSelected] = useState(0)
-  const [canPrev, setCanPrev] = useState(false)
-  const [canNext, setCanNext] = useState(false)
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setSelected(emblaApi.selectedScrollSnap())
-    setCanPrev(emblaApi.canScrollPrev())
-    setCanNext(emblaApi.canScrollNext())
   }, [emblaApi])
 
   useEffect(() => {
@@ -47,105 +106,68 @@ export function ServicesSlider({
     emblaApi.on('reInit', onSelect)
     return () => {
       emblaApi.off('select', onSelect)
-      emblaApi.off('reInit', onSelect)
     }
   }, [emblaApi, onSelect])
 
   if (!slides.length) return null
 
+  /*
+   * Figma Section / Services:
+   * - padding 128px, bg yellow
+   * - title max 840px, gap 80px to cards
+   * - cards 382×679, radius 24, gap 24, padding 32
+   * - Heading/Card 28 Unbounded yellow · Label/Card 16 Poppins white
+   */
   return (
     <section
       id="leistungen"
-      className="section-pad bg-brand-yellow"
-      aria-roledescription="carousel"
+      className="bg-brand-yellow py-14 md:py-32"
       aria-label={ueberschrift || 'Leistungen'}
     >
-      <div className="container-site">
-        <div className="mb-10 text-center">
+      <div className="mx-auto w-full max-w-[1780px] px-5 sm:px-8">
+        <div className="mx-auto max-w-[840px] text-center">
           {eyebrow ? (
             <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/60 uppercase">
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="heading-section text-brand-black">
+          <h2 className="heading-section text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
             {ueberschrift || 'Was wir machen'}
           </h2>
-          <div className="mt-8 hidden justify-center gap-3 sm:flex">
-            <button
-              type="button"
-              onClick={() => emblaApi?.scrollPrev()}
-              disabled={!canPrev}
-              aria-label="Vorherige Leistung"
-              className="circle grid h-12 w-12 place-items-center rounded-full bg-brand-black text-brand-yellow disabled:opacity-40"
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              onClick={() => emblaApi?.scrollNext()}
-              disabled={!canNext}
-              aria-label="Nächste Leistung"
-              className="circle grid h-12 w-12 place-items-center rounded-full bg-brand-black text-brand-yellow disabled:opacity-40"
-            >
-              ›
-            </button>
-          </div>
         </div>
-      </div>
 
-      <div className="pl-5 sm:pl-6 lg:pl-8">
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-5 pr-5 sm:gap-6 sm:pr-6 lg:pr-8">
-            {slides.map((slide, i) => {
-              const media = resolveMedia(slide.bild, slide.titel)
-              const card = (
-                <article
-                  className="relative aspect-[3/4] overflow-hidden rounded-[24px] bg-brand-black"
-                  role="group"
-                  aria-roledescription="slide"
-                  aria-label={`${i + 1} von ${slides.length}: ${slide.titel}`}
-                  aria-hidden={i !== selected}
-                >
-                  {media ? (
-                    <Image
-                      src={media.url}
-                      alt={media.alt}
-                      fill
-                      sizes="(max-width: 640px) 75vw, (max-width: 1024px) 40vw, 28vw"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-brand-card-dark" />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-6 text-center md:p-8">
-                    <h3 className="font-unbounded text-[1.35rem] font-extrabold leading-[1.1] text-brand-yellow md:text-[1.75rem]">
-                      {slide.titel}
-                    </h3>
-                    {slide.kurztext ? (
-                      <p className="mt-2 line-clamp-2 font-poppins text-sm font-medium leading-snug text-white md:text-base">
-                        {slide.kurztext}
-                      </p>
-                    ) : null}
-                  </div>
-                </article>
-              )
+        {/* Desktop: 4 cards, skaliert (Figma 382×679 auf Artboard 2908 → kleiner auf Laptop) */}
+        <div className="mt-12 hidden justify-center gap-4 overflow-x-auto px-2 md:mt-16 md:gap-5 lg:flex xl:gap-6">
+          {slides.map((slide, i) => (
+            <div
+              key={`${slide.titel}-${i}`}
+              className="aspect-[382/679] w-[clamp(200px,18vw,300px)] shrink-0"
+            >
+              <ServiceCard slide={slide} index={i} total={slides.length} />
+            </div>
+          ))}
+        </div>
 
-              return (
+        {/* Tablet / Mobile: carousel */}
+        <div className="mt-12 md:mt-20 lg:hidden" aria-roledescription="carousel">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex gap-6">
+              {slides.map((slide, i) => (
                 <div
-                  key={`${slide.titel}-${i}`}
-                  className="group min-w-0 flex-[0_0_78%] sm:flex-[0_0_48%] lg:flex-[0_0_32%]"
+                  key={`${slide.titel}-m-${i}`}
+                  className="min-w-0 flex-[0_0_78%] sm:flex-[0_0_45%]"
                 >
-                  {slide.link ? (
-                    <Link href={slide.link} className="block focus-visible:outline-offset-4">
-                      {card}
-                    </Link>
-                  ) : (
-                    card
-                  )}
+                  <div className="aspect-[382/679]">
+                    <ServiceCard
+                      slide={slide}
+                      index={i}
+                      total={slides.length}
+                      selected={i === selected}
+                    />
+                  </div>
                 </div>
-              )
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>

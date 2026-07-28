@@ -18,7 +18,10 @@ function renderBody(text?: string | ReactNode | null, children?: ReactNode) {
       .split(/\n{2,}/)
       .filter(Boolean)
       .map((para, i) => (
-        <p key={i} className="font-poppins text-base leading-relaxed text-brand-black/80 md:text-lg">
+        <p
+          key={i}
+          className="body-lead mx-auto max-w-[528px] whitespace-pre-line text-brand-black first:max-w-[471px]"
+        >
           {para.trim()}
         </p>
       ))
@@ -33,21 +36,22 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
   const media = resolveMedia(bild, ueberschrift || '')
   const body = renderBody(text, children)
 
+  /* Figma Section / About: padding 128px, heading 840/56 Unbounded 800, Body/Lead 22/500 */
   return (
-    <section className="section-pad bg-white">
-      <div className="container-site mx-auto max-w-[840px] text-center">
+    <section className="bg-white py-14 md:py-32">
+      <div className="mx-auto w-full max-w-[1780px] px-5 text-center sm:px-8">
         {eyebrow ? (
           <p className="mb-4 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
             {eyebrow}
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="heading-section whitespace-pre-line text-brand-black">{ueberschrift}</h2>
+          <h2 className="heading-section mx-auto max-w-[840px] whitespace-pre-line text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+            {ueberschrift}
+          </h2>
         ) : null}
         {body ? (
-          <div className="mt-6 space-y-4 whitespace-pre-line font-poppins text-base leading-relaxed text-brand-black/80 md:mt-8 md:text-lg">
-            {body}
-          </div>
+          <div className="mt-8 space-y-6 md:mt-8">{body}</div>
         ) : null}
         {media ? (
           <div className="relative mx-auto mt-10 aspect-[16/10] w-full max-w-2xl overflow-hidden rounded-3xl">

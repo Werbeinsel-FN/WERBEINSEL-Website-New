@@ -15,26 +15,20 @@ type HeaderProps = {
   variant?: 'light' | 'dark' | 'yellow'
 }
 
-function variantFromPath(pathname: string): 'light' | 'dark' | 'yellow' {
-  if (pathname === '/') return 'dark'
-  if (
-    pathname.startsWith('/kontakt') ||
-    pathname.startsWith('/jobs') ||
-    pathname.startsWith('/impressum') ||
-    pathname.startsWith('/datenschutz') ||
-    pathname.startsWith('/leistungen')
-  ) {
-    return 'yellow'
-  }
-  return 'light'
+/**
+ * Figma Header: gelber Balken (#FFED00) + schwarzer Burger.
+ * Logo: gleiches Motiv, Wortmarke schwarz (Kontrast auf Gelb).
+ */
+function variantFromPath(_pathname: string): 'yellow' {
+  return 'yellow'
 }
 
 const variantStyles = {
-  light: {
-    bar: 'bg-white text-brand-black',
+  yellow: {
+    bar: 'bg-brand-yellow text-brand-black',
     logoTone: 'light' as const,
     burger: 'bg-brand-black',
-    drawer: 'bg-white text-brand-black',
+    drawer: 'bg-brand-yellow text-brand-black',
   },
   dark: {
     bar: 'bg-brand-black text-white',
@@ -42,11 +36,11 @@ const variantStyles = {
     burger: 'bg-white',
     drawer: 'bg-brand-black text-white',
   },
-  yellow: {
-    bar: 'bg-brand-yellow text-brand-black',
+  light: {
+    bar: 'bg-white text-brand-black',
     logoTone: 'light' as const,
     burger: 'bg-brand-black',
-    drawer: 'bg-brand-yellow text-brand-black',
+    drawer: 'bg-white text-brand-black',
   },
 } as const
 
@@ -108,19 +102,21 @@ export function Header({ items, sticky = true, variant }: HeaderProps) {
 
   return (
     <header className={`${styles.bar} ${sticky ? 'sticky top-0 z-50' : 'relative z-50'}`}>
-      <div className="container-site flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
-        <Logo tone={styles.logoTone} />
+      <div className="relative flex h-[88px] w-full items-center">
+        <div className="container-site flex items-center">
+          <Logo tone={styles.logoTone} />
+        </div>
 
         <button
           ref={burgerRef}
           type="button"
-          className="grid h-11 w-11 place-items-center rounded-full"
+          className="absolute right-5 top-1/2 grid h-8 w-8 shrink-0 -translate-y-1/2 place-items-center sm:right-6 lg:right-8"
           aria-expanded={open}
           aria-controls={drawerId}
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
           onClick={toggle}
         >
-          <span className="relative block h-3.5 w-6" aria-hidden>
+          <span className="relative block h-3.5 w-[21px]" aria-hidden>
             <span
               className={`absolute left-0 top-0 h-0.5 w-full ${styles.burger} transition ${open ? 'translate-y-[6px] rotate-45' : ''}`}
             />
@@ -153,7 +149,7 @@ export function Header({ items, sticky = true, variant }: HeaderProps) {
           aria-label="Navigation"
           className={`absolute right-0 top-0 flex h-full w-[min(100%,22rem)] flex-col ${styles.drawer} shadow-xl transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          <div className="flex h-16 items-center justify-between px-5 sm:h-[4.5rem]">
+          <div className="flex h-[88px] items-center justify-between px-5 sm:px-8">
             <Logo tone={styles.logoTone} href={null} />
             <button
               type="button"

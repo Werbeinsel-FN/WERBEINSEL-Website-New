@@ -37,7 +37,7 @@ export const einstellungen = {
 }
 
 export const footer = {
-  tagline: 'Ihre Agentur für klassische Werbung und moderne Sichtbarkeit.',
+  tagline: 'Ihre Agentur für klassische Werbung\nund moderne Sichtbarkeit.',
   spalten: [
         {
           titel: 'Navigation',
@@ -78,7 +78,7 @@ export const home = {
     blockType: 'hero' as const,
     variante: 'bildKarte' as const,
     bild: { url: '/images/figma/hero-bg.png', alt: 'WERBEINSEL Außenwerbung' },
-    titel: 'Ihre Werbung.\nUnser Handwerk.',
+    titel: 'Ihre Werbung.\nUnser\nHandwerk.',
     untertitel: 'Plakat. Folie. Digital.\nSichtbarkeit für Marken in der Region.',
     buttons: [
       { label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' as const },
@@ -87,7 +87,7 @@ export const home = {
   },
   about: {
     blockType: 'textblock' as const,
-    ueberschrift: 'Ihre Agentur für\nklassische Werbung',
+    ueberschrift: 'Ihre Agentur für\nklassische\nWerbung',
     text: 'WERBEINSEL steht für klare Kommunikation\nund starke visuelle Präsenz.\n\nWir entwickeln, produzieren und montieren\nklassische Außenwerbung – regional verankert,\nprofessionell umgesetzt.',
   },
   services: {
@@ -101,13 +101,13 @@ export const home = {
         bild: { url: '/images/figma/service-plakat.png', alt: 'Plakatwerbung' },
       },
       {
-        titel: 'Folierung & Beschriftung',
+        titel: 'Folierung &\nBeschriftung',
         kurztext: 'Fahrzeuge. Schaufenster. Fassaden.',
         link: '/leistungen/folierung',
         bild: { url: '/images/figma/service-folie.png', alt: 'Folierung & Beschriftung' },
       },
       {
-        titel: 'Digitale Werbemittel',
+        titel: 'Digitale\nWerbemittel',
         kurztext: 'Screens. Social Media. Online-Kampagnen.',
         link: '/leistungen/social-media',
         bild: { url: '/images/figma/service-digital.png', alt: 'Digitale Werbemittel' },
@@ -191,17 +191,17 @@ export const home = {
   },
   cta: {
     blockType: 'cta' as const,
-    ueberschrift: 'Bereit für Ihr nächstes Projekt?',
-    text: 'Lassen Sie uns über Ihre Werbeziele sprechen. Gemeinsam machen wir Ihre Marke sichtbar.',
+    ueberschrift: 'Bereit für Ihr\nnächstes Projekt?',
+    text: 'Lassen Sie uns über Ihre Werbeziele sprechen.\nGemeinsam machen wir Ihre Marke sichtbar.',
     button: { label: 'JETZT ANFRAGEN', url: '/kontakt' },
   },
 }
 
 export const jobs = {
   hero: {
-    titel: 'WERDE TEIL DES TEAMS',
+    titel: 'WERDE TEIL\nDES TEAMS',
     untertitel:
-      'Kreative Köpfe gesucht! Wir sind eine Werbeagentur mit Leidenschaft für mutige Kampagnen und außergewöhnliches Design.',
+      'Kreative Köpfe gesucht! Wir sind eine Werbeagentur mit\nLeidenschaft für mutige Kampagnen und außergewöhnliches\nDesign.',
   },
   openingsTitle: 'HIER IST PLATZ FÜR DICH',
   formTitle: 'BEWIRB DICH JETZT',
@@ -211,35 +211,37 @@ export const jobs = {
     schritte: [
       {
         titel: 'Bewerbung',
-        kurztext: 'Formular ausfüllen und Unterlagen hochladen – unkompliziert und digital.',
+        kurztext: 'Formular ausfüllen & Unterlagen hochladen',
       },
       {
         titel: 'Rückmeldung',
-        kurztext: 'Wir prüfen deine Unterlagen und melden uns zeitnah bei dir.',
+        kurztext: 'Wir melden uns innerhalb von 48 Stunden',
       },
       {
         titel: 'Kennenlernen',
-        kurztext: 'Persönliches Gespräch – wir lernen uns kennen und prüfen, ob es passt.',
+        kurztext: 'Lockeres Gespräch – wir wollen dich\nkennenlernen',
       },
       {
         titel: 'Willkommen!',
-        kurztext: 'Passt alles? Dann heißen wir dich herzlich im Team willkommen.',
+        kurztext: 'Probetag & Start in dein neues Abenteuer',
       },
     ],
   },
   cta: {
-    ueberschrift: 'WORAUF WARTEST DU?',
-    text: 'Keine passende Stelle gefunden? Schick uns eine Initiativbewerbung – wir freuen uns auf dich.',
-    button: { label: 'JETZT BEWERBEN', url: '#bewerbung' },
+    ueberschrift: 'Worauf wartest du?',
+    text: 'Wir freuen uns darauf, dich kennenzulernen! Egal ob du Erfahrung\nmitbringst oder gerade erst durchstartest – bei uns zählt deine\nLeidenschaft und dein Wille, etwas zu bewegen.',
+    button: null,
   },
   list: [
     {
       id: 'plakatierer',
       titel: 'Plakatierer/in',
-      badges: ['Vollzeit', 'Vor Ort', 'ab sofort'],
+      badges: ['Vollzeit', 'Vor Ort', 'Ab sofort'],
       standort: 'Friedrichshafen',
       pensum: '100 %',
       aktiv: true,
+      intro:
+        'Du bist zuverlässig, packst gerne draußen an und willst Werbung in der Region sichtbar machen?',
       aufgaben: [
         'Auf- und Abhängen von Plakaten im Außendienst',
         'Pflege und Dokumentation der Standorte',
@@ -255,10 +257,12 @@ export const jobs = {
     {
       id: 'marketing-manager',
       titel: 'Marketing Manager/in',
-      badges: ['Vollzeit', 'Hybrid'],
+      badges: ['Vollzeit', 'Hybrid', 'Ab sofort'],
       standort: 'Friedrichshafen',
       pensum: '80–100 %',
       aktiv: true,
+      intro:
+        'Du planst Kampagnen, berätst Kunden und bringst Ideen von der Konzeption bis zur Fläche?',
       aufgaben: [
         'Kundenberatung und Kampagnenplanung',
         'Koordination von Gestaltung und Umsetzung',
@@ -278,15 +282,19 @@ export const jobs = {
       standort: 'Friedrichshafen',
       pensum: 'nach Absprache',
       aktiv: true,
+      intro:
+        'Du möchtest in die Welt der Werbung eintauchen und erste Praxiserfahrung sammeln?',
       aufgaben: [
-        'Unterstützung bei Kampagnen und Content',
-        'Mitarbeit an Design- und Produktionsaufgaben',
-        'Einblick in alle Agenturbereiche',
+        'Unterstützung bei der Gestaltung von Werbemitteln',
+        'Mitarbeit an kreativen Projekten und Kampagnen',
+        'Social Media Content-Erstellung',
+        'Einblick in alle Bereiche einer Werbeagentur',
       ],
       anforderungen: [
-        'Interesse an Werbung und Medien',
-        'Grundkenntnisse in Design-Tools von Vorteil',
-        'Motivation und Zuverlässigkeit',
+        'Student/in im Bereich Design, Marketing oder Kommunikation',
+        'Erste Erfahrung mit Adobe Creative Suite von Vorteil',
+        'Kreativität, Lernbereitschaft und Engagement',
+        'Praktikumsdauer: mindestens 3 Monate',
       ],
       benefits: ['Mentoring', 'Praxisnah', 'Übernahmechance'],
     },
@@ -295,11 +303,11 @@ export const jobs = {
 
 export const kontakt = {
   hero: {
-    titel: 'PROJEKT ANFRAGEN',
+    titel: 'PROJEKT\nANFRAGEN',
     untertitel:
-      'Lassen Sie uns gemeinsam Ihre Marke sichtbar machen. Wir melden uns innerhalb von 24 Stunden bei Ihnen.',
+      'Lassen Sie uns gemeinsam Ihre Marke sichtbar machen.\nWir melden uns innerhalb von 24 Stunden bei Ihnen.',
   },
-  contactTitle: 'DIREKT KONTAKT AUFNEHMEN',
+  contactTitle: 'Direkt Kontakt\nAufnehmen',
   cards: {
     telefonLabel: 'TELEFON',
     emailLabel: 'E-MAIL',
@@ -647,6 +655,6 @@ export const leistungen: Record<
 export const formOptions = {
   services: ['Außenwerbung', 'Beschriftung', 'Grafikdesign', 'Webdesign'],
   budgets: ['< 1.000€', '1.000€ - 5.000€', '5.000€ - 10.000€', '> 10.000€'],
-  zeitraeume: ['sofort', 'innerhalb 1 Monat', '1-2 Monate', '> 3 Monate'],
-  verfuegbarAb: ['sofort', 'in 2 Wochen', 'in 1 Monat', 'flexibel'],
+  zeitraeume: ['sofort', 'innerhalb 1 Monat', '1-3 Monate', '> 3 Monate'],
+  verfuegbarAb: ['sofort', 'nächsten Monat', 'in 3 Monaten', 'flexibel'],
 }

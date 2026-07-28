@@ -1,11 +1,23 @@
 'use client'
 
 import { useActionState, useState } from 'react'
-import Link from 'next/link'
 import { sendApplication, type FormState } from '@/app/actions'
 import { formOptions } from '@/data/seed'
 
 const initial: FormState = { ok: false }
+
+const inputClass =
+  'h-[70px] w-full rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
+
+const chipClass = (active: boolean) =>
+  `cursor-pointer rounded-full border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
+    active
+      ? 'bg-brand-black text-brand-yellow'
+      : 'bg-white text-brand-black hover:bg-brand-black hover:text-brand-yellow'
+  }`
+
+const sectionTitleClass =
+  'text-center font-unbounded text-[clamp(1.5rem,3vw,2rem)] font-extrabold leading-[1.2] text-brand-black'
 
 type Props = {
   positions: string[]
@@ -17,40 +29,40 @@ export function ApplicationForm({ positions }: Props) {
   const [verfuegbarAb, setVerfuegbarAb] = useState('')
   const [fileName, setFileName] = useState('')
 
-  const allPositions = [...positions, 'Initiativ']
+  const allPositions = [...positions, 'Initiativbewerbung']
 
   if (state.ok) {
     return (
-      <div className="rounded-3xl bg-brand-yellow p-8 text-black">
+      <div className="rounded-[24px] bg-brand-yellow p-8 text-brand-black">
         <p className="font-poppins text-lg font-semibold">{state.message}</p>
       </div>
     )
   }
 
   return (
-    <form action={action} className="flex flex-col gap-6" id="bewerbung">
-      <div className="grid gap-4 md:grid-cols-2">
+    <form
+      action={action}
+      className="mx-auto flex w-full max-w-[900px] flex-col items-center"
+      id="bewerbung-form"
+    >
+      <div className="grid w-full gap-6 md:grid-cols-2">
         <Field name="name" label="Name *" error={state.errors?.name} />
         <Field name="email" type="email" label="E-Mail *" error={state.errors?.email} />
-        <Field name="telefon" label="Telefon *" error={state.errors?.telefon} className="md:col-span-2" />
+        <Field
+          name="telefon"
+          label="Telefon *"
+          error={state.errors?.telefon}
+          className="md:col-span-2"
+        />
       </div>
 
-      <fieldset>
-        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
-          Gewünschte Position *
-        </legend>
-        <div className="flex flex-wrap gap-2">
+      <fieldset className="mt-12 flex w-full flex-col items-center">
+        <legend className={`${sectionTitleClass} mb-6 w-full`}>Gewünschte Position</legend>
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {allPositions.map((p) => {
             const active = position === p
             return (
-              <label
-                key={p}
-                className={`cursor-pointer rounded-full border px-4 py-2 font-poppins text-sm font-medium transition ${
-                  active
-                    ? 'border-black bg-black text-brand-yellow'
-                    : 'border-black/20 bg-white text-black hover:border-black'
-                }`}
-              >
+              <label key={p} className={chipClass(active)}>
                 <input
                   type="radio"
                   name="position"
@@ -69,22 +81,13 @@ export function ApplicationForm({ positions }: Props) {
         )}
       </fieldset>
 
-      <fieldset>
-        <legend className="mb-3 font-poppins text-sm font-semibold tracking-wide">
-          Verfügbar ab
-        </legend>
-        <div className="flex flex-wrap gap-2">
+      <fieldset className="mt-12 flex w-full flex-col items-center">
+        <legend className={`${sectionTitleClass} mb-6 w-full`}>Verfügbar ab</legend>
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {formOptions.verfuegbarAb.map((v) => {
             const active = verfuegbarAb === v
             return (
-              <label
-                key={v}
-                className={`cursor-pointer rounded-full border px-4 py-2 font-poppins text-sm font-medium transition ${
-                  active
-                    ? 'border-black bg-black text-brand-yellow'
-                    : 'border-black/20 bg-white text-black hover:border-black'
-                }`}
-              >
+              <label key={v} className={chipClass(active)}>
                 <input
                   type="radio"
                   name="verfuegbarAb"
@@ -100,14 +103,14 @@ export function ApplicationForm({ positions }: Props) {
         </div>
       </fieldset>
 
-      <div>
-        <label className="mb-3 block font-poppins text-sm font-semibold tracking-wide">
-          Unterlagen * (PDF, JPG, PNG, ZIP – max. 10 MB)
-        </label>
-        <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-black/25 bg-brand-card-light px-6 py-10 text-center transition hover:border-black">
-          <span className="font-unbounded text-sm font-extrabold">Datei auswählen</span>
-          <span className="font-poppins text-sm text-brand-muted">
-            {fileName || 'Zum Hochladen klicken oder Datei ablegen'}
+      <div className="mt-12 w-full">
+        <label className="flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[24px] border-[1.7px] border-dashed border-brand-black bg-white px-12 py-12 text-center transition hover:bg-brand-card-light/50">
+          <UploadIcon />
+          <span className="font-poppins text-base font-semibold text-brand-black">
+            {fileName || 'Lebenslauf & Arbeitsproben hier ablegen'}
+          </span>
+          <span className="font-poppins text-sm font-normal text-brand-black/60">
+            oder klicken zum Auswählen – PDF, JPG, PNG, ZIP (max. 10 MB)
           </span>
           <input
             type="file"
@@ -118,46 +121,56 @@ export function ApplicationForm({ positions }: Props) {
           />
         </label>
         {state.errors?.datei && (
-          <p className="mt-2 text-sm text-red-600">{state.errors.datei[0]}</p>
+          <p className="mt-2 text-center text-sm text-red-600">{state.errors.datei[0]}</p>
         )}
       </div>
 
-      <Field name="portfolio" type="url" label="Portfolio-URL (optional)" error={state.errors?.portfolio} />
+      <div className="mt-6 w-full">
+        <Field
+          name="portfolio"
+          type="url"
+          label="Portfolio / Behance / Dribbble / LinkedIn (optional)"
+          error={state.errors?.portfolio}
+        />
+      </div>
 
-      <textarea
-        name="nachricht"
-        placeholder="Kurze Nachricht (optional)"
-        rows={4}
-        className="rounded-2xl border border-black/15 bg-white p-4 font-poppins outline-none focus:border-black"
-      />
+      <div className="mt-6 w-full">
+        <textarea
+          name="nachricht"
+          placeholder="Möchtest du uns noch etwas mitteilen? (optional)"
+          rows={8}
+          className="min-h-[260px] w-full resize-y rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black"
+        />
+      </div>
 
-      <label className="flex items-start gap-3 font-poppins text-sm">
-        <input type="checkbox" name="consent" className="mt-1 size-4 accent-black" />
+      <label className="mt-8 flex w-full max-w-[560px] items-start gap-3 font-poppins text-base font-normal leading-[1.5] text-brand-black">
+        <input
+          type="checkbox"
+          name="consent"
+          className="mt-1 size-4 shrink-0 accent-brand-black"
+        />
         <span>
-          Ich habe die{' '}
-          <Link href="/datenschutz" className="underline underline-offset-2">
-            Datenschutzerklärung
-          </Link>{' '}
-          gelesen und stimme der Verarbeitung meiner Bewerbungsdaten zu. *
+          Ich habe die Datenschutzerklärung gelesen und akzeptiere sie. Ich bin damit
+          einverstanden, dass meine Daten zur Bearbeitung meiner Bewerbung verwendet werden.
         </span>
       </label>
       {state.errors?.consent && (
-        <p className="text-sm text-red-600">{state.errors.consent[0]}</p>
+        <p className="mt-2 text-sm text-red-600">{state.errors.consent[0]}</p>
       )}
 
       <div
-        className="cf-turnstile"
+        className="mt-6 cf-turnstile"
         data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
       />
 
       {state.message && !state.ok && (
-        <p className="text-sm text-red-600">{state.message}</p>
+        <p className="mt-4 text-sm text-red-600">{state.message}</p>
       )}
 
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 self-center rounded-full bg-black px-10 py-4 font-poppins text-sm font-bold tracking-wide text-brand-yellow transition hover:scale-[1.02] disabled:opacity-50"
+        className="mt-12 inline-flex h-[62px] items-center justify-center whitespace-nowrap rounded-full bg-brand-black px-8 font-poppins text-lg font-bold text-brand-yellow transition hover:bg-black/90 disabled:opacity-50 sm:px-12 sm:text-xl"
       >
         {pending ? 'WIRD GESENDET …' : 'BEWERBUNG ABSENDEN'}
       </button>
@@ -179,15 +192,36 @@ function Field({
   className?: string
 }) {
   return (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div className={`flex w-full flex-col gap-1 ${className}`}>
       <input
         name={name}
         type={type}
         placeholder={label}
         aria-label={label}
-        className="rounded-2xl border border-black/15 bg-white p-4 font-poppins outline-none focus:border-black"
+        className={inputClass}
       />
       {error && <p className="text-sm text-red-600">{error[0]}</p>}
     </div>
+  )
+}
+
+function UploadIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden className="mb-1">
+      <path
+        d="M12 16V4M12 4L7 9M12 4L17 9"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 16V18C4 19.1 4.9 20 6 20H18C19.1 20 20 19.1 20 18V16"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   )
 }

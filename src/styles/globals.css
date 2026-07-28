@@ -61,8 +61,9 @@
 
   .heading-hero {
     font-size: var(--text-hero);
+    font-weight: 900;
     line-height: 0.95;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.02em; /* Figma: -1.76px at 88px */
   }
 
   .heading-section {
@@ -72,6 +73,7 @@
   }
 
   .body-lead {
+    font-family: var(--font-poppins), system-ui, sans-serif;
     font-size: var(--text-lead);
     line-height: 1.6;
     font-weight: 500;
