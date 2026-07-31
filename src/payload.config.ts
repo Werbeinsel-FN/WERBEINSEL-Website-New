@@ -18,6 +18,11 @@ import { Anfragen } from './collections/Anfragen'
 import { Einstellungen } from './globals/Einstellungen'
 import { Footer } from './globals/Footer'
 import { Navigation } from './globals/Navigation'
+import { JobsSeite } from './globals/JobsSeite'
+import { KontaktSeite } from './globals/KontaktSeite'
+import { ServicesSeite } from './globals/ServicesSeite'
+import { Impressum } from './globals/Impressum'
+import { Datenschutz } from './globals/Datenschutz'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,7 +47,16 @@ export default buildConfig({
     Kundenlogos,
     Anfragen,
   ],
-  globals: [Einstellungen, Footer, Navigation],
+  globals: [
+    Einstellungen,
+    Footer,
+    Navigation,
+    JobsSeite,
+    KontaktSeite,
+    ServicesSeite,
+    Impressum,
+    Datenschutz,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

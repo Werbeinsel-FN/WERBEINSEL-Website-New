@@ -7,7 +7,7 @@ import { Footer } from '@/components/Footer'
 import { CookieConsent } from '@/components/CookieConsent'
 import { JsonLd } from '@/components/JsonLd'
 import { buildMetadata, localBusinessJsonLd } from '@/lib/seo'
-import { navigation, footer, einstellungen } from '@/data/seed'
+import { getSiteChrome } from '@/lib/content'
 
 export const metadata = buildMetadata({
   title: undefined,
@@ -16,11 +16,13 @@ export const metadata = buildMetadata({
   path: '/',
 })
 
-export default function FrontendLayout({ children }: { children: ReactNode }) {
+export default async function FrontendLayout({ children }: { children: ReactNode }) {
+  const { navigation, footer, einstellungen } = await getSiteChrome()
+
   return (
     <html lang="de" className={`${unbounded.variable} ${poppins.variable}`}>
       <body className="min-h-screen bg-white font-poppins text-brand-black antialiased">
-        <JsonLd data={localBusinessJsonLd()} />
+        <JsonLd data={localBusinessJsonLd(einstellungen)} />
         <Header items={navigation.items} />
         <main>{children}</main>
         <Footer
@@ -36,7 +38,6 @@ export default function FrontendLayout({ children }: { children: ReactNode }) {
           defer
           strategy="afterInteractive"
         />
-        {/* Kontakt-Platzhalter für Screenreader / Deeplinks */}
         <span className="sr-only">
           {einstellungen.telefon} · {einstellungen.email}
         </span>

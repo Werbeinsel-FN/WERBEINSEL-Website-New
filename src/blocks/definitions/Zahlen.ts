@@ -7,6 +7,13 @@ export const Zahlen: Block = {
     { name: 'eyebrow', type: 'text', label: 'Kleine Überzeile (optional)' },
     { name: 'ueberschrift', type: 'text', label: 'Überschrift (optional)' },
     {
+      name: 'dunkel',
+      type: 'checkbox',
+      label: 'Dunkler Hintergrund',
+      defaultValue: false,
+      admin: { description: 'Schwarz statt Weiß (z. B. Plakatwerbung).' },
+    },
+    {
       name: 'stats', type: 'array', label: 'Kennzahlen', minRows: 2, maxRows: 4,
       labels: { singular: 'Kennzahl', plural: 'Kennzahlen' },
       admin: { description: 'Zahlen müssen real und belegbar sein.' },

@@ -1,5 +1,5 @@
 import { Hero } from '@/components/blocks/Hero'
-import { datenschutz } from '@/data/seed'
+import { getDatenschutzContent } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
@@ -13,14 +13,14 @@ const heading =
 const step =
   'whitespace-pre-line font-unbounded text-xl font-bold leading-[1.5] tracking-normal text-brand-black [text-transform:none] md:text-2xl'
 const body =
-  'font-poppins text-lg font-normal leading-[1.5] text-brand-black'
+  'whitespace-pre-line font-poppins text-lg font-normal leading-[1.5] text-brand-black'
 
-export default function DatenschutzPage() {
-  const { platzhalter, abschnitte } = datenschutz
+export default async function DatenschutzPage() {
+  const { hero, abschnitte } = await getDatenschutzContent()
 
   return (
     <>
-      <Hero variante="einfach" titel={datenschutz.hero.titel} />
+      <Hero variante="einfach" titel={hero.titel} />
 
       <section className="bg-white py-20 md:py-32">
         <div className="mx-auto flex w-full max-w-[840px] flex-col items-center gap-12 px-5 pb-12 text-center sm:px-8 md:gap-16">
@@ -36,11 +36,14 @@ export default function DatenschutzPage() {
                   className="flex w-full flex-col items-center gap-4"
                 >
                   <h3 className={step}>{unter.titel}</h3>
-                  {Array.from({ length: unter.absatze }, (_, i) => (
-                    <p key={`${unter.titel}-${i}`} className={body}>
-                      {platzhalter}
-                    </p>
-                  ))}
+                  {unter.text
+                    .split(/\n{2,}/)
+                    .filter(Boolean)
+                    .map((para, i) => (
+                      <p key={`${unter.titel}-${i}`} className={body}>
+                        {para.trim()}
+                      </p>
+                    ))}
                 </div>
               ))}
             </div>

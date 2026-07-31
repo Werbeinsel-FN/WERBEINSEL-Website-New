@@ -1,12 +1,24 @@
 import type { Metadata } from 'next'
-import { einstellungen } from '@/data/seed'
+import { einstellungen as seedEinstellungen } from '@/data/seed'
 
 const SITE_NAME = 'WERBEINSEL'
 const DEFAULT_DESCRIPTION =
   'WERBEINSEL – Außenwerbung, Plakat, Folierung, Grafikdesign, Foto & Video und Social Media.'
 
-export function absoluteUrl(path = '/'): string {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || einstellungen.url).replace(/\/$/, '')
+type EinstellungenLike = {
+  firma?: string
+  url?: string
+  telefon?: string
+  email?: string
+  adresse?: { strasse?: string; plz?: string; ort?: string }
+}
+
+export function absoluteUrl(path = '/', siteUrl?: string): string {
+  const base = (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    siteUrl ||
+    seedEinstellungen.url
+  ).replace(/\/$/, '')
   const p = path.startsWith('/') ? path : `/${path}`
   return `${base}${p}`
 }
@@ -41,15 +53,15 @@ export function buildMetadata({
   }
 }
 
-export function localBusinessJsonLd() {
-  const a = einstellungen.adresse
+export function localBusinessJsonLd(einstellungen: EinstellungenLike = seedEinstellungen) {
+  const a = einstellungen.adresse || seedEinstellungen.adresse
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: einstellungen.firma,
-    url: absoluteUrl('/'),
-    telephone: einstellungen.telefon,
-    email: einstellungen.email,
+    name: einstellungen.firma || seedEinstellungen.firma,
+    url: absoluteUrl('/', einstellungen.url),
+    telephone: einstellungen.telefon || seedEinstellungen.telefon,
+    email: einstellungen.email || seedEinstellungen.email,
     address: {
       '@type': 'PostalAddress',
       streetAddress: a.strasse,
@@ -75,12 +87,15 @@ export function faqPageJsonLd(fragen: { frage: string; antwort: string }[]) {
   }
 }
 
-export function jobPostingJsonLd(job: {
-  titel: string
-  standort?: string
-  pensum?: string
-  beschreibung?: string
-}) {
+export function jobPostingJsonLd(
+  job: {
+    titel: string
+    standort?: string
+    pensum?: string
+    beschreibung?: string
+  },
+  einstellungen: EinstellungenLike = seedEinstellungen,
+) {
   return {
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
@@ -88,14 +103,15 @@ export function jobPostingJsonLd(job: {
     description: job.beschreibung || job.titel,
     hiringOrganization: {
       '@type': 'Organization',
-      name: einstellungen.firma,
-      sameAs: absoluteUrl('/'),
+      name: einstellungen.firma || seedEinstellungen.firma,
+      sameAs: absoluteUrl('/', einstellungen.url),
     },
     jobLocation: {
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: job.standort || einstellungen.adresse.ort,
+        addressLocality:
+          job.standort || einstellungen.adresse?.ort || seedEinstellungen.adresse.ort,
         addressCountry: 'DE',
       },
     },

@@ -6,6 +6,13 @@ export const ReferenzSlider: Block = {
   fields: [
     { name: 'eyebrow', type: 'text', label: 'Kleine Überzeile (optional)' },
     { name: 'ueberschrift', type: 'text', label: 'Überschrift' },
+    { name: 'untertitel', type: 'textarea', label: 'Untertitel (optional)' },
+    {
+      name: 'untertitelKlein',
+      type: 'checkbox',
+      label: 'Untertitel kleiner darstellen',
+      defaultValue: false,
+    },
     {
       name: 'kategorie', type: 'select', label: 'Welche Referenzen zeigen?',
       admin: { description: 'Zieht automatisch Referenzen dieser Kategorie.' },

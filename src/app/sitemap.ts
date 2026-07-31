@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next'
-import { leistungenSlugs } from '@/data/seed'
+import { getLeistungSlugs } from '@/lib/content'
 import { absoluteUrl } from '@/lib/seo'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
   const staticRoutes = ['', '/services', '/kontakt', '/jobs', '/impressum', '/datenschutz']
+  const leistungenSlugs = await getLeistungSlugs()
 
   return [
     ...staticRoutes.map((path) => ({

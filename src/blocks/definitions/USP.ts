@@ -6,7 +6,12 @@ export const USP: Block = {
   fields: [
     { name: 'eyebrow', type: 'text', label: 'Kleine Überzeile', admin: { description: 'z. B. „IHR ENTSCHEIDENDER VORTEIL"' } },
     { name: 'ueberschrift', type: 'text', label: 'Überschrift', required: true },
-    { name: 'text', type: 'richText', label: 'Text' },
+    {
+      name: 'text',
+      type: 'textarea',
+      label: 'Text',
+      admin: { description: 'Zeilenumbrüche bleiben erhalten.' },
+    },
     {
       name: 'belegpunkte', type: 'array', label: 'Belegpunkte', maxRows: 3,
       labels: { singular: 'Belegpunkt', plural: 'Belegpunkte' },

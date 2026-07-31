@@ -69,6 +69,13 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    pages: Page;
+    referenzen: Referenzen;
+    leistungen: Leistungen;
+    jobs: Job;
+    testimonials: Testimonial;
+    kundenlogos: Kundenlogo;
+    anfragen: Anfragen;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,17 +85,42 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    referenzen: ReferenzenSelect<false> | ReferenzenSelect<true>;
+    leistungen: LeistungenSelect<false> | LeistungenSelect<true>;
+    jobs: JobsSelect<false> | JobsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    kundenlogos: KundenlogosSelect<false> | KundenlogosSelect<true>;
+    anfragen: AnfragenSelect<false> | AnfragenSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    einstellungen: Einstellungen;
+    footer: Footer;
+    navigation: Navigation;
+    jobsSeite: JobsSeite;
+    kontaktSeite: KontaktSeite;
+    servicesSeite: ServicesSeite;
+    impressum: Impressum;
+    datenschutz: Datenschutz;
+  };
+  globalsSelect: {
+    einstellungen: EinstellungenSelect<false> | EinstellungenSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    jobsSeite: JobsSeiteSelect<false> | JobsSeiteSelect<true>;
+    kontaktSeite: KontaktSeiteSelect<false> | KontaktSeiteSelect<true>;
+    servicesSeite: ServicesSeiteSelect<false> | ServicesSeiteSelect<true>;
+    impressum: ImpressumSelect<false> | ImpressumSelect<true>;
+    datenschutz: DatenschutzSelect<false> | DatenschutzSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -122,7 +154,9 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
+  name?: string | null;
+  rolle?: ('admin' | 'editor') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -147,8 +181,12 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
+  /**
+   * Bildbeschreibung für Barrierefreiheit & SEO (Pflicht).
+   */
   alt: string;
+  caption?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -160,13 +198,568 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  titel: string;
+  /**
+   * z. B. „plakatwerbung" → /leistungen/plakatwerbung
+   */
+  slug: string;
+  status?: ('entwurf' | 'veroeffentlicht') | null;
+  /**
+   * Seite aus Sektions-Blöcken zusammensetzen. Reihenfolge = Anzeige auf der Seite.
+   */
+  layout?:
+    | (
+        | {
+            variante?: ('bildKarte' | 'einfach') | null;
+            bild?: (number | null) | Media;
+            titel: string;
+            untertitel?: string | null;
+            buttons?:
+              | {
+                  label: string;
+                  url: string;
+                  stil?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            /**
+             * Absätze mit Leerzeile trennen. Zeilenumbrüche bleiben erhalten.
+             */
+            text?: string | null;
+            bild?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textblock';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            /**
+             * Schwarz statt Weiß (z. B. Plakatwerbung).
+             */
+            dunkel?: boolean | null;
+            /**
+             * Zahlen müssen real und belegbar sein.
+             */
+            stats?:
+              | {
+                  /**
+                   * z. B. „20+"
+                   */
+                  zahl: string;
+                  /**
+                   * z. B. „Jahre Erfahrung"
+                   */
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'zahlen';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            /**
+             * Optionaler Text unter der Überschrift.
+             */
+            text?: string | null;
+            gelb?: boolean | null;
+            /**
+             * Event-/Einrichtungstypen. Gut für Wiedererkennung UND SEO.
+             */
+            kategorien?:
+              | {
+                  name: string;
+                  icon?: (number | null) | Media;
+                  link?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'kategorien';
+          }
+        | {
+            /**
+             * z. B. „IHR ENTSCHEIDENDER VORTEIL"
+             */
+            eyebrow?: string | null;
+            ueberschrift: string;
+            /**
+             * Zeilenumbrüche bleiben erhalten.
+             */
+            text?: string | null;
+            belegpunkte?:
+              | {
+                  titel: string;
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'usp';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift: string;
+            text?: string | null;
+            /**
+             * Nummer (01, 02, …) wird automatisch aus der Reihenfolge erzeugt.
+             */
+            schritte?:
+              | {
+                  titel: string;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'fullService';
+          }
+        | {
+            /**
+             * z. B. „SO LÄUFT IHRE PLAKATWERBUNG"
+             */
+            eyebrow?: string | null;
+            /**
+             * Reihenfolge = Anzeige. Nummer automatisch. 3–5 Schritte → Punkte, ab 6 → Fortschrittsbalken. Bewusst knapp halten.
+             */
+            schritte?:
+              | {
+                  titel: string;
+                  /**
+                   * Max. 240 Zeichen (2–3 Sätze) – verhindert Textmassen.
+                   */
+                  kurztext: string;
+                  /**
+                   * Ohne Foto erscheint automatisch ein gelbes Feld mit der Zahl.
+                   */
+                  foto?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'schrittSlider';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            untertitel?: string | null;
+            untertitelKlein?: boolean | null;
+            /**
+             * Zieht automatisch Referenzen dieser Kategorie.
+             */
+            kategorie?: ('alle' | 'plakat' | 'foto' | 'grafik' | 'folierung' | 'social') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'referenzSlider';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            text?: string | null;
+            /**
+             * Als echte Textliste ausgeben (SEO). Real halten.
+             */
+            staedte?:
+              | {
+                  name: string;
+                  region?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * DSGVO: OpenStreetMap/Leaflet, kein Google Maps.
+             */
+            karteZeigen?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'reichweite';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            formate?:
+              | {
+                  name: string;
+                  beschreibung?: string | null;
+                  bild?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'formateMaterial';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            fragen?:
+              | {
+                  frage: string;
+                  antwort: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            ueberschrift: string;
+            text?: string | null;
+            button: {
+              /**
+               * Konkret, z. B. „Kampagne anfragen".
+               */
+              label: string;
+              url: string;
+            };
+            /**
+             * Aus = schwarze CTA (gelbe Überschrift, weißer Text).
+             */
+            yellow?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'servicesSlider';
+          }
+        | {
+            eyebrow?: string | null;
+            ueberschrift?: string | null;
+            untertitel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'marquee';
+          }
+        | {
+            ueberschrift?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonialsBlock';
+          }
+        | {
+            ueberschrift?: string | null;
+            untertitel?: string | null;
+            items?:
+              | {
+                  titel: string;
+                  icon?: ('instagram' | 'tiktok' | 'facebook' | 'google' | 'youtube') | null;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'kanaele';
+          }
+        | {
+            ueberschrift?: string | null;
+            schritte?:
+              | {
+                  titel: string;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'betreuung';
+          }
+        | {
+            ueberschrift?: string | null;
+            untertitel?: string | null;
+            items?:
+              | {
+                  titel: string;
+                  icon?: ('zielgruppe' | 'motive' | 'auswertung') | null;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'onlineKampagnen';
+          }
+        | {
+            ueberschrift?: string | null;
+            text?: string | null;
+            punkte?:
+              | {
+                  titel: string;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'echtNichtGeneriert';
+          }
+        | {
+            ueberschrift?: string | null;
+            items?:
+              | {
+                  titel: string;
+                  icon?: ('events' | 'social' | 'image' | 'website') | null;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'wasWirAufnehmen';
+          }
+        | {
+            ueberschrift?: string | null;
+            text?: string | null;
+            items?:
+              | {
+                  label: string;
+                  icon: 'visitenkarte' | 'social' | 'reel' | 'plakat';
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'einMotiv';
+          }
+        | {
+            ueberschrift?: string | null;
+            items?:
+              | {
+                  titel: string;
+                  icon?: ('logo' | 'druck' | 'social' | 'plakat') | null;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'wasWirGestalten';
+          }
+        | {
+            ueberschrift?: string | null;
+            text?: string | null;
+            punkte?:
+              | {
+                  titel: string;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'transporterFaahrt';
+          }
+        | {
+            ueberschrift?: string | null;
+            items?:
+              | {
+                  titel: string;
+                  icon?: ('fahrzeug' | 'schaufenster' | 'schilder' | 'bauzaun') | null;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'wasWirBekleben';
+          }
+      )[]
+    | null;
+  /**
+   * Suchmaschinen- und Social-Media-Vorschau.
+   */
+  seo?: {
+    /**
+     * Optimal ~50–60 Zeichen.
+     */
+    metaTitle?: string | null;
+    /**
+     * Optimal ~150–160 Zeichen.
+     */
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "referenzen".
+ */
+export interface Referenzen {
+  id: number;
+  titel: string;
+  bild: number | Media;
+  kategorie: 'plakat' | 'foto' | 'grafik' | 'folierung' | 'social';
+  reihenfolge?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leistungen".
+ */
+export interface Leistungen {
+  id: number;
+  titel: string;
+  kurztext?: string | null;
+  bild?: (number | null) | Media;
+  /**
+   * z. B. /leistungen/plakatwerbung
+   */
+  link?: string | null;
+  reihenfolge?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs".
+ */
+export interface Job {
+  id: number;
+  titel: string;
+  /**
+   * z. B. „Vollzeit", „Vor Ort".
+   */
+  badges?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  standort?: string | null;
+  pensum?: string | null;
+  /**
+   * Kurzer Text über der Aufgabenliste.
+   */
+  intro?: string | null;
+  aufgaben?:
+    | {
+        punkt: string;
+        id?: string | null;
+      }[]
+    | null;
+  anforderungen?:
+    | {
+        punkt: string;
+        id?: string | null;
+      }[]
+    | null;
+  benefits?:
+    | {
+        punkt: string;
+        id?: string | null;
+      }[]
+    | null;
+  aktiv?: boolean | null;
+  reihenfolge?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  zitat: string;
+  autor: string;
+  firma?: string | null;
+  reihenfolge?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kundenlogos".
+ */
+export interface Kundenlogo {
+  id: number;
+  name: string;
+  logo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "anfragen".
+ */
+export interface Anfragen {
+  id: number;
+  typ: 'kontakt' | 'bewerbung';
+  daten?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  datei?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -183,20 +776,48 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'referenzen';
+        value: number | Referenzen;
+      } | null)
+    | ({
+        relationTo: 'leistungen';
+        value: number | Leistungen;
+      } | null)
+    | ({
+        relationTo: 'jobs';
+        value: number | Job;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'kundenlogos';
+        value: number | Kundenlogo;
+      } | null)
+    | ({
+        relationTo: 'anfragen';
+        value: number | Anfragen;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -206,10 +827,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -229,7 +850,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -240,6 +861,8 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  rolle?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -263,6 +886,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  caption?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -274,6 +898,501 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  titel?: T;
+  slug?: T;
+  status?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              variante?: T;
+              bild?: T;
+              titel?: T;
+              untertitel?: T;
+              buttons?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    stil?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        textblock?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              text?: T;
+              bild?: T;
+              id?: T;
+              blockName?: T;
+            };
+        zahlen?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              dunkel?: T;
+              stats?:
+                | T
+                | {
+                    zahl?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        kategorien?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              text?: T;
+              gelb?: T;
+              kategorien?:
+                | T
+                | {
+                    name?: T;
+                    icon?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        usp?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              text?: T;
+              belegpunkte?:
+                | T
+                | {
+                    titel?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        fullService?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              text?: T;
+              schritte?:
+                | T
+                | {
+                    titel?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        schrittSlider?:
+          | T
+          | {
+              eyebrow?: T;
+              schritte?:
+                | T
+                | {
+                    titel?: T;
+                    kurztext?: T;
+                    foto?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        referenzSlider?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              untertitel?: T;
+              untertitelKlein?: T;
+              kategorie?: T;
+              id?: T;
+              blockName?: T;
+            };
+        reichweite?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              text?: T;
+              staedte?:
+                | T
+                | {
+                    name?: T;
+                    region?: T;
+                    id?: T;
+                  };
+              karteZeigen?: T;
+              id?: T;
+              blockName?: T;
+            };
+        formateMaterial?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              formate?:
+                | T
+                | {
+                    name?: T;
+                    beschreibung?: T;
+                    bild?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              fragen?:
+                | T
+                | {
+                    frage?: T;
+                    antwort?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              ueberschrift?: T;
+              text?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              yellow?: T;
+              id?: T;
+              blockName?: T;
+            };
+        servicesSlider?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              id?: T;
+              blockName?: T;
+            };
+        marquee?:
+          | T
+          | {
+              eyebrow?: T;
+              ueberschrift?: T;
+              untertitel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        testimonialsBlock?:
+          | T
+          | {
+              ueberschrift?: T;
+              id?: T;
+              blockName?: T;
+            };
+        kanaele?:
+          | T
+          | {
+              ueberschrift?: T;
+              untertitel?: T;
+              items?:
+                | T
+                | {
+                    titel?: T;
+                    icon?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        betreuung?:
+          | T
+          | {
+              ueberschrift?: T;
+              schritte?:
+                | T
+                | {
+                    titel?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        onlineKampagnen?:
+          | T
+          | {
+              ueberschrift?: T;
+              untertitel?: T;
+              items?:
+                | T
+                | {
+                    titel?: T;
+                    icon?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        echtNichtGeneriert?:
+          | T
+          | {
+              ueberschrift?: T;
+              text?: T;
+              punkte?:
+                | T
+                | {
+                    titel?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        wasWirAufnehmen?:
+          | T
+          | {
+              ueberschrift?: T;
+              items?:
+                | T
+                | {
+                    titel?: T;
+                    icon?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        einMotiv?:
+          | T
+          | {
+              ueberschrift?: T;
+              text?: T;
+              items?:
+                | T
+                | {
+                    label?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        wasWirGestalten?:
+          | T
+          | {
+              ueberschrift?: T;
+              items?:
+                | T
+                | {
+                    titel?: T;
+                    icon?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        transporterFaahrt?:
+          | T
+          | {
+              ueberschrift?: T;
+              text?: T;
+              punkte?:
+                | T
+                | {
+                    titel?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        wasWirBekleben?:
+          | T
+          | {
+              ueberschrift?: T;
+              items?:
+                | T
+                | {
+                    titel?: T;
+                    icon?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "referenzen_select".
+ */
+export interface ReferenzenSelect<T extends boolean = true> {
+  titel?: T;
+  bild?: T;
+  kategorie?: T;
+  reihenfolge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leistungen_select".
+ */
+export interface LeistungenSelect<T extends boolean = true> {
+  titel?: T;
+  kurztext?: T;
+  bild?: T;
+  link?: T;
+  reihenfolge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs_select".
+ */
+export interface JobsSelect<T extends boolean = true> {
+  titel?: T;
+  badges?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  standort?: T;
+  pensum?: T;
+  intro?: T;
+  aufgaben?:
+    | T
+    | {
+        punkt?: T;
+        id?: T;
+      };
+  anforderungen?:
+    | T
+    | {
+        punkt?: T;
+        id?: T;
+      };
+  benefits?:
+    | T
+    | {
+        punkt?: T;
+        id?: T;
+      };
+  aktiv?: T;
+  reihenfolge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  zitat?: T;
+  autor?: T;
+  firma?: T;
+  reihenfolge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kundenlogos_select".
+ */
+export interface KundenlogosSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "anfragen_select".
+ */
+export interface AnfragenSelect<T extends boolean = true> {
+  typ?: T;
+  daten?: T;
+  datei?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -314,6 +1433,562 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "einstellungen".
+ */
+export interface Einstellungen {
+  id: number;
+  firma?: string | null;
+  /**
+   * z. B. https://werbeinsel.de – für SEO/JSON-LD.
+   */
+  url?: string | null;
+  telefon?: string | null;
+  email?: string | null;
+  /**
+   * Für den „Chat starten"-Deeplink.
+   */
+  whatsapp?: string | null;
+  adresse?: {
+    strasse?: string | null;
+    plz?: string | null;
+    ort?: string | null;
+  };
+  socials?:
+    | {
+        plattform: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  formServices?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  formBudgets?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  formZeitraeume?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  formVerfuegbarAb?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  tagline?: string | null;
+  spalten?:
+    | {
+        titel: string;
+        links?:
+          | {
+              label: string;
+              url: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  rechtslinks?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: number;
+  items?:
+    | {
+        label: string;
+        url: string;
+        children?:
+          | {
+              label: string;
+              url: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobsSeite".
+ */
+export interface JobsSeite {
+  id: number;
+  hero: {
+    titel: string;
+    untertitel?: string | null;
+  };
+  openingsTitle?: string | null;
+  formTitle?: string | null;
+  formSubtitle?: string | null;
+  process?: {
+    ueberschrift?: string | null;
+    schritte?:
+      | {
+          titel: string;
+          kurztext: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  cta?: {
+    ueberschrift?: string | null;
+    text?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kontaktSeite".
+ */
+export interface KontaktSeite {
+  id: number;
+  hero: {
+    titel: string;
+    untertitel?: string | null;
+  };
+  contactTitle?: string | null;
+  cards?: {
+    telefonLabel?: string | null;
+    emailLabel?: string | null;
+    whatsappLabel?: string | null;
+    whatsappCta?: string | null;
+    adresseLabel?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicesSeite".
+ */
+export interface ServicesSeite {
+  id: number;
+  hero: {
+    titel: string;
+    untertitel?: string | null;
+  };
+  sectionTitle?: string | null;
+  /**
+   * Wenn leer, werden die ersten Einträge aus „Leistungen" genutzt. Hier steuern Sie Reihenfolge, Nr. und Kategorie-Label.
+   */
+  items?:
+    | {
+        nr?: string | null;
+        kategorie?: string | null;
+        titel: string;
+        kurztext?: string | null;
+        link?: string | null;
+        bild?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  cta?: {
+    ueberschrift?: string | null;
+    text?: string | null;
+    button?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "impressum".
+ */
+export interface Impressum {
+  id: number;
+  hero: {
+    titel: string;
+  };
+  angabenTitel?: string | null;
+  firma?: string | null;
+  adresse?:
+    | {
+        zeile: string;
+        id?: string | null;
+      }[]
+    | null;
+  kontaktTitel?: string | null;
+  kontaktZeilen?:
+    | {
+        zeile: string;
+        id?: string | null;
+      }[]
+    | null;
+  ustTitel?: string | null;
+  ustText?: string | null;
+  verantwortlichTitel?: string | null;
+  verantwortlichZeilen?:
+    | {
+        zeile: string;
+        id?: string | null;
+      }[]
+    | null;
+  disclaimerTitel?: string | null;
+  disclaimerAbschnitte?:
+    | {
+        titel: string;
+        absatze?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "datenschutz".
+ */
+export interface Datenschutz {
+  id: number;
+  hero: {
+    titel: string;
+  };
+  abschnitte?:
+    | {
+        titel: string;
+        unterabschnitte?:
+          | {
+              titel: string;
+              /**
+               * Mehrere Absätze mit Leerzeile trennen.
+               */
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "einstellungen_select".
+ */
+export interface EinstellungenSelect<T extends boolean = true> {
+  firma?: T;
+  url?: T;
+  telefon?: T;
+  email?: T;
+  whatsapp?: T;
+  adresse?:
+    | T
+    | {
+        strasse?: T;
+        plz?: T;
+        ort?: T;
+      };
+  socials?:
+    | T
+    | {
+        plattform?: T;
+        url?: T;
+        id?: T;
+      };
+  formServices?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  formBudgets?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  formZeitraeume?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  formVerfuegbarAb?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  tagline?: T;
+  spalten?:
+    | T
+    | {
+        titel?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  rechtslinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobsSeite_select".
+ */
+export interface JobsSeiteSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        titel?: T;
+        untertitel?: T;
+      };
+  openingsTitle?: T;
+  formTitle?: T;
+  formSubtitle?: T;
+  process?:
+    | T
+    | {
+        ueberschrift?: T;
+        schritte?:
+          | T
+          | {
+              titel?: T;
+              kurztext?: T;
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        ueberschrift?: T;
+        text?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kontaktSeite_select".
+ */
+export interface KontaktSeiteSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        titel?: T;
+        untertitel?: T;
+      };
+  contactTitle?: T;
+  cards?:
+    | T
+    | {
+        telefonLabel?: T;
+        emailLabel?: T;
+        whatsappLabel?: T;
+        whatsappCta?: T;
+        adresseLabel?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicesSeite_select".
+ */
+export interface ServicesSeiteSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        titel?: T;
+        untertitel?: T;
+      };
+  sectionTitle?: T;
+  items?:
+    | T
+    | {
+        nr?: T;
+        kategorie?: T;
+        titel?: T;
+        kurztext?: T;
+        link?: T;
+        bild?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        ueberschrift?: T;
+        text?: T;
+        button?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "impressum_select".
+ */
+export interface ImpressumSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        titel?: T;
+      };
+  angabenTitel?: T;
+  firma?: T;
+  adresse?:
+    | T
+    | {
+        zeile?: T;
+        id?: T;
+      };
+  kontaktTitel?: T;
+  kontaktZeilen?:
+    | T
+    | {
+        zeile?: T;
+        id?: T;
+      };
+  ustTitel?: T;
+  ustText?: T;
+  verantwortlichTitel?: T;
+  verantwortlichZeilen?:
+    | T
+    | {
+        zeile?: T;
+        id?: T;
+      };
+  disclaimerTitel?: T;
+  disclaimerAbschnitte?:
+    | T
+    | {
+        titel?: T;
+        absatze?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "datenschutz_select".
+ */
+export interface DatenschutzSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        titel?: T;
+      };
+  abschnitte?:
+    | T
+    | {
+        titel?: T;
+        unterabschnitte?:
+          | T
+          | {
+              titel?: T;
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

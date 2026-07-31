@@ -6,7 +6,12 @@ export const Textblock: Block = {
   fields: [
     { name: 'eyebrow', type: 'text', label: 'Kleine Überzeile (optional)' },
     { name: 'ueberschrift', type: 'text', label: 'Überschrift' },
-    { name: 'text', type: 'richText', label: 'Text' },
+    {
+      name: 'text',
+      type: 'textarea',
+      label: 'Text',
+      admin: { description: 'Absätze mit Leerzeile trennen. Zeilenumbrüche bleiben erhalten.' },
+    },
     { name: 'bild', type: 'upload', relationTo: 'media', label: 'Bild (optional)' },
   ],
 }

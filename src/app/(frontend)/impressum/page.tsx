@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Hero } from '@/components/blocks/Hero'
-import { impressum } from '@/data/seed'
+import { getImpressumContent } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
@@ -32,7 +32,9 @@ function Block({
   )
 }
 
-export default function ImpressumPage() {
+export default async function ImpressumPage() {
+  const impressum = await getImpressumContent()
+
   return (
     <>
       <Hero variante="einfach" titel={impressum.hero.titel} />

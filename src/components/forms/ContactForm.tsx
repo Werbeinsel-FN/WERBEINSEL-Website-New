@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from 'react'
 import { sendContact, type FormState } from '@/app/actions'
-import { formOptions } from '@/data/seed'
+import { formOptions as seedFormOptions } from '@/data/seed'
 
 const initial: FormState = { ok: false }
 
@@ -19,7 +19,13 @@ const chipClass = (active: boolean) =>
 const sectionTitleClass =
   'text-center font-unbounded text-[clamp(1.5rem,3vw,2rem)] font-extrabold leading-[1.2] text-brand-black'
 
-export function ContactForm() {
+export type ContactFormOptions = {
+  services: string[]
+  budgets: string[]
+  zeitraeume: string[]
+}
+
+export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: ContactFormOptions }) {
   const [state, action, pending] = useActionState(sendContact, initial)
   const [services, setServices] = useState<string[]>([])
   const [budget, setBudget] = useState('')

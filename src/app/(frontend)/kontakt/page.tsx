@@ -1,5 +1,5 @@
 import { ContactForm } from '@/components/forms/ContactForm'
-import { kontakt, einstellungen } from '@/data/seed'
+import { getKontaktContent, getSiteChrome, getFormOptions } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
@@ -8,7 +8,12 @@ export const metadata = buildMetadata({
   path: '/kontakt',
 })
 
-export default function KontaktPage() {
+export default async function KontaktPage() {
+  const [kontakt, { einstellungen }, formOptions] = await Promise.all([
+    getKontaktContent(),
+    getSiteChrome(),
+    getFormOptions(),
+  ])
   const wa = einstellungen.whatsapp.replace(/\D/g, '')
   const mapsQuery = encodeURIComponent(
     `${einstellungen.adresse.strasse}, ${einstellungen.adresse.plz} ${einstellungen.adresse.ort}`,
@@ -31,7 +36,7 @@ export default function KontaktPage() {
       {/* Formular – Figma: max 1700, padding 0 32 */}
       <section className="bg-white py-16 md:py-24">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
-          <ContactForm />
+          <ContactForm formOptions={formOptions} />
         </div>
       </section>
 

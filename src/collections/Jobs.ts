@@ -15,6 +15,12 @@ export const Jobs: CollectionConfig = {
     { name: 'standort', type: 'text', label: 'Standort' },
     { name: 'pensum', type: 'text', label: 'Pensum' },
     {
+      name: 'intro',
+      type: 'textarea',
+      label: 'Kurzintro',
+      admin: { description: 'Kurzer Text über der Aufgabenliste.' },
+    },
+    {
       name: 'aufgaben', type: 'array', label: 'Aufgaben',
       fields: [{ name: 'punkt', type: 'text', label: 'Aufgabe', required: true }],
     },

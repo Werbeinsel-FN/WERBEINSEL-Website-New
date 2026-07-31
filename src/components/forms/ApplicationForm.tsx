@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from 'react'
 import { sendApplication, type FormState } from '@/app/actions'
-import { formOptions } from '@/data/seed'
+import { formOptions as seedFormOptions } from '@/data/seed'
 
 const initial: FormState = { ok: false }
 
@@ -21,9 +21,10 @@ const sectionTitleClass =
 
 type Props = {
   positions: string[]
+  formOptions?: { verfuegbarAb: string[] }
 }
 
-export function ApplicationForm({ positions }: Props) {
+export function ApplicationForm({ positions, formOptions = seedFormOptions }: Props) {
   const [state, action, pending] = useActionState(sendApplication, initial)
   const [position, setPosition] = useState('')
   const [verfuegbarAb, setVerfuegbarAb] = useState('')

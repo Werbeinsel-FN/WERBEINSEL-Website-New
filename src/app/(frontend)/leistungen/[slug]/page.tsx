@@ -1,17 +1,18 @@
 import { notFound } from 'next/navigation'
 import { RenderBlocks } from '@/components/RenderBlocks'
-import { leistungen, leistungenSlugs, type LeistungSlug } from '@/data/seed'
+import { getCmsPage, getLeistungSlugs } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
 
 type Props = { params: Promise<{ slug: string }> }
 
-export function generateStaticParams() {
-  return leistungenSlugs.map((slug) => ({ slug }))
+export async function generateStaticParams() {
+  const slugs = await getLeistungSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const page = leistungen[slug as LeistungSlug]
+  const page = await getCmsPage(slug)
   if (!page) return {}
   return buildMetadata({
     title: page.titel,
@@ -22,8 +23,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function LeistungPage({ params }: Props) {
   const { slug } = await params
-  if (!leistungenSlugs.includes(slug as LeistungSlug)) notFound()
-  const page = leistungen[slug as LeistungSlug]
-
-  return <RenderBlocks blocks={page.blocks as any} />
+  const page = await getCmsPage(slug)
+  if (!page) notFound()
+  return <RenderBlocks blocks={page.blocks} />
 }

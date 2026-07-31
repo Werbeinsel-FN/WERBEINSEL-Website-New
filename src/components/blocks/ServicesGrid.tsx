@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { resolveMedia, type MediaLike } from '@/lib/media'
 
 export type ServiceGridItem = {
-  nr: string
-  kategorie: string
+  nr?: string | null
+  kategorie?: string | null
   titel: string
   kurztext?: string | null
   link?: string | null

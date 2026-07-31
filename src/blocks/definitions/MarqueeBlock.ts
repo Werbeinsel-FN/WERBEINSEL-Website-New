@@ -7,5 +7,6 @@ export const MarqueeBlock: Block = {
   fields: [
     { name: 'eyebrow', type: 'text', label: 'Kleine Überzeile (optional)' },
     { name: 'ueberschrift', type: 'text', label: 'Überschrift' },
+    { name: 'untertitel', type: 'textarea', label: 'Untertitel (optional)' },
   ],
 }

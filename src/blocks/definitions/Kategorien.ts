@@ -7,6 +7,18 @@ export const Kategorien: Block = {
     { name: 'eyebrow', type: 'text', label: 'Kleine Überzeile (optional)' },
     { name: 'ueberschrift', type: 'text', label: 'Überschrift' },
     {
+      name: 'text',
+      type: 'textarea',
+      label: 'Einleitungstext',
+      admin: { description: 'Optionaler Text unter der Überschrift.' },
+    },
+    {
+      name: 'gelb',
+      type: 'checkbox',
+      label: 'Gelber Hintergrund',
+      defaultValue: false,
+    },
+    {
       name: 'kategorien', type: 'array', label: 'Kategorien', minRows: 1,
       labels: { singular: 'Kategorie', plural: 'Kategorien' },
       admin: { description: 'Event-/Einrichtungstypen. Gut für Wiedererkennung UND SEO.' },

@@ -6,7 +6,8 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   labels: { singular: 'Seite', plural: 'Seiten' },
   admin: { useAsTitle: 'titel', defaultColumns: ['titel', 'slug', 'status'] },
-  versions: { drafts: true },
+  // Kein Payload-Drafts-Plugin: eigenes Feld „status" (entwurf/veroeffentlicht),
+  // sonst kollidiert der Enum-Name enum_pages_status mit _status (draft/published).
   access: {
     // Öffentlich nur veröffentlichte Seiten; eingeloggte Redaktion sieht alles.
     read: ({ req }) => (req.user ? true : { status: { equals: 'veroeffentlicht' } }),
