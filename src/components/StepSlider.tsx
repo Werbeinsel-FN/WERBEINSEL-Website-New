@@ -2,11 +2,12 @@
 
 import { useCallback, useState } from 'react'
 import Image from 'next/image'
+import { resolveMedia, type MediaLike } from '@/lib/media'
 
 type Step = {
   titel: string
   kurztext: string
-  foto?: { url: string; alt?: string | null } | null
+  foto?: MediaLike
 }
 
 type Props = {
@@ -52,6 +53,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
   const step = schritte[selected]
   const nummer = String(selected + 1).padStart(2, '0')
   const totalLabel = String(total).padStart(2, '0')
+  const foto = resolveMedia(step?.foto, step?.titel)
 
   return (
     <section
@@ -68,11 +70,11 @@ export function StepSlider({ eyebrow, schritte }: Props) {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-stretch lg:gap-10 xl:gap-14 2xl:gap-[120px]">
           <div className="relative w-full min-w-0 overflow-hidden rounded-[20px] lg:w-[min(48%,420px)] lg:shrink-0 xl:w-[min(46%,520px)] 2xl:w-[min(100%,760px)] 2xl:rounded-[24px]">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] sm:aspect-[3/4] lg:aspect-[3/4] 2xl:aspect-[760/1013] 2xl:rounded-[24px]">
-              {step?.foto?.url ? (
+              {foto ? (
                 <>
                   <Image
-                    src={step.foto.url}
-                    alt={step.foto.alt || step.titel}
+                    src={foto.url}
+                    alt={foto.alt || step.titel}
                     fill
                     sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 45vw, 760px"
                     className="object-cover"
