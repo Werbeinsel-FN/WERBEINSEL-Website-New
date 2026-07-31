@@ -4,7 +4,7 @@ export const navigation = {
   items: [
     {
       label: 'Leistungen',
-      url: '/leistungen/plakatwerbung',
+      url: '/services',
       children: [
         { label: 'Plakatwerbung', url: '/leistungen/plakatwerbung' },
         { label: 'Foto & Video', url: '/leistungen/foto-video' },
@@ -42,7 +42,7 @@ export const footer = {
         {
           titel: 'Navigation',
           links: [
-            { label: 'Services', url: '/#leistungen' },
+            { label: 'Services', url: '/services' },
             { label: 'Plakatierung', url: '/leistungen/plakatwerbung' },
             { label: 'Folierung', url: '/leistungen/folierung' },
             { label: 'Digitale Werbemittel', url: '/leistungen/social-media' },
@@ -82,7 +82,7 @@ export const home = {
     untertitel: 'Plakat. Folie. Digital.\nSichtbarkeit für Marken in der Region.',
     buttons: [
       { label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' as const },
-      { label: 'Services ansehen', url: '#leistungen', stil: 'secondary' as const },
+      { label: 'Services ansehen', url: '/services', stil: 'secondary' as const },
     ],
   },
   about: {
@@ -320,62 +320,158 @@ export const kontakt = {
 export const impressum = {
   hero: { titel: 'IMPRESSUM' },
   /** PLACEHOLDER – rechtlich prüfen und ersetzen */
-  text: `
-PLATZHALTER – bitte durch geprüften Impressumstext ersetzen.
-
-Angaben gemäß § 5 TMG
-
-WERBEINSEL
-Musterstraße 1
-00000 Musterstadt
-
-Vertreten durch: [Name der Vertretung]
-
-Kontakt
-Telefon: ${einstellungen.telefon}
-E-Mail: ${einstellungen.email}
-
-Umsatzsteuer-ID: [USt-IdNr. eintragen]
-Registereintrag: [Registergericht / HRB eintragen]
-
-Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:
-[Name, Anschrift]
-
-Haftungshinweis: Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für Inhalte externer Links.
-`.trim(),
+  angabenTitel: 'Angaben gemäß § 5 DDG\n(Digitale-Dienste-Gesetz)',
+  firma: 'Werbeinsel',
+  adresse: [
+    'Inhaber: Kristian Cajic',
+    'Musterstraße 12',
+    '88045 Friedrichshafen',
+    'Deutschland',
+  ],
+  kontaktTitel: 'Kontakt',
+  kontaktZeilen: [
+    'Telefon: +49 (0) XXX XXXXXXX',
+    `E-Mail: ${einstellungen.email}`,
+  ],
+  ustTitel: 'Umsatzsteuer-ID',
+  ustText:
+    'Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:\nDE123456789 (bitte eintragen oder entfernen, falls nicht vorhanden)',
+  verantwortlichTitel: 'Verantwortlich für den Inhalt\nnach § 18 Abs. 2 MStV',
+  verantwortlichZeilen: [
+    'Kristian Cajic',
+    'Musterstraße 12',
+    '88045 Friedrichshafen',
+  ],
+  disclaimerTitel: 'Haftungsausschluss\n(Disclaimer)',
+  disclaimerAbschnitte: [
+    {
+      titel: 'Haftung für Inhalte',
+      absatze: [
+        'Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.',
+        'Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.',
+      ],
+    },
+    {
+      titel: 'Haftung für Links',
+      absatze: [
+        'Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.',
+        'Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar.',
+        'Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.',
+      ],
+    },
+    {
+      titel: 'Urheberrecht',
+      absatze: [
+        'Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.',
+        'Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet.',
+        'Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.',
+      ],
+    },
+  ],
 }
 
 export const datenschutz = {
   hero: { titel: 'DATENSCHUTZ' },
   /** PLACEHOLDER – rechtlich prüfen und ersetzen */
-  text: `
-PLATZHALTER – bitte durch geprüfte Datenschutzerklärung ersetzen.
+  platzhalter:
+    '[Platzhalter - Rechtstext einsetzen. Dieser Absatz dient ausschließlich der Gestaltung und zeigt die typische Länge eines Datenschutzabsatzes. Text von Anwalt, Datenschutzbeauftragtem oder einem geprüften Generator einsetzen.]',
+  abschnitte: [
+    {
+      titel: 'Datenschutz auf einen Blick',
+      unterabschnitte: [
+        {
+          titel: 'Allgemeine Hinweise',
+          absatze: 1,
+        },
+        {
+          titel: 'Datenerfassung auf dieser Website',
+          absatze: 2,
+        },
+        {
+          titel: 'Hosting',
+          absatze: 1,
+        },
+      ],
+    },
+    {
+      titel: 'Allgemeine Hinweise und\nPflichtinformationen',
+      unterabschnitte: [
+        { titel: 'Datenschutz', absatze: 1 },
+        { titel: 'Hinweis zur verantwortlichen Stelle', absatze: 1 },
+        { titel: 'Speicherdauer', absatze: 1 },
+        {
+          titel: 'Widerruf Ihrer Einwilligung zur Datenverarbeitung',
+          absatze: 1,
+        },
+        {
+          titel: 'Beschwerderecht bei der zuständigen Aufsichtsbehörde',
+          absatze: 1,
+        },
+        { titel: 'Recht auf Datenübertragbarkeit', absatze: 1 },
+        { titel: 'Auskunft, Löschung und Berichtigung', absatze: 1 },
+        { titel: 'Recht auf Einschränkung der Verarbeitung', absatze: 1 },
+        { titel: 'SSL- bzw. TLS-Verschlüsselung', absatze: 1 },
+      ],
+    },
+    {
+      titel: 'Datenerfassung auf dieser Website',
+      unterabschnitte: [
+        { titel: 'Cookies', absatze: 1 },
+        { titel: 'Server-Log-Dateien', absatze: 1 },
+        { titel: 'Kontaktformular', absatze: 1 },
+        { titel: 'Anfrage per E-Mail oder Telefon', absatze: 1 },
+      ],
+    },
+  ],
+}
 
-1. Verantwortlicher
-WERBEINSEL, Musterstraße 1, 00000 Musterstadt
-E-Mail: ${einstellungen.email}
-
-2. Erhebung und Speicherung personenbezogener Daten
-Beim Besuch dieser Website können technisch notwendige Daten verarbeitet werden (z. B. IP-Adresse, Zeitpunkt, User-Agent). Formulareingaben (Kontakt, Bewerbung) werden zur Bearbeitung Ihrer Anfrage verarbeitet.
-
-3. Cookies & Einwilligung
-Wir setzen notwendige Cookies für den Betrieb der Website. Optionale Analyse-Cookies nur nach Ihrer Einwilligung über den Cookie-Hinweis.
-
-4. Cloudflare Turnstile
-Zum Schutz vor Spam nutzen wir Cloudflare Turnstile. Dabei können Daten an Cloudflare übermittelt werden. Details: cloudflare.com/privacypolicy.
-
-5. E-Mail-Versand
-Anfragen können per E-Mail-Dienstleister (z. B. Resend) zugestellt werden.
-
-6. Bewerbungsunterlagen
-Hochgeladene Dateien werden ausschließlich zur Bearbeitung Ihrer Bewerbung verwendet und nach Abschluss des Verfahrens gelöscht bzw. gemäß gesetzlicher Fristen aufbewahrt.
-
-7. Ihre Rechte
-Sie haben Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde bei einer Aufsichtsbehörde.
-
-8. Stand
-Dieser Text ist ein Platzhalter und ersetzt keine rechtsverbindliche Beratung.
-`.trim(),
+/** Page / Services – Figma Übersicht */
+export const servicesPage = {
+  hero: {
+    titel: 'UNSERE\nLEISTUNGEN',
+    untertitel:
+      'Von der ersten Idee bis zur fertigen Montage – alles aus einer Hand. Klassische Außenwerbung und moderne Sichtbarkeit für die Region.',
+  },
+  sectionTitle: 'VIER DISZIPLINEN, EIN ANSPRUCH',
+  items: [
+    {
+      nr: '01',
+      kategorie: 'AUSSENWERBUNG',
+      titel: 'Plakatwerbung',
+      kurztext: 'Auffällig. Präsent. Wirkungsvoll.',
+      link: '/leistungen/plakatwerbung',
+      bild: { url: '/images/figma/service-plakat.png', alt: 'Plakatwerbung' },
+    },
+    {
+      nr: '02',
+      kategorie: 'BESCHRIFTUNG',
+      titel: 'Folierung &\nBeschriftung',
+      kurztext: 'Fahrzeuge. Schaufenster. Fassaden.',
+      link: '/leistungen/folierung',
+      bild: { url: '/images/figma/service-folie.png', alt: 'Folierung & Beschriftung' },
+    },
+    {
+      nr: '03',
+      kategorie: 'DIGITAL',
+      titel: 'Digitale\nWerbemittel',
+      kurztext: 'Screens. Social Media. Online-\nKampagnen.',
+      link: '/leistungen/social-media',
+      bild: { url: '/images/figma/service-digital.png', alt: 'Digitale Werbemittel' },
+    },
+    {
+      nr: '04',
+      kategorie: 'PRINT',
+      titel: 'Drucksachen',
+      kurztext: 'Flyer. Broschüren. Geschäftsausstattung.',
+      link: '/leistungen/grafikdesign',
+      bild: { url: '/images/figma/service-druck.png', alt: 'Drucksachen' },
+    },
+  ],
+  cta: {
+    ueberschrift: 'WELCHE LEISTUNG PASST ZU\nIHNEN?',
+    text: 'Wir beraten Sie ehrlich – auch dann, wenn die Antwort einmal „weniger“ lautet.',
+    button: { label: 'Beratung anfragen', url: '/kontakt' },
+  },
 }
 
 /** Leistungsseiten – Plakatwerbung voll, übrige als Struktur-Platzhalter */
@@ -405,65 +501,87 @@ export const leistungen: Record<
         blockType: 'hero',
         variante: 'einfach',
         titel: 'PLAKATWERBUNG',
-        untertitel: 'Flächen finden, genehmigen, gestalten und platzieren – lokal und wirksam.',
-        buttons: [{ label: 'Kampagne anfragen', url: '/kontakt', stil: 'primary' }],
+        untertitel:
+          'Plakate an Straßenlaternen im 100-Kilometer-Umkreis rund um Friedrichshafen. Von der\nKampagnenplanung über die Sondernutzungserlaubnis bis zum GPS-Fotonachweis\nübernehmen wir jeden Schritt.',
+        buttons: [],
       },
       {
         blockType: 'zahlen',
-        eyebrow: 'AUF EINEN BLICK',
+        dunkel: true,
         stats: [
-          { zahl: '20+', label: 'Jahre Erfahrung (Platzhalter)' },
-          { zahl: '50+', label: 'Flächenpartner (Platzhalter)' },
-          { zahl: '100%', label: 'Full-Service' },
+          { zahl: '20+', label: 'Jahre Erfahrung' },
+          { zahl: '150+', label: 'Städte im Verteilnetz' },
+          { zahl: '3.000+', label: 'Kampagnen umgesetzt' },
+          { zahl: '1', label: 'Ansprechpartner für alles' },
         ],
       },
       {
-        blockType: 'textblock',
-        eyebrow: 'WARUM PLAKAT',
-        ueberschrift: 'Aufmerksamkeit im echten Leben.',
-        text: 'Plakatwerbung erreicht Menschen unterwegs – ohne Scrollen, ohne Adblocker. Wir kombinieren Standortwissen, Gestaltung und Produktion zu Kampagnen, die man nicht übersehen kann.',
-      },
-      {
         blockType: 'kategorien',
-        eyebrow: 'FÜR WEN',
-        ueberschrift: 'Passend zu Ihrem Anlass',
+        gelb: true,
+        ueberschrift: 'JEDER ANLASS BRAUCHT SEINE EIGENE\nKAMPAGNE',
+        text: 'Ein Stadtfest braucht andere Standorte als eine Messe, ein Konzert eine andere Vorlaufzeit als eine Vereinsfeier.\nMotiv, Stückzahl, Verteilgebiet und Laufzeit arbeiten wir für jeden Anlass neu aus.',
         kategorien: [
-          { name: 'Events & Festivals' },
-          { name: 'Handel & Filialen' },
-          { name: 'Kultur & Öffentlich' },
-          { name: 'Marken-Launches' },
+          { name: 'Konzerte' },
+          { name: 'Festivals' },
+          { name: 'Stadtfeste' },
+          { name: 'Messen' },
+          { name: 'Theater & Kleinkunst' },
+          { name: 'Sportevents' },
+          { name: 'Vereinsjubiläen' },
+          { name: 'Eröffnungen' },
+          { name: 'Jahrmärkte' },
+          { name: 'Weihnachtsmärkte' },
+          { name: 'Kino & Kultur' },
+          { name: 'Tag der offenen Tür' },
+          { name: 'Wahlkampf' },
         ],
       },
       {
         blockType: 'usp',
         eyebrow: 'IHR ENTSCHEIDENDER VORTEIL',
-        ueberschrift: 'Genehmigung & Flächen aus einer Hand',
-        text: 'Wir übernehmen Abstimmung mit Partnern und Behörden – damit Ihre Motive rechtzeitig und legal sichtbar werden.',
+        ueberschrift: 'DIE GENEHMIGUNG\nMACHEN WIR.',
+        text: 'Seit zwei Jahrzehnten pflegen wir enge Beziehungen zu Städten und Kommunen und verfügen über die nötigen Sondernutzungserlaubnisse. Für Sie heißt das: kein Behördenstress, keine Absagen, kein Papierkrieg – wir sichern die Standorte und übernehmen die komplette Genehmigung.',
         belegpunkte: [
           {
-            titel: 'Standortberatung',
-            text: 'Wir empfehlen Flächen nach Zielgruppe, Laufwegen und Budget.',
+            titel: 'Sondernutzungserlaub\nnis',
+            text: 'Wir haben die Genehmigungen für die\nFlächen – Sie brauchen keine zu\nbeantragen.',
           },
           {
-            titel: 'Genehmigungs-Support',
-            text: 'Formulare, Fristen und Nachweise – wir halten den Überblick.',
+            titel: 'Direkter Draht zu den\nÄmtern',
+            text: 'Gewachsene Kontakte in den\nKommunen sorgen für schnelle,\nverlässliche Zusagen.',
           },
           {
-            titel: 'Produktion & Montage',
-            text: 'Druckdaten, Qualität und Aufbau – koordiniert bis zur Live-Schaltung.',
+            titel: 'Sie kümmern sich um\nnichts',
+            text: 'Von Antrag bis Abnahme läuft der\nkomplette Behördenteil über uns.',
           },
         ],
       },
       {
         blockType: 'fullService',
-        eyebrow: 'FULL SERVICE',
-        ueberschrift: 'Von der Idee bis zur Fläche',
-        text: 'Ein Ansprechpartner für Konzept, Motiv, Druck und Placement.',
+        eyebrow: 'FULL-SERVICE – KEINE SCHNITTSTELLEN',
+        ueberschrift: 'ALLES AUS EINER HAND',
+        text: 'Von der ersten Idee bis zur abgehängten Fläche – ein Ansprechpartner für den kompletten Weg. Auf Wunsch übernehmen wir auch Gestaltung und Druck, damit alles perfekt zusammenpasst.',
         schritte: [
-          { titel: 'Briefing', text: 'Ziele, Region, Zeitraum und Budget klären.' },
-          { titel: 'Konzept & Motiv', text: 'Botschaft und Gestaltung auf Distanzwirkung trimmen.' },
-          { titel: 'Flächen & Genehmigung', text: 'Standorte sichern und Freigaben einholen.' },
-          { titel: 'Produktion & Live', text: 'Druck, Montage und Kampagnenstart.' },
+          {
+            titel: 'Gestaltung',
+            text: 'Motiv & Layout – auf Wunsch komplett von uns.',
+          },
+          {
+            titel: 'Druck',
+            text: 'Wetterfester Großformatdruck in Top-Qualität.',
+          },
+          {
+            titel: 'Genehmigung',
+            text: 'Sondernutzung & Standorte – wir regeln alles.',
+          },
+          {
+            titel: 'Verteilung',
+            text: 'Pünktliche Plakatierung an den besten Flächen.',
+          },
+          {
+            titel: 'Abhängung',
+            text: 'Saubere Entfernung nach Kampagnenende.',
+          },
         ],
       },
       {
@@ -471,31 +589,97 @@ export const leistungen: Record<
         eyebrow: 'SO LÄUFT IHRE PLAKATWERBUNG',
         schritte: [
           {
-            titel: 'Ziele definieren',
-            kurztext: 'Wir klären Zielgruppe, Region und Botschaft – kompakt und verbindlich.',
+            titel: 'Beratung &\nStandortanalyse',
+            kurztext:
+              'Wir schauen uns Ihre Ziele und Ihre Zielgruppe an und finden die Standorte mit der größten Wirkung – von der Hauptstraße bis zur Großfläche an der Ausfallstraße.',
+            foto: { url: '/images/figma/work-1.png', alt: 'Standortanalyse' },
           },
           {
-            titel: 'Flächen wählen',
-            kurztext: 'Passende Formate und Standorte nach Reichweite und Budget.',
+            titel: 'Konzept &\nMotiv',
+            kurztext:
+              'Botschaft und Gestaltung auf Distanzwirkung trimmen – klar, lesbar und passgenau für Fläche und Anlass.',
+            foto: { url: '/images/figma/work-2.png', alt: 'Konzept und Motiv' },
           },
           {
-            titel: 'Motiv finalisieren',
-            kurztext: 'Gestaltung und Druckdaten für maximale Lesbarkeit von Weitem.',
+            titel: 'Flächen\nauswählen',
+            kurztext:
+              'Passende Formate und Standorte nach Reichweite, Laufwegen und Budget – transparent und nachvollziehbar.',
+            foto: { url: '/images/figma/service-plakat.png', alt: 'Flächenauswahl' },
           },
           {
-            titel: 'Live schalten',
-            kurztext: 'Produktion, Montage und Kontrolle – Ihre Kampagne ist sichtbar.',
+            titel: 'Genehmigung\neinholen',
+            kurztext:
+              'Sondernutzung und Freigaben übernehmen wir – damit Ihre Kampagne rechtzeitig und legal live geht.',
+            foto: { url: '/images/figma/work-3.png', alt: 'Genehmigung' },
+          },
+          {
+            titel: 'Produktion\n& Druck',
+            kurztext:
+              'Wetterfester Großformatdruck in Top-Qualität – abgestimmt auf Material, Format und Montage.',
+            foto: { url: '/images/figma/service-druck.png', alt: 'Druck' },
+          },
+          {
+            titel: 'Verteilung &\nPlakatierung',
+            kurztext:
+              'Pünktliche Montage an den gebuchten Flächen – koordiniert und dokumentiert.',
+            foto: { url: '/images/figma/work-4.png', alt: 'Plakatierung' },
+          },
+          {
+            titel: 'GPS-\nFotonachweis',
+            kurztext:
+              'Jeder Standort wird dokumentiert – Sie sehen, wo und wann Ihre Werbung sichtbar ist.',
+            foto: { url: '/images/figma/work-5.png', alt: 'Fotonachweis' },
+          },
+          {
+            titel: 'Laufzeit &\nKontrolle',
+            kurztext:
+              'Während der Kampagne prüfen wir die Flächen und reagieren, wenn nachgebessert werden muss.',
+            foto: { url: '/images/figma/work-6.png', alt: 'Kontrolle' },
+          },
+          {
+            titel: 'Abhängung',
+            kurztext:
+              'Saubere Entfernung nach Kampagnenende – Flächen wieder freigeräumt, Auftrag abgeschlossen.',
+            foto: { url: '/images/figma/service-folie.png', alt: 'Abhängung' },
+          },
+          {
+            titel: 'Reporting &\nFollow-up',
+            kurztext:
+              'Kurzer Abschlussbericht und Empfehlungen für die nächste Welle – damit Sichtbarkeit nachhaltig wirkt.',
+            foto: { url: '/images/figma/service-digital.png', alt: 'Reporting' },
           },
         ],
       },
       {
         blockType: 'referenzSlider',
-        eyebrow: 'BEISPIELE',
-        ueberschrift: 'Plakat-Referenzen (Platzhalter)',
-        kategorie: 'plakat',
+        ueberschrift: 'SO SIEHT DAS AUS',
+        untertitel: 'Plakate an Straßenlaternen im Verteilergebiet.',
+        untertitelKlein: true,
         items: [
-          { titel: 'City-Light Sommer', kategorie: 'Plakat', ort: 'Innenstadt' },
-          { titel: 'Großfläche Launch', kategorie: 'Plakat', ort: 'Zufahrt' },
+          {
+            titel: 'Bushaltestelle',
+            bild: { url: '/images/figma/work-1.png', alt: 'Plakat an Bushaltestelle' },
+          },
+          {
+            titel: 'Straßenlaterne',
+            bild: { url: '/images/figma/work-2.png', alt: 'Plakat an Straßenlaterne' },
+          },
+          {
+            titel: 'Stadtverkehr',
+            bild: { url: '/images/figma/work-3.png', alt: 'Plakat im Stadtverkehr' },
+          },
+          {
+            titel: 'Innenstadt',
+            bild: { url: '/images/figma/work-4.png', alt: 'Plakat in der Innenstadt' },
+          },
+          {
+            titel: 'Großfläche',
+            bild: { url: '/images/figma/work-5.png', alt: 'Großflächenplakat' },
+          },
+          {
+            titel: 'Kampagne live',
+            bild: { url: '/images/figma/work-6.png', alt: 'Live-Kampagne' },
+          },
         ],
       },
       {
@@ -552,101 +736,692 @@ export const leistungen: Record<
   },
   'foto-video': {
     titel: 'Foto & Video',
-    metaDescription: 'Foto- und Videoproduktion für Marken und Kampagnen – WERBEINSEL.',
+    metaDescription:
+      'Wir filmen und fotografieren, was tatsächlich passiert – vom Event bis zum Reel. Foto- und Videoproduktion von WERBEINSEL.',
     blocks: [
       {
         blockType: 'hero',
         variante: 'einfach',
         titel: 'FOTO & VIDEO',
-        untertitel: 'Platzhalter: Strukturseite – Inhalte folgen.',
-        buttons: [{ label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' }],
+        untertitel:
+          'Wir filmen und fotografieren, was tatsächlich passiert – vom Event bis zum Reel. Ihre Räume, Ihre Leute, Ihr Moment.',
+        buttons: [],
       },
       {
-        blockType: 'textblock',
-        eyebrow: 'LEISTUNG',
-        ueberschrift: 'Bild und Bewegtbild (Platzhalter)',
-        text: 'Hier folgen Angebotsbeschreibung, Packages und Referenzen für Foto- und Videoproduktion.',
+        blockType: 'referenzSlider',
+        sectionId: 'arbeiten-foto-video',
+        ueberschrift: 'ALLES DAVON IST PASSIERT',
+        untertitel: 'Kein Motiv auf dieser Seite ist generiert. Jedes war ein Termin.',
+        untertitelKlein: true,
+        items: [
+          {
+            titel: 'Arbeit 1',
+            bild: { url: '/images/figma/work-1.png', alt: 'Foto- und Videoarbeit 1' },
+          },
+          {
+            titel: 'Arbeit 2',
+            bild: { url: '/images/figma/work-2.png', alt: 'Foto- und Videoarbeit 2' },
+          },
+          {
+            titel: 'Arbeit 3',
+            bild: { url: '/images/figma/work-3.png', alt: 'Foto- und Videoarbeit 3' },
+          },
+          {
+            titel: 'Arbeit 4',
+            bild: { url: '/images/figma/work-4.png', alt: 'Foto- und Videoarbeit 4' },
+          },
+          {
+            titel: 'Arbeit 5',
+            bild: { url: '/images/figma/work-5.png', alt: 'Foto- und Videoarbeit 5' },
+          },
+          {
+            titel: 'Arbeit 6',
+            bild: { url: '/images/figma/work-6.png', alt: 'Foto- und Videoarbeit 6' },
+          },
+        ],
+      },
+      {
+        blockType: 'echtNichtGeneriert',
+        ueberschrift: 'ECHT. NICHT GENERIERT.',
+        text: 'Generierte Bilder sehen aus wie generierte Bilder. Man merkt es, auch wenn man nicht sagen kann, woran. Was bei uns rauskommt, ist tatsächlich passiert – mit Kamera, an einem Ort, an einem Tag.',
+        punkte: [
+          {
+            titel: 'Ihre Räume',
+            text: 'Kein Studio, keine Kulisse aus dem Rechner. Ihr Betrieb.',
+          },
+          {
+            titel: 'Ihre Leute',
+            text: 'Die Gesichter, denen Ihre Kunden auch wirklich begegnen.',
+          },
+          {
+            titel: 'Ihr Moment',
+            text: 'Der Termin, der Event, der eine Tag – festgehalten, wie er war.',
+          },
+        ],
+      },
+      {
+        blockType: 'wasWirAufnehmen',
+        ueberschrift: 'WAS WIR AUFNEHMEN',
+        items: [
+          {
+            titel: 'Events',
+            icon: 'events',
+            text: 'Wir sind da, wenn es passiert. Konzerte, Messen, Firmenfeiern, Jubiläen.',
+          },
+          {
+            titel: 'Social-Content',
+            icon: 'social',
+            text: 'Reels, Shorts, Stories – hochkant gedreht und für den Kanal geschnitten.',
+          },
+          {
+            titel: 'Imagefilm',
+            icon: 'image',
+            text: 'Der Film über Ihr Unternehmen – für Website, Messe und Präsentation.',
+          },
+          {
+            titel: 'Website',
+            icon: 'website',
+            text: 'Hero-Videos und Aufnahmen für Ihre Website – klar, echt, wiedererkennbar.',
+          },
+        ],
+      },
+      {
+        blockType: 'schrittSlider',
+        eyebrow: 'SO LÄUFT IHR SHOOTING',
+        schritte: [
+          {
+            titel: 'Beratung &\nStandortanalyse',
+            kurztext:
+              'Wir schauen uns Ihre Ziele und Ihre Zielgruppe an und finden die Standorte mit der größten Wirkung – von der Hauptstraße bis zur Großfläche an der Ausfallstraße.',
+            foto: { url: '/images/figma/work-1.png', alt: 'Beratung und Standortanalyse' },
+          },
+          {
+            titel: 'Briefing &\nKonzept',
+            kurztext:
+              'Was soll das Bild oder der Film leisten? Wir klären Motiv, Tonalität und Einsatz – Website, Social, Event oder Imagefilm.',
+            foto: { url: '/images/figma/work-2.png', alt: 'Briefing und Konzept' },
+          },
+          {
+            titel: 'Location &\nSetup',
+            kurztext:
+              'Wir prüfen Licht, Zugang und Ablauf vor Ort – damit am Drehtag nichts überrascht.',
+            foto: { url: '/images/figma/work-3.png', alt: 'Location und Setup' },
+          },
+          {
+            titel: 'Personen &\nAbstimmung',
+            kurztext:
+              'Wer steht vor der Kamera, wer freigibt – wir stimmen Team, Termine und Abläufe mit Ihnen ab.',
+            foto: { url: '/images/figma/service-digital.png', alt: 'Personen und Abstimmung' },
+          },
+          {
+            titel: 'Drehplan',
+            kurztext:
+              'Shotlist, Zeiten und Reihenfolge – damit wir am Tag effizient drehen und nichts vergessen.',
+            foto: { url: '/images/figma/work-4.png', alt: 'Drehplan' },
+          },
+          {
+            titel: 'Shooting /\nDreh',
+            kurztext:
+              'Wir filmen und fotografieren vor Ort – Ihre Räume, Ihre Leute, Ihr Moment.',
+            foto: { url: '/images/figma/work-5.png', alt: 'Shooting' },
+          },
+          {
+            titel: 'Auswahl',
+            kurztext:
+              'Sie sehen eine kuratierte Auswahl – wir markieren Favoriten und holen Ihr Feedback ein.',
+            foto: { url: '/images/figma/work-6.png', alt: 'Auswahl' },
+          },
+          {
+            titel: 'Post-\nproduktion',
+            kurztext:
+              'Schnitt, Farbe, Ton – aufbereitet für die Kanäle, auf denen die Inhalte laufen sollen.',
+            foto: { url: '/images/figma/service-folie.png', alt: 'Postproduktion' },
+          },
+          {
+            titel: 'Freigabe',
+            kurztext:
+              'Finale Versionen zur Abnahme – Anpassungen fließen ein, bevor etwas ausgeliefert wird.',
+            foto: { url: '/images/figma/service-plakat.png', alt: 'Freigabe' },
+          },
+          {
+            titel: 'Übergabe',
+            kurztext:
+              'Dateien in den richtigen Formaten – ready für Website, Social, Präsentation oder Archiv.',
+            foto: { url: '/images/figma/service-druck.png', alt: 'Übergabe' },
+          },
+        ],
       },
       {
         blockType: 'cta',
-        ueberschrift: 'Dreh oder Shooting geplant?',
-        text: 'Schreiben Sie uns Ihr Vorhaben – wir melden uns mit einem Vorschlag.',
-        button: { label: 'Kontakt', url: '/kontakt' },
+        yellow: false,
+        ueberschrift: 'WANN SOLLEN WIR KOMMEN?',
+        text: 'Events haben ein Datum. Je früher wir es kennen, desto besser können wir planen.',
+        button: { label: 'Termin anfragen', url: '/kontakt' },
       },
     ],
   },
   grafikdesign: {
     titel: 'Grafikdesign',
-    metaDescription: 'Grafikdesign und Corporate Design – WERBEINSEL.',
+    metaDescription:
+      'Vom Logo bis zur Druckvorlage, vom Social-Post bis zum Großflächenplakat – Grafikdesign von WERBEINSEL.',
     blocks: [
       {
         blockType: 'hero',
         variante: 'einfach',
         titel: 'GRAFIKDESIGN',
-        untertitel: 'Platzhalter: Strukturseite – Inhalte folgen.',
-        buttons: [{ label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' }],
+        untertitel:
+          'Vom Logo bis zur Druckvorlage, vom Social-Post bis zum Großflächenplakat. Wir entwerfen es – und hängen es danach auch auf.',
+        buttons: [],
       },
       {
-        blockType: 'textblock',
-        eyebrow: 'LEISTUNG',
-        ueberschrift: 'Design, das wirkt (Platzhalter)',
-        text: 'Hier folgen Leistungen zu Corporate Design, Print und digitalen Assets.',
+        blockType: 'referenzSlider',
+        sectionId: 'arbeiten-grafikdesign',
+        ueberschrift: 'ENTWORFEN UND AUSGELIEFERT',
+        untertitel:
+          'Jedes Motiv hier ist bei uns entstanden – und danach tatsächlich irgendwo gelandet.',
+        untertitelKlein: true,
+        items: [
+          {
+            titel: 'Arbeit 1',
+            bild: { url: '/images/figma/work-1.png', alt: 'Grafikdesign Arbeit 1' },
+          },
+          {
+            titel: 'Arbeit 2',
+            bild: { url: '/images/figma/work-2.png', alt: 'Grafikdesign Arbeit 2' },
+          },
+          {
+            titel: 'Arbeit 3',
+            bild: { url: '/images/figma/work-3.png', alt: 'Grafikdesign Arbeit 3' },
+          },
+          {
+            titel: 'Arbeit 4',
+            bild: { url: '/images/figma/work-4.png', alt: 'Grafikdesign Arbeit 4' },
+          },
+          {
+            titel: 'Arbeit 5',
+            bild: { url: '/images/figma/work-5.png', alt: 'Grafikdesign Arbeit 5' },
+          },
+          {
+            titel: 'Arbeit 6',
+            bild: { url: '/images/figma/work-6.png', alt: 'Grafikdesign Arbeit 6' },
+          },
+        ],
+      },
+      {
+        blockType: 'einMotiv',
+        ueberschrift: 'EIN MOTIV, ALLE FORMATE',
+        text: 'Bei einer reinen Grafikagentur endet die Arbeit beim fertigen Entwurf. Bei uns fängt sie da erst an: Wir ziehen das Motiv durch jedes Format – und bringen es danach selbst an.',
+        items: [
+          { label: 'Visitenkarte', icon: 'visitenkarte' },
+          { label: 'Social-Post', icon: 'social' },
+          { label: 'Reel', icon: 'reel' },
+          { label: 'Plakat', icon: 'plakat' },
+        ],
+      },
+      {
+        blockType: 'wasWirGestalten',
+        ueberschrift: 'WAS WIR GESTALTEN',
+        items: [
+          {
+            titel: 'Logo & Erscheinungsbild',
+            icon: 'logo',
+            text: 'Das Zeichen, die Farben, die Schrift. Und die Regeln, damit es überall gleich aussieht.',
+          },
+          {
+            titel: 'Druckvorlagen',
+            icon: 'druck',
+            text: 'Flyer, Broschüren, Speisekarten, Anzeigen. Druckfertig, mit Anschnitt, im richtigen Farbraum.',
+          },
+          {
+            titel: 'Social-Grafiken',
+            icon: 'social',
+            text: 'Posts, Stories, Anzeigen – kanalgerecht und im Look Ihrer Marke.',
+          },
+          {
+            titel: 'Plakat & Großfläche',
+            icon: 'plakat',
+            text: 'Motive für Plakat und Großfläche – lesbar auf Distanz, druckfertig geliefert.',
+          },
+        ],
+      },
+      {
+        blockType: 'schrittSlider',
+        eyebrow: 'SO LÄUFT IHR DESIGN-PROJEKT',
+        schritte: [
+          {
+            titel: 'Beratung &\nStandortanalyse',
+            kurztext:
+              'Wir schauen uns Ihre Ziele und Ihre Zielgruppe an und finden die Standorte mit der größten Wirkung – von der Hauptstraße bis zur Großfläche an der Ausfallstraße.',
+            foto: { url: '/images/figma/work-1.png', alt: 'Beratung und Standortanalyse' },
+          },
+          {
+            titel: 'Konzept &\nRichtung',
+            kurztext:
+              'Idee, Tonalität und visuelle Linie – abgestimmt auf Marke und Anlass, bevor wir entwerfen.',
+            foto: { url: '/images/figma/work-2.png', alt: 'Konzept und Richtung' },
+          },
+          {
+            titel: 'Moodboard',
+            kurztext:
+              'Referenzen, Farben und Typografie als gemeinsame Basis – damit alle dasselbe Bild im Kopf haben.',
+            foto: { url: '/images/figma/work-3.png', alt: 'Moodboard' },
+          },
+          {
+            titel: 'Entwurf',
+            kurztext:
+              'Erste Motive und Layouts – klar genug zum Entscheiden, offen genug für Feedback.',
+            foto: { url: '/images/figma/service-digital.png', alt: 'Entwurf' },
+          },
+          {
+            titel: 'Feedback &\nIteration',
+            kurztext:
+              'Ihre Rückmeldung fließt ein – wir schärfen, bis Richtung und Aussage stimmen.',
+            foto: { url: '/images/figma/work-4.png', alt: 'Feedback' },
+          },
+          {
+            titel: 'Ausarbeitung',
+            kurztext:
+              'Feinschliff von Motiv, Typo und Details – druck- und kanalgerecht vorbereitet.',
+            foto: { url: '/images/figma/work-5.png', alt: 'Ausarbeitung' },
+          },
+          {
+            titel: 'Formate\nableiten',
+            kurztext:
+              'Ein Motiv, viele Formate – Visitenkarte, Social, Reel, Plakat und was sonst gebraucht wird.',
+            foto: { url: '/images/figma/work-6.png', alt: 'Formate ableiten' },
+          },
+          {
+            titel: 'Freigabe',
+            kurztext:
+              'Finale Versionen zur Abnahme – Anpassungen fließen ein, bevor etwas produziert wird.',
+            foto: { url: '/images/figma/service-folie.png', alt: 'Freigabe' },
+          },
+          {
+            titel: 'Produktion &\nDruckdaten',
+            kurztext:
+              'Druckfertig mit Anschnitt und richtigem Farbraum – oder digital exportiert für Ihre Kanäle.',
+            foto: { url: '/images/figma/service-druck.png', alt: 'Produktion' },
+          },
+          {
+            titel: 'Übergabe &\nUmsetzung',
+            kurztext:
+              'Dateien und, wo gewünscht, die Umsetzung vor Ort – vom Entwurf bis zur Fläche.',
+            foto: { url: '/images/figma/service-plakat.png', alt: 'Übergabe' },
+          },
+        ],
       },
       {
         blockType: 'cta',
-        ueberschrift: 'Design-Projekt starten?',
-        text: 'Kurz beschreiben, was Sie brauchen – wir kommen auf Sie zu.',
-        button: { label: 'Kontakt', url: '/kontakt' },
+        yellow: false,
+        ueberschrift: 'WAS SOLL ENTSTEHEN?',
+        text: 'Ob ein einzelner Flyer oder ein ganzes Erscheinungsbild – erzählen Sie uns, was Sie vorhaben.',
+        button: { label: 'Projekt besprechen', url: '/kontakt' },
       },
     ],
   },
   folierung: {
     titel: 'Folierung',
-    metaDescription: 'Fahrzeug- und Flächenfolierung – WERBEINSEL.',
+    metaDescription:
+      'Fahrzeuge, Schaufenster, Schilder, Fassaden – Folierung von WERBEINSEL.',
     blocks: [
       {
         blockType: 'hero',
         variante: 'einfach',
         titel: 'FOLIERUNG',
-        untertitel: 'Platzhalter: Strukturseite – Inhalte folgen.',
-        buttons: [{ label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' }],
+        untertitel:
+          'Fahrzeuge, Schaufenster, Schilder, Fassaden. Wir bringen Ihr Motiv auf die Flächen, die Sie ohnehin schon haben.',
+        buttons: [],
       },
       {
-        blockType: 'textblock',
-        eyebrow: 'LEISTUNG',
-        ueberschrift: 'Fahrzeuge & Flächen (Platzhalter)',
-        text: 'Hier folgen Leistungen zu Fahrzeug-, Schaufenster- und Objektfolierung.',
+        blockType: 'referenzSlider',
+        sectionId: 'arbeiten-folierung',
+        ueberschrift: 'GEKLEBT AM BODENSEE',
+        untertitel:
+          'Jedes Fahrzeug hier fährt tatsächlich. Jede Scheibe steht irgendwo in der Region.',
+        untertitelKlein: true,
+        items: [
+          {
+            titel: 'Arbeit 1',
+            bild: { url: '/images/figma/work-1.png', alt: 'Folierung Arbeit 1' },
+          },
+          {
+            titel: 'Arbeit 2',
+            bild: { url: '/images/figma/work-2.png', alt: 'Folierung Arbeit 2' },
+          },
+          {
+            titel: 'Arbeit 3',
+            bild: { url: '/images/figma/work-3.png', alt: 'Folierung Arbeit 3' },
+          },
+          {
+            titel: 'Arbeit 4',
+            bild: { url: '/images/figma/work-4.png', alt: 'Folierung Arbeit 4' },
+          },
+          {
+            titel: 'Arbeit 5',
+            bild: { url: '/images/figma/work-5.png', alt: 'Folierung Arbeit 5' },
+          },
+          {
+            titel: 'Arbeit 6',
+            bild: { url: '/images/figma/work-6.png', alt: 'Folierung Arbeit 6' },
+          },
+        ],
+      },
+      {
+        blockType: 'transporterFaahrt',
+        ueberschrift: 'IHR TRANSPORTER FÄHRT SOWIESO',
+        text: 'Ein Plakat kostet Miete. Eine Anzeige kostet Platz. Ihr Fahrzeug steht ohnehin auf der Straße, jeden Tag, kostenlos – nur eben unbeschriftet. Dasselbe gilt für Ihr Schaufenster: Die Fläche gehört Ihnen längst.',
+        punkte: [
+          {
+            titel: 'Einmal zahlen',
+            text: 'Keine Miete, keine Schaltung. Die Folie klebt und arbeitet.',
+          },
+          {
+            titel: 'Fährt von allein',
+            text: 'Jede Fahrt zur Baustelle ist eine Rundfahrt durchs Einzugsgebiet.',
+          },
+          {
+            titel: 'Wieder abzulösen',
+            text: 'Rückstandslos entfernbar – wichtig, wenn das Fahrzeug geleast ist.',
+          },
+        ],
+      },
+      {
+        blockType: 'wasWirBekleben',
+        ueberschrift: 'WAS WIR BEKLEBEN',
+        items: [
+          {
+            titel: 'Fahrzeugbeschriftung',
+            icon: 'fahrzeug',
+            text: 'Vom Schriftzug auf der Tür bis zur Vollverklebung. Transporter, Pkw, Anhänger, Flotte.',
+          },
+          {
+            titel: 'Schaufenster',
+            icon: 'schaufenster',
+            text: 'Logo, Öffnungszeiten, Sichtschutz. Von außen Werbung, von innen bleibt das Licht.',
+          },
+          {
+            titel: 'Schilder & Fassade',
+            icon: 'schilder',
+            text: 'Firmenschild, Hausnummer, Leitsystem. Damit man Sie findet, wenn man davorsteht.',
+          },
+          {
+            titel: 'Bauzaun & Banner',
+            icon: 'bauzaun',
+            text: 'Große Fläche, kurze Zeit. Für Baustellen, Eröffnungen und Veranstaltungen.',
+          },
+        ],
+      },
+      {
+        blockType: 'schrittSlider',
+        eyebrow: 'SO LÄUFT IHRE FOLIERUNG',
+        schritte: [
+          {
+            titel: 'Beratung &\nStandortanalyse',
+            kurztext:
+              'Wir schauen uns Ihre Ziele und Ihre Zielgruppe an und finden die Standorte mit der größten Wirkung – von der Hauptstraße bis zur Großfläche an der Ausfallstraße.',
+            foto: { url: '/images/figma/work-1.png', alt: 'Beratung und Standortanalyse' },
+          },
+          {
+            titel: 'Konzept &\nMotiv',
+            kurztext:
+              'Botschaft und Gestaltung für die Fläche – klar, lesbar und passgenau für Fahrzeug, Fenster oder Fassade.',
+            foto: { url: '/images/figma/work-2.png', alt: 'Konzept und Motiv' },
+          },
+          {
+            titel: 'Aufmaß &\nDaten',
+            kurztext:
+              'Maße, Radien und Besonderheiten vor Ort – damit die Folie später sitzt, wie geplant.',
+            foto: { url: '/images/figma/work-3.png', alt: 'Aufmaß' },
+          },
+          {
+            titel: 'Druck &\nZuschnitt',
+            kurztext:
+              'Druckfertig mit dem richtigen Material – zugeschnitten auf die Fläche und den Einsatz.',
+            foto: { url: '/images/figma/service-druck.png', alt: 'Druck und Zuschnitt' },
+          },
+          {
+            titel: 'Vorbereitung',
+            kurztext:
+              'Reinigung und Untergrund – die Basis für eine Folierung, die hält und sauber aussieht.',
+            foto: { url: '/images/figma/work-4.png', alt: 'Vorbereitung' },
+          },
+          {
+            titel: 'Verklebung',
+            kurztext:
+              'Wir bringen das Motiv auf – präzise, faltenfrei und dokumentiert.',
+            foto: { url: '/images/figma/work-5.png', alt: 'Verklebung' },
+          },
+          {
+            titel: 'Nacharbeit',
+            kurztext:
+              'Kanten, Ecken und Details – damit nichts absteht und alles fertig wirkt.',
+            foto: { url: '/images/figma/work-6.png', alt: 'Nacharbeit' },
+          },
+          {
+            titel: 'Abnahme',
+            kurztext:
+              'Gemeinsamer Check vor Ort – Sie sehen das Ergebnis und geben frei.',
+            foto: { url: '/images/figma/service-folie.png', alt: 'Abnahme' },
+          },
+          {
+            titel: 'Dokumentation',
+            kurztext:
+              'Fotos und Hinweise zur Pflege – damit Sie wissen, was drauf ist und wie es hält.',
+            foto: { url: '/images/figma/service-plakat.png', alt: 'Dokumentation' },
+          },
+          {
+            titel: 'Service &\nAblösung',
+            kurztext:
+              'Bei Bedarf rückstandslos ablösen oder nachfolieren – auch bei geleasten Fahrzeugen.',
+            foto: { url: '/images/figma/service-digital.png', alt: 'Service' },
+          },
+        ],
       },
       {
         blockType: 'cta',
-        ueberschrift: 'Folierung anfragen?',
-        text: 'Fahrzeugtyp, Motiv und Termin – wir kümmern uns um den Rest.',
-        button: { label: 'Kontakt', url: '/kontakt' },
+        yellow: false,
+        ueberschrift: 'WAS SOLL BEKLEBT WERDEN?',
+        text: 'Sagen Sie uns, welches Fahrzeug oder welche Fläche – wir schauen es uns an und machen einen Vorschlag.',
+        button: { label: 'Angebot anfragen', url: '/kontakt' },
       },
     ],
   },
   'social-media': {
-    titel: 'Social Media',
-    metaDescription: 'Social-Media-Content und Kampagnen – WERBEINSEL.',
+    titel: 'Social Media Marketing',
+    metaDescription:
+      'Social-Media-Kanäle pflegen, Content erstellen und Online-Kampagnen planen – WERBEINSEL.',
     blocks: [
       {
         blockType: 'hero',
         variante: 'einfach',
-        titel: 'SOCIAL MEDIA',
-        untertitel: 'Platzhalter: Strukturseite – Inhalte folgen.',
-        buttons: [{ label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' }],
+        titel: 'SOCIAL MEDIA MARKETING',
+        untertitel:
+          'Wir pflegen Ihre Kanäle und füllen sie mit Inhalten – abgestimmt mit Ihnen, nicht an Ihnen vorbei. Dazu planen wir Online-Kampagnen, die ein Ziel haben und ein Ende.',
+        buttons: [],
       },
       {
-        blockType: 'textblock',
-        eyebrow: 'LEISTUNG',
-        ueberschrift: 'Content & Kampagnen (Platzhalter)',
-        text: 'Hier folgen Leistungen zu Content-Erstellung, Redaktion und Social Ads.',
+        blockType: 'referenzSlider',
+        sectionId: 'kanaele-content',
+        ueberschrift: 'WAS AUF DEN KANÄLEN LÄUFT',
+        untertitel: 'Reels, Stories, Posts – hochkant, so wie sie ausgespielt werden.',
+        untertitelKlein: true,
+        items: [
+          {
+            titel: 'Content 1',
+            bild: { url: '/images/figma/work-1.png', alt: 'Social-Media-Content Beispiel 1' },
+          },
+          {
+            titel: 'Content 2',
+            bild: { url: '/images/figma/work-2.png', alt: 'Social-Media-Content Beispiel 2' },
+          },
+          {
+            titel: 'Content 3',
+            bild: { url: '/images/figma/work-3.png', alt: 'Social-Media-Content Beispiel 3' },
+          },
+          {
+            titel: 'Content 4',
+            bild: { url: '/images/figma/work-4.png', alt: 'Social-Media-Content Beispiel 4' },
+          },
+          {
+            titel: 'Content 5',
+            bild: { url: '/images/figma/work-5.png', alt: 'Social-Media-Content Beispiel 5' },
+          },
+          {
+            titel: 'Content 6',
+            bild: { url: '/images/figma/work-6.png', alt: 'Social-Media-Content Beispiel 6' },
+          },
+        ],
+      },
+      {
+        blockType: 'kanaele',
+        ueberschrift: 'IHRE KANÄLE',
+        untertitel:
+          'Welche davon Sinn ergeben, entscheiden wir gemeinsam. Lieber zwei Kanäle gut als fünf halb.',
+        items: [
+          {
+            titel: 'Instagram',
+            icon: 'instagram',
+            text: 'Reels, Stories und Feed. Der Kanal für Bilder, die in der Region hängen bleiben.',
+          },
+          {
+            titel: 'TikTok',
+            icon: 'tiktok',
+            text: 'Kurze Videos, große Reichweite. Vor allem beim jungen Publikum.',
+          },
+          {
+            titel: 'Facebook',
+            icon: 'facebook',
+            text: 'Veranstaltungen, Neuigkeiten und die Reichweite, die am Bodensee weiterhin zählt.',
+          },
+          {
+            titel: 'Google',
+            icon: 'google',
+            text: 'Öffnungszeiten, Fotos, Bewertungen. Der erste Eindruck bei jeder Google-Suche.',
+          },
+          {
+            titel: 'YouTube',
+            icon: 'youtube',
+            text: 'Längere Videos und Shorts. Inhalte, die auch in einem Jahr noch gefunden werden.',
+          },
+        ],
+      },
+      {
+        blockType: 'betreuung',
+        ueberschrift: 'SO LÄUFT DIE BETREUUNG',
+        schritte: [
+          {
+            titel: 'Absprache',
+            text: 'Wir klären, was Sie zu sagen haben und wen Sie erreichen wollen.',
+          },
+          {
+            titel: 'Redaktionsplan',
+            text: 'Themen, Frequenz und Kanäle legen wir gemeinsam fest – Sie geben frei.',
+          },
+          {
+            titel: 'Inhalte',
+            text: 'Wir produzieren Fotos, Videos und Texte und bereiten sie je Kanal auf.',
+          },
+          {
+            titel: 'Pflegen',
+            text: 'Wir veröffentlichen, beantworten Kommentare und halten die Profile aktuell.',
+          },
+        ],
+      },
+      {
+        blockType: 'schrittSlider',
+        eyebrow: 'SO LÄUFT IHR SOCIAL MEDIA',
+        schritte: [
+          {
+            titel: 'Beratung &\nZielklärung',
+            kurztext:
+              'Wir schauen uns Ihre Ziele und Ihre Zielgruppe an und legen fest, was Social Media für Sie leisten soll – Reichweite, Leads oder Markenbild.',
+            foto: { url: '/images/figma/work-1.png', alt: 'Beratung und Zielklärung' },
+          },
+          {
+            titel: 'Kanal-\nStrategie',
+            kurztext:
+              'Welche Plattformen Sinn ergeben, entscheiden wir gemeinsam – lieber zwei Kanäle gut als fünf halb.',
+            foto: { url: '/images/figma/work-2.png', alt: 'Kanalstrategie' },
+          },
+          {
+            titel: 'Redaktions-\nplan',
+            kurztext:
+              'Themen, Frequenz und Formate legen wir gemeinsam fest – Sie geben frei, bevor etwas online geht.',
+            foto: { url: '/images/figma/work-3.png', alt: 'Redaktionsplan' },
+          },
+          {
+            titel: 'Content-\nKonzept',
+            kurztext:
+              'Botschaft, Tonalität und visuelle Linie – abgestimmt auf Marke und Zielgruppe je Kanal.',
+            foto: { url: '/images/figma/service-digital.png', alt: 'Content-Konzept' },
+          },
+          {
+            titel: 'Produktion',
+            kurztext:
+              'Wir produzieren Fotos, Videos und Texte und bereiten sie kanalgerecht auf – Reels, Stories, Posts, Shorts.',
+            foto: { url: '/images/figma/work-4.png', alt: 'Produktion' },
+          },
+          {
+            titel: 'Freigabe',
+            kurztext:
+              'Sie sehen die Inhalte vor Veröffentlichung – Feedback fließt ein, bevor etwas live geht.',
+            foto: { url: '/images/figma/work-5.png', alt: 'Freigabe' },
+          },
+          {
+            titel: 'Veröffent-\nlichung',
+            kurztext:
+              'Wir posten zum richtigen Zeitpunkt auf den vereinbarten Kanälen – konsistent und planbar.',
+            foto: { url: '/images/figma/work-6.png', alt: 'Veröffentlichung' },
+          },
+          {
+            titel: 'Community\nManagement',
+            kurztext:
+              'Wir beantworten Kommentare und Nachrichten und halten die Profile aktiv und aktuell.',
+            foto: { url: '/images/figma/service-folie.png', alt: 'Community Management' },
+          },
+          {
+            titel: 'Ads &\nReichweite',
+            kurztext:
+              'Bei Bedarf schalten wir gezielte Kampagnen – mit klaren Zielen, Budget und messbaren Ergebnissen.',
+            foto: { url: '/images/figma/service-plakat.png', alt: 'Ads und Reichweite' },
+          },
+          {
+            titel: 'Reporting &\nOptimierung',
+            kurztext:
+              'Regelmäßige Auswertung und Anpassungen – damit Reichweite und Wirkung nachhaltig steigen.',
+            foto: { url: '/images/figma/service-druck.png', alt: 'Reporting' },
+          },
+        ],
+      },
+      {
+        blockType: 'onlineKampagnen',
+        ueberschrift: 'ONLINE-KAMPAGNEN',
+        untertitel:
+          'Laufende Betreuung hält die Kanäle am Leben. Eine Kampagne hat ein Ziel, ein Budget und ein Ende – für eine Eröffnung, eine Aktion, eine Veranstaltung.',
+        items: [
+          {
+            titel: 'Zielgruppe & Budget',
+            icon: 'zielgruppe',
+            text: 'Wen wollen Sie erreichen, in welchem Umkreis, mit welchem Einsatz.',
+          },
+          {
+            titel: 'Motive & Texte',
+            icon: 'motive',
+            text: 'Wir entwickeln, was ausgespielt wird – passend zum Kanal und zum Anlass.',
+          },
+          {
+            titel: 'Auswertung',
+            icon: 'auswertung',
+            text: 'Nach der Kampagne sehen Sie, was sie gebracht hat.',
+          },
+        ],
       },
       {
         blockType: 'cta',
-        ueberschrift: 'Social pushen?',
-        text: 'Ziele und Kanäle skizzieren – wir schlagen ein Setup vor.',
-        button: { label: 'Kontakt', url: '/kontakt' },
+        yellow: false,
+        ueberschrift: 'REDEN WIR ÜBER IHRE KANÄLE',
+        text: 'Ein Gespräch reicht, um zu klären, welche Kanäle sich für Sie lohnen – und welche nicht.',
+        button: { label: 'Gespräch vereinbaren', url: '/kontakt' },
       },
     ],
   },

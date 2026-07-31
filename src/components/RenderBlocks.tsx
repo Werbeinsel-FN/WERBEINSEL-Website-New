@@ -13,6 +13,15 @@ import { CTA } from './blocks/CTA'
 import { ServicesSlider } from './blocks/ServicesSlider'
 import { Marquee } from './blocks/Marquee'
 import { Testimonials } from './blocks/Testimonials'
+import { Kanaele } from './blocks/Kanaele'
+import { Betreuung } from './blocks/Betreuung'
+import { OnlineKampagnen } from './blocks/OnlineKampagnen'
+import { EchtNichtGeneriert } from './blocks/EchtNichtGeneriert'
+import { WasWirAufnehmen } from './blocks/WasWirAufnehmen'
+import { EinMotiv } from './blocks/EinMotiv'
+import { WasWirGestalten } from './blocks/WasWirGestalten'
+import { TransporterFaahrt } from './blocks/TransporterFaahrt'
+import { WasWirBekleben } from './blocks/WasWirBekleben'
 
 /** Ein Block, wie ihn Payload im Feld „layout" liefert. */
 export type PageBlock = { blockType: string; [key: string]: any }
@@ -38,6 +47,15 @@ const BLOCK_MAP: Record<string, React.ComponentType<any>> = {
   servicesSlider: ServicesSlider,
   marquee: Marquee,
   testimonialsBlock: Testimonials,
+  kanaele: Kanaele,
+  betreuung: Betreuung,
+  onlineKampagnen: OnlineKampagnen,
+  echtNichtGeneriert: EchtNichtGeneriert,
+  wasWirAufnehmen: WasWirAufnehmen,
+  einMotiv: EinMotiv,
+  wasWirGestalten: WasWirGestalten,
+  transporterFaahrt: TransporterFaahrt,
+  wasWirBekleben: WasWirBekleben,
 }
 
 export function RenderBlocks({ blocks }: { blocks?: PageBlock[] }) {

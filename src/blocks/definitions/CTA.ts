@@ -13,5 +13,12 @@ export const CTA: Block = {
         { name: 'url', type: 'text', label: 'Link', required: true },
       ],
     },
+    {
+      name: 'yellow',
+      type: 'checkbox',
+      label: 'Gelber Hintergrund',
+      defaultValue: true,
+      admin: { description: 'Aus = schwarze CTA (gelbe Überschrift, weißer Text).' },
+    },
   ],
 }

@@ -30,15 +30,17 @@ export function Hero({
   if (variante === 'einfach') {
     return (
       <section
-        className={`section-pad ${hintergrund ? '' : 'bg-brand-yellow'}`.trim()}
+        className={`flex flex-col items-stretch justify-center self-stretch py-20 md:py-32 ${
+          hintergrund ? '' : 'bg-brand-yellow'
+        }`}
         style={hintergrund ? { backgroundColor: hintergrund } : undefined}
       >
-        <div className="container-site text-center">
-          <h1 className="heading-hero mx-auto max-w-[18ch] whitespace-pre-line text-brand-black">
+        <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-6 px-4 text-center sm:px-6 md:px-8">
+          <h1 className="heading-hero mx-auto w-full max-w-[1700px] font-black uppercase text-brand-black text-[clamp(2rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.02em] xl:whitespace-nowrap xl:text-[clamp(2.5rem,calc(0.35rem+4.6vw),5.5rem)]">
             {titel}
           </h1>
           {untertitel ? (
-            <p className="body-lead mx-auto mt-6 max-w-[42ch] whitespace-pre-line text-brand-black/80">
+            <p className="body-lead mx-auto max-w-[1000px] whitespace-pre-line text-brand-black md:text-[22px] md:leading-[1.6]">
               {untertitel}
             </p>
           ) : null}

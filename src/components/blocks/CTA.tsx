@@ -5,7 +5,7 @@ export type CTAProps = {
   text?: string | null
   button?: { label: string; url: string } | null
   /** Default true (gelbe CTA). false = schwarze Variante. */
-  yellow?: boolean
+  yellow?: boolean | null
 }
 
 export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
@@ -13,26 +13,26 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
 
   return (
     <section
-      className={`flex flex-col items-stretch py-20 md:py-32 ${
+      className={`flex flex-col items-stretch justify-center self-stretch py-20 md:py-32 ${
         isYellow ? 'bg-brand-yellow' : 'bg-brand-black'
       }`}
     >
-      <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8 text-center">
+      <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-5 text-center sm:px-8">
         <h2
-          className={`heading-section mx-auto whitespace-pre-line md:text-[56px] md:leading-none md:tracking-[-0.56px] ${
+          className={`heading-section mx-auto whitespace-pre-line uppercase md:text-[56px] md:leading-none md:tracking-[-0.56px] ${
             isYellow
               ? 'max-w-[900px] text-brand-black'
-              : 'max-w-[840px] text-brand-yellow'
+              : 'max-w-[1200px] text-brand-yellow'
           }`}
         >
           {ueberschrift}
         </h2>
         {text ? (
           <p
-            className={`body-lead mx-auto mt-6 whitespace-pre-line md:text-[22px] ${
+            className={`body-lead mx-auto mt-6 whitespace-pre-line md:text-[22px] md:leading-[1.6] ${
               isYellow
                 ? 'max-w-[508px] text-brand-black'
-                : 'max-w-[840px] text-white'
+                : 'max-w-[850px] text-white'
             }`}
           >
             {text}
@@ -45,7 +45,7 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
               variant="primary"
               onYellow={isYellow}
               size="lg"
-              className={!isYellow ? 'bg-brand-yellow text-brand-black hover:bg-brand-yellow/90' : undefined}
+              className={!isYellow ? 'font-bold' : undefined}
             >
               {button.label}
             </Button>

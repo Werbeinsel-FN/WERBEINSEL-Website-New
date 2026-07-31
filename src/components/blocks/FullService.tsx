@@ -11,44 +11,52 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
   const steps = schritte?.filter((s) => s?.titel) ?? []
 
   return (
-    <section className="section-pad bg-white">
-      <div className="container-site">
-        <div className="mx-auto max-w-3xl text-center">
+    <section className="flex flex-col items-center self-stretch bg-white py-20 md:py-32">
+      {/* Figma: max 1780, gap 56, align flex-start, padding 128 */}
+      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-start gap-10 px-5 sm:px-8 md:gap-14">
+        <div className="flex w-full flex-col items-start gap-6 md:gap-14">
           {eyebrow ? (
-            <p className="mb-4 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
+            <p className="font-poppins text-sm font-bold uppercase tracking-[0.12em] text-[#666] md:text-base">
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="heading-section text-brand-black">
+
+          {/* Unbounded 56/800, lh 115% */}
+          <h2 className="heading-section w-full whitespace-pre-line text-brand-black md:text-[56px] md:leading-[1.15] md:tracking-[-0.56px]">
             {ueberschrift}
           </h2>
+
           {text ? (
-            <p className="mt-5 font-poppins text-base leading-relaxed text-brand-black/75 md:text-lg">
+            /* Poppins 32/400 #666, max 1400 */
+            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-base font-normal leading-[1.5] text-[#666] md:text-[28px] xl:text-[32px]">
               {text}
             </p>
           ) : null}
         </div>
 
         {steps.length ? (
-          <ol className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-5 xl:gap-6">
             {steps.map((step, i) => {
               const nummer = String(i + 1).padStart(2, '0')
               return (
                 <li
                   key={`${step.titel}-${i}`}
-                  className="rounded-3xl bg-brand-card-light p-7 md:p-8"
+                  className="@container flex min-w-0 flex-col items-start gap-4 rounded-[24px] bg-[#F5F5F5] p-6 sm:p-8 xl:p-10"
                 >
+                  {/* Unbounded 40/900 yellow */}
                   <span
-                    className="font-unbounded text-4xl font-black leading-none text-brand-yellow md:text-5xl"
+                    className="font-unbounded text-[clamp(1.75rem,12cqi,2.5rem)] font-black leading-none text-brand-yellow"
                     aria-hidden
                   >
                     {nummer}
                   </span>
-                  <h3 className="mt-5 font-unbounded text-xl font-extrabold text-brand-black">
+                  {/* Unbounded 24/800 */}
+                  <h3 className="w-full font-unbounded text-[clamp(1.05rem,7cqi,1.5rem)] font-extrabold leading-[1.2] text-brand-black">
                     {step.titel}
                   </h3>
                   {step.text ? (
-                    <p className="mt-3 font-poppins text-sm leading-relaxed text-brand-black/70 md:text-base">
+                    /* Poppins 20/400 #666, lh 145% */
+                    <p className="w-full font-poppins text-[clamp(0.85rem,5.5cqi,1.25rem)] font-normal leading-[1.45] text-[#666]">
                       {step.text}
                     </p>
                   ) : null}
