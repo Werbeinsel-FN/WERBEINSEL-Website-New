@@ -70,7 +70,34 @@ export function ReferenzSlider({
     }
   }, [emblaApi, onSelect])
 
-  if (!slides.length) return null
+  // Auch ohne Bilder die Struktur-Sektion zeigen (Lastenheft: Inhalte folgen später)
+  if (!slides.length) {
+    return (
+      <section
+        id={sectionId || undefined}
+        className="flex flex-col gap-12 bg-white py-20 md:py-32"
+        aria-label={ueberschrift || 'Referenzen'}
+      >
+        <div className="mx-auto w-full max-w-[1780px] px-5 sm:px-8">
+          <div className="mx-auto max-w-[1716px] text-center">
+            {eyebrow ? (
+              <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
+                {eyebrow}
+              </p>
+            ) : null}
+            <h2 className="heading-section whitespace-pre-line text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+              {ueberschrift}
+            </h2>
+            {untertitel ? (
+              <p className="body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black md:text-[22px]">
+                {untertitel}
+              </p>
+            ) : null}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section

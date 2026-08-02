@@ -50,11 +50,13 @@ src/
 
 | Titel | slug | Route |
 |---|---|---|
-| Startseite | `home` | `/` |
-| Plakatwerbung | `plakatwerbung` | `/leistungen/plakatwerbung` |
-| Foto & Video | `foto-video` | `/leistungen/foto-video` |
-| Grafikdesign | `grafikdesign` | `/leistungen/grafikdesign` |
-| Folierung | `folierung` | `/leistungen/folierung` |
-| Social Media | `social-media` | `/leistungen/social-media` |
+| Startseite | `home` | `/` | fertig (Inhalte) |
+| Plakatwerbung | `plakatwerbung` | `/leistungen/plakatwerbung` | **STRUKTUR** (Vorlage + Platzhalter) |
+| Foto & Video | `foto-video` | `/leistungen/foto-video` | **STRUKTUR** |
+| Grafikdesign | `grafikdesign` | `/leistungen/grafikdesign` | **STRUKTUR** |
+| Folierung | `folierung` | `/leistungen/folierung` | **STRUKTUR** |
+| Social Media | `social-media` | `/leistungen/social-media` | **STRUKTUR** |
+
+Leistungsseiten: laut Lastenheft nur Routen + Block-Gerüst. Echte Texte/Bilder später im Admin unter **Seiten** nachpflegen.
 
 Jobs, Kontakt, Impressum, Datenschutz und Services-Übersicht liegen in **Globals** (feste Layouts), nicht als Block-Seiten.

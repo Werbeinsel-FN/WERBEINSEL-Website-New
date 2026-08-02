@@ -11,6 +11,7 @@ export const Referenzen: CollectionConfig = {
     {
       name: 'kategorie', type: 'select', label: 'Kategorie', required: true,
       options: [
+        { label: 'Startseite / Portfolio', value: 'portfolio' },
         { label: 'Plakat', value: 'plakat' },
         { label: 'Foto & Video', value: 'foto' },
         { label: 'Grafik', value: 'grafik' },

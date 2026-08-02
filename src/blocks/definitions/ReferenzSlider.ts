@@ -18,6 +18,7 @@ export const ReferenzSlider: Block = {
       admin: { description: 'Zieht automatisch Referenzen dieser Kategorie.' },
       options: [
         { label: 'Alle', value: 'alle' },
+        { label: 'Startseite / Portfolio', value: 'portfolio' },
         { label: 'Plakat', value: 'plakat' },
         { label: 'Foto & Video', value: 'foto' },
         { label: 'Grafik', value: 'grafik' },

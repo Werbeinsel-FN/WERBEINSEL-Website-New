@@ -370,29 +370,9 @@ async function main() {
 
   const refSources: Array<{ titel: string; bild: any; kategorie: string; i: number }> = []
   for (const [i, item] of home.referenzen.items.entries()) {
-    refSources.push({ titel: item.titel, bild: item.bild, kategorie: 'plakat', i })
+    refSources.push({ titel: item.titel, bild: item.bild, kategorie: 'portfolio', i })
   }
-  // Referenzen aus Leistungsseiten (falls Bilder vorhanden)
-  const katBySlug: Record<string, string> = {
-    plakatwerbung: 'plakat',
-    'foto-video': 'foto',
-    grafikdesign: 'grafik',
-    folierung: 'folierung',
-    'social-media': 'social',
-  }
-  for (const slug of leistungenSlugs) {
-    const page = leistungen[slug]
-    const refBlock = page.blocks.find((b) => b.blockType === 'referenzSlider') as any
-    if (!refBlock?.items) continue
-    for (const [i, item] of refBlock.items.entries()) {
-      refSources.push({
-        titel: `${item.titel} (${slug})`,
-        bild: item.bild,
-        kategorie: katBySlug[slug] || 'plakat',
-        i: 100 + refSources.length + i,
-      })
-    }
-  }
+  // Keine Fake-Referenzen aus Leistungsseiten – Lastenheft: Inhalte folgen später.
   for (const ref of refSources) {
     const bild = await ensureMedia(payload, ref.bild)
     if (!bild) continue
