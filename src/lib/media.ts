@@ -63,7 +63,7 @@ export function resolveMedia(
   if (!media || typeof media === 'number' || typeof media === 'string') return null
 
   const alt = media.alt || fallbackAlt
-  let url = media.url || null
+  const url = media.url || null
 
   // Bereits öffentlicher /images- oder /brand-Pfad
   if (url && (url.startsWith('/images/') || url.startsWith('/brand/') || url.startsWith('/icons/'))) {

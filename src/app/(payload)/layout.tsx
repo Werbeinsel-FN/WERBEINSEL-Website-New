@@ -9,6 +9,9 @@ import React from 'react'
 import { importMap } from './admin/importMap.js'
 import './custom.scss'
 
+/** Admin must not be served from a stale/partial RSC cache. */
+export const dynamic = 'force-dynamic'
+
 type Args = {
   children: React.ReactNode
 }

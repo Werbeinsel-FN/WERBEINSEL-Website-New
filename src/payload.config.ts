@@ -75,6 +75,9 @@ export default buildConfig({
           vercelBlobStorage({
             collections: { media: true },
             token: blobToken,
+            // Vercel Functions limit ~4.5MB request body — upload direct to Blob.
+            clientUploads: true,
+            addRandomSuffix: true,
           }),
         ]
       : []),

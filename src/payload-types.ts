@@ -394,7 +394,7 @@ export interface Page {
             /**
              * Zieht automatisch Referenzen dieser Kategorie.
              */
-            kategorie?: ('alle' | 'plakat' | 'foto' | 'grafik' | 'folierung' | 'social') | null;
+            kategorie?: ('alle' | 'portfolio' | 'plakat' | 'foto' | 'grafik' | 'folierung' | 'social') | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'referenzSlider';
@@ -643,7 +643,7 @@ export interface Referenzen {
   id: number;
   titel: string;
   bild: number | Media;
-  kategorie: 'plakat' | 'foto' | 'grafik' | 'folierung' | 'social';
+  kategorie: 'portfolio' | 'plakat' | 'foto' | 'grafik' | 'folierung' | 'social';
   reihenfolge?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -735,6 +735,8 @@ export interface Kundenlogo {
   createdAt: string;
 }
 /**
+ * Formular-Einsendungen (Kontakt/Bewerbung). DSGVO: Aufbewahrungsfrist festlegen und regelmäßig löschen.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "anfragen".
  */

@@ -71,7 +71,7 @@ Siehe `.env.example`. Mindestens:
 - `NEXT_PUBLIC_SERVER_URL` – z. B. `https://werbeinsel.de`
 - `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TO_AGENTUR`
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
-- `BLOB_READ_WRITE_TOKEN` (optional)
+- `BLOB_READ_WRITE_TOKEN` (required on Vercel for Media uploads — Storage → Blob)
 
 ## Design & DSGVO
 
