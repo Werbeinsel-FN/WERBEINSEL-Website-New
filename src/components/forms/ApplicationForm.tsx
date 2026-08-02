@@ -5,11 +5,18 @@ import { useActionState, useState } from 'react'
 import { sendApplication, type FormState } from '@/app/actions'
 import { formOptions as seedFormOptions } from '@/data/seed'
 import { TurnstileField } from '@/components/forms/TurnstileField'
+import {
+  FormErrorSummary,
+  FormSuccess,
+  useFormScroll,
+} from '@/components/forms/FormFeedback'
 
 const initial: FormState = { ok: false }
+const FORM_ID = 'bewerbung-form'
 
 const inputClass =
   'h-[70px] w-full rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
+const inputErrorClass = 'border-red-600'
 
 const chipClass = (active: boolean) =>
   `cursor-pointer rounded-full border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
@@ -33,22 +40,20 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
   const [services, setServices] = useState<string[]>([])
   const [fileName, setFileName] = useState('')
   const serviceOptions = formOptions.services ?? seedFormOptions.services
+  const successRef = useFormScroll(state, FORM_ID)
 
   const allPositions = [...positions, 'Initiativbewerbung']
 
   if (state.ok) {
-    return (
-      <div className="rounded-[24px] bg-brand-yellow p-8 text-brand-black">
-        <p className="font-poppins text-lg font-semibold">{state.message}</p>
-      </div>
-    )
+    return <FormSuccess message={state.message} successRef={successRef} />
   }
 
   return (
     <form
+      id={FORM_ID}
       action={action}
+      noValidate
       className="mx-auto flex w-full max-w-[900px] flex-col items-center"
-      id="bewerbung-form"
     >
       <div className="grid w-full gap-6 md:grid-cols-2">
         <Field name="name" label="Name *" error={state.errors?.name} />
@@ -61,8 +66,8 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
         />
       </div>
 
-      <fieldset className="mt-12 flex w-full flex-col items-center">
-        <legend className={`${sectionTitleClass} mb-6 w-full`}>Gewünschte Position</legend>
+      <fieldset className="mt-12 flex w-full flex-col items-center" data-field="position">
+        <legend className={`${sectionTitleClass} mb-6 w-full`}>Gewünschte Position *</legend>
         <div className="flex flex-wrap items-center justify-center gap-3">
           {allPositions.map((p) => {
             const active = position === p
@@ -134,11 +139,11 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
         </div>
       </fieldset>
 
-      <div className="mt-12 w-full">
+      <div className="mt-12 w-full" data-field="datei">
         <label className="flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[24px] border-[1.7px] border-dashed border-brand-black bg-white px-12 py-12 text-center transition hover:bg-brand-card-light/50">
           <UploadIcon />
           <span className="font-poppins text-base font-semibold text-brand-black">
-            {fileName || 'Lebenslauf & Arbeitsproben hier ablegen'}
+            {fileName || 'Lebenslauf & Arbeitsproben hier ablegen *'}
           </span>
           <span className="font-poppins text-sm font-normal text-brand-black/60">
             oder klicken zum Auswählen – PDF, DOC, JPG, PNG, ZIP (max. 10 MB)
@@ -174,7 +179,10 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
         />
       </div>
 
-      <label className="mt-8 flex w-full max-w-[560px] items-start gap-3 font-poppins text-base font-normal leading-[1.5] text-brand-black">
+      <label
+        data-field="consent"
+        className="mt-8 flex w-full max-w-[560px] items-start gap-3 font-poppins text-base font-normal leading-[1.5] text-brand-black"
+      >
         <input
           type="checkbox"
           name="consent"
@@ -186,7 +194,7 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
             Datenschutzerklärung
           </Link>{' '}
           gelesen und akzeptiere sie. Ich bin damit einverstanden, dass meine Daten zur
-          Bearbeitung meiner Bewerbung verwendet werden.
+          Bearbeitung meiner Bewerbung verwendet werden. *
         </span>
       </label>
       {state.errors?.consent && (
@@ -194,10 +202,7 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
       )}
 
       <TurnstileField />
-
-      {state.message && !state.ok && (
-        <p className="mt-4 text-sm text-red-600">{state.message}</p>
-      )}
+      <FormErrorSummary state={state} />
 
       <button
         type="submit"
@@ -224,13 +229,14 @@ function Field({
   className?: string
 }) {
   return (
-    <div className={`flex w-full flex-col gap-1 ${className}`}>
+    <div className={`flex w-full flex-col gap-1 ${className}`} data-field={name}>
       <input
         name={name}
         type={type}
         placeholder={label}
         aria-label={label}
-        className={inputClass}
+        aria-invalid={Boolean(error)}
+        className={`${inputClass} ${error ? inputErrorClass : ''}`}
       />
       {error && <p className="text-sm text-red-600">{error[0]}</p>}
     </div>

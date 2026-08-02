@@ -5,11 +5,18 @@ import { useActionState, useState } from 'react'
 import { sendContact, type FormState } from '@/app/actions'
 import { formOptions as seedFormOptions } from '@/data/seed'
 import { TurnstileField } from '@/components/forms/TurnstileField'
+import {
+  FormErrorSummary,
+  FormSuccess,
+  useFormScroll,
+} from '@/components/forms/FormFeedback'
 
 const initial: FormState = { ok: false }
+const FORM_ID = 'kontakt-form'
 
 const inputClass =
   'h-[70px] w-full rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
+const inputErrorClass = 'border-red-600'
 
 const chipClass = (active: boolean) =>
   `cursor-pointer rounded-full border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
@@ -32,13 +39,10 @@ export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: C
   const [services, setServices] = useState<string[]>([])
   const [budget, setBudget] = useState('')
   const [zeitraum, setZeitraum] = useState('')
+  const successRef = useFormScroll(state, FORM_ID)
 
   if (state.ok) {
-    return (
-      <div className="rounded-[24px] bg-brand-yellow p-8 text-brand-black">
-        <p className="font-poppins text-lg font-semibold">{state.message}</p>
-      </div>
-    )
+    return <FormSuccess message={state.message} successRef={successRef} />
   }
 
   function toggleService(value: string) {
@@ -48,7 +52,12 @@ export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: C
   }
 
   return (
-    <form action={action} className="mx-auto flex w-full max-w-[900px] flex-col items-center">
+    <form
+      id={FORM_ID}
+      action={action}
+      noValidate
+      className="mx-auto flex w-full max-w-[900px] flex-col items-center"
+    >
       <div className="grid w-full gap-6 md:grid-cols-2">
         <Field name="name" label="Name *" error={state.errors?.name} />
         <Field name="email" type="email" label="E-Mail *" error={state.errors?.email} />
@@ -60,7 +69,6 @@ export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: C
         <legend className={`${sectionTitleClass} w-full whitespace-pre-line md:mb-6`}>
           {'Welche Services\ninteressieren Sie?'}
         </legend>
-        {/* Mobile Figma: 1 / 2 / 1, gap 12, pt 32 · Desktop: wrap row */}
         <div className="grid w-full max-w-[326px] grid-cols-2 items-start justify-items-center gap-3 pt-8 md:flex md:max-w-none md:flex-wrap md:items-center md:justify-center md:pt-0">
           {formOptions.services.map((s, i) => {
             const active = services.includes(s)
@@ -138,7 +146,10 @@ export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: C
         />
       </div>
 
-      <label className="mt-8 flex w-full max-w-[560px] items-start gap-3 font-poppins text-base font-normal leading-[1.5] text-brand-black">
+      <label
+        data-field="consent"
+        className="mt-8 flex w-full max-w-[560px] items-start gap-3 font-poppins text-base font-normal leading-[1.5] text-brand-black"
+      >
         <input
           type="checkbox"
           name="consent"
@@ -150,7 +161,7 @@ export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: C
             Datenschutzerklärung
           </Link>{' '}
           gelesen und akzeptiere sie. Ich bin damit einverstanden, dass meine Daten zur
-          Bearbeitung meiner Anfrage verwendet werden.
+          Bearbeitung meiner Anfrage verwendet werden. *
         </span>
       </label>
       {state.errors?.consent && (
@@ -158,10 +169,7 @@ export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: C
       )}
 
       <TurnstileField />
-
-      {state.message && !state.ok && (
-        <p className="mt-4 text-sm text-red-600">{state.message}</p>
-      )}
+      <FormErrorSummary state={state} />
 
       <button
         type="submit"
@@ -186,13 +194,14 @@ function Field({
   error?: string[]
 }) {
   return (
-    <div className="flex w-full flex-col gap-1">
+    <div className="flex w-full flex-col gap-1" data-field={name}>
       <input
         name={name}
         type={type}
         placeholder={label}
         aria-label={label}
-        className={inputClass}
+        aria-invalid={Boolean(error)}
+        className={`${inputClass} ${error ? inputErrorClass : ''}`}
       />
       {error && <p className="text-sm text-red-600">{error[0]}</p>}
     </div>
