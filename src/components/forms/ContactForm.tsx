@@ -1,8 +1,10 @@
 'use client'
 
+import Link from 'next/link'
 import { useActionState, useState } from 'react'
 import { sendContact, type FormState } from '@/app/actions'
 import { formOptions as seedFormOptions } from '@/data/seed'
+import { TurnstileField } from '@/components/forms/TurnstileField'
 
 const initial: FormState = { ok: false }
 
@@ -143,18 +145,19 @@ export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: C
           className="mt-1 size-4 shrink-0 accent-brand-black"
         />
         <span>
-          Ich habe die Datenschutzerklärung gelesen und akzeptiere sie. Ich bin damit
-          einverstanden, dass meine Daten zur Bearbeitung meiner Anfrage verwendet werden.
+          Ich habe die{' '}
+          <Link href="/datenschutz" className="underline underline-offset-2 hover:opacity-80">
+            Datenschutzerklärung
+          </Link>{' '}
+          gelesen und akzeptiere sie. Ich bin damit einverstanden, dass meine Daten zur
+          Bearbeitung meiner Anfrage verwendet werden.
         </span>
       </label>
       {state.errors?.consent && (
         <p className="mt-2 text-sm text-red-600">{state.errors.consent[0]}</p>
       )}
 
-      <div
-        className="mt-6 cf-turnstile"
-        data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
-      />
+      <TurnstileField />
 
       {state.message && !state.ok && (
         <p className="mt-4 text-sm text-red-600">{state.message}</p>

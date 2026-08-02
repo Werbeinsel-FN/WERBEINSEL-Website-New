@@ -7,8 +7,19 @@ import type { CollectionConfig } from 'payload'
 export const Anfragen: CollectionConfig = {
   slug: 'anfragen',
   labels: { singular: 'Anfrage', plural: 'Anfragen' },
-  admin: { useAsTitle: 'typ', defaultColumns: ['typ', 'createdAt'], group: 'System' },
-  access: { read: ({ req }) => Boolean(req.user), create: () => true },
+  admin: {
+    useAsTitle: 'typ',
+    defaultColumns: ['typ', 'createdAt'],
+    group: 'System',
+    description:
+      'Formular-Einsendungen (Kontakt/Bewerbung). DSGVO: Aufbewahrungsfrist festlegen und regelmäßig löschen.',
+  },
+  access: {
+    read: ({ req }) => Boolean(req.user),
+    create: () => true,
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
   fields: [
     {
       name: 'typ', type: 'select', label: 'Typ', required: true,

@@ -1,6 +1,5 @@
 'use server'
 
-import { Resend } from 'resend'
 import {
   BEWERBUNG_ALLOWED_TYPES,
   BEWERBUNG_MAX_BYTES,
@@ -8,6 +7,8 @@ import {
   kontaktSchema,
 } from '@/lib/validation'
 import { verifyTurnstile } from '@/lib/turnstile'
+import { sendConfirmation, sendToAgentur } from '@/lib/mail'
+import { persistAnfrage } from '@/lib/anfragen'
 
 export type FormState = {
   ok: boolean
@@ -15,7 +16,18 @@ export type FormState = {
   errors?: Record<string, string[] | undefined>
 }
 
-/** Kontaktformular: validieren → Turnstile → E-Mail via Resend. */
+function absoluteMediaUrl(pathOrUrl: string | null | undefined): string | null {
+  if (!pathOrUrl) return null
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl
+  const base = (process.env.NEXT_PUBLIC_SERVER_URL || process.env.NEXT_PUBLIC_SITE_URL || '').replace(
+    /\/$/,
+    '',
+  )
+  if (!base) return pathOrUrl
+  return `${base}${pathOrUrl.startsWith('/') ? '' : '/'}${pathOrUrl}`
+}
+
+/** Kontaktformular: validieren → Turnstile → speichern → Resend (Agentur + Bestätigung). */
 export async function sendContact(_prev: FormState, formData: FormData): Promise<FormState> {
   const raw = {
     name: formData.get('name'),
@@ -40,42 +52,51 @@ export async function sendContact(_prev: FormState, formData: FormData): Promise
   }
 
   const d = parsed.data
-  const resendKey = process.env.RESEND_API_KEY
-  if (!resendKey) {
-    console.warn('RESEND_API_KEY fehlt – Anfrage nur geloggt.')
-    console.info('[Kontakt]', d)
-    return { ok: true, message: 'Danke! Ihre Anfrage ist bei uns eingegangen.' }
+
+  await persistAnfrage({
+    typ: 'kontakt',
+    daten: {
+      name: d.name,
+      email: d.email,
+      unternehmen: d.unternehmen || null,
+      telefon: d.telefon,
+      services: d.services || [],
+      budget: d.budget || null,
+      zeitraum: d.zeitraum || null,
+      nachricht: d.nachricht || null,
+    },
+  })
+
+  const text = [
+    'Neue Kontaktanfrage über die Website',
+    '',
+    `Name: ${d.name}`,
+    `E-Mail: ${d.email}`,
+    `Unternehmen: ${d.unternehmen || '-'}`,
+    `Telefon: ${d.telefon}`,
+    `Services: ${(d.services || []).join(', ') || '-'}`,
+    `Budget: ${d.budget || '-'}`,
+    `Zeitraum: ${d.zeitraum || '-'}`,
+    '',
+    'Nachricht:',
+    d.nachricht || '-',
+  ].join('\n')
+
+  const agency = await sendToAgentur({
+    subject: `Neue Anfrage von ${d.name}`,
+    text,
+    replyTo: d.email,
+  })
+  if (!agency.ok) {
+    return { ok: false, message: agency.error }
   }
 
-  const resend = new Resend(resendKey)
+  await sendConfirmation({ to: d.email, name: d.name, kind: 'kontakt' })
 
-  try {
-    await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'website@werbeinsel.de',
-      to: process.env.EMAIL_TO_AGENTUR || '',
-      replyTo: d.email,
-      subject: `Neue Anfrage von ${d.name}`,
-      text: [
-        `Name: ${d.name}`,
-        `E-Mail: ${d.email}`,
-        `Unternehmen: ${d.unternehmen || '-'}`,
-        `Telefon: ${d.telefon}`,
-        `Services: ${(d.services || []).join(', ') || '-'}`,
-        `Budget: ${d.budget || '-'}`,
-        `Zeitraum: ${d.zeitraum || '-'}`,
-        '',
-        d.nachricht || '',
-      ].join('\n'),
-    })
-
-    return { ok: true, message: 'Danke! Ihre Anfrage ist bei uns eingegangen.' }
-  } catch (err) {
-    console.error(err)
-    return { ok: false, message: 'Versand fehlgeschlagen. Bitte später erneut versuchen.' }
-  }
+  return { ok: true, message: 'Danke! Ihre Anfrage ist bei uns eingegangen.' }
 }
 
-/** Bewerbungsformular inkl. Datei-Prüfung. */
+/** Bewerbungsformular: Datei prüfen → speichern (Media) → Resend inkl. Anhang. */
 export async function sendApplication(_prev: FormState, formData: FormData): Promise<FormState> {
   const portfolioRaw = String(formData.get('portfolio') || '').trim()
   const raw = {
@@ -84,6 +105,7 @@ export async function sendApplication(_prev: FormState, formData: FormData): Pro
     telefon: formData.get('telefon'),
     position: formData.get('position'),
     verfuegbarAb: formData.get('verfuegbarAb') || undefined,
+    services: formData.getAll('services') as string[],
     portfolio: portfolioRaw || '',
     nachricht: formData.get('nachricht'),
     consent: formData.get('consent'),
@@ -103,9 +125,9 @@ export async function sendApplication(_prev: FormState, formData: FormData): Pro
   }
   const typeOk =
     BEWERBUNG_ALLOWED_TYPES.includes(file.type as (typeof BEWERBUNG_ALLOWED_TYPES)[number]) ||
-    /\.(pdf|jpe?g|png|zip)$/i.test(file.name)
+    /\.(pdf|docx?|jpe?g|png|zip)$/i.test(file.name)
   if (!typeOk) {
-    return { ok: false, errors: { datei: ['Erlaubt: PDF, JPG, PNG oder ZIP.'] } }
+    return { ok: false, errors: { datei: ['Erlaubt: PDF, DOC, DOCX, JPG, PNG oder ZIP.'] } }
   }
 
   const captchaOk = await verifyTurnstile(formData.get('cf-turnstile-response') as string | null)
@@ -114,52 +136,67 @@ export async function sendApplication(_prev: FormState, formData: FormData): Pro
   }
 
   const d = parsed.data
-  const resendKey = process.env.RESEND_API_KEY
+
+  const saved = await persistAnfrage({
+    typ: 'bewerbung',
+    daten: {
+      name: d.name,
+      email: d.email,
+      telefon: d.telefon,
+      position: d.position,
+      verfuegbarAb: d.verfuegbarAb || null,
+      services: d.services || [],
+      portfolio: d.portfolio || null,
+      nachricht: d.nachricht || null,
+      dateiName: file.name,
+      dateiSize: file.size,
+    },
+    file,
+  })
+
+  const fileLink = absoluteMediaUrl(saved.fileUrl)
   const textBody = [
+    'Neue Bewerbung über die Website',
+    '',
     `Name: ${d.name}`,
     `E-Mail: ${d.email}`,
     `Telefon: ${d.telefon}`,
     `Position: ${d.position}`,
     `Verfügbar ab: ${d.verfuegbarAb || '-'}`,
+    `Interessen: ${(d.services || []).join(', ') || '-'}`,
     `Portfolio: ${d.portfolio || '-'}`,
-    `Anhang: ${file.name} (${Math.round(file.size / 1024)} KB, ${file.type || 'unbekannt'})`,
+    `Anhang: ${file.name} (${Math.round(file.size / 1024)} KB)`,
+    fileLink ? `Datei-Link: ${fileLink}` : '',
     '',
-    d.nachricht || '',
-  ].join('\n')
+    'Nachricht:',
+    d.nachricht || '-',
+  ]
+    .filter(Boolean)
+    .join('\n')
 
-  if (!resendKey) {
-    console.warn('RESEND_API_KEY fehlt – Bewerbung nur geloggt.')
-    console.info('[Bewerbung]', { ...d, datei: file.name, size: file.size })
-    return { ok: true, message: 'Danke! Ihre Bewerbung ist bei uns eingegangen.' }
-  }
-
-  const resend = new Resend(resendKey)
-
+  let attachments: Array<{ filename: string; content: Buffer }> | undefined
   try {
-    const attachments =
-      file.size <= BEWERBUNG_MAX_BYTES
-        ? [
-            {
-              filename: file.name,
-              content: Buffer.from(await file.arrayBuffer()),
-            },
-          ]
-        : undefined
-
-    await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'website@werbeinsel.de',
-      to: process.env.EMAIL_TO_AGENTUR || '',
-      replyTo: d.email,
-      subject: `Bewerbung: ${d.position} – ${d.name}`,
-      text: attachments
-        ? textBody
-        : `${textBody}\n\n(Hinweis: Anhang zu groß für Direktversand – Dateiname notiert.)`,
-      attachments,
-    })
-
-    return { ok: true, message: 'Danke! Ihre Bewerbung ist bei uns eingegangen.' }
-  } catch (err) {
-    console.error(err)
-    return { ok: false, message: 'Versand fehlgeschlagen. Bitte später erneut versuchen.' }
+    attachments = [
+      {
+        filename: file.name,
+        content: Buffer.from(await file.arrayBuffer()),
+      },
+    ]
+  } catch {
+    attachments = undefined
   }
+
+  const agency = await sendToAgentur({
+    subject: `Bewerbung: ${d.position} – ${d.name}`,
+    text: textBody,
+    replyTo: d.email,
+    attachments,
+  })
+  if (!agency.ok) {
+    return { ok: false, message: agency.error }
+  }
+
+  await sendConfirmation({ to: d.email, name: d.name, kind: 'bewerbung' })
+
+  return { ok: true, message: 'Danke! Ihre Bewerbung ist bei uns eingegangen.' }
 }

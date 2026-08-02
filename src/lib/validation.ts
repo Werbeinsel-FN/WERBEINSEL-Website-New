@@ -23,6 +23,7 @@ export const bewerbungSchema = z.object({
   telefon: z.string().min(4, 'Bitte Telefonnummer angeben.'),
   position: z.string().min(1, 'Bitte Position wählen.'),
   verfuegbarAb: z.string().optional(),
+  services: z.array(z.string()).optional(),
   portfolio: z.union([z.literal(''), z.string().url('Bitte gültige URL angeben.')]).optional(),
   nachricht: z.string().optional(),
   consent: z
@@ -34,6 +35,8 @@ export type BewerbungInput = z.infer<typeof bewerbungSchema>
 export const BEWERBUNG_MAX_BYTES = 10 * 1024 * 1024
 export const BEWERBUNG_ALLOWED_TYPES = [
   'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   'image/jpeg',
   'image/png',
   'application/zip',

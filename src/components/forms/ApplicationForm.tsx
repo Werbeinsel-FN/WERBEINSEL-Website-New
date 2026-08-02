@@ -1,8 +1,10 @@
 'use client'
 
+import Link from 'next/link'
 import { useActionState, useState } from 'react'
 import { sendApplication, type FormState } from '@/app/actions'
 import { formOptions as seedFormOptions } from '@/data/seed'
+import { TurnstileField } from '@/components/forms/TurnstileField'
 
 const initial: FormState = { ok: false }
 
@@ -21,14 +23,16 @@ const sectionTitleClass =
 
 type Props = {
   positions: string[]
-  formOptions?: { verfuegbarAb: string[] }
+  formOptions?: { verfuegbarAb: string[]; services?: string[] }
 }
 
 export function ApplicationForm({ positions, formOptions = seedFormOptions }: Props) {
   const [state, action, pending] = useActionState(sendApplication, initial)
   const [position, setPosition] = useState('')
   const [verfuegbarAb, setVerfuegbarAb] = useState('')
+  const [services, setServices] = useState<string[]>([])
   const [fileName, setFileName] = useState('')
+  const serviceOptions = formOptions.services ?? seedFormOptions.services
 
   const allPositions = [...positions, 'Initiativbewerbung']
 
@@ -104,6 +108,32 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
         </div>
       </fieldset>
 
+      <fieldset className="mt-12 flex w-full flex-col items-center">
+        <legend className={`${sectionTitleClass} mb-6 w-full`}>Interessensbereiche</legend>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {serviceOptions.map((s) => {
+            const active = services.includes(s)
+            return (
+              <label key={s} className={chipClass(active)}>
+                <input
+                  type="checkbox"
+                  name="services"
+                  value={s}
+                  checked={active}
+                  onChange={() =>
+                    setServices((prev) =>
+                      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s],
+                    )
+                  }
+                  className="sr-only"
+                />
+                {s}
+              </label>
+            )
+          })}
+        </div>
+      </fieldset>
+
       <div className="mt-12 w-full">
         <label className="flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[24px] border-[1.7px] border-dashed border-brand-black bg-white px-12 py-12 text-center transition hover:bg-brand-card-light/50">
           <UploadIcon />
@@ -111,12 +141,12 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
             {fileName || 'Lebenslauf & Arbeitsproben hier ablegen'}
           </span>
           <span className="font-poppins text-sm font-normal text-brand-black/60">
-            oder klicken zum Auswählen – PDF, JPG, PNG, ZIP (max. 10 MB)
+            oder klicken zum Auswählen – PDF, DOC, JPG, PNG, ZIP (max. 10 MB)
           </span>
           <input
             type="file"
             name="datei"
-            accept=".pdf,.jpg,.jpeg,.png,.zip,application/pdf,image/jpeg,image/png,application/zip"
+            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png,application/zip"
             className="sr-only"
             onChange={(e) => setFileName(e.target.files?.[0]?.name || '')}
           />
@@ -151,18 +181,19 @@ export function ApplicationForm({ positions, formOptions = seedFormOptions }: Pr
           className="mt-1 size-4 shrink-0 accent-brand-black"
         />
         <span>
-          Ich habe die Datenschutzerklärung gelesen und akzeptiere sie. Ich bin damit
-          einverstanden, dass meine Daten zur Bearbeitung meiner Bewerbung verwendet werden.
+          Ich habe die{' '}
+          <Link href="/datenschutz" className="underline underline-offset-2 hover:opacity-80">
+            Datenschutzerklärung
+          </Link>{' '}
+          gelesen und akzeptiere sie. Ich bin damit einverstanden, dass meine Daten zur
+          Bearbeitung meiner Bewerbung verwendet werden.
         </span>
       </label>
       {state.errors?.consent && (
         <p className="mt-2 text-sm text-red-600">{state.errors.consent[0]}</p>
       )}
 
-      <div
-        className="mt-6 cf-turnstile"
-        data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
-      />
+      <TurnstileField />
 
       {state.message && !state.ok && (
         <p className="mt-4 text-sm text-red-600">{state.message}</p>
