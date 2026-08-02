@@ -44,10 +44,10 @@ export const leistungen: Record<
         blockType: 'zahlen',
         dunkel: true,
         stats: [
-          { zahl: '–', label: PH },
-          { zahl: '–', label: PH },
-          { zahl: '–', label: PH },
-          { zahl: '–', label: PH },
+          { zahl: '–', label: 'Kennzahl 1 (folgt)' },
+          { zahl: '–', label: 'Kennzahl 2 (folgt)' },
+          { zahl: '–', label: 'Kennzahl 3 (folgt)' },
+          { zahl: '–', label: 'Kennzahl 4 (folgt)' },
         ],
       },
       {

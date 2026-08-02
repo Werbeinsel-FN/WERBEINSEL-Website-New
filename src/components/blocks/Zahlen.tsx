@@ -50,9 +50,9 @@ export function Zahlen({ eyebrow, ueberschrift, stats, dunkel }: ZahlenProps) {
 
         {/* Skaliert mit Spaltenbreite – kein Überlappen (Figma Desktop: bis 130px) */}
         <div className={`grid w-full gap-8 sm:gap-6 md:gap-8 ${cols}`}>
-          {list.map((stat) => (
+          {list.map((stat, i) => (
             <div
-              key={`${stat.zahl}-${stat.label}`}
+              key={`stat-${i}`}
               className="@container flex min-w-0 flex-col items-center gap-3 text-center sm:gap-4"
             >
               <p
