@@ -22,6 +22,21 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: '*.blob.vercel-storage.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.werbeinsel.de',
+        pathname: '/api/media/file/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'werbeinsel.de',
+        pathname: '/api/media/file/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.vercel.app',
+        pathname: '/api/media/file/**',
+      },
     ],
   },
   webpack: (webpackConfig) => {

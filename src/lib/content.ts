@@ -1,5 +1,6 @@
 import type { Payload } from 'payload'
 import { getPayloadSafe } from '@/lib/payload'
+import { resolveMedia } from '@/lib/media'
 import {
   navigation as seedNav,
   footer as seedFooter,
@@ -68,7 +69,18 @@ async function enrichBlocks(payload: Payload, blocks: PageBlock[]): Promise<Page
     bild: d.bild,
   }))
 
-  const kundenNames = kunden.docs.map((d: any) => d.name).filter(Boolean)
+  const kundenItems = kunden.docs
+    .map((d: any) => {
+      const name = typeof d.name === 'string' ? d.name.trim() : ''
+      if (!name) return null
+      const logo = resolveMedia(d.logo, name)
+      return {
+        name,
+        logoUrl: logo?.url || null,
+        logoAlt: logo?.alt || name,
+      }
+    })
+    .filter(Boolean)
 
   const testimonialItems = testimonials.docs.map((d: any) => ({
     zitat: d.zitat,
@@ -82,8 +94,12 @@ async function enrichBlocks(payload: Payload, blocks: PageBlock[]): Promise<Page
     if (block.blockType === 'servicesSlider' && !block.items?.length) {
       return { ...block, items: leistungItems }
     }
-    if (block.blockType === 'marquee' && !block.names?.length) {
-      return { ...block, names: kundenNames }
+    if (block.blockType === 'marquee' && kundenItems.length) {
+      return {
+        ...block,
+        items: kundenItems,
+        names: kundenItems.map((k: any) => k.name),
+      }
     }
     if (block.blockType === 'testimonialsBlock' && !block.items?.length && !block.testimonials?.length) {
       return { ...block, items: testimonialItems }

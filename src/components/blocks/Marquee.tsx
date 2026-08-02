@@ -1,39 +1,94 @@
+import Image from 'next/image'
+
+export type MarqueeItem = {
+  name: string
+  logoUrl?: string | null
+  logoAlt?: string | null
+}
+
 export type MarqueeProps = {
   eyebrow?: string | null
   ueberschrift?: string | null
   untertitel?: string | null
+  /** @deprecated Prefer `items` – kept for seed/text-only fallbacks */
   names?: string[] | null
+  items?: MarqueeItem[] | null
 }
 
 /** Figma: Section / Clients → genau 3 Marquee-Reihen. */
 const ROW_COUNT = 3
 
-function chunkRows(names: string[], rowCount: number): string[][] {
-  if (!names.length) return Array.from({ length: rowCount }, () => [])
-  const rows: string[][] = Array.from({ length: rowCount }, () => [])
-  names.forEach((name, i) => {
-    rows[i % rowCount].push(name)
+function normalizeItems(items?: MarqueeItem[] | null, names?: string[] | null): MarqueeItem[] {
+  if (items?.length) return items.filter((i) => i?.name)
+  return (names || []).filter(Boolean).map((name) => ({ name }))
+}
+
+function chunkRows(items: MarqueeItem[], rowCount: number): MarqueeItem[][] {
+  if (!items.length) return Array.from({ length: rowCount }, () => [])
+  const rows: MarqueeItem[][] = Array.from({ length: rowCount }, () => [])
+  items.forEach((item, i) => {
+    rows[i % rowCount].push(item)
   })
   return rows.map((row) => {
-    if (row.length === 0) return names
+    if (row.length === 0) return items
     const filled = [...row]
     while (filled.length < 8) filled.push(...row)
     return filled
   })
 }
 
+function MarqueePill({
+  item,
+  dark,
+}: {
+  item: MarqueeItem
+  dark: boolean
+}) {
+  const hasLogo = Boolean(item.logoUrl)
+
+  return (
+    <span
+      className={`inline-flex h-[95px] w-[180px] shrink-0 items-center justify-center rounded-full px-6 sm:h-[120px] sm:w-[240px] sm:px-8 md:h-[190px] md:w-[360px] md:px-12 ${
+        dark
+          ? 'bg-brand-black text-white'
+          : 'bg-white text-brand-black ring-1 ring-brand-black'
+      }`}
+    >
+      {hasLogo ? (
+        <span className="relative flex h-[42%] w-[72%] items-center justify-center sm:h-[44%] sm:w-[70%] md:h-[46%] md:w-[68%]">
+          <Image
+            src={item.logoUrl!}
+            alt={item.logoAlt || item.name}
+            fill
+            className={`object-contain ${
+              dark
+                ? 'brightness-0 invert'
+                : 'brightness-0'
+            }`}
+            sizes="(max-width: 640px) 130px, (max-width: 768px) 170px, 240px"
+          />
+        </span>
+      ) : (
+        <span className="text-center font-poppins text-[13px] font-bold leading-[1.2] tracking-[0.03em] uppercase sm:text-[15px] md:text-lg">
+          {item.name}
+        </span>
+      )}
+    </span>
+  )
+}
+
 function MarqueeRow({
-  names,
+  items,
   reverse,
   offset,
   startIndex,
 }: {
-  names: string[]
+  items: MarqueeItem[]
   reverse?: boolean
   offset?: boolean
   startIndex: number
 }) {
-  const doubled = [...names, ...names]
+  const doubled = [...items, ...items]
   return (
     <div className="overflow-hidden py-1">
       <div
@@ -41,19 +96,14 @@ function MarqueeRow({
           reverse ? 'marquee-track-reverse' : 'marquee-track'
         } ${offset ? 'marquee-track-offset' : ''}`}
       >
-        {doubled.map((name, i) => {
+        {doubled.map((item, i) => {
           const dark = (startIndex + i) % 2 === 0
           return (
-            <span
-              key={`${name}-${i}`}
-              className={`inline-flex h-[95px] w-[180px] shrink-0 items-center justify-center rounded-full px-5 text-center font-poppins text-[13px] font-bold leading-[1.2] tracking-[0.03em] uppercase sm:h-[120px] sm:w-[240px] sm:px-8 sm:text-[15px] md:h-[190px] md:w-[360px] md:px-10 md:text-lg ${
-                dark
-                  ? 'bg-brand-black text-white'
-                  : 'bg-white text-brand-black ring-1 ring-brand-black'
-              }`}
-            >
-              {name}
-            </span>
+            <MarqueePill
+              key={`${item.name}-${item.logoUrl || 'text'}-${i}`}
+              item={item}
+              dark={dark}
+            />
           )
         })}
       </div>
@@ -61,18 +111,12 @@ function MarqueeRow({
   )
 }
 
-export function Marquee({ eyebrow, ueberschrift, untertitel, names }: MarqueeProps) {
-  const list = names?.filter(Boolean) ?? []
+export function Marquee({ eyebrow, ueberschrift, untertitel, names, items }: MarqueeProps) {
+  const list = normalizeItems(items, names)
   if (!list.length) return null
 
   const rows = chunkRows(list, ROW_COUNT)
 
-  /*
-   * Figma Section / Clients:
-   * - padding 96px, bg yellow
-   * - Heading/Section 56 · Body/Lead 22, gap 24 title→lead, 80 to pills
-   * - 3 rows · Label/Client Poppins 18/700 · pill padding 32×40
-   */
   return (
     <section className="overflow-hidden bg-brand-yellow py-14 md:py-24">
       <div className="mx-auto w-full max-w-[1780px] px-5 text-center sm:px-8">
@@ -97,7 +141,7 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names }: MarqueePro
         {rows.map((row, i) => (
           <MarqueeRow
             key={`row-${i}`}
-            names={row}
+            items={row}
             reverse={i % 2 === 1}
             offset={i === 1}
             startIndex={i}
@@ -106,8 +150,8 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names }: MarqueePro
       </div>
 
       <ul className="sr-only">
-        {list.map((name) => (
-          <li key={name}>{name}</li>
+        {list.map((item) => (
+          <li key={item.name}>{item.name}</li>
         ))}
       </ul>
     </section>
