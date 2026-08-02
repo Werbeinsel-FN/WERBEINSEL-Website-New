@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobalAfterChange } from '../hooks/revalidate'
 
 export const Einstellungen: GlobalConfig = {
   slug: 'einstellungen',
   label: 'Einstellungen (Kontakt & Social)',
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     { name: 'firma', type: 'text', label: 'Firmenname', defaultValue: 'WERBEINSEL' },
     {

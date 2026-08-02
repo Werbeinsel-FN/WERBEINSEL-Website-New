@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobalAfterChange } from '../hooks/revalidate'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
   label: 'Footer',
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     { name: 'tagline', type: 'text', label: 'Tagline' },
     {

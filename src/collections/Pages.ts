@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { blocks } from '../blocks/definitions'
 import { seoField } from '../fields/seo'
+import { revalidatePagesAfterChange } from '../hooks/revalidate'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -11,6 +12,9 @@ export const Pages: CollectionConfig = {
   access: {
     // Öffentlich nur veröffentlichte Seiten; eingeloggte Redaktion sieht alles.
     read: ({ req }) => (req.user ? true : { status: { equals: 'veroeffentlicht' } }),
+  },
+  hooks: {
+    afterChange: [revalidatePagesAfterChange],
   },
   fields: [
     { name: 'titel', type: 'text', label: 'Titel', required: true },

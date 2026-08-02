@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobalAfterChange } from '../hooks/revalidate'
 
 /**
  * Übersicht /services – Karten können aus Collection „Leistungen" kommen,
@@ -8,6 +9,9 @@ export const ServicesSeite: GlobalConfig = {
   slug: 'servicesSeite',
   label: 'Seite: Services (Übersicht)',
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     {
       name: 'hero',

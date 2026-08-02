@@ -1,10 +1,14 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobalAfterChange } from '../hooks/revalidate'
 
 /** Texte der Jobs-Seite (Stellen selbst liegen in Collection „jobs"). */
 export const JobsSeite: GlobalConfig = {
   slug: 'jobsSeite',
   label: 'Seite: Jobs (Texte)',
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     {
       name: 'hero',

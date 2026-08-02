@@ -9,6 +9,9 @@ import { JsonLd } from '@/components/JsonLd'
 import { buildMetadata, localBusinessJsonLd } from '@/lib/seo'
 import { getSiteChrome } from '@/lib/content'
 
+/** CMS-Inhalte immer frisch laden (nach Admin-Änderungen sichtbar). */
+export const dynamic = 'force-dynamic'
+
 export const metadata = buildMetadata({
   title: undefined,
   description:

@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobalAfterChange } from '../hooks/revalidate'
 
 export const Impressum: GlobalConfig = {
   slug: 'impressum',
   label: 'Seite: Impressum',
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     {
       name: 'hero',

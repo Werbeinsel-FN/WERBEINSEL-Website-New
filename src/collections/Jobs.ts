@@ -1,10 +1,14 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCollectionAfterChange } from '../hooks/revalidate'
 
 export const Jobs: CollectionConfig = {
   slug: 'jobs',
   labels: { singular: 'Stelle', plural: 'Stellen' },
   admin: { useAsTitle: 'titel', defaultColumns: ['titel', 'aktiv', 'reihenfolge'] },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateCollectionAfterChange],
+  },
   fields: [
     { name: 'titel', type: 'text', label: 'Stellentitel', required: true },
     {

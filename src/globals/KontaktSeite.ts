@@ -1,10 +1,14 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobalAfterChange } from '../hooks/revalidate'
 
 /** Texte der Kontakt-Seite (Kontaktdaten liegen in „Einstellungen"). */
 export const KontaktSeite: GlobalConfig = {
   slug: 'kontaktSeite',
   label: 'Seite: Kontakt (Texte)',
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     {
       name: 'hero',

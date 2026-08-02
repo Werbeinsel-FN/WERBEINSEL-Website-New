@@ -1,10 +1,14 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCollectionAfterChange } from '../hooks/revalidate'
 
 export const Referenzen: CollectionConfig = {
   slug: 'referenzen',
   labels: { singular: 'Referenz', plural: 'Referenzen' },
   admin: { useAsTitle: 'titel', defaultColumns: ['titel', 'kategorie', 'reihenfolge'] },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateCollectionAfterChange],
+  },
   fields: [
     { name: 'titel', type: 'text', label: 'Titel', required: true },
     { name: 'bild', type: 'upload', relationTo: 'media', label: 'Bild', required: true },
