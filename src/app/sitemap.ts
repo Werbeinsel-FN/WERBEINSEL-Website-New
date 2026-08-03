@@ -1,8 +1,20 @@
 import type { MetadataRoute } from 'next'
 import { getLeistungSlugs } from '@/lib/content'
 import { absoluteUrl } from '@/lib/seo'
+import { isSiteGateEnabled } from '@/lib/site-gate'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (isSiteGateEnabled()) {
+    return [
+      {
+        url: absoluteUrl('/coming-soon'),
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 1,
+      },
+    ]
+  }
+
   const now = new Date()
   const staticRoutes = ['', '/services', '/kontakt', '/jobs', '/impressum', '/datenschutz']
   const leistungenSlugs = await getLeistungSlugs()
