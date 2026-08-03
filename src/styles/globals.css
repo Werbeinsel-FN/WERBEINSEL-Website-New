@@ -106,15 +106,15 @@
 }
 
 .marquee-track {
-  animation: marquee-left 40s linear infinite;
+  animation: marquee-left 80s linear infinite;
 }
 
 .marquee-track-reverse {
-  animation: marquee-right 40s linear infinite;
+  animation: marquee-right 80s linear infinite;
 }
 
 .marquee-track-offset {
-  animation-delay: -20s;
+  animation-delay: -40s;
 }
 
 @media (prefers-reduced-motion: reduce) {
