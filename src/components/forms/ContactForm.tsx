@@ -53,9 +53,15 @@ function ContactFormInner({
   onSuccessDone: () => void
 }) {
   const [state, action, pending] = useActionState(sendContact, initial)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [unternehmen, setUnternehmen] = useState('')
+  const [telefon, setTelefon] = useState('')
   const [services, setServices] = useState<string[]>([])
   const [budget, setBudget] = useState('')
   const [zeitraum, setZeitraum] = useState('')
+  const [nachricht, setNachricht] = useState('')
+  const [consent, setConsent] = useState(false)
   useFormScroll(state, FORM_ID)
 
   if (state.ok) {
@@ -76,10 +82,34 @@ function ContactFormInner({
       className="mx-auto flex w-full max-w-[900px] flex-col items-center"
     >
       <div className="grid w-full gap-6 md:grid-cols-2">
-        <Field name="name" label="Name *" error={state.errors?.name} />
-        <Field name="email" type="email" label="E-Mail *" error={state.errors?.email} />
-        <Field name="unternehmen" label="Unternehmen" />
-        <Field name="telefon" label="Telefon *" error={state.errors?.telefon} />
+        <Field
+          name="name"
+          label="Name *"
+          error={state.errors?.name}
+          value={name}
+          onChange={setName}
+        />
+        <Field
+          name="email"
+          type="email"
+          label="E-Mail *"
+          error={state.errors?.email}
+          value={email}
+          onChange={setEmail}
+        />
+        <Field
+          name="unternehmen"
+          label="Unternehmen"
+          value={unternehmen}
+          onChange={setUnternehmen}
+        />
+        <Field
+          name="telefon"
+          label="Telefon *"
+          error={state.errors?.telefon}
+          value={telefon}
+          onChange={setTelefon}
+        />
       </div>
 
       <fieldset className="mt-12 flex w-full flex-col items-center">
@@ -157,6 +187,8 @@ function ContactFormInner({
       <div className="mt-12 w-full">
         <textarea
           name="nachricht"
+          value={nachricht}
+          onChange={(e) => setNachricht(e.target.value)}
           placeholder="Ihre Nachricht an uns (optional)"
           rows={8}
           className="min-h-[260px] w-full resize-y rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black"
@@ -170,6 +202,9 @@ function ContactFormInner({
         <input
           type="checkbox"
           name="consent"
+          value="on"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
           className="mt-1 size-4 shrink-0 accent-brand-black"
         />
         <span>
@@ -204,17 +239,23 @@ function Field({
   label,
   type = 'text',
   error,
+  value,
+  onChange,
 }: {
   name: string
   label: string
   type?: string
   error?: string[]
+  value: string
+  onChange: (value: string) => void
 }) {
   return (
     <div className="flex w-full flex-col gap-1" data-field={name}>
       <input
         name={name}
         type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={label}
         aria-label={label}
         aria-invalid={Boolean(error)}
