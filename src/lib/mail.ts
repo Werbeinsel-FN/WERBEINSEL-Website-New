@@ -11,7 +11,7 @@ function getResend(): Resend | null {
 export function mailConfig() {
   return {
     from: (process.env.EMAIL_FROM || 'website@werbeinsel.de').trim(),
-    toAgentur: (process.env.EMAIL_TO_AGENTUR || 'k.cajic@werbeinsel.de').trim(),
+    toAgentur: (process.env.EMAIL_TO_AGENTUR || 'hallo@werbeinsel.de').trim(),
   }
 }
 
@@ -21,7 +21,7 @@ function humanizeResendError(message: string): string {
     return (
       'E-Mail-Versand blockiert: Bitte Domain „werbeinsel.de“ bei Resend verifizieren ' +
       'und EMAIL_FROM auf eine Adresse dieser Domain setzen (z. B. website@werbeinsel.de). ' +
-      'Ohne verifizierte Domain kann Resend nicht an k.cajic@werbeinsel.de senden.'
+      'Ohne verifizierte Domain kann Resend nicht an hallo@werbeinsel.de senden.'
     )
   }
   if (lower.includes('invalid') && lower.includes('api')) {
