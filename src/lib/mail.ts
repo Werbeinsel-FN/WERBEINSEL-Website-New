@@ -3,16 +3,31 @@ import { Resend } from 'resend'
 export type MailResult = { ok: true } | { ok: false; error: string }
 
 function getResend(): Resend | null {
-  const key = process.env.RESEND_API_KEY
+  const key = process.env.RESEND_API_KEY?.trim()
   if (!key) return null
   return new Resend(key)
 }
 
 export function mailConfig() {
   return {
-    from: process.env.EMAIL_FROM || 'website@werbeinsel.de',
-    toAgentur: process.env.EMAIL_TO_AGENTUR || '',
+    from: (process.env.EMAIL_FROM || 'website@werbeinsel.de').trim(),
+    toAgentur: (process.env.EMAIL_TO_AGENTUR || 'k.cajic@werbeinsel.de').trim(),
   }
+}
+
+function humanizeResendError(message: string): string {
+  const lower = message.toLowerCase()
+  if (lower.includes('verify a domain') || lower.includes('testing emails')) {
+    return (
+      'E-Mail-Versand blockiert: Bitte Domain „werbeinsel.de“ bei Resend verifizieren ' +
+      'und EMAIL_FROM auf eine Adresse dieser Domain setzen (z. B. website@werbeinsel.de). ' +
+      'Ohne verifizierte Domain kann Resend nicht an k.cajic@werbeinsel.de senden.'
+    )
+  }
+  if (lower.includes('invalid') && lower.includes('api')) {
+    return 'E-Mail-Versand fehlgeschlagen: RESEND_API_KEY ist ungültig.'
+  }
+  return message || 'E-Mail an Agentur fehlgeschlagen.'
 }
 
 /** E-Mail an die Agentur (+ optionale Anhänge). */
@@ -28,11 +43,10 @@ export async function sendToAgentur(opts: {
   if (!resend) {
     console.warn('[mail] RESEND_API_KEY fehlt – nur geloggt:', opts.subject)
     console.info(opts.text)
-    // Lokal ohne Key: als Erfolg werten (Seed/Dev). Produktion: Fehler.
     if (process.env.NODE_ENV === 'production') {
       return {
         ok: false,
-        error: 'E-Mail-Versand ist nicht konfiguriert (RESEND_API_KEY fehlt).',
+        error: 'E-Mail-Versand ist nicht konfiguriert (RESEND_API_KEY fehlt auf Vercel).',
       }
     }
     return { ok: true }
@@ -55,7 +69,7 @@ export async function sendToAgentur(opts: {
 
   if (error) {
     console.error('[mail] Agentur:', error)
-    return { ok: false, error: error.message || 'E-Mail an Agentur fehlgeschlagen.' }
+    return { ok: false, error: humanizeResendError(error.message || '') }
   }
   return { ok: true }
 }
