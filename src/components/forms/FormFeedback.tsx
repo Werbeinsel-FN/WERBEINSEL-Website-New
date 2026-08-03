@@ -4,15 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { FormState } from '@/app/actions'
 
-/** Scrollt zum ersten Fehler oder zur Erfolgsmeldung. */
+/** Scrollt zum ersten Fehler. */
 export function useFormScroll(state: FormState, formId: string) {
-  const successRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
-    if (state.ok) {
-      successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      return
-    }
+    if (state.ok) return
     if (!state.errors && !state.message) return
 
     const order = [
@@ -38,8 +33,6 @@ export function useFormScroll(state: FormState, formId: string) {
       .querySelector<HTMLElement>(`#${formId} [data-form-alert]`)
       ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }, [state, formId])
-
-  return successRef
 }
 
 export function FormErrorSummary({
@@ -65,15 +58,16 @@ export function FormErrorSummary({
   )
 }
 
+/** Solid filled thumbs-up (no outline / sharp inner cuts). */
 function ThumbsUpIcon() {
   return (
     <svg
-      viewBox="0 0 64 64"
+      viewBox="0 0 24 24"
       className="h-20 w-20 text-brand-black md:h-28 md:w-28"
       fill="currentColor"
       aria-hidden
     >
-      <path d="M48.5 28H36.2V16.8c0-4.2-2.6-7.8-6.5-7.8-1.4 0-2.4.9-2.8 2.3L22 28H14c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h28.8c1.8 0 3.4-1.2 3.9-2.9l5.8-19.4c.7-2.4-.9-4.7-3.5-4.7zM18 52H14V32h4v20zm28.8 0H22V30.7l4.8-16.6c.1-.2.2-.3.4-.3.8 0 1.5 1.1 1.5 2.8V32h19.8L43.8 52z" />
+      <path d="M1.75 21.5h3.5V10.25H1.75V21.5zm19.82-9.95c.24-.39.37-.84.37-1.32 0-1.38-1.12-2.5-2.5-2.5h-5.34l.8-3.85.03-.28c0-.52-.21-.99-.55-1.33L13.17 1 7.09 7.09c-.34.33-.54.78-.54 1.28v10c0 1.1.9 2 2 2h8.23c.75 0 1.4-.45 1.67-1.11l2.75-6.4c.09-.21.13-.43.13-.65 0-.18-.03-.35-.09-.52l.33.06z" />
     </svg>
   )
 }
@@ -100,7 +94,7 @@ function DankeOverlay({ onDone }: { onDone: () => void }) {
       role="status"
       aria-live="polite"
     >
-      <div className="form-danke-content flex flex-col items-center gap-4 px-6 text-center">
+      <div className="form-danke-content flex flex-col items-center gap-5 px-6 text-center">
         <ThumbsUpIcon />
         <p className="font-unbounded text-[clamp(2.75rem,10vw,6rem)] font-extrabold uppercase leading-none tracking-tight text-brand-black">
           Danke
@@ -111,31 +105,12 @@ function DankeOverlay({ onDone }: { onDone: () => void }) {
   )
 }
 
-export function FormSuccess({
-  message,
-  successRef,
-}: {
-  message?: string
-  successRef: React.RefObject<HTMLDivElement | null>
-}) {
-  const [showOverlay, setShowOverlay] = useState(true)
-  const hideOverlay = useRef(() => setShowOverlay(false)).current
-
-  return (
-    <>
-      {showOverlay ? <DankeOverlay onDone={hideOverlay} /> : null}
-      <div
-        ref={successRef}
-        role="status"
-        className="mx-auto w-full max-w-[900px] rounded-[24px] bg-brand-yellow p-8 text-center text-brand-black md:p-12"
-      >
-        <p className="font-unbounded text-2xl font-extrabold uppercase md:text-3xl">
-          Vielen Dank!
-        </p>
-        <p className="mt-4 font-poppins text-lg font-semibold leading-relaxed">
-          {message || 'Ihre Nachricht ist bei uns eingegangen.'}
-        </p>
-      </div>
-    </>
-  )
+/** Full-screen Danke, then reset the form (no lasting success card). */
+export function FormDankeThenReset({ onFinished }: { onFinished: () => void }) {
+  const onFinishedRef = useRef(onFinished)
+  onFinishedRef.current = onFinished
+  const stableDone = useRef(() => {
+    onFinishedRef.current()
+  }).current
+  return <DankeOverlay onDone={stableDone} />
 }

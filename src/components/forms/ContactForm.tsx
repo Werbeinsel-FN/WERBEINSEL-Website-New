@@ -7,7 +7,7 @@ import { formOptions as seedFormOptions } from '@/data/seed'
 import { TurnstileField } from '@/components/forms/TurnstileField'
 import {
   FormErrorSummary,
-  FormSuccess,
+  FormDankeThenReset,
   useFormScroll,
 } from '@/components/forms/FormFeedback'
 
@@ -35,14 +35,31 @@ export type ContactFormOptions = {
 }
 
 export function ContactForm({ formOptions = seedFormOptions }: { formOptions?: ContactFormOptions }) {
+  const [formKey, setFormKey] = useState(0)
+  return (
+    <ContactFormInner
+      key={formKey}
+      formOptions={formOptions}
+      onSuccessDone={() => setFormKey((k) => k + 1)}
+    />
+  )
+}
+
+function ContactFormInner({
+  formOptions,
+  onSuccessDone,
+}: {
+  formOptions: ContactFormOptions
+  onSuccessDone: () => void
+}) {
   const [state, action, pending] = useActionState(sendContact, initial)
   const [services, setServices] = useState<string[]>([])
   const [budget, setBudget] = useState('')
   const [zeitraum, setZeitraum] = useState('')
-  const successRef = useFormScroll(state, FORM_ID)
+  useFormScroll(state, FORM_ID)
 
   if (state.ok) {
-    return <FormSuccess message={state.message} successRef={successRef} />
+    return <FormDankeThenReset onFinished={onSuccessDone} />
   }
 
   function toggleService(value: string) {

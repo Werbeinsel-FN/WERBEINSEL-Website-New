@@ -7,7 +7,7 @@ import { formOptions as seedFormOptions } from '@/data/seed'
 import { TurnstileField } from '@/components/forms/TurnstileField'
 import {
   FormErrorSummary,
-  FormSuccess,
+  FormDankeThenReset,
   useFormScroll,
 } from '@/components/forms/FormFeedback'
 
@@ -34,18 +34,34 @@ type Props = {
 }
 
 export function ApplicationForm({ positions, formOptions = seedFormOptions }: Props) {
+  const [formKey, setFormKey] = useState(0)
+  return (
+    <ApplicationFormInner
+      key={formKey}
+      positions={positions}
+      formOptions={formOptions}
+      onSuccessDone={() => setFormKey((k) => k + 1)}
+    />
+  )
+}
+
+function ApplicationFormInner({
+  positions,
+  formOptions = seedFormOptions,
+  onSuccessDone,
+}: Props & { onSuccessDone: () => void }) {
   const [state, action, pending] = useActionState(sendApplication, initial)
   const [position, setPosition] = useState('')
   const [verfuegbarAb, setVerfuegbarAb] = useState('')
   const [services, setServices] = useState<string[]>([])
   const [fileName, setFileName] = useState('')
   const serviceOptions = formOptions.services ?? seedFormOptions.services
-  const successRef = useFormScroll(state, FORM_ID)
+  useFormScroll(state, FORM_ID)
 
   const allPositions = [...positions, 'Initiativbewerbung']
 
   if (state.ok) {
-    return <FormSuccess message={state.message} successRef={successRef} />
+    return <FormDankeThenReset onFinished={onSuccessDone} />
   }
 
   return (
