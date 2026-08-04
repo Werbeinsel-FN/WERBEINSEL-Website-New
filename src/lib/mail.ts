@@ -44,9 +44,12 @@ function getResend(): Resend | null {
 }
 
 export function mailConfig() {
+  const fromAddress =
+    normalizeEmailAddress(process.env.EMAIL_FROM) || 'website@werbeinsel.de'
   return {
-    from:
-      normalizeEmailAddress(process.env.EMAIL_FROM) || 'website@werbeinsel.de',
+    /** Display name helps deliverability; address must stay on verified domain. */
+    from: `WERBEINSEL <${fromAddress}>`,
+    fromAddress,
     toAgentur:
       normalizeEmailAddress(process.env.EMAIL_TO_AGENTUR) || 'hallo@werbeinsel.de',
   }
@@ -105,9 +108,9 @@ export async function sendToAgentur(opts: {
     return { ok: false, error: 'Ungültige Absender-E-Mail. Bitte prüfen Sie das Formularfeld.' }
   }
 
-  console.info('[mail] sending to agentur', { from, to: toAgentur })
+  console.info('[mail] sending to agentur', { from, to: toAgentur, replyTo })
 
-  const { error } = await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from,
     to: [toAgentur],
     replyTo,
@@ -123,6 +126,11 @@ export async function sendToAgentur(opts: {
     console.error('[mail] Agentur:', error)
     return { ok: false, error: humanizeResendError(error.message || '') }
   }
+  if (!data?.id) {
+    console.error('[mail] Agentur: no email id in Resend response', { data, error })
+    return { ok: false, error: 'E-Mail-Versand fehlgeschlagen (keine Bestätigung von Resend).' }
+  }
+  console.info('[mail] Agentur sent', { id: data.id, to: toAgentur })
   return { ok: true }
 }
 
@@ -155,7 +163,7 @@ export async function sendConfirmation(opts: {
     'Ihr WERBEINSEL-Team',
   ].join('\n')
 
-  const { error } = await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from,
     to: [to],
     subject,
@@ -167,5 +175,6 @@ export async function sendConfirmation(opts: {
     console.warn('[mail] Bestätigung fehlgeschlagen:', error)
     return { ok: true }
   }
+  console.info('[mail] confirmation sent', { id: data?.id, to })
   return { ok: true }
 }
