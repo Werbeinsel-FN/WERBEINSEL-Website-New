@@ -21,8 +21,6 @@ export function ComingSoonClient() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [mailTest, setMailTest] = useState('')
-  const [mailTesting, setMailTesting] = useState(false)
 
   useEffect(() => {
     setYear(String(new Date().getFullYear()))
@@ -60,7 +58,6 @@ export function ComingSoonClient() {
   async function onUnlock(e: FormEvent) {
     e.preventDefault()
     setError('')
-    setMailTest('')
     setLoading(true)
     try {
       const res = await fetch('/coming-soon/unlock', {
@@ -79,35 +76,6 @@ export function ComingSoonClient() {
       setError('Netzwerkfehler. Bitte erneut versuchen.')
     } finally {
       setLoading(false)
-    }
-  }
-
-  async function onMailTest() {
-    setError('')
-    setMailTest('')
-    setMailTesting(true)
-    try {
-      const res = await fetch('/coming-soon/mail-test', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      })
-      const data = (await res.json()) as {
-        ok?: boolean
-        error?: string
-        id?: string
-        to?: string
-        from?: string
-      }
-      if (!res.ok || !data.ok) {
-        setError(data.error || 'Mail-Test fehlgeschlagen.')
-        return
-      }
-      setMailTest(`OK → ${data.to} (id: ${data.id})`)
-    } catch {
-      setError('Netzwerkfehler beim Mail-Test.')
-    } finally {
-      setMailTesting(false)
     }
   }
 
@@ -280,16 +248,7 @@ export function ComingSoonClient() {
               <button className="btn btn-dark" type="submit" disabled={loading}>
                 {loading ? '…' : 'Öffnen'}
               </button>
-              <button
-                className="btn btn-line"
-                type="button"
-                disabled={mailTesting || !password}
-                onClick={onMailTest}
-              >
-                {mailTesting ? '…' : 'Mail-Test'}
-              </button>
               {error ? <p className="err">{error}</p> : null}
-              {mailTest ? <p className="err" style={{ color: '#0a5' }}>{mailTest}</p> : null}
             </form>
           ) : null}
         </article>
