@@ -173,4 +173,10 @@
   .form-danke-content {
     animation: none;
   }
+
+  .wi-menu-pill,
+  .wi-menu-panel,
+  .wi-menu-item {
+    transition: none !important;
+  }
 }
