@@ -300,7 +300,7 @@
 /* Hover-Pill nur auf Geräten mit echtem Hover (kein Sticky-Hover auf Touch) */
 @media (hover: hover) and (pointer: fine) {
   .wi-menu-link:hover {
-    background-color: var(--color-brand-yellow, #ffed00);
-    color: var(--color-brand-black, #000);
+    background-color: var(--color-yellow, #ffed00);
+    color: var(--color-black, #000);
   }
 }
