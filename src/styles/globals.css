@@ -176,7 +176,91 @@
 
   .wi-menu-pill,
   .wi-menu-panel,
-  .wi-menu-item {
+  .wi-menu-item,
+  .wi-menu-line {
     transition: none !important;
+  }
+}
+
+/* MENÜ-Pill (zwetschke-ähnlich): mittig unten, Hover → Breite + Linien spreizen */
+.wi-menu-pill {
+  width: 200px;
+  transition:
+    width 0.4s ease,
+    box-shadow 0.3s ease;
+}
+
+.wi-menu-pill:hover,
+.wi-menu-pill:focus-visible {
+  width: min(86vw, 920px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.32);
+}
+
+.wi-menu-ball {
+  width: 56px;
+  height: 56px;
+}
+
+.wi-menu-line {
+  width: 18px;
+  height: 3px;
+  margin: 2.5px 0;
+  transition: margin 0.4s ease;
+}
+
+.wi-menu-pill:hover .wi-menu-line,
+.wi-menu-pill:focus-visible .wi-menu-line {
+  margin: 4.5px 0;
+}
+
+.wi-menu-label {
+  font-size: 1.35rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  .wi-menu-pill {
+    width: 260px;
+  }
+
+  .wi-menu-ball {
+    width: 68px;
+    height: 68px;
+  }
+
+  .wi-menu-line {
+    width: 22px;
+    height: 3.5px;
+    margin: 3px 0;
+  }
+
+  .wi-menu-pill:hover .wi-menu-line,
+  .wi-menu-pill:focus-visible .wi-menu-line {
+    margin: 5px 0;
+  }
+
+  .wi-menu-label {
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wi-menu-pill {
+    width: 300px;
+  }
+
+  .wi-menu-ball {
+    width: 76px;
+    height: 76px;
+  }
+
+  .wi-menu-line {
+    width: 24px;
+    height: 4px;
+  }
+
+  .wi-menu-label {
+    font-size: 2rem;
   }
 }

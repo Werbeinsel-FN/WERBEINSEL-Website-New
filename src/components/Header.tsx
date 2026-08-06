@@ -114,33 +114,37 @@ export function Header({ items }: HeaderProps) {
         </div>
       </header>
 
-      {/* Schwebender MENÜ-Pill – ausgeblendet wenn Overlay offen (X oben rechts) */}
-      <button
-        ref={menuBtnRef}
-        type="button"
-        className={`wi-menu-pill fixed bottom-5 right-5 z-[70] flex items-center gap-3 rounded-full bg-brand-yellow py-2 pl-2 pr-5 text-brand-black shadow-[0_12px_40px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-black sm:bottom-8 sm:right-8 sm:pr-6 ${
-          open ? 'pointer-events-none scale-90 opacity-0' : 'scale-100 opacity-100'
-        }`}
-        aria-expanded={open}
-        aria-controls={drawerId}
-        aria-label="Menü öffnen"
-        tabIndex={open ? -1 : 0}
-        onClick={toggle}
+      {/* MENÜ unten mittig – Hover wie zwetschke: Breite expandiert, Linien spreizen */}
+      <div
+        className={`wi-menu-dock fixed bottom-6 left-0 right-0 z-[70] flex justify-center px-4 pointer-events-none sm:bottom-10 ${
+          open ? 'opacity-0' : 'opacity-100'
+        } transition-opacity duration-300`}
+        aria-hidden={open}
       >
-        <span
-          className="grid h-11 w-11 place-items-center rounded-full bg-brand-black sm:h-12 sm:w-12"
-          aria-hidden
+        <button
+          ref={menuBtnRef}
+          type="button"
+          className={`wi-menu-pill flex items-center overflow-hidden rounded-full bg-brand-yellow py-2 pl-2 pr-6 text-brand-black shadow-[0_12px_40px_rgba(0,0,0,0.28)] sm:py-2.5 sm:pl-2.5 sm:pr-8 ${
+            open ? 'pointer-events-none' : 'pointer-events-auto'
+          }`}
+          aria-expanded={open}
+          aria-controls={drawerId}
+          aria-label="Menü öffnen"
+          tabIndex={open ? -1 : 0}
+          onClick={toggle}
         >
-          <span className="relative block h-3.5 w-[18px]">
-            <span className="absolute left-0 top-0 h-[2.5px] w-full rounded-full bg-brand-yellow" />
-            <span className="absolute left-0 top-[6px] h-[2.5px] w-full rounded-full bg-brand-yellow" />
-            <span className="absolute left-0 top-[12px] h-[2.5px] w-full rounded-full bg-brand-yellow" />
+          <span className="wi-menu-ball grid shrink-0 place-items-center rounded-full bg-brand-black" aria-hidden>
+            <span className="wi-menu-lines flex flex-col items-center justify-center">
+              <span className="wi-menu-line block rounded-full bg-brand-yellow" />
+              <span className="wi-menu-line block rounded-full bg-brand-yellow" />
+              <span className="wi-menu-line block rounded-full bg-brand-yellow" />
+            </span>
           </span>
-        </span>
-        <span className="font-unbounded text-sm font-extrabold uppercase tracking-[0.06em] sm:text-base">
-          Menü
-        </span>
-      </button>
+          <span className="wi-menu-label font-unbounded font-extrabold uppercase tracking-[-0.02em]">
+            Menü
+          </span>
+        </button>
+      </div>
 
       {/* Vollflächiges Overlay: schwarz, Akzente gelb */}
       <div
