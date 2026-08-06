@@ -171,10 +171,10 @@ export function Header({ items, sticky = true }: HeaderProps) {
           </button>
 
           <nav
-            className="flex flex-1 flex-col items-center justify-center overflow-y-auto px-4 py-24 sm:px-8"
+            className="wi-menu-nav flex flex-1 flex-col items-center justify-center px-4 sm:px-8"
             aria-label="Hauptnavigation"
           >
-            <ul className="flex w-full max-w-xl flex-col items-center gap-1 sm:gap-1.5">
+            <ul className="wi-menu-list flex w-full max-w-xl flex-col items-center">
               {links.map((link, i) => {
                 const active = linkActive(pathname, link.url)
                 return (
@@ -190,7 +190,7 @@ export function Header({ items, sticky = true }: HeaderProps) {
                     <Link
                       href={link.url}
                       onClick={close}
-                      className={`group mx-auto flex w-fit max-w-full items-center justify-center rounded-full px-6 py-2.5 text-center font-unbounded text-[clamp(1.35rem,4.5vw,2.75rem)] font-extrabold uppercase leading-[1.05] tracking-tight transition duration-200 sm:px-8 sm:py-3 ${
+                      className={`wi-menu-link group mx-auto flex w-fit max-w-full items-center justify-center rounded-full text-center font-unbounded font-extrabold uppercase tracking-tight transition duration-200 ${
                         active
                           ? 'bg-brand-yellow text-brand-black'
                           : 'text-brand-yellow hover:bg-brand-yellow hover:text-brand-black'

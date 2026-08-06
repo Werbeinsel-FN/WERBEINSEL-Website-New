@@ -182,7 +182,7 @@
   }
 }
 
-/* MENÜ-Pill (zwetschke-ähnlich): mittig unten, Hover → Breite + Linien spreizen */
+/* MENÜ-Pill (zwetschke-ähnlich): mittig unten, dezentes Hover-Breitenwachstum */
 .wi-menu-pill {
   width: 200px;
   transition:
@@ -192,7 +192,7 @@
 
 .wi-menu-pill:hover,
 .wi-menu-pill:focus-visible {
-  width: min(86vw, 920px);
+  width: 248px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.32);
 }
 
@@ -224,6 +224,11 @@
     width: 260px;
   }
 
+  .wi-menu-pill:hover,
+  .wi-menu-pill:focus-visible {
+    width: 320px;
+  }
+
   .wi-menu-ball {
     width: 68px;
     height: 68px;
@@ -250,6 +255,11 @@
     width: 300px;
   }
 
+  .wi-menu-pill:hover,
+  .wi-menu-pill:focus-visible {
+    width: 380px;
+  }
+
   .wi-menu-ball {
     width: 76px;
     height: 76px;
@@ -263,4 +273,21 @@
   .wi-menu-label {
     font-size: 2rem;
   }
+}
+
+/* Overlay-Links: skaliert mit Viewport-Höhe, kein Scroll nötig */
+.wi-menu-nav {
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 8dvh, 6rem);
+}
+
+.wi-menu-list {
+  gap: clamp(0.1rem, 0.6dvh, 0.45rem);
+}
+
+.wi-menu-link {
+  font-size: clamp(1.05rem, 5.2dvh, 2.6rem);
+  padding-block: clamp(0.2rem, 0.9dvh, 0.7rem);
+  padding-inline: clamp(1rem, 2.5vw, 2rem);
+  line-height: 1.05;
 }
