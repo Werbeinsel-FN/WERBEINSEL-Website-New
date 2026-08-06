@@ -41,7 +41,7 @@ function linkActive(pathname: string, url: string) {
  * Navigation im Stil von zwetschke.de:
  * schwebender MENÜ-Pill + vollflächiges Overlay (schwarz/gelb invertiert).
  */
-export function Header({ items }: HeaderProps) {
+export function Header({ items, sticky = true }: HeaderProps) {
   const pathname = usePathname() || '/'
   const [open, setOpen] = useState(false)
   const [entered, setEntered] = useState(false)
@@ -101,16 +101,14 @@ export function Header({ items }: HeaderProps) {
 
   return (
     <>
-      {/* Nur Logo – schwebend, kein Burger oben rechts */}
-      <header className="pointer-events-none absolute left-0 right-0 top-0 z-50">
-        <div className="container-site pointer-events-auto flex h-[88px] items-center">
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-full bg-brand-yellow px-4 py-2.5 shadow-[0_8px_28px_rgba(0,0,0,0.18)] ring-2 ring-brand-black transition hover:-translate-y-0.5"
-            aria-label="WERBEINSEL Startseite"
-          >
-            <Logo tone="light" href={null} />
-          </Link>
+      {/* Gelber Header wie zuvor – nur Logo, kein Menü oben rechts */}
+      <header
+        className={`bg-brand-yellow text-brand-black ${sticky ? 'sticky top-0 z-50' : 'relative z-50'}`}
+      >
+        <div className="relative flex h-[88px] w-full items-center">
+          <div className="container-site flex items-center">
+            <Logo tone="light" />
+          </div>
         </div>
       </header>
 
