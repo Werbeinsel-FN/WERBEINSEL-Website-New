@@ -275,19 +275,32 @@
   }
 }
 
-/* Overlay-Links: skaliert mit Viewport-Höhe, kein Scroll nötig */
+/* Overlay-Links: passen in Viewport, keine abgeschnittenen Wörter */
 .wi-menu-nav {
   overflow: hidden;
-  padding-block: clamp(3.5rem, 8dvh, 6rem);
+  padding-block: clamp(3.25rem, 7dvh, 5.5rem);
 }
 
 .wi-menu-list {
-  gap: clamp(0.1rem, 0.6dvh, 0.45rem);
+  gap: clamp(0.05rem, 0.45dvh, 0.4rem);
 }
 
 .wi-menu-link {
-  font-size: clamp(1.05rem, 5.2dvh, 2.6rem);
-  padding-block: clamp(0.2rem, 0.9dvh, 0.7rem);
-  padding-inline: clamp(1rem, 2.5vw, 2rem);
-  line-height: 1.05;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  font-size: clamp(0.95rem, min(4.8dvh, 7.2vw), 2.5rem);
+  padding-block: clamp(0.15rem, 0.7dvh, 0.55rem);
+  padding-inline: clamp(0.5rem, 2vw, 1.25rem);
+  line-height: 1.1;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+/* Hover-Pill nur auf Geräten mit echtem Hover (kein Sticky-Hover auf Touch) */
+@media (hover: hover) and (pointer: fine) {
+  .wi-menu-link:hover {
+    background-color: var(--color-brand-yellow, #ffed00);
+    color: var(--color-brand-black, #000);
+  }
 }

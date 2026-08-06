@@ -32,11 +32,6 @@ function flattenNav(items: NavItem[]): FlatLink[] {
   return out
 }
 
-function linkActive(pathname: string, url: string) {
-  if (url === '/') return pathname === '/'
-  return pathname === url || pathname.startsWith(`${url}/`)
-}
-
 /**
  * Navigation im Stil von zwetschke.de:
  * schwebender MENÜ-Pill + vollflächiges Overlay (schwarz/gelb invertiert).
@@ -171,12 +166,11 @@ export function Header({ items, sticky = true }: HeaderProps) {
           </button>
 
           <nav
-            className="wi-menu-nav flex flex-1 flex-col items-center justify-center px-4 sm:px-8"
+            className="wi-menu-nav flex min-h-0 flex-1 flex-col items-center justify-center px-5 sm:px-10"
             aria-label="Hauptnavigation"
           >
-            <ul className="wi-menu-list flex w-full max-w-xl flex-col items-center">
+            <ul className="wi-menu-list flex w-full max-w-[min(100%,36rem)] flex-col items-center">
               {links.map((link, i) => {
-                const active = linkActive(pathname, link.url)
                 return (
                   <li
                     key={`${link.url}-${link.label}`}
@@ -190,11 +184,7 @@ export function Header({ items, sticky = true }: HeaderProps) {
                     <Link
                       href={link.url}
                       onClick={close}
-                      className={`wi-menu-link group mx-auto flex w-fit max-w-full items-center justify-center rounded-full text-center font-unbounded font-extrabold uppercase tracking-tight transition duration-200 ${
-                        active
-                          ? 'bg-brand-yellow text-brand-black'
-                          : 'text-brand-yellow hover:bg-brand-yellow hover:text-brand-black'
-                      }`}
+                      className="wi-menu-link group mx-auto flex w-full max-w-full items-center justify-center rounded-full text-center font-unbounded font-extrabold uppercase tracking-tight text-brand-yellow transition duration-200"
                     >
                       {link.label}
                     </Link>
