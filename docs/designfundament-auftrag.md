@@ -21,13 +21,23 @@ Das Fundament ist angelegt, wird aber kaum genutzt.
 | Bereich | Vorhanden | Tatsächliche Nutzung |
 |---|---|---|
 | Farb-Tokens | `src/styles/tokens.css`, in `globals.css` als `brand-*` an Tailwind gebunden | `#FFED00` steht 291-mal fest im Code, `#B8B8B8` 14-mal statt Token `#B3B3B3` |
-| Mitwachsende Schriftgrößen | `--text-hero`, `--text-section`, `--text-lead` und Klassen `.heading-hero`, `.heading-section`, `.body-lead` | Überwiegend feste Pixelwerte: `md:text-[56px]` 23-mal, `md:text-[22px]` 14-mal, `md:text-[88px]` 3-mal |
+| Mitwachsende Schriftgrößen | `--text-hero`, `--text-section`, `--text-lead` und Klassen `.heading-hero`, `.heading-section`, `.body-lead` | Zusätzlich feste Pixelwerte: `md:text-[56px]` 23-mal, `md:text-[22px]` 14-mal, `md:text-[88px]` 3-mal – sie stehen immer zusammen mit der Token-Klasse und greifen nicht (siehe unten) |
 | Container | Komponente `components/ui/Container.tsx` und Klasse `.container-site` | Komponente wird **nirgends** verwendet; 25 Dateien setzen `max-w-[1780px]`, `max-w-[1716px]` oder `max-w-[1700px]` direkt |
 | Sektionsabstände | Klasse `.section-pad` mit Tokens | Sektionen nutzen direkt `py-32` (29-mal), `py-20` (28-mal) und weitere Werte |
 | Breakpoints | Tailwind-Standard (640 / 768 / 1024 / 1280 / 1536) | Eigene Media Queries in `globals.css` mit 641 px und 1025 px |
 | Rundungen | keine Tokens | `rounded-[24px]`, `rounded-3xl`, `rounded-[20px]`, `[16px]`, `[28px]`, `[40px]` gemischt |
 
-**Folge mit sichtbarer Wirkung:** Überschriften springen ab 768 px (`md:`) sofort auf die volle Desktopgröße von 56 px bzw. 88 px. Auf Tablets und kleinen Laptops sind sie dadurch zu groß und brechen unschön um.
+**Überschriften (korrigiert nach Prüfung im Browser):** Die festen Werte `md:text-[56px]`, `md:text-[88px]` und `md:text-[22px]` stehen ausnahmslos zusammen mit `.heading-section`, `.heading-hero` bzw. `.body-lead`. Diese Klassen stehen in der CSS-Reihenfolge später und **überschreiben die festen Pixelwerte**. Die Überschriften springen also nicht auf 56 bzw. 88 px, sondern folgen schon heute den bisherigen, mitwachsenden Token-Werten. Die festen Werte sind wirkungslos und nur Ballast im Code.
+
+Gemessene Größen heute (bisherige Token-Werte) im Vergleich zu den neuen Werten aus Abschnitt 5.2:
+
+| Token | 810 px | 1024 px | 1440 px | 1920 px |
+|---|---|---|---|---|
+| `--text-section` heute → neu | 29,8 → 35,7 | 34,5 → 39,6 | 43,7 → 47,2 | 54,2 → 56 |
+| `--text-hero` heute → neu | 42,0 → 47,4 | 51,0 → 55,2 | 68,5 → 70,4 | 88 → 88 |
+| `--text-lead` heute → neu | 17,2 → 17,7 | 18,0 → 18,5 | 19,4 → 20,1 | 21,1 → 22 |
+
+Bei 390 px sind alte und neue Werte gleich.
 
 **Nicht betroffen:** `src/app/coming-soon/ComingSoonClient.tsx` hat bewusst eigene, in sich geschlossene Variablen. Diese Seite bleibt unverändert.
 
@@ -153,10 +163,11 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 
 ## 6. Aufgaben
 
-### T1 – Tokens und Breakpoints
+### T1 – Tokens
 - `tokens.css` gemäß Abschnitt 5 ergänzen, `globals.css` per `@theme inline` binden.
-- Breakpoints gemäß 5.5 setzen; Media Queries in `globals.css` von 641/1025 auf die neuen Werte umstellen.
-- **Fertig, wenn:** alle Tokens als Tailwind-Klassen nutzbar sind.
+- `--text-hero`, `--text-section` und `--text-lead` behalten ihre bisherigen Werte; die neuen Werte aus 5.2 setzt erst T4.
+- Breakpoints und Media Queries bleiben unverändert (Umstellung in T5).
+- **Fertig, wenn:** alle Tokens als Tailwind-Klassen nutzbar sind und die Screenshots keine sichtbare Änderung zeigen.
 
 ### T2 – Basis-Komponenten
 - `Container`: max. 1780 px, Seitenrand über `--gutter`; Variante `text` mit 840 px.
@@ -171,14 +182,17 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 - **Fertig, wenn:** `grep -rE "#[0-9A-Fa-f]{6}" src --include=*.tsx` außerhalb von `coming-soon` keine Treffer mehr liefert.
 
 ### T4 – Schriftgrößen umstellen (**sichtbare Korrektur**)
-- Alle `text-[…px]` und `md:text-[…px]` durch die Tokens aus 5.2 ersetzen.
-- **Erwartete Änderung:** Überschriften wachsen gleichmäßig mit und erreichen ihre volle Größe erst bei 1920 px. Auf Tablets werden sie deutlich kleiner als heute. **Auch bei 1440 px werden sie kleiner** (Sektionsüberschrift ca. 47 statt 56 px, Hero ca. 70 statt 88 px). Das entspricht dem Verhalten von zwetschke und wird auf der Vorschau gemeinsam geprüft.
+- `--text-hero`, `--text-section` und `--text-lead` auf die neuen Werte aus 5.2 setzen.
+- Alle `text-[…px]` und `md:text-[…px]` durch die Tokens aus 5.2 ersetzen. Die wirkungslosen `md:text-[56px]`, `md:text-[88px]` und `md:text-[22px]` (siehe Abschnitt 2) entfallen ersatzlos.
+- **Erwartete Änderung:** Überschriften und Einleitungstexte werden ab ca. 800 px **etwas größer** als heute (Tabelle in Abschnitt 2, z. B. Sektionsüberschrift bei 810 px ca. 36 statt 30 px, bei 1440 px ca. 47 statt 44 px). Längere Überschriften können dadurch eine Zeile mehr brauchen (z. B. „VIER DISZIPLINEN, EIN ANSPRUCH“ auf `/services` bei 810 px). Wird auf der Vorschau gemeinsam geprüft.
 - **Fertig, wenn:** keine festen Pixel-Schriftgrößen mehr in `.tsx`.
 
-### T5 – Container und Sektionen umstellen (**sichtbare Korrektur**)
+### T5 – Breakpoints, Container und Sektionen umstellen (**sichtbare Korrektur**)
+- Breakpoints gemäß 5.5 setzen (sm 660, 2xl 1400); Media Queries in `globals.css` von 640/641/1025 auf die neuen Werte umstellen.
 - Alle `max-w-[1780px]`, `[1716px]`, `[1700px]`, `[1400px]`, `[1100px]` usw. für Seitenbreiten durch `Container` ersetzen.
 - Alle Sektions-`py-*` durch `Section` bzw. `--space-section` ersetzen.
 - **Erwartete Änderung:** Seitenrand wächst mit (3,5 %), Sektionsabstände folgen den Stufen 52 / 68 / 115 px.
+- **Achtung 1440 px:** Mit 2xl ab 1400 px greifen dort alle bisherigen `2xl:`-Stile. Ohne Anpassung rückt der Inhalt von Kopfzeile, Reichweite, Formate und FAQ (`.container-site`) von ca. 112 auf 32 px an den Rand, der Schritt-Slider (`StepSlider.tsx`) springt in die große Variante (Bild bis 760 px, Pfeile 130 px, 200 px Innenabstand) und die USP-Karten erhalten `2xl:p-14`. Diese Stellen gemeinsam mit den Containern umstellen und gezielt prüfen.
 - **Fertig, wenn:** keine festen `max-w-[…px]`-Werte für Seitenbreiten mehr im Code.
 
 ### T6 – Abstände und Rundungen
@@ -216,3 +230,11 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 | Überschriften | durchgehend mitwachsend bis 1920 px (wie zwetschke), WERBEINSEL-Größen als Obergrenze |
 | Fließtext | 16 → 18 px (bewusst kleiner als zwetschke) |
 | Feinabstimmung Schriftgrößen | gemeinsam auf der Vorschau-Adresse nach T4 |
+| T1 ohne sichtbare Änderung | Neue Werte für hero/section/lead erst in T4, neue Breakpoints erst in T5 |
+
+---
+
+## 9. Offene Punkte für eine eigene Aufgabe nach dem Designfundament
+
+- **Lint-Fehler** in `src/components/forms/FormFeedback.tsx`, Zeilen 111–112 (`react-hooks/refs`: „Cannot access refs during render“). Bestanden schon vor T1; `npm run lint` läuft deshalb bis dahin nicht fehlerfrei.
+- **npm-audit-Hinweise** aus `npm ci` prüfen und beheben.

@@ -48,3 +48,7 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Lokale Screenshots (Vorher/Nachher) und Startkonfiguration der Claude-App
+/screenshots/
+/.claude/launch.json
