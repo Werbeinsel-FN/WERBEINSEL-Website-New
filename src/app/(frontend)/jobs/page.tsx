@@ -4,6 +4,7 @@ import { CTA } from '@/components/blocks/CTA'
 import { JsonLd } from '@/components/JsonLd'
 import { getJobsContent, getFormOptions, getSiteChrome } from '@/lib/content'
 import { buildMetadata, jobPostingJsonLd } from '@/lib/seo'
+import { Container } from '@/components/ui/Container'
 
 export const metadata = buildMetadata({
   title: 'Jobs',
@@ -42,30 +43,30 @@ export default async function JobsPage() {
         />
       ))}
 
-      <section className="flex flex-col items-stretch bg-brand-yellow py-20 text-brand-black md:py-32">
-        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8 text-center">
+      <section className="flex flex-col items-stretch bg-brand-yellow py-section text-brand-black">
+        <Container className="flex flex-col items-center text-center">
           <h1 className="heading-hero mx-auto max-w-[675px] whitespace-pre-line uppercase text-brand-black">
             {jobs.hero.titel}
           </h1>
           <p className="body-lead mx-auto mt-6 max-w-[700px] whitespace-pre-line text-brand-black">
             {jobs.hero.untertitel}
           </p>
-        </div>
+        </Container>
       </section>
 
-      <section className="flex flex-col items-stretch bg-white py-20 md:py-32">
-        <div className="mx-auto flex w-full max-w-[1716px] flex-col items-center px-8">
+      <section className="flex flex-col items-stretch bg-white py-section">
+        <Container className="flex flex-col items-center">
           <h2 className="heading-section text-center text-brand-black">
             {jobs.openingsTitle}
           </h2>
           <div className="mt-10 w-full md:mt-16">
             <JobAccordion jobs={active} />
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="flex flex-col items-stretch bg-brand-black py-20 text-white md:py-32">
-        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center px-8">
+      <section className="flex flex-col items-stretch bg-brand-black py-section text-white">
+        <Container className="flex flex-col items-center">
           <h2 className="heading-section text-center text-white">
             {jobs.process.ueberschrift}
           </h2>
@@ -88,11 +89,11 @@ export default async function JobsPage() {
               </li>
             ))}
           </ol>
-        </div>
+        </Container>
       </section>
 
-      <section className="flex flex-col items-stretch bg-white py-20 md:py-32" id="bewerbung">
-        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
+      <section className="flex flex-col items-stretch bg-white py-section" id="bewerbung">
+        <Container className="flex flex-col items-center">
           <h2 className="heading-section text-center text-brand-black">
             {jobs.formTitle}
           </h2>
@@ -102,7 +103,7 @@ export default async function JobsPage() {
           <div className="mt-10 w-full md:mt-12">
             <ApplicationForm positions={positions} formOptions={formOptions} />
           </div>
-        </div>
+        </Container>
       </section>
 
       <CTA {...jobs.cta} yellow={false} />

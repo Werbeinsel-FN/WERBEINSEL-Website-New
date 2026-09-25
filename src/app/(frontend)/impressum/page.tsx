@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Hero } from '@/components/blocks/Hero'
 import { getImpressumContent } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
+import { Container } from '@/components/ui/Container'
 
 export const metadata = buildMetadata({
   title: 'Impressum',
@@ -39,8 +40,8 @@ export default async function ImpressumPage() {
     <>
       <Hero variante="einfach" titel={impressum.hero.titel} />
 
-      <section className="bg-white py-20 md:py-32">
-        <div className="mx-auto flex w-full max-w-[840px] flex-col items-center gap-12 px-5 text-center sm:px-8 md:gap-16">
+      <section className="bg-white py-section">
+        <Container variant="text" className="flex flex-col items-center gap-12 text-center md:gap-16">
           <Block title={impressum.angabenTitel}>
             <p className={label}>{impressum.firma}</p>
             <div className={body}>
@@ -86,7 +87,7 @@ export default async function ImpressumPage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
     </>
   )

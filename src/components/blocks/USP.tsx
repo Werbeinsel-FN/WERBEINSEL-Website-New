@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Container } from '@/components/ui/Container'
 
 export type USPBeleg = { titel: string; text: string }
 
@@ -13,8 +14,8 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
   const points = belegpunkte?.filter((b) => b?.titel)?.slice(0, 3) ?? []
 
   return (
-    <section className="flex flex-col items-center self-stretch bg-brand-black py-20 text-white md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-start gap-10 px-5 sm:px-8 md:gap-14">
+    <section className="flex flex-col items-center self-stretch bg-brand-black py-section text-white">
+      <Container className="flex flex-col items-start gap-10 md:gap-14">
         {/* Figma: gap 56 zwischen Blöcken */}
         <div className="flex w-full flex-col items-start gap-6 md:gap-14">
           {eyebrow ? (
@@ -65,7 +66,7 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
             ))}
           </div>
         ) : null}
-      </div>
+      </Container>
     </section>
   )
 }

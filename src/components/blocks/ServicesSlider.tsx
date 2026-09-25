@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { resolveMedia, type MediaLike } from '@/lib/media'
+import { Container } from '@/components/ui/Container'
 
 export type ServiceSlideItem = {
   titel: string
@@ -121,11 +122,11 @@ export function ServicesSlider({
   return (
     <section
       id="leistungen"
-      className="bg-brand-yellow py-14 md:py-32"
+      className="bg-brand-yellow py-section"
       aria-label={ueberschrift || 'Leistungen'}
     >
-      <div className="mx-auto w-full max-w-[1780px] px-5 sm:px-8">
-        <div className="mx-auto max-w-[840px] text-center">
+      <Container>
+        <div className="mx-auto max-w-text text-center">
           {eyebrow ? (
             <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/60 uppercase">
               {eyebrow}
@@ -170,7 +171,7 @@ export function ServicesSlider({
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

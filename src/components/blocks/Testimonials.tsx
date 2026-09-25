@@ -93,7 +93,7 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
 
   return (
     <section
-      className="relative flex min-h-[480px] flex-col justify-center bg-brand-black py-16 text-white md:min-h-[640px] md:py-24 lg:min-h-[820px] lg:py-40"
+      className="relative flex min-h-[480px] flex-col justify-center bg-brand-black py-section text-white md:min-h-[640px] lg:min-h-[820px]"
       aria-roledescription="carousel"
       aria-label={ueberschrift || 'Kundenstimmen'}
     >

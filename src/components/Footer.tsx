@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Logo } from '@/components/Logo'
+import { Container } from '@/components/ui/Container'
 
 export type FooterLink = { label: string; url: string }
 export type FooterColumn = { titel: string; links?: FooterLink[] | null }
@@ -43,7 +44,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
 
   return (
     <footer className="flex flex-col items-stretch bg-brand-black text-white">
-      <div className="mx-auto w-full max-w-[1700px] px-8 pt-16 md:pt-20">
+      <Container className="pt-16 md:pt-20">
         {/*
           Mobile: stack
           Tablet: logo full width, then Nav | Rechtliches | Social
@@ -111,7 +112,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
             © {year} WERBEINSEL. Alle Rechte vorbehalten.
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   )
 }

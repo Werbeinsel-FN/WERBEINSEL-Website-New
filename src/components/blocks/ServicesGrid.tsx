@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { resolveMedia, type MediaLike } from '@/lib/media'
+import { Container } from '@/components/ui/Container'
 
 export type ServiceGridItem = {
   nr?: string | null
@@ -80,8 +81,8 @@ function ServiceOverviewCard({ item }: { item: ServiceGridItem }) {
 
 export function ServicesGrid({ ueberschrift, items }: ServicesGridProps) {
   return (
-    <section className="flex flex-col items-stretch self-stretch bg-white py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1716px] flex-col items-center px-5 sm:px-8">
+    <section className="flex flex-col items-stretch self-stretch bg-white py-section">
+      <Container className="flex flex-col items-center">
         <h2 className="heading-section max-w-full text-center text-brand-black">
           {ueberschrift}
         </h2>
@@ -92,7 +93,7 @@ export function ServicesGrid({ ueberschrift, items }: ServicesGridProps) {
             <ServiceOverviewCard key={item.nr} item={item} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

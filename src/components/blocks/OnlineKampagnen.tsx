@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 type IconKey = 'zielgruppe' | 'motive' | 'auswertung'
 
 export type OnlineKampagneItem = {
@@ -324,9 +326,9 @@ export function OnlineKampagnen({
   if (!list.length) return null
 
   return (
-    <section className="bg-white py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center px-5 sm:px-8">
-        <div className="w-full max-w-[1716px] text-center">
+    <section className="bg-white py-section">
+      <Container className="flex flex-col items-center">
+        <div className="w-full text-center">
           <h2 className="heading-section text-brand-black">
             {ueberschrift}
           </h2>
@@ -357,7 +359,7 @@ export function OnlineKampagnen({
             </article>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 export type FormatItem = {
   label: string
   icon: 'visitenkarte' | 'social' | 'reel' | 'plakat'
@@ -170,9 +172,9 @@ export function EinMotiv({
   const list = items?.length ? items : DEFAULT_ITEMS
 
   return (
-    <section className="bg-brand-black py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center px-5 sm:px-8">
-        <div className="flex w-full max-w-[1716px] flex-col items-center gap-5 text-center">
+    <section className="bg-brand-black py-section">
+      <Container className="flex flex-col items-center">
+        <div className="flex w-full flex-col items-center gap-5 text-center">
           <h2 className="heading-section text-brand-yellow">
             {ueberschrift}
           </h2>
@@ -183,7 +185,7 @@ export function EinMotiv({
           ) : null}
         </div>
 
-        <div className="@container mt-7 w-full max-w-[1716px] pt-7">
+        <div className="@container mt-7 w-full pt-7">
           <div className="flex flex-nowrap items-end justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-8 xl:gap-11">
             {list.map((item) => (
               <div
@@ -198,7 +200,7 @@ export function EinMotiv({
             ))}
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

@@ -1,7 +1,7 @@
 /*
  * Design-Tokens (docs/designfundament-auftrag.md, Abschnitt 5).
  * Mitwachsende Werte laufen von 390 px bis 1920 px Bildschirmbreite.
- * Breakpoints: bis T5 Tailwind-Standard; ab T5 sm 660 · md 768 · lg 1024 · xl 1280 · 2xl 1400.
+ * Breakpoints: sm 660 · md 768 · lg 1024 · xl 1280 · 2xl 1400 (globals.css).
  */
 :root {
   /* 5.1 Farben (Figma) */
@@ -39,13 +39,8 @@
   --space-gap: clamp(1rem, 0.7451rem + 1.046vw, 2rem); /* 16 → 32 */
   --space-card: clamp(1.5rem, 1.245rem + 1.046vw, 2.5rem); /* 24 → 40 */
 
-  /* Bisheriges Section-Polster von .section-pad; Umstellung auf --space-section folgt in T5 */
-  --space-section-mobile: 56px;
-  --space-section-tablet: 96px;
-  --space-section-desktop: 96px;
-
   /* 5.4 Breiten und Seitenrand */
-  --container-max: 1780px;
+  --container-max: 1780px; /* Inhaltsbreite, Seitenrand kommt außen dazu */
   --container-text: 840px;
   --gutter: 20px; /* ab 660 px: 3.5vw */
 

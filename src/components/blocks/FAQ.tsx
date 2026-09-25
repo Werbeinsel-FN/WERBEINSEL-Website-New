@@ -3,6 +3,7 @@
 import { useId, useState } from 'react'
 import { JsonLd } from '@/components/JsonLd'
 import { faqPageJsonLd } from '@/lib/seo'
+import { Container } from '@/components/ui/Container'
 
 export type FAQItem = { frage: string; antwort: string }
 
@@ -80,9 +81,9 @@ export function FAQ({
   if (!list.length) return null
 
   return (
-    <section className="section-pad bg-brand-black text-white">
+    <section className="py-section bg-brand-black text-white">
       <JsonLd data={buildFaqJsonLd(list)} />
-      <div className="container-site">
+      <Container>
         {eyebrow ? (
           <p className="mb-4 font-poppins text-sm font-bold tracking-[0.2em] text-brand-yellow uppercase">
             {eyebrow}
@@ -121,7 +122,7 @@ export function FAQ({
             ))}
           </div>
         )}
-      </div>
+      </Container>
     </section>
   )
 }

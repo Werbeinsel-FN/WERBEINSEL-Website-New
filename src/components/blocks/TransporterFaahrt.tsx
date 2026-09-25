@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 export type TransporterPunkt = {
   titel: string
   text?: string | null
@@ -62,9 +64,9 @@ export function TransporterFaahrt({
   const list = punkte?.filter((p) => p?.titel) ?? []
 
   return (
-    <section className="bg-brand-black py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-12 px-5 sm:px-8 md:gap-16">
-        <div className="flex w-full max-w-[1716px] flex-col items-center gap-5 text-center">
+    <section className="bg-brand-black py-section">
+      <Container className="flex flex-col items-center gap-12 md:gap-16">
+        <div className="flex w-full flex-col items-center gap-5 text-center">
           <h2 className="heading-section text-brand-yellow">
             {ueberschrift}
           </h2>
@@ -78,7 +80,7 @@ export function TransporterFaahrt({
         <VanGraphic />
 
         {list.length ? (
-          <div className="grid w-full max-w-[1716px] grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-8">
+          <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-8">
             {list.map((punkt) => (
               <div
                 key={punkt.titel}
@@ -96,7 +98,7 @@ export function TransporterFaahrt({
             ))}
           </div>
         ) : null}
-      </div>
+      </Container>
     </section>
   )
 }

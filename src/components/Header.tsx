@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { Logo } from '@/components/Logo'
+import { Container } from '@/components/ui/Container'
 
 export type NavChild = { label: string; url: string }
 export type NavItem = { label: string; url: string; children?: NavChild[] }
@@ -101,9 +102,9 @@ export function Header({ items, sticky = true }: HeaderProps) {
         className={`bg-brand-yellow text-brand-black ${sticky ? 'sticky top-0 z-50' : 'relative z-50'}`}
       >
         <div className="relative flex h-[88px] w-full items-center">
-          <div className="container-site flex items-center">
+          <Container className="flex items-center">
             <Logo tone="light" />
-          </div>
+          </Container>
         </div>
       </header>
 

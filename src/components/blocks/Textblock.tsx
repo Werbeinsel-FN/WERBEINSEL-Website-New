@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { resolveMedia, type MediaLike } from '@/lib/media'
+import { Container } from '@/components/ui/Container'
 
 export type TextblockProps = {
   eyebrow?: string | null
@@ -38,8 +39,8 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
 
   /* Figma Section / About: padding 128px, heading 840/56 Unbounded 800, Body/Lead 22/500 */
   return (
-    <section className="bg-white py-14 md:py-32">
-      <div className="mx-auto w-full max-w-[1780px] px-5 text-center sm:px-8">
+    <section className="bg-white py-section">
+      <Container className="text-center">
         {eyebrow ? (
           <p className="mb-4 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
             {eyebrow}
@@ -64,7 +65,7 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
             />
           </div>
         ) : null}
-      </div>
+      </Container>
     </section>
   )
 }

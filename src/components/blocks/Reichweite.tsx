@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 export type StadtItem = { name: string; region?: string | null }
 
 export type ReichweiteProps = {
@@ -18,8 +20,8 @@ export function Reichweite({
   const cities = staedte?.filter((s) => s?.name) ?? []
 
   return (
-    <section className="section-pad bg-brand-yellow">
-      <div className="container-site">
+    <section className="py-section bg-brand-yellow">
+      <Container>
         <div className={`grid gap-12 ${karteZeigen ? 'lg:grid-cols-2 lg:items-start' : ''}`}>
           <div>
             {eyebrow ? (
@@ -73,7 +75,7 @@ export function Reichweite({
             </div>
           ) : null}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

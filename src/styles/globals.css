@@ -1,6 +1,15 @@
 @import 'tailwindcss';
 @import './tokens.css';
 
+/* Breakpoints (Abschnitt 5.5), angelehnt an zwetschke.de */
+@theme {
+  --breakpoint-sm: 660px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1400px;
+}
+
 /* Tokens aus tokens.css als Tailwind-Klassen (bg-brand-yellow, text-section, p-card, rounded-card …) */
 @theme inline {
   --color-brand-yellow: var(--color-yellow);
@@ -36,6 +45,8 @@
 
   --container-site: var(--container-max);
   --container-text: var(--container-text);
+  --container-site-outer: calc(var(--container-max) + 2 * var(--gutter));
+  --container-text-outer: calc(var(--container-text) + 2 * var(--gutter));
 
   --radius-pill: var(--radius-pill);
   --radius-card: var(--radius-card);
@@ -70,28 +81,26 @@
   }
 }
 
+/*
+ * Seitencontainer (Abschnitt 5.4): Inhalt max. 1780 px bzw. 840 px,
+ * Seitenrand (--gutter) liegt außen, wie bei zwetschke.de.
+ * Komponente: components/ui/Container.tsx
+ */
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--container-site-outer);
+  padding-inline: var(--gutter);
+}
+
+@utility container-text {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--container-text-outer);
+  padding-inline: var(--gutter);
+}
+
 @layer utilities {
-  .section-pad {
-    padding-block: var(--space-section-mobile);
-  }
-
-  @media (min-width: 641px) {
-    .section-pad {
-      padding-block: var(--space-section-tablet);
-    }
-  }
-
-  @media (min-width: 1025px) {
-    .section-pad {
-      padding-block: var(--space-section-desktop);
-    }
-  }
-
-  .container-site {
-    /* Figma content width ~1780 within 2908 artboard */
-    @apply mx-auto w-full max-w-[1112px] px-5 sm:px-6 lg:px-8 xl:max-w-[1280px] 2xl:max-w-[1780px];
-  }
-
   .heading-hero {
     font-size: var(--text-hero);
     font-weight: 900;
@@ -252,7 +261,7 @@
   margin-right: auto;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 660px) {
   .wi-menu-pill {
     width: 260px;
   }

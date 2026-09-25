@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { resolveMedia, type MediaLike } from '@/lib/media'
+import { Container } from '@/components/ui/Container'
 
 export type ReferenzSlideItem = {
   titel: string
@@ -75,11 +76,11 @@ export function ReferenzSlider({
     return (
       <section
         id={sectionId || undefined}
-        className="flex flex-col gap-12 bg-white py-20 md:py-32"
+        className="flex flex-col gap-12 bg-white py-section"
         aria-label={ueberschrift || 'Referenzen'}
       >
-        <div className="mx-auto w-full max-w-[1780px] px-5 sm:px-8">
-          <div className="mx-auto max-w-[1716px] text-center">
+        <Container>
+          <div className="text-center">
             {eyebrow ? (
               <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
                 {eyebrow}
@@ -94,7 +95,7 @@ export function ReferenzSlider({
               </p>
             ) : null}
           </div>
-        </div>
+        </Container>
       </section>
     )
   }
@@ -102,12 +103,12 @@ export function ReferenzSlider({
   return (
     <section
       id={sectionId || undefined}
-      className="flex flex-col gap-12 bg-white py-20 md:py-32"
+      className="flex flex-col gap-12 bg-white py-section"
       aria-roledescription="carousel"
       aria-label={ueberschrift || 'Referenzen'}
     >
-      <div className="mx-auto w-full max-w-[1780px] px-5 sm:px-8">
-        <div className="mx-auto max-w-[1716px] text-center">
+      <Container>
+        <div className="text-center">
           {eyebrow ? (
             <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
               {eyebrow}
@@ -120,7 +121,7 @@ export function ReferenzSlider({
             <p
               className={
                 untertitelKlein
-                  ? 'mx-auto mt-4 max-w-[1716px] text-center font-poppins text-base font-normal leading-[1.5] text-brand-black md:mt-6'
+                  ? 'mx-auto mt-4 text-center font-poppins text-base font-normal leading-[1.5] text-brand-black md:mt-6'
                   : 'body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black'
               }
             >
@@ -128,7 +129,7 @@ export function ReferenzSlider({
             </p>
           ) : null}
         </div>
-      </div>
+      </Container>
 
       <div className="relative">
         <div className="overflow-hidden" ref={emblaRef}>

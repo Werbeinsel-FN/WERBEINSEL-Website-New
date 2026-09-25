@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { resolveMedia, type MediaLike } from '@/lib/media'
+import { Container } from '@/components/ui/Container'
 
 export type FormatItem = {
   name: string
@@ -22,8 +23,8 @@ export function FormateMaterial({
   if (!list.length) return null
 
   return (
-    <section className="section-pad bg-brand-black text-white">
-      <div className="container-site">
+    <section className="py-section bg-brand-black text-white">
+      <Container>
         {eyebrow ? (
           <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-yellow uppercase">
             {eyebrow}
@@ -66,7 +67,7 @@ export function FormateMaterial({
             )
           })}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 export type BetreuungSchritt = {
   titel: string
   text?: string | null
@@ -16,13 +18,13 @@ export function Betreuung({
   if (!steps.length) return null
 
   return (
-    <section className="bg-brand-black py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-12 px-5 sm:px-8 md:gap-16">
-        <h2 className="heading-section w-full max-w-[1716px] text-center text-brand-yellow">
+    <section className="bg-brand-black py-section">
+      <Container className="flex flex-col items-center gap-12 md:gap-16">
+        <h2 className="heading-section w-full text-center text-brand-yellow">
           {ueberschrift}
         </h2>
 
-        <ol className="flex w-full max-w-[1716px] flex-col gap-10 sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-6 xl:gap-8">
+        <ol className="flex w-full flex-col gap-10 sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-6 xl:gap-8">
           {steps.map((step, i) => {
             const nummer = String(i + 1).padStart(2, '0')
             return (
@@ -50,7 +52,7 @@ export function Betreuung({
             )
           })}
         </ol>
-      </div>
+      </Container>
     </section>
   )
 }

@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 type IconKey = 'instagram' | 'tiktok' | 'facebook' | 'google' | 'youtube'
 
 export type KanalItem = {
@@ -428,9 +430,9 @@ export function Kanaele({
   if (!list.length) return null
 
   return (
-    <section className="bg-brand-yellow py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center px-5 sm:px-8">
-        <div className="w-full max-w-[1716px] text-center">
+    <section className="bg-brand-yellow py-section">
+      <Container className="flex flex-col items-center">
+        <div className="w-full text-center">
           <h2 className="heading-section text-brand-black">
             {ueberschrift}
           </h2>
@@ -469,7 +471,7 @@ export function Kanaele({
             )
           })}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

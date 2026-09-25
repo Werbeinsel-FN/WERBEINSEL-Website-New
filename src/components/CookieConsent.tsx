@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { Container } from '@/components/ui/Container'
 
 const STORAGE_KEY = 'werbeinsel-cookie-consent'
 
@@ -43,7 +44,7 @@ export function CookieConsent() {
       aria-label="Cookie-Hinweis"
       className="fixed inset-x-0 bottom-0 z-[60] border-t border-black/10 bg-white p-5 shadow-[0_-8px_40px_rgba(0,0,0,0.12)] md:p-6"
     >
-      <div className="container-site flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <Container className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="max-w-2xl">
           <p className="font-unbounded text-sm font-extrabold">Cookies</p>
           <p className="mt-2 font-poppins text-sm leading-relaxed text-black/70">
@@ -71,7 +72,7 @@ export function CookieConsent() {
             Analyse erlauben
           </button>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }

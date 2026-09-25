@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 type IconKey = 'events' | 'social' | 'image' | 'website'
 
 export type AufnehmenItem = {
@@ -361,9 +363,9 @@ export function WasWirAufnehmen({
   if (!list.length) return null
 
   return (
-    <section className="bg-white py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-12 px-5 sm:px-8">
-        <h2 className="heading-section w-full max-w-[1716px] text-center text-brand-black">
+    <section className="bg-white py-section">
+      <Container className="flex flex-col items-center gap-12">
+        <h2 className="heading-section w-full text-center text-brand-black">
           {ueberschrift}
         </h2>
 
@@ -387,7 +389,7 @@ export function WasWirAufnehmen({
             </article>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

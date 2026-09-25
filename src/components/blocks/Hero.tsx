@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { resolveMedia, type MediaLike } from '@/lib/media'
+import { Container } from '@/components/ui/Container'
 
 type HeroButton = {
   label: string
@@ -30,13 +31,13 @@ export function Hero({
   if (variante === 'einfach') {
     return (
       <section
-        className={`flex flex-col items-stretch justify-center self-stretch py-20 md:py-32 ${
+        className={`flex flex-col items-stretch justify-center self-stretch py-section ${
           hintergrund ? '' : 'bg-brand-yellow'
         }`}
         style={hintergrund ? { backgroundColor: hintergrund } : undefined}
       >
-        <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-6 px-4 text-center sm:px-6 md:px-8">
-          <h1 className="heading-hero mx-auto w-full max-w-[1700px] font-black uppercase text-brand-black xl:whitespace-nowrap">
+        <Container className="flex flex-col items-center gap-6 text-center">
+          <h1 className="heading-hero mx-auto w-full font-black uppercase text-brand-black xl:whitespace-nowrap">
             {titel}
           </h1>
           {untertitel ? (
@@ -59,7 +60,7 @@ export function Hero({
               ))}
             </div>
           ) : null}
-        </div>
+        </Container>
       </section>
     )
   }
@@ -92,7 +93,7 @@ export function Hero({
       )}
       <div className="absolute inset-0 bg-black/40" aria-hidden />
 
-      <div className="relative z-10 flex items-center justify-center px-5 py-14 sm:px-8 md:py-24">
+      <div className="relative z-10 flex items-center justify-center px-gutter py-14 md:py-24">
         <div className="w-full max-w-[1100px] rounded-[40px] bg-brand-yellow px-6 py-10 text-center sm:px-12 sm:py-12 md:p-16">
           <h1 className="heading-hero mx-auto max-w-[972px] whitespace-pre-line font-black text-brand-black">
             {titel}

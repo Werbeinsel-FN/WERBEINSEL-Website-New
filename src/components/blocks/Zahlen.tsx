@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 export type ZahlenStat = { zahl: string; label: string }
 
 export type ZahlenProps = {
@@ -22,11 +24,11 @@ export function Zahlen({ eyebrow, ueberschrift, stats, dunkel }: ZahlenProps) {
 
   return (
     <section
-      className={`flex flex-col items-center self-stretch py-20 md:py-32 ${
+      className={`flex flex-col items-center self-stretch py-section ${
         isDark ? 'bg-brand-black' : 'bg-white'
       }`}
     >
-      <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-5 sm:px-8">
+      <Container className="flex flex-col items-center">
         {(eyebrow || ueberschrift) && (
           <div className="mb-12 text-center">
             {eyebrow ? (
@@ -68,7 +70,7 @@ export function Zahlen({ eyebrow, ueberschrift, stats, dunkel }: ZahlenProps) {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

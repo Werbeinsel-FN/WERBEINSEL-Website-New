@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 export type EchtNichtGeneriertPunkt = {
   titel: string
   text?: string | null
@@ -79,8 +81,8 @@ export function EchtNichtGeneriert({
   const list = punkte?.filter((p) => p?.titel) ?? []
 
   return (
-    <section className="bg-brand-black py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-10 px-5 sm:px-8 lg:flex-row lg:items-center lg:gap-[88px]">
+    <section className="bg-brand-black py-section">
+      <Container className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-[88px]">
         <div className="w-full max-w-[min(100%,440px)] shrink-0 lg:w-[min(100%,440px)]">
           <Graphic />
         </div>
@@ -116,7 +118,7 @@ export function EchtNichtGeneriert({
             </div>
           ) : null}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

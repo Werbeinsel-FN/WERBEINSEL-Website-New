@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Container } from '@/components/ui/Container'
 
 export type MarqueeItem = {
   name: string
@@ -118,8 +119,8 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names, items }: Mar
   const rows = chunkRows(list, ROW_COUNT)
 
   return (
-    <section className="overflow-hidden bg-brand-yellow py-14 md:py-24">
-      <div className="mx-auto w-full max-w-[1780px] px-5 text-center sm:px-8">
+    <section className="overflow-hidden bg-brand-yellow py-section">
+      <Container className="text-center">
         {eyebrow ? (
           <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/55 uppercase">
             {eyebrow}
@@ -135,7 +136,7 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names, items }: Mar
             {untertitel}
           </p>
         ) : null}
-      </div>
+      </Container>
 
       <div className="mt-10 flex flex-col gap-5 md:mt-20 md:gap-8" aria-hidden>
         {rows.map((row, i) => (

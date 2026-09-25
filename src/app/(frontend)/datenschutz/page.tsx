@@ -1,6 +1,7 @@
 import { Hero } from '@/components/blocks/Hero'
 import { getDatenschutzContent } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
+import { Container } from '@/components/ui/Container'
 
 export const metadata = buildMetadata({
   title: 'Datenschutz',
@@ -22,8 +23,8 @@ export default async function DatenschutzPage() {
     <>
       <Hero variante="einfach" titel={hero.titel} />
 
-      <section className="bg-white py-20 md:py-32">
-        <div className="mx-auto flex w-full max-w-[840px] flex-col items-center gap-12 px-5 pb-12 text-center sm:px-8 md:gap-16">
+      <section className="bg-white py-section">
+        <Container variant="text" className="flex flex-col items-center gap-12 pb-12 text-center md:gap-16">
           {abschnitte.map((abschnitt) => (
             <div
               key={abschnitt.titel}
@@ -48,7 +49,7 @@ export default async function DatenschutzPage() {
               ))}
             </div>
           ))}
-        </div>
+        </Container>
       </section>
     </>
   )

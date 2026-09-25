@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Container } from '@/components/ui/Container'
 
 export type KategorieItem = {
   name: string
@@ -29,11 +30,11 @@ export function Kategorien({
 
   return (
     <section
-      className={`flex flex-col items-stretch self-stretch py-20 md:py-32 ${
+      className={`flex flex-col items-stretch self-stretch py-section ${
         isYellow ? 'bg-brand-yellow' : 'bg-white'
       }`}
     >
-      <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
+      <Container className="flex flex-col items-center">
         {(eyebrow || ueberschrift || text) && (
           <div className="flex w-full max-w-[1500px] flex-col items-center text-center">
             {eyebrow ? (
@@ -81,7 +82,7 @@ export function Kategorien({
             )
           })}
         </ul>
-      </div>
+      </Container>
     </section>
   )
 }

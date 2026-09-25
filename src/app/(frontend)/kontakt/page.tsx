@@ -1,6 +1,7 @@
 import { ContactForm } from '@/components/forms/ContactForm'
 import { getKontaktContent, getSiteChrome, getFormOptions } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
+import { Container } from '@/components/ui/Container'
 
 export const metadata = buildMetadata({
   title: 'Kontakt',
@@ -22,27 +23,27 @@ export default async function KontaktPage() {
   return (
     <>
       {/* Hero – gelb, Display/Hero + Body/Lead (Figma) */}
-      <section className="flex flex-col items-stretch bg-brand-yellow py-20 text-brand-black md:py-32">
-        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8 text-center">
+      <section className="flex flex-col items-stretch bg-brand-yellow py-section text-brand-black">
+        <Container className="flex flex-col items-center text-center">
           <h1 className="heading-hero mx-auto max-w-[640px] whitespace-pre-line uppercase text-brand-black">
             {kontakt.hero.titel}
           </h1>
           <p className="body-lead mx-auto mt-6 max-w-[625px] whitespace-pre-line text-brand-black">
             {kontakt.hero.untertitel}
           </p>
-        </div>
+        </Container>
       </section>
 
       {/* Formular – Figma: max 1700, padding 0 32 */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
+      <section className="bg-white py-section">
+        <Container className="flex flex-col items-center">
           <ContactForm formOptions={formOptions} />
-        </div>
+        </Container>
       </section>
 
       {/* Direktkontakt – Figma: padding 128, icons 80, Label/Meta + Body/Lead */}
-      <section className="flex flex-col items-stretch bg-brand-black py-20 text-white md:py-32">
-        <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
+      <section className="flex flex-col items-stretch bg-brand-black py-section text-white">
+        <Container className="flex flex-col items-center">
           <h2 className="heading-section mb-12 whitespace-pre-line text-center text-brand-yellow md:mb-16">
             {kontakt.contactTitle}
           </h2>
@@ -84,7 +85,7 @@ export default async function KontaktPage() {
               external
             />
           </div>
-        </div>
+        </Container>
       </section>
     </>
   )

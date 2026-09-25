@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react'
 import Image from 'next/image'
 import { resolveMedia, type MediaLike } from '@/lib/media'
+import { Container } from '@/components/ui/Container'
 
 type Step = {
   titel: string
@@ -66,7 +67,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
       }}
       tabIndex={0}
     >
-      <div className="mx-auto w-full max-w-[1780px] px-5 py-14 sm:px-8 md:py-20 xl:py-24 2xl:py-[200px]">
+      <Container className="py-section">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-stretch lg:gap-10 xl:gap-14 2xl:gap-[120px]">
           <div className="relative w-full min-w-0 overflow-hidden rounded-[20px] lg:w-[min(48%,420px)] lg:shrink-0 xl:w-[min(46%,520px)] 2xl:w-[min(100%,760px)] 2xl:rounded-[24px]">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] sm:aspect-[3/4] lg:aspect-[3/4] 2xl:aspect-[760/1013] 2xl:rounded-[24px]">
@@ -157,7 +158,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

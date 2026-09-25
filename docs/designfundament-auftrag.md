@@ -143,6 +143,8 @@ Schriften: **Unbounded** (800, 900) für Überschriften, **Poppins** (400, 500, 
 
 Farbige Hintergrundflächen laufen immer über die volle Breite, nur der Inhalt wird begrenzt.
 
+**Seitenrand liegt außen (festgelegt in T5):** 1780 px bzw. 840 px sind die Breite des *Inhalts*; der Seitenrand kommt außen dazu. Das entspricht der Messung bei zwetschke.de (bei 1920 px: 1920 − 2 × 3,5 % ≈ 1786 px Inhalt). Umgesetzt als Klassen `container-site` und `container-text` in `globals.css` (`max-width: calc(Inhaltsbreite + 2 × --gutter)`, `padding-inline: --gutter`); die Komponente `Container` nutzt diese Klassen.
+
 ### 5.5 Breakpoints
 
 In `globals.css` per `@theme` festlegen, angelehnt an zwetschke:
@@ -233,6 +235,41 @@ Seiten werden bei 810–1440 px um 20–75 px länger; bei 390 px teils kürzer 
 - **Achtung 1440 px:** Mit 2xl ab 1400 px greifen dort alle bisherigen `2xl:`-Stile. Ohne Anpassung rückt der Inhalt von Kopfzeile, Reichweite, Formate und FAQ (`.container-site`) von ca. 112 auf 32 px an den Rand, der Schritt-Slider (`StepSlider.tsx`) springt in die große Variante (Bild bis 760 px, Pfeile 130 px, 200 px Innenabstand) und die USP-Karten erhalten `2xl:p-14`. Diese Stellen gemeinsam mit den Containern umstellen und gezielt prüfen.
 - **Fertig, wenn:** keine festen `max-w-[…px]`-Werte für Seitenbreiten mehr im Code.
 
+**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+
+- **Umgesetzt:**
+  - Breakpoints sm 660 / 2xl 1400, Menü-Media-Query 640 → 660.
+  - 39 Seiten-Wrapper → `<Container>` (davon 2 × `variant="text"` für Impressum und Datenschutz), innere `max-w-[1716px]` bzw. `[1700px]` entfernt.
+  - 35 Sektionen und der Schritt-Slider → `py-section`; `.section-pad` und die alten `--space-section-*`-Tokens entfallen.
+  - Seitenrand der Hero-Bildvariante → `px-gutter`.
+- **Bewusst belassen:**
+  - `max-w-[1000–1500px]` an Überschriften und Absätzen (Zeilenlänge, keine Seitenbreite) und an der gelben Hero-Karte.
+  - Innenabstand des Hero-Blocks.
+  - `Testimonials`: eigener Innen-Wrapper `max-w-[900px]` mit festen Rändern; prüfen in T7.
+
+Sichtbare Änderungen:
+
+| | 390 | 810 | 1024 | 1440 | 1920 |
+|---|---|---|---|---|---|
+| Seitenrand der meisten Blöcke (vorher `px-5 sm:px-8`) | 20 → 20 | 32 → 28 | 32 → 36 | 32 → 50 | 102 → 70 |
+| Seitenrand Kopfzeile, Reichweite, Formate, FAQ, Cookie-Banner (vorher `.container-site`) | 20 → 20 | 24 → 28 | 32 → 36 | **112 → 50** | 102 → 70 |
+| Seitenrand Seiten-Köpfe Jobs/Kontakt/Services, Kategorien, Footer (vorher `max-w-[1700px] px-8`) | 32 → 20 | 32 → 28 | 32 → 36 | 32 → 50 | 142 → 70 |
+| Inhaltsbreite bei 1920 px | | | | | 1636–1716 → 1780 |
+| Impressum/Datenschutz Textbreite | 350 → 350 | 746 → 753 | 776 → 840 | 776 → 840 | 776 → 840 |
+| Sektionsabstand (vorher meist `py-20 md:py-32`) | 80 → 52 | 128 → 68 | 128 → 115 | 128 → 115 | 128 → 115 |
+| Sektionsabstand FAQ, Formate, Reichweite (vorher `.section-pad`) | 56 → 52 | 96 → 68 | 96 → 115 | 96 → 115 | 96 → 115 |
+| Kundenstimmen (vorher 64/96/160, Mindesthöhen bleiben) | 64 → 52 | 96 → 68 | 160 → 115 | 160 → 115 | 160 → 115 |
+| Schritt-Slider oben/unten (vorher 56/80/96/200) | 56 → 52 | 80 → 68 | 80 → 115 | 96 → 115 | 200 → 115 |
+
+⚠️ **Zur Prüfung auf der Vorschau (1440 px):**
+1. **Schritt-Slider:** springt durch 2xl ab 1400 px in die große Variante – Bild bis 760 px breit, sehr große „01“, Pfeile 130 px, Abstand Bild–Text 120 px. Leistungsseiten werden bei 1440 px dadurch ca. 230–330 px länger.
+2. **USP-Karten:** Innenabstand 40 → 56 px (`2xl:p-14`).
+3. **Seitenrand:** überall einheitlich 50 px; Kopfzeile, Reichweite, Formate und FAQ rücken von 112 auf 50 px nach außen und fluchten jetzt mit dem restlichen Inhalt.
+
+Seitenlängen: bei 390 px 100–420 px kürzer, bei 810 px 300–1000 px kürzer (Sektionsabstände), bei 1920 px 70–300 px kürzer.
+
+**Bekannter Fehler, verstärkt:** Die Hero-Überschrift „PLAKATWERBUNG“ ist bei 390 px 378 px breit und läuft über; durch den einheitlichen Seitenrand (20 statt 16 px) wächst der Überlauf der Seite von 4 auf 8 px. Behebung in T7.
+
 ### T6 – Abstände und Rundungen
 - Karten-Innenabstände, Abstände zwischen Überschrift und Inhalt sowie zwischen Karten auf die Tokens aus 5.3 umstellen.
 - Rundungen auf die drei Tokens aus 5.6 vereinheitlichen.
@@ -241,6 +278,7 @@ Seiten werden bei 810–1440 px um 20–75 px länger; bei 390 px teils kürzer 
 ### T7 – CMS-Blöcke prüfen
 - Alle 24 Blöcke unter `src/components/blocks/` mit den neuen Komponenten gegenprüfen, damit neue Leistungsseiten im CMS automatisch sauber aussehen.
 - **Testseite** anlegen, die alle 24 CMS-Blöcke mit Beispielinhalten zeigt (ohne Datenbank, aus den Seed-Daten), und in `scripts/screenshots.mjs` aufnehmen. Viele Blöcke – darunter alle mit SVG-Illustrationen (Kanäle, Online-Kampagnen, Was wir aufnehmen/bekleben/gestalten, Ein Motiv, Echt nicht generiert, Transporter) – kommen auf keiner Seed-Seite vor und fehlen deshalb bisher in den Screenshot-Vergleichen. Die Testseite darf nicht öffentlich erreichbar oder indexiert sein (z. B. nur im Entwicklungsmodus oder mit `noindex` und ohne Link).
+- Bekannt aus T5: Hero-Überschrift „PLAKATWERBUNG“ läuft bei 390 px über (Seite 8 px zu breit); `Testimonials` hat noch einen eigenen Wrapper `max-w-[900px]` mit festen Rändern.
 - **Fertig, wenn:** jeder Block in allen fünf Prüfbreiten ohne Überlauf und ohne abgeschnittenen Text dargestellt wird.
 
 ### T8 – Absicherung

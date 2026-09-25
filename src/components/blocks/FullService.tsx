@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 export type FullServiceSchritt = { titel: string; text?: string | null }
 
 export type FullServiceProps = {
@@ -11,9 +13,9 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
   const steps = schritte?.filter((s) => s?.titel) ?? []
 
   return (
-    <section className="flex flex-col items-center self-stretch bg-white py-20 md:py-32">
+    <section className="flex flex-col items-center self-stretch bg-white py-section">
       {/* Figma: max 1780, gap 56, align flex-start, padding 128 */}
-      <div className="mx-auto flex w-full max-w-[1780px] flex-col items-start gap-10 px-5 sm:px-8 md:gap-14">
+      <Container className="flex flex-col items-start gap-10 md:gap-14">
         <div className="flex w-full flex-col items-start gap-6 md:gap-14">
           {eyebrow ? (
             <p className="font-poppins text-sm font-bold uppercase tracking-[0.12em] text-brand-on-light md:text-base">
@@ -65,7 +67,7 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
             })}
           </ol>
         ) : null}
-      </div>
+      </Container>
     </section>
   )
 }

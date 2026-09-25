@@ -13,7 +13,7 @@ describe('Container', () => {
     render(<Container data-testid="c">Inhalt</Container>)
     const el = screen.getByTestId('c')
     expect(el.tagName).toBe('DIV')
-    expect(el).toHaveProperty('className', 'mx-auto w-full px-gutter max-w-site')
+    expect(el).toHaveProperty('className', 'container-site')
   })
 
   it('nutzt in der Variante text die Textbreite', () => {
@@ -23,8 +23,7 @@ describe('Container', () => {
       </Container>,
     )
     const el = screen.getByTestId('c')
-    expect(el.className).toContain('max-w-text')
-    expect(el.className).not.toContain('max-w-site')
+    expect(el.className).toBe('container-text')
   })
 
   it('übernimmt Tag und zusätzliche Klassen', () => {

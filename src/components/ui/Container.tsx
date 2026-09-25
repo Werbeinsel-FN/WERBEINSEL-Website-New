@@ -6,13 +6,14 @@ type ContainerProps = {
   children: ReactNode
   className?: string
   as?: 'div' | 'section' | 'header' | 'footer' | 'nav'
-  /** site: Inhaltsbreite 1780 px · text: 840 px für lange Fließtexte */
+  /** site: Inhalt max. 1780 px · text: max. 840 px für lange Fließtexte; Seitenrand jeweils außen */
   variant?: ContainerVariant
 } & Omit<HTMLAttributes<HTMLElement>, 'children'>
 
+/* container-site / container-text sind in globals.css definiert */
 const variantClasses: Record<ContainerVariant, string> = {
-  site: 'max-w-site',
-  text: 'max-w-text',
+  site: 'container-site',
+  text: 'container-text',
 }
 
 export function Container({
@@ -23,7 +24,7 @@ export function Container({
   ...rest
 }: ContainerProps) {
   return (
-    <Tag className={`mx-auto w-full px-gutter ${variantClasses[variant]} ${className}`.trim()} {...rest}>
+    <Tag className={`${variantClasses[variant]} ${className}`.trim()} {...rest}>
       {children}
     </Tag>
   )
