@@ -173,8 +173,8 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 - `Container`: max. 1780 px, Seitenrand über `--gutter`; Variante `text` mit 840 px.
 - Neue Komponente `Section` mit Hintergrund `yellow | black | white`, Abstand über `--space-section`.
 - Neue Komponente `Heading` mit den Größen `hero | section | sub | card | step`; semantische Ebene (h1–h4) unabhängig von der Größe wählbar.
-- `Button` nutzt `--text-button` und `--radius-pill`.
-- **Fertig, wenn:** Komponenten vorhanden und mit Unit-Tests abgedeckt sind.
+- `Button` nutzt `--radius-pill`. Die Schriftgrößen bleiben vorerst fest (`text-sm` / `text-base` / `text-xl`); die Umstellung auf `--text-button` folgt in T4, weil sie sichtbar ist (Hero- und CTA-Buttons bei 390 px 16 statt 20 px).
+- **Fertig, wenn:** Komponenten vorhanden und mit Unit-Tests abgedeckt sind und die Screenshots keine sichtbare Änderung zeigen.
 
 ### T3 – Farben umstellen
 - Alle festen Farbwerte in `.tsx` durch Token-Klassen ersetzen (`#FFED00` → `brand-yellow` usw.).
@@ -183,6 +183,7 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 
 ### T4 – Schriftgrößen umstellen (**sichtbare Korrektur**)
 - `--text-hero`, `--text-section` und `--text-lead` auf die neuen Werte aus 5.2 setzen.
+- `Button` für alle Größen auf `--text-button` umstellen (aus T2 verschoben) und den Unit-Test in `tests/int/ui.int.spec.tsx` anpassen. **Erwartete Änderung:** Button-Schrift 20 → 16 px bei 390, ca. 17 px bei 810, ca. 18,7 px bei 1440, unverändert 20 px bei 1920.
 - Alle `text-[…px]` und `md:text-[…px]` durch die Tokens aus 5.2 ersetzen. Die wirkungslosen `md:text-[56px]`, `md:text-[88px]` und `md:text-[22px]` (siehe Abschnitt 2) entfallen ersatzlos.
 - **Erwartete Änderung:** Überschriften und Einleitungstexte werden ab ca. 800 px **etwas größer** als heute (Tabelle in Abschnitt 2, z. B. Sektionsüberschrift bei 810 px ca. 36 statt 30 px, bei 1440 px ca. 47 statt 44 px). Längere Überschriften können dadurch eine Zeile mehr brauchen (z. B. „VIER DISZIPLINEN, EIN ANSPRUCH“ auf `/services` bei 810 px). Wird auf der Vorschau gemeinsam geprüft.
 - **Fertig, wenn:** keine festen Pixel-Schriftgrößen mehr in `.tsx`.
@@ -231,6 +232,7 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 | Fließtext | 16 → 18 px (bewusst kleiner als zwetschke) |
 | Feinabstimmung Schriftgrößen | gemeinsam auf der Vorschau-Adresse nach T4 |
 | T1 ohne sichtbare Änderung | Neue Werte für hero/section/lead erst in T4, neue Breakpoints erst in T5 |
+| T2 ohne sichtbare Änderung | `Button` auf `--text-button` erst in T4 |
 
 ---
 
@@ -238,3 +240,4 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 
 - **Lint-Fehler** in `src/components/forms/FormFeedback.tsx`, Zeilen 111–112 (`react-hooks/refs`: „Cannot access refs during render“). Bestanden schon vor T1; `npm run lint` läuft deshalb bis dahin nicht fehlerfrei.
 - **npm-audit-Hinweise** aus `npm ci` prüfen und beheben.
+- **Test `tests/int/api.int.spec.ts` schlägt lokal fehl:** Ohne `DATABASE_URL` versucht Payload eine Postgres-Verbindung zu `localhost:5432` („cannot connect to Postgres“). `npm run test:int` läuft deshalb lokal nicht vollständig durch. Test so anpassen, dass er ohne Datenbank übersprungen wird oder eine eigene Testdatenbank nutzt – nie die Produktionsdatenbank.
