@@ -20,35 +20,35 @@ function VanGraphic() {
     >
       <path
         d="M40 236V150C40 144.667 42.6667 141.333 48 140L118 128L176 62C180 56.6667 186 54 194 54H654C663.333 54 668 58.6667 668 68V236H40Z"
-        stroke="#FFED00"
+        className="stroke-brand-yellow"
         strokeWidth="3.5"
         strokeLinejoin="round"
       />
-      <path opacity="0.5" d="M128 136L182 72H244V130L128 136Z" fill="#FFED00" />
-      <path opacity="0.3" d="M300 60V236" stroke="#FFED00" strokeWidth="2" />
+      <path opacity="0.5" d="M128 136L182 72H244V130L128 136Z" className="fill-brand-yellow" />
+      <path opacity="0.3" d="M300 60V236" className="stroke-brand-yellow" strokeWidth="2" />
       <path
         d="M150 270C168.778 270 184 254.778 184 236C184 217.222 168.778 202 150 202C131.222 202 116 217.222 116 236C116 254.778 131.222 270 150 270Z"
-        stroke="#FFED00"
+        className="stroke-brand-yellow"
         strokeWidth="3.5"
       />
       <path
         d="M556 270C574.778 270 590 254.778 590 236C590 217.222 574.778 202 556 202C537.222 202 522 217.222 522 236C522 254.778 537.222 270 556 270Z"
-        stroke="#FFED00"
+        className="stroke-brand-yellow"
         strokeWidth="3.5"
       />
       <path
         opacity="0.5"
         d="M150 248C156.627 248 162 242.627 162 236C162 229.373 156.627 224 150 224C143.373 224 138 229.373 138 236C138 242.627 143.373 248 150 248Z"
-        fill="#FFED00"
+        className="fill-brand-yellow"
       />
       <path
         opacity="0.5"
         d="M556 248C562.627 248 568 242.627 568 236C568 229.373 562.627 224 556 224C549.373 224 544 229.373 544 236C544 242.627 549.373 248 556 248Z"
-        fill="#FFED00"
+        className="fill-brand-yellow"
       />
       <path
         d="M638 86H328C324.686 86 322 88.6863 322 92V206C322 209.314 324.686 212 328 212H638C641.314 212 644 209.314 644 206V92C644 88.6863 641.314 86 638 86Z"
-        fill="#FFED00"
+        className="fill-brand-yellow"
       />
     </svg>
   )
@@ -88,7 +88,7 @@ export function TransporterFaahrt({
                   {punkt.titel}
                 </h3>
                 {punkt.text ? (
-                  <p className="w-full font-poppins text-base font-normal leading-[1.5] text-[#B8B8B8]">
+                  <p className="w-full font-poppins text-base font-normal leading-[1.5] text-brand-muted">
                     {punkt.text}
                   </p>
                 ) : null}

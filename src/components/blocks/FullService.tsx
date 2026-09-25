@@ -16,7 +16,7 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
       <div className="mx-auto flex w-full max-w-[1780px] flex-col items-start gap-10 px-5 sm:px-8 md:gap-14">
         <div className="flex w-full flex-col items-start gap-6 md:gap-14">
           {eyebrow ? (
-            <p className="font-poppins text-sm font-bold uppercase tracking-[0.12em] text-[#666] md:text-base">
+            <p className="font-poppins text-sm font-bold uppercase tracking-[0.12em] text-brand-on-light md:text-base">
               {eyebrow}
             </p>
           ) : null}
@@ -27,8 +27,8 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
           </h2>
 
           {text ? (
-            /* Poppins 32/400 #666, max 1400 */
-            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-base font-normal leading-[1.5] text-[#666] md:text-[28px] xl:text-[32px]">
+            /* Poppins 32/400 brand-on-light, max 1400 */
+            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-base font-normal leading-[1.5] text-brand-on-light md:text-[28px] xl:text-[32px]">
               {text}
             </p>
           ) : null}
@@ -41,7 +41,7 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
               return (
                 <li
                   key={`${step.titel}-${i}`}
-                  className="@container flex min-w-0 flex-col items-start gap-4 rounded-[24px] bg-[#F5F5F5] p-6 sm:p-8 xl:p-10"
+                  className="@container flex min-w-0 flex-col items-start gap-4 rounded-[24px] bg-brand-card-light p-6 sm:p-8 xl:p-10"
                 >
                   {/* Unbounded 40/900 yellow */}
                   <span
@@ -55,8 +55,8 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
                     {step.titel}
                   </h3>
                   {step.text ? (
-                    /* Poppins 20/400 #666, lh 145% */
-                    <p className="w-full font-poppins text-[clamp(0.85rem,5.5cqi,1.25rem)] font-normal leading-[1.45] text-[#666]">
+                    /* Poppins 20/400 brand-on-light, lh 145% */
+                    <p className="w-full font-poppins text-[clamp(0.85rem,5.5cqi,1.25rem)] font-normal leading-[1.45] text-brand-on-light">
                       {step.text}
                     </p>
                   ) : null}

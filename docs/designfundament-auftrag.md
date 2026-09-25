@@ -87,9 +87,15 @@ Alle Werte stehen in `src/styles/tokens.css` und werden in `globals.css` per `@t
 | `--color-card-light` | `#F5F5F5` | Karten auf Weiß |
 | `--color-text-muted` | `#B3B3B3` | Fließtext auf Schwarz; ersetzt `#B8B8B8` |
 | `--color-text-subtle` | `#808080` | Nebeninfos |
+| `--color-text-on-light` | `#666666` | Nebentext auf Weiß/Hellgrau (Kontrast 5,7:1); nicht „text-secondary“, das ist in Figma `#B3B3B3` |
 | `--color-divider` | `#333333` | Linien auf Schwarz |
+| `--color-control` | `#595959` | Slider-Steuerung auf Schwarz (Fortschrittsbalken, Zurück-Pfeil) |
+| `--color-control-hover` | `#6A6A6A` | Hover dazu |
 | `--color-error` | `#8A0000` | Fehlermeldungen in Formularen |
 | `--color-whatsapp` | `#25D366` | nur WhatsApp |
+| `--gradient-hero-fallback` | `radial-gradient(… #3a3a3a → #111 → #000)` | Ersatzhintergrund für Hero ohne Bild |
+
+Tailwind-Klassen: `brand-yellow`, `brand-black`, `brand-white`, `brand-card-dark`, `brand-card-light`, `brand-muted`, `brand-subtle`, `brand-on-light`, `brand-divider`, `brand-control`, `brand-control-hover`, `brand-error`, `brand-whatsapp` (z. B. `bg-brand-control`, `text-brand-on-light`, `fill-brand-yellow`).
 
 ### 5.2 Schriftgrößen
 
@@ -178,8 +184,9 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 
 ### T3 – Farben umstellen
 - Alle festen Farbwerte in `.tsx` durch Token-Klassen ersetzen (`#FFED00` → `brand-yellow` usw.).
-- `#B8B8B8` → `text-muted` (#B3B3B3); `#595959` prüfen und einem Token zuordnen.
-- **Fertig, wenn:** `grep -rE "#[0-9A-Fa-f]{6}" src --include=*.tsx` außerhalb von `coming-soon` keine Treffer mehr liefert.
+- `#B8B8B8` → `brand-muted` (#B3B3B3); `#595959` → `brand-control`, Hover `#6A6A6A` → `brand-control-hover`; `#666` → `brand-on-light`; Hero-Verlauf → `var(--gradient-hero-fallback)`.
+- SVG-Illustrationen: `fill="#FFED00"` / `stroke="#FFED00"` → `className="fill-brand-yellow"` / `"stroke-brand-yellow"`.
+- **Fertig, wenn:** `grep -rnE "#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b" src --include=*.tsx | grep -v "src/app/coming-soon/"` keine Treffer mehr liefert (sechs- und dreistellige Hex-Werte).
 
 ### T4 – Schriftgrößen umstellen (**sichtbare Korrektur**)
 - `--text-hero`, `--text-section` und `--text-lead` auf die neuen Werte aus 5.2 setzen.
@@ -203,6 +210,7 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 
 ### T7 – CMS-Blöcke prüfen
 - Alle 24 Blöcke unter `src/components/blocks/` mit den neuen Komponenten gegenprüfen, damit neue Leistungsseiten im CMS automatisch sauber aussehen.
+- **Testseite** anlegen, die alle 24 CMS-Blöcke mit Beispielinhalten zeigt (ohne Datenbank, aus den Seed-Daten), und in `scripts/screenshots.mjs` aufnehmen. Viele Blöcke – darunter alle mit SVG-Illustrationen (Kanäle, Online-Kampagnen, Was wir aufnehmen/bekleben/gestalten, Ein Motiv, Echt nicht generiert, Transporter) – kommen auf keiner Seed-Seite vor und fehlen deshalb bisher in den Screenshot-Vergleichen. Die Testseite darf nicht öffentlich erreichbar oder indexiert sein (z. B. nur im Entwicklungsmodus oder mit `noindex` und ohne Link).
 - **Fertig, wenn:** jeder Block in allen fünf Prüfbreiten ohne Überlauf und ohne abgeschnittenen Text dargestellt wird.
 
 ### T8 – Absicherung

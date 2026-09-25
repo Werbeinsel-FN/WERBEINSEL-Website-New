@@ -62,11 +62,7 @@ export function Zahlen({ eyebrow, ueberschrift, stats, dunkel }: ZahlenProps) {
               >
                 {stat.zahl}
               </p>
-              <p
-                className={`max-w-[360px] font-poppins font-medium leading-[1.3] text-[clamp(0.875rem,6cqi,1.75rem)] ${
-                  isDark ? 'text-[#B8B8B8]' : 'text-brand-muted'
-                }`}
-              >
+              <p className="max-w-[360px] font-poppins font-medium leading-[1.3] text-[clamp(0.875rem,6cqi,1.75rem)] text-brand-muted">
                 {stat.label}
               </p>
             </div>

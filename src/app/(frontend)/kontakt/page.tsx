@@ -61,7 +61,7 @@ export default async function KontaktPage() {
               icon="mail"
             />
             <div className="flex flex-col items-center gap-4 text-center">
-              <span className="circle grid size-20 shrink-0 place-items-center rounded-full bg-[#25D366] text-white">
+              <span className="circle grid size-20 shrink-0 place-items-center rounded-full bg-brand-whatsapp text-white">
                 <ChatBubbleIcon />
               </span>
               <p className="font-unbounded text-lg font-extrabold leading-[1.5] uppercase text-brand-yellow">
@@ -71,7 +71,7 @@ export default async function KontaktPage() {
                 href={`https://wa.me/${wa}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-3 font-poppins text-base font-semibold text-white transition hover:brightness-110"
+                className="inline-flex items-center justify-center rounded-full bg-brand-whatsapp px-6 py-3 font-poppins text-base font-semibold text-white transition hover:brightness-110"
               >
                 {kontakt.cards.whatsappCta}
               </a>

@@ -30,12 +30,12 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
           </h2>
 
           {typeof text === 'string' && text ? (
-            /* Poppins 32/400 #B8B8B8, max 1400 */
-            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-base font-normal leading-[1.5] text-[#B8B8B8] md:text-[28px] xl:text-[32px]">
+            /* Poppins 32/400 brand-muted, max 1400 */
+            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-base font-normal leading-[1.5] text-brand-muted md:text-[28px] xl:text-[32px]">
               {text}
             </p>
           ) : text && typeof text !== 'string' ? (
-            <div className="max-w-[1400px] font-poppins text-base leading-[1.5] text-[#B8B8B8] md:text-[28px] xl:text-[32px]">
+            <div className="max-w-[1400px] font-poppins text-base leading-[1.5] text-brand-muted md:text-[28px] xl:text-[32px]">
               {text}
             </div>
           ) : null}
@@ -46,7 +46,7 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
             {points.map((point, i) => (
               <article
                 key={`${point.titel}-${i}`}
-                className="@container flex h-full min-w-0 flex-col items-start gap-4 overflow-hidden rounded-[24px] bg-[#1A1A1A] p-5 sm:p-6 md:gap-5 xl:p-10 2xl:p-14"
+                className="@container flex h-full min-w-0 flex-col items-start gap-4 overflow-hidden rounded-[24px] bg-brand-card-dark p-5 sm:p-6 md:gap-5 xl:p-10 2xl:p-14"
               >
                 <span
                   className="block size-5 shrink-0 rounded-full bg-brand-yellow xl:size-6"
@@ -57,7 +57,7 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
                   {point.titel}
                 </h3>
                 {point.text ? (
-                  <p className="w-full min-w-0 max-w-full whitespace-pre-line font-poppins text-[clamp(0.75rem,4.4cqi,1.5rem)] font-normal leading-[1.45] text-[#B8B8B8] hyphens-none">
+                  <p className="w-full min-w-0 max-w-full whitespace-pre-line font-poppins text-[clamp(0.75rem,4.4cqi,1.5rem)] font-normal leading-[1.45] text-brand-muted hyphens-none">
                     {point.text}
                   </p>
                 ) : null}

@@ -10,7 +10,10 @@
   --color-brand-card-light: var(--color-card-light);
   --color-brand-muted: var(--color-text-muted);
   --color-brand-subtle: var(--color-text-subtle);
+  --color-brand-on-light: var(--color-text-on-light);
   --color-brand-divider: var(--color-divider);
+  --color-brand-control: var(--color-control);
+  --color-brand-control-hover: var(--color-control-hover);
   --color-brand-error: var(--color-error);
   --color-brand-whatsapp: var(--color-whatsapp);
 

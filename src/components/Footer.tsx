@@ -107,7 +107,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
         </div>
 
         <div className="mt-12 flex flex-col items-stretch border-t border-white/15 pt-6 pb-12 text-center">
-          <p className="font-poppins text-sm font-normal leading-[1.5] text-[#808080]">
+          <p className="font-poppins text-sm font-normal leading-[1.5] text-brand-subtle">
             © {year} WERBEINSEL. Alle Rechte vorbehalten.
           </p>
         </div>

@@ -42,7 +42,7 @@ export function Betreuung({
                   {step.titel}
                 </h3>
                 {step.text ? (
-                  <p className="max-w-[405px] font-poppins text-[clamp(0.8125rem,4cqi,1rem)] font-normal leading-[1.5] text-[#B8B8B8]">
+                  <p className="max-w-[405px] font-poppins text-[clamp(0.8125rem,4cqi,1rem)] font-normal leading-[1.5] text-brand-muted">
                     {step.text}
                   </p>
                 ) : null}

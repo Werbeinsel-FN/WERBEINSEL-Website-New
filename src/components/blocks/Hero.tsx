@@ -86,10 +86,7 @@ export function Hero({
       ) : (
         <div
           className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse at 30% 40%, #3a3a3a 0%, #111 45%, #000 100%)',
-          }}
+          style={{ background: 'var(--gradient-hero-fallback)' }}
           aria-hidden
         />
       )}

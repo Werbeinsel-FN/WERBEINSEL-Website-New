@@ -111,7 +111,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
             <h3 className="mt-3 max-w-full whitespace-pre-line break-words font-unbounded text-[clamp(1.25rem,3.2vw,1.75rem)] font-extrabold leading-[1.15] text-white hyphens-none sm:mt-4 lg:text-[1.75rem] xl:text-[2rem] 2xl:mt-8 2xl:text-[clamp(2.5rem,3.5vw,4rem)] 2xl:leading-[1.08]">
               {step?.titel}
             </h3>
-            <p className="mt-3 max-w-[900px] whitespace-pre-line font-poppins text-sm font-normal leading-[1.5] text-[#B8B8B8] sm:text-[15px] lg:mt-4 lg:text-base xl:text-lg 2xl:mt-8 2xl:text-[clamp(1.25rem,2vw,2.25rem)]">
+            <p className="mt-3 max-w-[900px] whitespace-pre-line font-poppins text-sm font-normal leading-[1.5] text-brand-muted sm:text-[15px] lg:mt-4 lg:text-base xl:text-lg 2xl:mt-8 2xl:text-[clamp(1.25rem,2vw,2.25rem)]">
               {step?.kurztext}
             </p>
 
@@ -121,7 +121,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
                   {`SCHRITT ${nummer} / ${totalLabel}`}
                 </p>
                 <div
-                  className="h-1.5 w-full overflow-hidden rounded-full bg-[#595959] sm:h-2"
+                  className="h-1.5 w-full overflow-hidden rounded-full bg-brand-control sm:h-2"
                   role="progressbar"
                   aria-valuemin={1}
                   aria-valuemax={total}
@@ -140,7 +140,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
                   onClick={prev}
                   disabled={selected === 0}
                   aria-label="Vorheriger Schritt"
-                  className="grid size-11 place-items-center rounded-full bg-[#595959] text-white transition hover:bg-[#6a6a6a] disabled:opacity-40 sm:size-12 lg:size-14 xl:size-16 2xl:size-[130px]"
+                  className="grid size-11 place-items-center rounded-full bg-brand-control text-white transition hover:bg-brand-control-hover disabled:opacity-40 sm:size-12 lg:size-14 xl:size-16 2xl:size-[130px]"
                 >
                   <Chevron dir="left" />
                 </button>
