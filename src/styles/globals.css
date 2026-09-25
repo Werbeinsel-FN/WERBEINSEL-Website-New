@@ -1,13 +1,43 @@
 @import 'tailwindcss';
 @import './tokens.css';
 
+/* Tokens aus tokens.css als Tailwind-Klassen (bg-brand-yellow, text-section, p-card, rounded-card …) */
 @theme inline {
   --color-brand-yellow: var(--color-yellow);
   --color-brand-black: var(--color-black);
-  --color-brand-whatsapp: var(--color-whatsapp);
-  --color-brand-muted: var(--color-text-muted);
+  --color-brand-white: var(--color-white);
   --color-brand-card-dark: var(--color-card-dark);
   --color-brand-card-light: var(--color-card-light);
+  --color-brand-muted: var(--color-text-muted);
+  --color-brand-subtle: var(--color-text-subtle);
+  --color-brand-divider: var(--color-divider);
+  --color-brand-error: var(--color-error);
+  --color-brand-whatsapp: var(--color-whatsapp);
+
+  --text-hero: var(--text-hero);
+  --text-section: var(--text-section);
+  --text-sub: var(--text-sub);
+  --text-card: var(--text-card);
+  --text-step: var(--text-step);
+  --text-lead: var(--text-lead);
+  --text-body: var(--text-body);
+  --text-small: var(--text-small);
+  --text-button: var(--text-button);
+  --text-client: var(--text-client);
+
+  --spacing-section: var(--space-section);
+  --spacing-stack: var(--space-stack);
+  --spacing-gap: var(--space-gap);
+  --spacing-card: var(--space-card);
+  --spacing-gutter: var(--gutter);
+
+  --container-site: var(--container-max);
+  --container-text: var(--container-text);
+
+  --radius-pill: var(--radius-pill);
+  --radius-card: var(--radius-card);
+  --radius-panel: var(--radius-panel);
+
   --font-unbounded: var(--font-unbounded);
   --font-poppins: var(--font-poppins);
 }

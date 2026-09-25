@@ -1,22 +1,71 @@
+/*
+ * Design-Tokens (docs/designfundament-auftrag.md, Abschnitt 5).
+ * Mitwachsende Werte laufen von 390 px bis 1920 px Bildschirmbreite.
+ * Breakpoints: bis T5 Tailwind-Standard; ab T5 sm 660 · md 768 · lg 1024 · xl 1280 · 2xl 1400.
+ */
 :root {
-  /* Farben (Figma) */
+  /* 5.1 Farben (Figma) */
   --color-yellow: #FFED00;
   --color-black: #000000;
   --color-white: #FFFFFF;
-  --color-whatsapp: #25D366;
-  --color-text-muted: #B3B3B3;
   --color-card-dark: #1A1A1A;
   --color-card-light: #F5F5F5;
+  --color-text-muted: #B3B3B3;
+  --color-text-subtle: #808080;
+  --color-divider: #333333;
+  --color-error: #8A0000;
+  --color-whatsapp: #25D366;
 
-  /* Typo (Figma Display/Hero, Heading/Section, Body/Lead) */
+  /* 5.2 Schriftgrößen
+   * hero, section und lead behalten bis T4 ihre bisherigen Werte; T4 setzt:
+   *   --text-hero:    clamp(2rem, 1.108rem + 3.66vw, 5.5rem)
+   *   --text-section: clamp(1.75rem, 1.304rem + 1.83vw, 3.5rem)
+   *   --text-lead:    clamp(1rem, 0.9044rem + 0.3922vw, 1.375rem)
+   */
   --text-hero: clamp(2rem, 4.2vw + 0.5rem, 5.5rem); /* 32 → 88 */
   --text-section: clamp(1.75rem, 2.2vw + 0.75rem, 3.5rem); /* 28 → 56 */
+  --text-sub: clamp(1.375rem, 1.216rem + 0.6536vw, 2rem); /* 22 → 32 */
+  --text-card: clamp(1.25rem, 1.123rem + 0.5229vw, 1.75rem); /* 20 → 28 */
+  --text-step: clamp(1.125rem, 1.029rem + 0.3922vw, 1.5rem); /* 18 → 24 */
   --text-lead: clamp(1rem, 0.35vw + 0.9rem, 1.375rem); /* 16 → 22 */
+  --text-body: clamp(1rem, 0.9681rem + 0.1307vw, 1.125rem); /* 16 → 18 */
+  --text-small: 0.875rem; /* 14 */
+  --text-button: clamp(1rem, 0.9363rem + 0.2614vw, 1.25rem); /* 16 → 20 */
+  --text-client: clamp(0.875rem, 0.8113rem + 0.2614vw, 1.125rem); /* 14 → 18 */
 
-  /* Abstände (Section-Polster) */
+  /* 5.3 Abstände */
+  --space-section: 52px; /* Stufen: 52 / 68 / 115, siehe Media Queries unten */
+  --space-stack: clamp(2rem, 1.49rem + 2.092vw, 4rem); /* 32 → 64 */
+  --space-gap: clamp(1rem, 0.7451rem + 1.046vw, 2rem); /* 16 → 32 */
+  --space-card: clamp(1.5rem, 1.245rem + 1.046vw, 2.5rem); /* 24 → 40 */
+
+  /* Bisheriges Section-Polster von .section-pad; Umstellung auf --space-section folgt in T5 */
   --space-section-mobile: 56px;
   --space-section-tablet: 96px;
   --space-section-desktop: 96px;
+
+  /* 5.4 Breiten und Seitenrand */
+  --container-max: 1780px;
+  --container-text: 840px;
+  --gutter: 20px; /* ab 660 px: 3.5vw */
+
+  /* 5.6 Rundungen */
+  --radius-pill: 9999px;
+  --radius-card: 24px;
+  --radius-panel: 40px;
+}
+
+@media (min-width: 660px) {
+  :root {
+    --space-section: 68px;
+    --gutter: 3.5vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --space-section: 115px;
+  }
 }
 
 /* Überschriften: 120% Zeilenabstand (Unbounded/Umlaute) */
