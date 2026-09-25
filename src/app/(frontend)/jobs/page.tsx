@@ -44,10 +44,10 @@ export default async function JobsPage() {
 
       <section className="flex flex-col items-stretch bg-brand-yellow py-20 text-brand-black md:py-32">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8 text-center">
-          <h1 className="heading-hero mx-auto max-w-[675px] whitespace-pre-line uppercase text-brand-black md:text-[88px] md:leading-[0.95] md:tracking-[-1.76px]">
+          <h1 className="heading-hero mx-auto max-w-[675px] whitespace-pre-line uppercase text-brand-black">
             {jobs.hero.titel}
           </h1>
-          <p className="body-lead mx-auto mt-6 max-w-[700px] whitespace-pre-line text-brand-black md:text-[22px]">
+          <p className="body-lead mx-auto mt-6 max-w-[700px] whitespace-pre-line text-brand-black">
             {jobs.hero.untertitel}
           </p>
         </div>
@@ -55,7 +55,7 @@ export default async function JobsPage() {
 
       <section className="flex flex-col items-stretch bg-white py-20 md:py-32">
         <div className="mx-auto flex w-full max-w-[1716px] flex-col items-center px-8">
-          <h2 className="heading-section text-center text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section text-center text-brand-black">
             {jobs.openingsTitle}
           </h2>
           <div className="mt-10 w-full md:mt-16">
@@ -66,21 +66,21 @@ export default async function JobsPage() {
 
       <section className="flex flex-col items-stretch bg-brand-black py-20 text-white md:py-32">
         <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center px-8">
-          <h2 className="heading-section text-center text-white md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section text-center text-white">
             {jobs.process.ueberschrift}
           </h2>
 
           <ol className="mt-10 grid w-full grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 md:mt-16 lg:grid-cols-4">
             {jobs.process.schritte.map((s, i) => (
               <li key={s.titel} className="flex min-w-0 flex-col items-center px-1 text-center">
-                <span className="circle mb-4 grid size-20 shrink-0 place-items-center rounded-full bg-brand-yellow font-unbounded text-[22px] font-extrabold leading-none text-brand-black">
+                <span className="circle mb-4 grid size-20 shrink-0 place-items-center rounded-full bg-brand-yellow font-unbounded text-lead font-extrabold leading-none text-brand-black">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="font-unbounded text-[24px] font-bold leading-[1.5] text-white">
+                <p className="font-unbounded text-step font-bold leading-[1.5] text-white">
                   {s.titel}
                 </p>
                 <p
-                  className="mt-0 w-full whitespace-pre-line font-poppins text-[16px] font-normal leading-[1.5] text-white"
+                  className="mt-0 w-full whitespace-pre-line font-poppins text-body font-normal leading-[1.5] text-white"
                   style={{ fontWeight: 400, fontSize: 16, lineHeight: 1.5 }}
                 >
                   {s.kurztext}
@@ -93,10 +93,10 @@ export default async function JobsPage() {
 
       <section className="flex flex-col items-stretch bg-white py-20 md:py-32" id="bewerbung">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
-          <h2 className="heading-section text-center text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section text-center text-brand-black">
             {jobs.formTitle}
           </h2>
-          <p className="body-lead mx-auto mt-4 max-w-[537px] text-center text-brand-black md:text-[22px]">
+          <p className="body-lead mx-auto mt-4 max-w-[537px] text-center text-brand-black">
             {jobs.formSubtitle}
           </p>
           <div className="mt-10 w-full md:mt-12">

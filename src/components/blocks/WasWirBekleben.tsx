@@ -257,7 +257,7 @@ export function WasWirBekleben({
   return (
     <section className="bg-white py-20 md:py-32">
       <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-10 px-5 sm:px-8 md:gap-12">
-        <h2 className="heading-section w-full max-w-[1716px] text-center text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+        <h2 className="heading-section w-full max-w-[1716px] text-center text-brand-black">
           {ueberschrift}
         </h2>
 

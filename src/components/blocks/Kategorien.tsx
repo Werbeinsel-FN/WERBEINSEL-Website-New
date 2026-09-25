@@ -46,12 +46,12 @@ export function Kategorien({
               </p>
             ) : null}
             {ueberschrift ? (
-              <h2 className="heading-section w-full max-w-[1500px] whitespace-pre-line text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+              <h2 className="heading-section w-full max-w-[1500px] whitespace-pre-line text-brand-black">
                 {ueberschrift}
               </h2>
             ) : null}
             {text ? (
-              <p className="body-lead mx-auto mt-6 max-w-[1100px] whitespace-pre-line text-brand-black md:text-[22px] md:leading-[1.6]">
+              <p className="body-lead mx-auto mt-6 max-w-[1100px] whitespace-pre-line text-brand-black">
                 {text}
               </p>
             ) : null}

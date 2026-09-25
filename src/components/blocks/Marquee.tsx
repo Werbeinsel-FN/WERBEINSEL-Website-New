@@ -69,7 +69,7 @@ function MarqueePill({
           />
         </span>
       ) : (
-        <span className="text-center font-poppins text-[13px] font-bold leading-[1.2] tracking-[0.03em] uppercase sm:text-[15px] md:text-lg">
+        <span className="text-center font-poppins text-client font-bold leading-[1.2] tracking-[0.03em] uppercase">
           {item.name}
         </span>
       )}
@@ -126,12 +126,12 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names, items }: Mar
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="heading-section text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section text-brand-black">
             {ueberschrift}
           </h2>
         ) : null}
         {untertitel ? (
-          <p className="body-lead mx-auto mt-6 max-w-[480px] whitespace-pre-line text-brand-black md:text-[22px]">
+          <p className="body-lead mx-auto mt-6 max-w-[480px] whitespace-pre-line text-brand-black">
             {untertitel}
           </p>
         ) : null}

@@ -86,12 +86,12 @@ export function EchtNichtGeneriert({
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col items-start gap-6">
-          <h2 className="heading-section w-full text-brand-yellow md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section w-full text-brand-yellow">
             {ueberschrift}
           </h2>
 
           {text ? (
-            <p className="body-lead w-full max-w-[1188px] text-white md:text-[22px] md:leading-[1.6]">
+            <p className="body-lead w-full max-w-[1188px] text-white">
               {text}
             </p>
           ) : null}

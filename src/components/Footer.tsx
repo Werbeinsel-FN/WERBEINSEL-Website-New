@@ -53,7 +53,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
           <div className="flex flex-col items-start md:col-span-3 lg:col-span-1">
             <Logo tone="dark" />
             {tagline ? (
-              <p className="mt-5 max-w-[270px] whitespace-pre-line font-poppins text-[15px] font-normal leading-[1.5] text-brand-muted">
+              <p className="mt-5 max-w-[270px] whitespace-pre-line font-poppins text-small font-normal leading-[1.5] text-brand-muted">
                 {tagline}
               </p>
             ) : null}
@@ -61,7 +61,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
 
           {spalten?.map((col) => (
             <div key={col.titel} className="flex flex-col items-start">
-              <h3 className="font-poppins text-[13px] font-bold tracking-[0.12em] text-white uppercase">
+              <h3 className="font-poppins text-small font-bold tracking-[0.12em] text-white uppercase">
                 {col.titel}
               </h3>
               {col.links?.length ? (
@@ -70,7 +70,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
                     <li key={`${link.label}-${link.url}`}>
                       <Link
                         href={link.url}
-                        className="font-poppins text-[15px] font-normal leading-[1.5] text-brand-muted transition hover:text-brand-yellow"
+                        className="font-poppins text-small font-normal leading-[1.5] text-brand-muted transition hover:text-brand-yellow"
                       >
                         {link.label}
                       </Link>
@@ -83,7 +83,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
 
           {socials?.length ? (
             <div className="flex flex-col items-start">
-              <h3 className="font-poppins text-[13px] font-bold tracking-[0.12em] text-white uppercase">
+              <h3 className="font-poppins text-small font-bold tracking-[0.12em] text-white uppercase">
                 Social Media
               </h3>
               <ul className="mt-5 flex flex-wrap gap-3" aria-label="Social Media">

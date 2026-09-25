@@ -36,11 +36,11 @@ export function Hero({
         style={hintergrund ? { backgroundColor: hintergrund } : undefined}
       >
         <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-6 px-4 text-center sm:px-6 md:px-8">
-          <h1 className="heading-hero mx-auto w-full max-w-[1700px] font-black uppercase text-brand-black text-[clamp(2rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.02em] xl:whitespace-nowrap xl:text-[clamp(2.5rem,calc(0.35rem+4.6vw),5.5rem)]">
+          <h1 className="heading-hero mx-auto w-full max-w-[1700px] font-black uppercase text-brand-black xl:whitespace-nowrap">
             {titel}
           </h1>
           {untertitel ? (
-            <p className="body-lead mx-auto max-w-[1000px] whitespace-pre-line text-brand-black md:text-[22px] md:leading-[1.6]">
+            <p className="body-lead mx-auto max-w-[1000px] whitespace-pre-line text-brand-black">
               {untertitel}
             </p>
           ) : null}
@@ -98,7 +98,7 @@ export function Hero({
             {titel}
           </h1>
           {untertitel ? (
-            <p className="body-lead mx-auto mt-6 max-w-[413px] whitespace-pre-line text-brand-black md:text-[22px]">
+            <p className="body-lead mx-auto mt-6 max-w-[413px] whitespace-pre-line text-brand-black">
               {untertitel}
             </p>
           ) : null}

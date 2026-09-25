@@ -19,7 +19,7 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
     >
       <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-5 text-center sm:px-8">
         <h2
-          className={`heading-section mx-auto whitespace-pre-line uppercase md:text-[56px] md:leading-none md:tracking-[-0.56px] ${
+          className={`heading-section mx-auto whitespace-pre-line uppercase ${
             isYellow
               ? 'max-w-[900px] text-brand-black'
               : 'max-w-[1200px] text-brand-yellow'
@@ -29,7 +29,7 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
         </h2>
         {text ? (
           <p
-            className={`body-lead mx-auto mt-6 whitespace-pre-line md:text-[22px] md:leading-[1.6] ${
+            className={`body-lead mx-auto mt-6 whitespace-pre-line ${
               isYellow
                 ? 'max-w-[508px] text-brand-black'
                 : 'max-w-[850px] text-white'

@@ -19,23 +19,23 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
         <div className="flex w-full flex-col items-start gap-6 md:gap-14">
           {eyebrow ? (
             /* Poppins 28/700 yellow, tracking 1.68 */
-            <p className="font-poppins text-lg font-bold uppercase leading-normal tracking-[0.06em] text-brand-yellow md:text-[28px] md:tracking-[1.68px]">
+            <p className="font-poppins text-card font-bold uppercase leading-normal tracking-[0.06em] text-brand-yellow">
               {eyebrow}
             </p>
           ) : null}
 
           {/* Unbounded 56/800 white, lh 118% */}
-          <h2 className="heading-section w-full max-w-full whitespace-pre-line text-white md:text-[56px] md:leading-[1.18] md:tracking-[-0.56px]">
+          <h2 className="heading-section w-full max-w-full whitespace-pre-line text-white">
             {ueberschrift}
           </h2>
 
           {typeof text === 'string' && text ? (
             /* Poppins 32/400 brand-muted, max 1400 */
-            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-base font-normal leading-[1.5] text-brand-muted md:text-[28px] xl:text-[32px]">
+            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-sub font-normal leading-[1.5] text-brand-muted">
               {text}
             </p>
           ) : text && typeof text !== 'string' ? (
-            <div className="max-w-[1400px] font-poppins text-base leading-[1.5] text-brand-muted md:text-[28px] xl:text-[32px]">
+            <div className="max-w-[1400px] font-poppins text-sub leading-[1.5] text-brand-muted">
               {text}
             </div>
           ) : null}

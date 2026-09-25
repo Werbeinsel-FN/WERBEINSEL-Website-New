@@ -15,12 +15,12 @@ export type ButtonProps = {
   newTab?: boolean
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'>
 
-/* Feste Schriftgrößen bis T4; dann für alle Größen --text-button (text-button, 16 → 20 px) */
+/* Schriftgröße für alle Größen über --text-button (16 → 20 px); die Größen unterscheiden sich im Innenabstand */
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-5 py-2 text-sm',
-  md: 'px-7 py-3 text-base',
+  sm: 'px-5 py-2',
+  md: 'px-7 py-3',
   /* Figma Hero Button: padding 16×32, height 62, Poppins 700 20px */
-  lg: 'h-[62px] px-8 py-4 text-xl font-bold',
+  lg: 'h-[62px] px-8 py-4 font-bold',
 }
 
 function variantClasses(variant: Variant, onYellow: boolean): string {
@@ -45,7 +45,7 @@ function variantClasses(variant: Variant, onYellow: boolean): string {
 }
 
 const base =
-  'inline-flex items-center justify-center rounded-pill font-poppins font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-yellow disabled:opacity-50'
+  'inline-flex items-center justify-center rounded-pill font-poppins text-button font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-yellow disabled:opacity-50'
 
 export function Button({
   children,

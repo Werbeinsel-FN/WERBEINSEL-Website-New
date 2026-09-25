@@ -327,7 +327,7 @@ export function OnlineKampagnen({
     <section className="bg-white py-20 md:py-32">
       <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center px-5 sm:px-8">
         <div className="w-full max-w-[1716px] text-center">
-          <h2 className="heading-section text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section text-brand-black">
             {ueberschrift}
           </h2>
           {untertitel ? (

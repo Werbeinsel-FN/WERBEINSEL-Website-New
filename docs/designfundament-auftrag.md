@@ -195,6 +195,36 @@ Eigene Media Queries verwenden ausschließlich diese Werte.
 - **Erwartete Änderung:** Überschriften und Einleitungstexte werden ab ca. 800 px **etwas größer** als heute (Tabelle in Abschnitt 2, z. B. Sektionsüberschrift bei 810 px ca. 36 statt 30 px, bei 1440 px ca. 47 statt 44 px). Längere Überschriften können dadurch eine Zeile mehr brauchen (z. B. „VIER DISZIPLINEN, EIN ANSPRUCH“ auf `/services` bei 810 px). Wird auf der Vorschau gemeinsam geprüft.
 - **Fertig, wenn:** keine festen Pixel-Schriftgrößen mehr in `.tsx`.
 
+**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+
+Aufgeräumt ohne sichtbare Wirkung: 103 wirkungslose Klassen neben `.heading-section`, `.heading-hero` und `.body-lead` entfernt (`md:text-[…]`, `md:leading-*`, `md:tracking-*` sowie Größe, Zeilenhöhe und Laufweite im Hero). Diese Klassen setzen Größe, Zeilenhöhe und Laufweite selbst und stehen in der CSS-Reihenfolge später.
+
+Sichtbare Änderungen, Größen in px (vorher → nachher):
+
+| Stelle | Token | 390 | 810 | 1024 | 1440 | 1920 |
+|---|---|---|---|---|---|---|
+| Sektionsüberschriften | section | 28 → 28 | 30 → 36 | 34 → 40 | 44 → 47 | 54 → 56 |
+| Hero-Überschriften | hero | 32 → 32 | 42 → 47 | 51 → 55 | 68 → 70 | 88 → 88 |
+| Einleitungstexte (`body-lead`) | lead | 16 → 16 | 17 → 18 | 18 → 18,5 | 19 → 20 | 21 → 22 |
+| Buttons (Hero, CTA) | button | 20 → 16 | 20 → 17 | 20 → 18 | 20 → 19 | 20 → 20 |
+| USP- und Full-Service-Einleitung (Figma 32) ⚠️ | sub | **16 → 22** | 28 → 25 | 28 → 26 | 32 → 29 | 32 → 32 |
+| USP-Label „USP“ | card | 18 → 20 | 28 → 22 | 28 → 23 | 28 → 25,5 | 28 → 28 |
+| Betreuung-Titel | card | 20 → 20 | 28 → 22 | 28 → 23 | 28 → 25,5 | 28 → 28 |
+| Kunden-Laufband | client | 13 → 14 | 18 → 15 | 18 → 16 | 18 → 17 | 18 → 18 |
+| Schritt-Slider: Label „SO LÄUFT'S“ ⚠️ | step | **12 → 18** | 14 → 20 | 16 → 20,5 | 18 → 22 | **30 → 24** |
+| Schritt-Slider: Fließtext ⚠️ | lead | 14 → 16 | 15 → 18 | 16 → 18,5 | 18 → 20 | **36 → 22** |
+| Schritt-Slider „SCHRITT 01 / 03“, Services-Tags | small | 11 → 14 | 12 → 14 | 14 → 14 | 14 → 14 | 14 → 14 |
+| Footer-Texte / Footer-Überschriften | small | 15 / 13 → 14 | gleich | gleich | gleich | gleich |
+| Jobs: Nummernkreis / Titel / Text | lead / step / body | 22 → 16 · 24 → 18 · 16 → 16 | | | | 22 · 24 · 18 |
+| Kontakt: Einleitung | lead | 22 → 16 | 22 → 18 | 22 → 18,5 | 22 → 20 | 22 → 22 |
+
+⚠️ **Zur Prüfung auf der Vorschau:**
+1. **USP- und Full-Service-Einleitung auf dem Handy:** `text-sub` beginnt bei 22 px, also deutlich größer als bisher 16 px. Alternative: `text-lead` (16 → 22 px), dann aber auf dem Desktop 22 statt 32 px.
+2. **Label „SO LÄUFT'S“:** mit `text-step` auf dem Handy 18 statt 12 px. Alternative: `text-small` (fest 14 px).
+3. **Schritt-Slider bei 1920 px:** Label und Fließtext werden kleiner (24 statt 30 px bzw. 22 statt 36 px), weil die bisherige große 2xl-Variante der Schrift entfällt.
+
+Seiten werden bei 810–1440 px um 20–75 px länger; bei 390 px teils kürzer (`/jobs`, `/kontakt`). Keine neuen Überläufe, kein abgeschnittener Text.
+
 ### T5 – Breakpoints, Container und Sektionen umstellen (**sichtbare Korrektur**)
 - Breakpoints gemäß 5.5 setzen (sm 660, 2xl 1400); Media Queries in `globals.css` von 640/641/1025 auf die neuen Werte umstellen.
 - Alle `max-w-[1780px]`, `[1716px]`, `[1700px]`, `[1400px]`, `[1100px]` usw. für Seitenbreiten durch `Container` ersetzen.

@@ -47,7 +47,7 @@ function ServiceOverviewCard({ item }: { item: ServiceGridItem }) {
       </span>
 
       <div className="relative z-10 flex w-full min-w-0 flex-col items-start self-stretch">
-        <p className="w-full truncate font-poppins text-[11px] font-semibold uppercase leading-[1.5] tracking-[0.7px] text-brand-yellow sm:text-xs xl:text-sm">
+        <p className="w-full truncate font-poppins text-small font-semibold uppercase leading-[1.5] tracking-[0.7px] text-brand-yellow">
           {item.kategorie}
         </p>
         {/* Skaliert mit Kartenbreite – keine Wortzerstückelung */}
@@ -82,7 +82,7 @@ export function ServicesGrid({ ueberschrift, items }: ServicesGridProps) {
   return (
     <section className="flex flex-col items-stretch self-stretch bg-white py-20 md:py-32">
       <div className="mx-auto flex w-full max-w-[1716px] flex-col items-center px-5 sm:px-8">
-        <h2 className="heading-section max-w-full text-center text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+        <h2 className="heading-section max-w-full text-center text-brand-black">
           {ueberschrift}
         </h2>
 

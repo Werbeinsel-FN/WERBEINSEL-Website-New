@@ -103,7 +103,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
 
           <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
             {eyebrow ? (
-              <p className="font-poppins text-xs font-bold uppercase leading-normal tracking-[0.08em] text-brand-yellow sm:text-sm lg:text-base xl:text-lg 2xl:text-[30px] 2xl:tracking-[1.8px]">
+              <p className="font-poppins text-step font-bold uppercase leading-normal tracking-[0.08em] text-brand-yellow">
                 {eyebrow}
               </p>
             ) : null}
@@ -111,13 +111,13 @@ export function StepSlider({ eyebrow, schritte }: Props) {
             <h3 className="mt-3 max-w-full whitespace-pre-line break-words font-unbounded text-[clamp(1.25rem,3.2vw,1.75rem)] font-extrabold leading-[1.15] text-white hyphens-none sm:mt-4 lg:text-[1.75rem] xl:text-[2rem] 2xl:mt-8 2xl:text-[clamp(2.5rem,3.5vw,4rem)] 2xl:leading-[1.08]">
               {step?.titel}
             </h3>
-            <p className="mt-3 max-w-[900px] whitespace-pre-line font-poppins text-sm font-normal leading-[1.5] text-brand-muted sm:text-[15px] lg:mt-4 lg:text-base xl:text-lg 2xl:mt-8 2xl:text-[clamp(1.25rem,2vw,2.25rem)]">
+            <p className="mt-3 max-w-[900px] whitespace-pre-line font-poppins text-lead font-normal leading-[1.5] text-brand-muted lg:mt-4 2xl:mt-8">
               {step?.kurztext}
             </p>
 
             <div className="mt-6 flex flex-col gap-4 sm:mt-8 sm:flex-row sm:items-end sm:justify-between sm:gap-6 lg:mt-auto lg:pt-8 2xl:pt-16">
               <div className="min-w-0 w-full max-w-[420px] flex-1">
-                <p className="mb-2 font-poppins text-[11px] font-bold tracking-widest text-brand-yellow sm:text-xs lg:text-sm">
+                <p className="mb-2 font-poppins text-small font-bold tracking-widest text-brand-yellow">
                   {`SCHRITT ${nummer} / ${totalLabel}`}
                 </p>
                 <div

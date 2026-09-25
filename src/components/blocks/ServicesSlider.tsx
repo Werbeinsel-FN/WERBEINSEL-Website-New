@@ -131,7 +131,7 @@ export function ServicesSlider({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="heading-section text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section text-brand-black">
             {ueberschrift || 'Was wir machen'}
           </h2>
         </div>

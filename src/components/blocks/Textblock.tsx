@@ -46,7 +46,7 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="heading-section mx-auto max-w-[840px] whitespace-pre-line text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section mx-auto max-w-[840px] whitespace-pre-line text-brand-black">
             {ueberschrift}
           </h2>
         ) : null}

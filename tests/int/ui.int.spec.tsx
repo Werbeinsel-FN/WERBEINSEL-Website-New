@@ -129,17 +129,13 @@ describe('Heading', () => {
 })
 
 describe('Button', () => {
-  // Schriftgrößen bleiben bis T4 fest; dann auf text-button umstellen und diesen Test anpassen
-  it.each([
-    ['sm', 'text-sm'],
-    ['md', 'text-base'],
-    ['lg', 'text-xl'],
-  ] as const)('Größe %s nutzt --radius-pill und vorerst %s', (size, text) => {
+  it.each(['sm', 'md', 'lg'] as const)('Größe %s nutzt --text-button und --radius-pill', (size) => {
     render(<Button size={size}>Los</Button>)
     const el = screen.getByRole('button', { name: 'Los' })
+    expect(el.className).toContain('text-button')
     expect(el.className).toContain('rounded-pill')
+    expect(el.className).not.toMatch(/\btext-(sm|base|xl)\b/)
     expect(el.className).not.toContain('rounded-full')
-    expect(el.className).toContain(text)
   })
 
   it('rendert mit href einen Link, extern in neuem Tab', () => {

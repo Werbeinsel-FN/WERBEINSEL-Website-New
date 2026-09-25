@@ -65,11 +65,11 @@ export function TransporterFaahrt({
     <section className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-12 px-5 sm:px-8 md:gap-16">
         <div className="flex w-full max-w-[1716px] flex-col items-center gap-5 text-center">
-          <h2 className="heading-section text-brand-yellow md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section text-brand-yellow">
             {ueberschrift}
           </h2>
           {text ? (
-            <p className="body-lead max-w-[1120px] text-white md:text-[22px] md:leading-[1.6]">
+            <p className="body-lead max-w-[1120px] text-white">
               {text}
             </p>
           ) : null}

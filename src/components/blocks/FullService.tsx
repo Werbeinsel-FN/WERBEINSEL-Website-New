@@ -22,13 +22,13 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
           ) : null}
 
           {/* Unbounded 56/800, lh 115% */}
-          <h2 className="heading-section w-full whitespace-pre-line text-brand-black md:text-[56px] md:leading-[1.15] md:tracking-[-0.56px]">
+          <h2 className="heading-section w-full whitespace-pre-line text-brand-black">
             {ueberschrift}
           </h2>
 
           {text ? (
             /* Poppins 32/400 brand-on-light, max 1400 */
-            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-base font-normal leading-[1.5] text-brand-on-light md:text-[28px] xl:text-[32px]">
+            <p className="max-w-[1400px] whitespace-pre-line font-poppins text-sub font-normal leading-[1.5] text-brand-on-light">
               {text}
             </p>
           ) : null}

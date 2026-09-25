@@ -24,10 +24,10 @@ export default async function KontaktPage() {
       {/* Hero – gelb, Display/Hero + Body/Lead (Figma) */}
       <section className="flex flex-col items-stretch bg-brand-yellow py-20 text-brand-black md:py-32">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8 text-center">
-          <h1 className="heading-hero mx-auto max-w-[640px] whitespace-pre-line uppercase text-brand-black md:text-[88px] md:leading-[0.95] md:tracking-[-1.76px]">
+          <h1 className="heading-hero mx-auto max-w-[640px] whitespace-pre-line uppercase text-brand-black">
             {kontakt.hero.titel}
           </h1>
-          <p className="body-lead mx-auto mt-6 max-w-[625px] whitespace-pre-line text-brand-black md:text-[22px]">
+          <p className="body-lead mx-auto mt-6 max-w-[625px] whitespace-pre-line text-brand-black">
             {kontakt.hero.untertitel}
           </p>
         </div>
@@ -43,7 +43,7 @@ export default async function KontaktPage() {
       {/* Direktkontakt – Figma: padding 128, icons 80, Label/Meta + Body/Lead */}
       <section className="flex flex-col items-stretch bg-brand-black py-20 text-white md:py-32">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-8">
-          <h2 className="heading-section mb-12 whitespace-pre-line text-center text-brand-yellow md:mb-16 md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section mb-12 whitespace-pre-line text-center text-brand-yellow md:mb-16">
             {kontakt.contactTitle}
           </h2>
 
@@ -117,7 +117,7 @@ function ContactCol({
       <p className="font-unbounded text-lg font-extrabold leading-[1.5] uppercase text-brand-yellow">
         {label}
       </p>
-      <p className="whitespace-pre-line font-poppins text-[22px] font-medium leading-[1.6] text-white">
+      <p className="whitespace-pre-line font-poppins text-lead font-medium leading-[1.6] text-white">
         {value}
       </p>
     </a>

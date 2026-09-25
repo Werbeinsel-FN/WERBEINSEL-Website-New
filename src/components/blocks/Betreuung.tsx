@@ -18,7 +18,7 @@ export function Betreuung({
   return (
     <section className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto flex w-full max-w-[1780px] flex-col items-center gap-12 px-5 sm:px-8 md:gap-16">
-        <h2 className="heading-section w-full max-w-[1716px] text-center text-brand-yellow md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+        <h2 className="heading-section w-full max-w-[1716px] text-center text-brand-yellow">
           {ueberschrift}
         </h2>
 
@@ -34,7 +34,7 @@ export function Betreuung({
                   className="grid size-14 shrink-0 place-items-center rounded-full bg-brand-yellow sm:size-[76px]"
                   aria-hidden
                 >
-                  <span className="font-unbounded text-xl font-extrabold leading-[1.1] text-brand-black sm:text-[28px]">
+                  <span className="font-unbounded text-card font-extrabold leading-[1.1] text-brand-black">
                     {nummer}
                   </span>
                 </span>

@@ -85,11 +85,11 @@ export function ReferenzSlider({
                 {eyebrow}
               </p>
             ) : null}
-            <h2 className="heading-section whitespace-pre-line text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+            <h2 className="heading-section whitespace-pre-line text-brand-black">
               {ueberschrift}
             </h2>
             {untertitel ? (
-              <p className="body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black md:text-[22px]">
+              <p className="body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black">
                 {untertitel}
               </p>
             ) : null}
@@ -113,7 +113,7 @@ export function ReferenzSlider({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="heading-section whitespace-pre-line text-brand-black md:text-[56px] md:leading-none md:tracking-[-0.56px]">
+          <h2 className="heading-section whitespace-pre-line text-brand-black">
             {ueberschrift}
           </h2>
           {untertitel ? (
@@ -121,7 +121,7 @@ export function ReferenzSlider({
               className={
                 untertitelKlein
                   ? 'mx-auto mt-4 max-w-[1716px] text-center font-poppins text-base font-normal leading-[1.5] text-brand-black md:mt-6'
-                  : 'body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black md:text-[22px]'
+                  : 'body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black'
               }
             >
               {untertitel}
