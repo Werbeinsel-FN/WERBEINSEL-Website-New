@@ -224,133 +224,103 @@
     animation: none;
   }
 
-  .wi-menu-pill,
-  .wi-menu-panel,
-  .wi-menu-item,
-  .wi-menu-line {
-    transition: none !important;
+  .wi-menu:not([hidden]) {
+    animation: none;
+  }
+
+  .wi-menu-hover,
+  .wi-menu-close {
+    transition: none;
   }
 }
 
-/* MENÜ-Pill (zwetschke-ähnlich): mittig unten, dezentes Hover-Breitenwachstum */
-.wi-menu-pill {
-  width: 200px;
-  transition:
-    width 0.4s ease,
-    box-shadow 0.3s ease;
+/* Menü: Burger oben rechts im Header, Vollbild-Menü mit kurzem Einblenden */
+.wi-menu-button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
 }
 
-.wi-menu-pill:hover,
-.wi-menu-pill:focus-visible {
-  width: 248px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.32);
+.wi-menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 28px;
 }
 
-.wi-menu-ball {
-  width: 56px;
-  height: 56px;
-}
-
-.wi-menu-line {
-  width: 18px;
+.wi-menu-icon > span {
+  display: block;
   height: 3px;
-  margin: 2.5px 0;
-  transition: margin 0.4s ease;
+  background-color: currentColor;
 }
 
-.wi-menu-pill:hover .wi-menu-line,
-.wi-menu-pill:focus-visible .wi-menu-line {
-  margin: 4.5px 0;
+/* X: zwei gekreuzte Balken an derselben Stelle wie der Burger */
+.wi-menu-icon--close {
+  display: grid;
 }
 
-.wi-menu-label {
-  font-size: 1.35rem;
-  margin-left: auto;
-  margin-right: auto;
+.wi-menu-icon--close > span {
+  grid-area: 1 / 1;
+  transform: rotate(45deg);
 }
 
-@media (min-width: 660px) {
-  .wi-menu-pill {
-    width: 260px;
-  }
-
-  .wi-menu-pill:hover,
-  .wi-menu-pill:focus-visible {
-    width: 320px;
-  }
-
-  .wi-menu-ball {
-    width: 68px;
-    height: 68px;
-  }
-
-  .wi-menu-line {
-    width: 22px;
-    height: 3.5px;
-    margin: 3px 0;
-  }
-
-  .wi-menu-pill:hover .wi-menu-line,
-  .wi-menu-pill:focus-visible .wi-menu-line {
-    margin: 5px 0;
-  }
-
-  .wi-menu-label {
-    font-size: 1.75rem;
-  }
+.wi-menu-icon--close > span + span {
+  transform: rotate(-45deg);
 }
 
-@media (min-width: 1024px) {
-  .wi-menu-pill {
-    width: 300px;
-  }
-
-  .wi-menu-pill:hover,
-  .wi-menu-pill:focus-visible {
-    width: 380px;
-  }
-
-  .wi-menu-ball {
-    width: 76px;
-    height: 76px;
-  }
-
-  .wi-menu-line {
-    width: 24px;
-    height: 4px;
-  }
-
-  .wi-menu-label {
-    font-size: 2rem;
-  }
+/* Schließen: gelber Kreis mit schwarzem X, wie die übrigen Pillen der Seite */
+.wi-menu-close .wi-menu-icon {
+  width: 22px;
 }
 
-/* Overlay-Links: passen in Viewport, keine abgeschnittenen Wörter */
-.wi-menu-nav {
-  overflow: hidden;
-  padding-block: clamp(3.25rem, 7dvh, 5.5rem);
+.wi-menu-close {
+  transition: background-color 120ms ease-out;
 }
 
-.wi-menu-list {
-  gap: clamp(0.05rem, 0.45dvh, 0.4rem);
-}
-
-.wi-menu-link {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  font-size: clamp(0.95rem, min(4.8dvh, 7.2vw), 2.5rem);
-  padding-block: clamp(0.15rem, 0.7dvh, 0.55rem);
-  padding-inline: clamp(0.5rem, 2vw, 1.25rem);
-  line-height: 1.1;
-  overflow-wrap: normal;
-  word-break: keep-all;
-}
-
-/* Hover-Pill nur auf Geräten mit echtem Hover (kein Sticky-Hover auf Touch) */
 @media (hover: hover) and (pointer: fine) {
-  .wi-menu-link:hover {
-    background-color: var(--color-yellow, #ffed00);
-    color: var(--color-black, #000);
+  .wi-menu-close:hover {
+    background-color: var(--color-white, #fff);
   }
+}
+
+.wi-menu-close:focus-visible {
+  outline: 3px solid var(--color-brand-yellow);
+  outline-offset: 4px;
+}
+
+.wi-menu:not([hidden]) {
+  animation: wi-menu-in 150ms ease-out both;
+}
+
+@keyframes wi-menu-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Gelb bei Hover (nur Geräte mit Maus), Tastaturfokus, Antippen und für die aktuelle Seite */
+.wi-menu-hover {
+  transition: color 120ms ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .wi-menu-hover:hover {
+    color: var(--color-brand-yellow);
+  }
+}
+
+.wi-menu-hover:focus-visible,
+.wi-menu-hover:active,
+.wi-menu-hover[aria-current='page'] {
+  color: var(--color-brand-yellow);
+}
+
+.wi-menu-hover:focus-visible {
+  outline: 3px solid var(--color-brand-yellow);
+  outline-offset: 4px;
 }

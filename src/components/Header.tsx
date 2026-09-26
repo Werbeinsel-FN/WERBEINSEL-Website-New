@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Logo } from '@/components/Logo'
 import { Container } from '@/components/ui/Container'
 
@@ -12,20 +12,16 @@ export type NavItem = { label: string; url: string; children?: NavChild[] }
 type HeaderProps = {
   items: NavItem[]
   sticky?: boolean
-  /** Überschreibt automatische Variante aus der Route */
-  variant?: 'light' | 'dark' | 'yellow'
 }
 
 type FlatLink = { label: string; url: string }
 
-/** Leistungen-Kinder auf dieselbe Ebene wie Jobs/Kontakt heben (kein Untermenü). */
-function flattenNav(items: NavItem[]): FlatLink[] {
-  const out: FlatLink[] = [{ label: 'Startseite', url: '/' }]
+/** Menüpunkte ohne Untermenü: ein Eintrag mit Unterpunkten wird durch seine Unterpunkte ersetzt. */
+export function flattenNav(items: NavItem[]): FlatLink[] {
+  const out: FlatLink[] = []
   for (const item of items) {
     if (item.children?.length) {
-      for (const child of item.children) {
-        out.push({ label: child.label, url: child.url })
-      }
+      for (const child of item.children) out.push({ label: child.label, url: child.url })
     } else {
       out.push({ label: item.label, url: item.url })
     }
@@ -33,51 +29,70 @@ function flattenNav(items: NavItem[]): FlatLink[] {
   return out
 }
 
+/** Ab dieser Länge bricht eine Bezeichnung mit „&“ fest nach dem „&“ um (z. B. „Folierung & Beschriftung“). */
+const MENU_BREAK_MIN_LENGTH = 17
+
 /**
- * Navigation im Stil von zwetschke.de:
- * schwebender MENÜ-Pill + vollflächiges Overlay (schwarz/gelb invertiert).
+ * Menübeschriftung: lange Bezeichnungen mit „&“ brechen auf jedem Gerät fest nach dem „&“ um,
+ * kurze („Foto & Video“) bleiben zusammen; vor dem „&“ nie ein Umbruch (geschütztes Leerzeichen).
  */
+export function menuLabel(label: string): ReactNode {
+  const glued = label.replace(/ &/g, ' &')
+  const at = glued.indexOf('& ')
+  if (label.length < MENU_BREAK_MIN_LENGTH || at < 0) return glued
+  return (
+    <>
+      {glued.slice(0, at + 1)}
+      <br />
+      {glued.slice(at + 2)}
+    </>
+  )
+}
+
+function isCurrentPage(pathname: string, url: string): boolean {
+  if (!url.startsWith('/') || url.includes('#')) return false
+  const clean = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p)
+  return clean(pathname) === clean(url)
+}
+
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+/** Header mit Logo links und Burger rechts; der Burger öffnet ein schwarzes Vollbild-Menü. */
 export function Header({ items, sticky = true }: HeaderProps) {
   const pathname = usePathname() || '/'
   const [open, setOpen] = useState(false)
-  const [entered, setEntered] = useState(false)
-  const drawerId = useId()
-  const menuBtnRef = useRef<HTMLButtonElement>(null)
+  const [prevPathname, setPrevPathname] = useState(pathname)
+  const menuId = useId()
+  const burgerRef = useRef<HTMLButtonElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
   const links = useMemo(() => flattenNav(items), [items])
 
+  // Seitenwechsel (z. B. Zurück-Taste) schließt das Menü
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
+    setOpen(false)
+  }
+
   const close = useCallback(() => setOpen(false), [])
-  const toggle = useCallback(() => setOpen((v) => !v), [])
 
   useEffect(() => {
-    close()
-  }, [pathname, close])
-
-  useEffect(() => {
-    if (!open) {
-      setEntered(false)
-      return
-    }
-    const prev = document.body.style.overflow
+    if (!open) return
+    const burger = burgerRef.current
+    const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    const enterId = window.setTimeout(() => setEntered(true), 20)
-
-    const panel = panelRef.current
-    const focusables = panel?.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    )
-    focusables?.[0]?.focus()
+    closeRef.current?.focus()
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        close()
-        menuBtnRef.current?.focus()
+        setOpen(false)
         return
       }
-      if (e.key !== 'Tab' || !focusables?.length) return
-      const list = Array.from(focusables)
-      const first = list[0]
-      const last = list[list.length - 1]
+      if (e.key !== 'Tab') return
+      const focusables = Array.from(panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? [])
+      if (!focusables.length) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault()
         last.focus()
@@ -89,112 +104,92 @@ export function Header({ items, sticky = true }: HeaderProps) {
 
     document.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = prev
       document.removeEventListener('keydown', onKey)
-      window.clearTimeout(enterId)
+      document.body.style.overflow = prevOverflow
+      burger?.focus()
     }
-  }, [open, close])
+  }, [open])
 
   return (
     <>
-      {/* Gelber Header wie zuvor – nur Logo, kein Menü oben rechts */}
       <header
         className={`bg-brand-yellow text-brand-black ${sticky ? 'sticky top-0 z-50' : 'relative z-50'}`}
       >
-        <div className="relative flex h-[88px] w-full items-center">
-          <Container className="flex items-center">
+        <div className="flex h-[88px] w-full items-center">
+          <Container className="flex items-center justify-between">
             <Logo tone="light" />
+            <button
+              ref={burgerRef}
+              type="button"
+              className="wi-menu-button text-brand-black"
+              aria-expanded={open}
+              aria-controls={menuId}
+              aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
+              onClick={() => setOpen(true)}
+            >
+              <span className="wi-menu-icon" aria-hidden>
+                <span />
+                <span />
+                <span />
+              </span>
+            </button>
           </Container>
         </div>
       </header>
 
-      {/* MENÜ unten mittig – Hover wie zwetschke: Breite expandiert, Linien spreizen */}
+      {/* Vollbild-Menü: schwarz, Schrift weiß, gelb bei Hover, Fokus, Antippen und für die aktuelle Seite */}
       <div
-        className={`wi-menu-dock fixed bottom-6 left-0 right-0 z-[70] flex justify-center px-4 pointer-events-none sm:bottom-10 ${
-          open ? 'opacity-0' : 'opacity-100'
-        } transition-opacity duration-300`}
-        aria-hidden={open}
+        ref={panelRef}
+        id={menuId}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menü"
+        hidden={!open}
+        className="wi-menu fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-brand-black text-white"
+        onClick={(e) => {
+          // Jeder Link im Menü (auch das Logo) schließt es
+          if ((e.target as HTMLElement).closest('a')) close()
+        }}
       >
-        <button
-          ref={menuBtnRef}
-          type="button"
-          className={`wi-menu-pill flex items-center overflow-hidden rounded-pill bg-brand-yellow py-2 pl-2 pr-6 text-brand-black shadow-[0_12px_40px_rgba(0,0,0,0.28)] sm:py-2.5 sm:pl-2.5 sm:pr-8 ${
-            open ? 'pointer-events-none' : 'pointer-events-auto'
-          }`}
-          aria-expanded={open}
-          aria-controls={drawerId}
-          aria-label="Menü öffnen"
-          tabIndex={open ? -1 : 0}
-          onClick={toggle}
-        >
-          <span className="wi-menu-ball grid shrink-0 place-items-center rounded-pill bg-brand-black" aria-hidden>
-            <span className="wi-menu-lines flex flex-col items-center justify-center">
-              <span className="wi-menu-line block rounded-pill bg-brand-yellow" />
-              <span className="wi-menu-line block rounded-pill bg-brand-yellow" />
-              <span className="wi-menu-line block rounded-pill bg-brand-yellow" />
-            </span>
-          </span>
-          <span className="wi-menu-label font-unbounded font-extrabold uppercase tracking-[-0.02em]">
-            Menü
-          </span>
-        </button>
-      </div>
+        <div className="flex h-[88px] w-full shrink-0 items-center">
+          <Container className="flex items-center justify-between">
+            <Logo tone="dark" />
+            <button
+              ref={closeRef}
+              type="button"
+              className="wi-menu-button wi-menu-close rounded-pill bg-brand-yellow text-brand-black"
+              aria-label="Menü schließen"
+              onClick={close}
+            >
+              <span className="wi-menu-icon wi-menu-icon--close" aria-hidden>
+                <span />
+                <span />
+              </span>
+            </button>
+          </Container>
+        </div>
 
-      {/* Vollflächiges Overlay: schwarz, Akzente gelb */}
-      <div
-        className={`fixed inset-0 z-[60] ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}
-        aria-hidden={!open}
-      >
-        <div
-          ref={panelRef}
-          id={drawerId}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation"
-          className={`wi-menu-panel absolute inset-0 flex flex-col overflow-hidden bg-brand-black text-brand-yellow transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            entered ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <button
-            type="button"
-            onClick={close}
-            className="absolute right-5 top-5 z-10 grid h-12 w-12 place-items-center rounded-pill bg-brand-yellow text-brand-black transition hover:scale-105 sm:right-8 sm:top-8 sm:h-14 sm:w-14"
-            aria-label="Menü schließen"
-          >
-            <span className="font-unbounded text-3xl leading-none sm:text-4xl" aria-hidden>
-              ×
-            </span>
-          </button>
-
-          <nav
-            className="wi-menu-nav flex min-h-0 flex-1 flex-col items-center justify-center px-5 sm:px-10"
-            aria-label="Hauptnavigation"
-          >
-            <ul className="wi-menu-list flex w-full max-w-[min(100%,36rem)] flex-col items-center">
-              {links.map((link, i) => {
+        {/* Menüpunkte horizontal und vertikal mittig; die Kopfzeile oben wird unten als Abstand gespiegelt */}
+        <nav aria-label="Hauptnavigation" className="flex flex-1 flex-col justify-center pb-[88px]">
+          <Container>
+            <ul className="flex flex-col items-center py-stack text-center">
+              {links.map((link) => {
+                const current = isCurrentPage(pathname, link.url)
                 return (
-                  <li
-                    key={`${link.url}-${link.label}`}
-                    className={`wi-menu-item w-full transition-all duration-500 ${
-                      entered
-                        ? 'translate-y-0 opacity-100'
-                        : 'translate-y-4 opacity-0'
-                    }`}
-                    style={{ transitionDelay: entered ? `${80 + i * 45}ms` : '0ms' }}
-                  >
+                  <li key={`${link.url}-${link.label}`}>
                     <Link
                       href={link.url}
-                      onClick={close}
-                      className="wi-menu-link group mx-auto flex w-full max-w-full items-center justify-center rounded-pill text-center font-unbounded font-extrabold uppercase tracking-tight text-brand-yellow transition duration-200"
+                      aria-current={current ? 'page' : undefined}
+                      className="wi-menu-hover block py-2 font-unbounded text-section font-extrabold uppercase leading-[1.15] tracking-tight"
                     >
-                      {link.label}
+                      {menuLabel(link.label)}
                     </Link>
                   </li>
                 )
               })}
             </ul>
-          </nav>
-        </div>
+          </Container>
+        </nav>
       </div>
     </>
   )

@@ -134,6 +134,18 @@ import { Button } from '@/components/ui/Button'
 
 Standard-Ebene von `Heading`: hero → h1, section → h2, sub/card → h3, step → h4. Pro Seite genau ein `h1`.
 
+### Menü (`src/components/Header.tsx`)
+
+- **Header:** gelb, 88 px hoch, klebt oben. Logo links, Burger rechts, beide im `Container` (Abstand zum Rand = `gutter`). Auf allen Bildschirmgrößen gleich; eine Menü-Pille gibt es nicht mehr.
+- **Burger:** drei schwarze Balken (28 × 3 px, 6 px Abstand) in einer Trefferfläche von 48 × 48 px.
+- **Vollbild-Menü:** `bg-brand-black`, überdeckt die ganze Seite (`z-[70]`, auch über dem Cookie-Banner). Oben dieselbe Zeile wie der Header: Logo in der dunklen Variante links, rechts das Schließen-X an genau der Stelle des Burgers, als gelber Kreis (`rounded-pill`, `bg-brand-yellow`) mit schwarzem X; bei Hover weiß.
+- **Menüpunkte:** Unbounded, `text-section`, Versalien, weiß, horizontal und vertikal mittig. Gelb (`brand-yellow`) bei Hover (nur Geräte mit Maus), bei Tastaturfokus (zusätzlich gelbe Kontur) und beim Antippen; die aktuelle Seite ist dauerhaft gelb (`aria-current="page"`).
+- **Umbruch:** Vor einem „&“ nie ein Umbruch (geschütztes Leerzeichen). Bezeichnungen mit „&“ ab 17 Zeichen brechen fest nach dem „&“ um („Folierung &“ / „Beschriftung“), kürzere bleiben zusammen („Foto & Video“).
+- **Menüpunkte aus dem CMS:** Global „Navigation (Header)“, Rückfall `seed.ts` → `navigation`. Ein Eintrag mit Untermenü wird im Menü durch seine Unterpunkte ersetzt, der Eintrag selbst erscheint nicht (heute: „Leistungen“ → Plakatwerbung, Folierung & Beschriftung, Foto & Video; danach Jobs, Kontakt). „Startseite“ steht nicht im Menü, dafür führt das Logo zur Startseite.
+- **Bedienung:** Schließen per X, Esc und Klick auf einen Link. Solange das Menü offen ist, scrollt die Seite dahinter nicht; der Fokus startet auf dem X, bleibt im Menü gefangen und springt beim Schließen auf den Burger zurück. `aria-expanded`, `aria-controls`, `role="dialog"`, `aria-modal`, Beschriftungen „Menü öffnen“ / „Menü schließen“.
+- **Animation:** nur Einblenden in 150 ms; bei „reduzierter Bewegung“ keine Animation.
+- **Tests:** `tests/int/header.int.spec.tsx` (Öffnen, Schließen, Esc, Fokus, Reihenfolge, Umbruch); Screenshot-Test „Menü offen“ in allen fünf Prüfbreiten.
+
 ## 7. Neue Seite oder neuer CMS-Block – Checkliste
 
 1. Außen `<Section>`, innen `<Container>`; keine eigenen `py-*`, `px-*` oder `max-w-[…px]` für Sektion und Seite.
@@ -161,7 +173,8 @@ npx playwright show-report   #    Vorher/Nachher/Differenz je Seite und Breite
 ```
 
 - Die Tests starten den Dev-Server bei Bedarf selbst (`npm run dev`).
-- Während der Aufnahme wird die Kopfzeile fest oben gezeigt und die Menü-Pille ausgeblendet, damit die Bilder stabil sind.
+- Während der Aufnahme wird die Kopfzeile fest oben gezeigt, damit die Bilder stabil sind.
+- Zusätzlich wird das geöffnete Menü in allen fünf Breiten aufgenommen (sichtbarer Bildschirm auf `/leistungen/plakatwerbung`, damit die Markierung der aktuellen Seite mit im Bild ist).
 - **Referenzbilder liegen in `screenshots/baseline/<Betriebssystem>/` und bewusst nicht im Repository:** Sie sind zusammen rund 25 MB groß und hängen von Betriebssystem und Schriftdarstellung ab; unter Linux (CI) weichen sie von Windows ab. Jede:r legt sie vor einer Änderung lokal an.
 - Einzelne Seite oder Breite: `npm run test:visual -- --grep "1440 px › start"`.
 

@@ -13,7 +13,7 @@ import config from './pages.json' with { type: 'json' }
 // Während der Aufnahme: Kopfzeile fest oben statt sticky, schwebende Elemente ausblenden
 const STABLE_CSS = `
   header { position: static !important; }
-  .wi-menu-dock, nextjs-portal { display: none !important; }
+  nextjs-portal { display: none !important; }
 `
 
 for (const width of config.widths) {
@@ -82,3 +82,33 @@ for (const width of config.widths) {
     }
   })
 }
+
+// Geöffnetes Vollbild-Menü in allen Prüfbreiten, auf einer Leistungsseite (aktuelle Seite gelb markiert)
+test.describe('Menü offen', () => {
+  for (const width of config.widths) {
+    test(`${width} px`, async ({ page, context }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.emulateMedia({ reducedMotion: 'reduce' })
+      await context.addInitScript(() => {
+        localStorage.setItem(
+          'werbeinsel-cookie-consent',
+          JSON.stringify({ necessary: true, analytics: false, decided: true }),
+        )
+      })
+      await page.goto('/leistungen/plakatwerbung', { waitUntil: 'networkidle' })
+      await page.addStyleTag({ content: 'nextjs-portal { display: none !important; }' })
+      await page.getByRole('button', { name: 'Menü öffnen' }).click()
+      const dialog = page.getByRole('dialog', { name: 'Menü' })
+      await expect(dialog).toBeVisible()
+      await page.evaluate(() => document.fonts.ready)
+      // Maus aus dem Bild, damit kein Hover-Gelb auf dem X mit aufgenommen wird
+      await page.mouse.move(0, 899)
+
+      await expect(page).toHaveScreenshot(`menu-offen_${width}.png`, {
+        animations: 'disabled',
+        maxDiffPixels: 100,
+        threshold: 0.05,
+      })
+    })
+  }
+})
