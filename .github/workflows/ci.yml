@@ -20,16 +20,8 @@ jobs:
       - name: Typprüfung
         run: npx tsc --noEmit
 
-      # Bekannte Lint-Fehler stehen in eslint-suppressions.json (Abschnitt 9 im Auftrag).
-      # Neue Fehler lassen diesen Schritt fehlschlagen; nach Behebung meldet ESLint den überflüssigen Eintrag.
       - name: Lint
         run: npm run lint
-
-      - name: Bekannte Lint-Fehler anzeigen (nicht blockierend, siehe docs/designfundament-auftrag.md Abschnitt 9)
-        continue-on-error: true
-        run: |
-          echo '{}' > "$RUNNER_TEMP/keine-vermerke.json"
-          npx eslint . --suppressions-location "$RUNNER_TEMP/keine-vermerke.json"
 
       - name: Unit-Tests
         run: npm run test:unit

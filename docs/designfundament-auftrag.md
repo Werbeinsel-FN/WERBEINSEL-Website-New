@@ -477,8 +477,8 @@ Seitenlängen: meist 5–85 px länger (Zeilenhöhe der Überschriften); Startse
 
 ## 9. Offene Punkte für eine eigene Aufgabe nach dem Designfundament
 
-- **Lint-Fehler** in `src/components/forms/FormFeedback.tsx`, Zeilen 111–112 (`react-hooks/refs`: „Cannot access refs during render“). Bestanden schon vor T1; `npm run lint` läuft deshalb bis dahin nicht fehlerfrei.
+- **Lint-Fehler** in `src/components/forms/FormFeedback.tsx`, Zeilen 111–112 (`react-hooks/refs`: „Cannot access refs during render“). Bestanden schon vor T1; `npm run lint` läuft deshalb bis dahin nicht fehlerfrei. **Erledigt:** Ref wird im Effekt aktualisiert, die stabile Funktion kommt aus `useCallback`.
 - **npm-audit-Hinweise** aus `npm ci` prüfen und beheben.
 - **Test `tests/int/api.int.spec.ts` schlägt lokal fehl:** Ohne `DATABASE_URL` versucht Payload eine Postgres-Verbindung zu `localhost:5432` („cannot connect to Postgres“). `npm run test:int` läuft deshalb lokal nicht vollständig durch. Test so anpassen, dass er ohne Datenbank übersprungen wird oder eine eigene Testdatenbank nutzt – nie die Produktionsdatenbank. In der CI läuft er als nicht blockierender Schritt; danach blockierend machen.
-- **Lint-Vermerke entfernen:** Nach Behebung der Lint-Fehler `npx eslint . --prune-suppressions` ausführen und den nicht blockierenden Anzeige-Schritt aus `ci.yml` entfernen.
+- **Lint-Vermerke entfernen:** Nach Behebung der Lint-Fehler `npx eslint . --prune-suppressions` ausführen und den nicht blockierenden Anzeige-Schritt aus `ci.yml` entfernen. **Erledigt:** `eslint-suppressions.json` und der Anzeige-Schritt sind entfernt.
 - **Vorlagen-Test `tests/e2e/frontend.e2e.spec.ts`:** stammt unverändert aus der Payload-Vorlage und erwartet den Titel „Payload Blank Template“; schlägt deshalb fehl. `admin.e2e.spec.ts` legt einen Testnutzer über Payload an und braucht eine Datenbank. Beide ersetzen oder entfernen.

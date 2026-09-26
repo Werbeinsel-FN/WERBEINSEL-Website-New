@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { FormState } from '@/app/actions'
 
@@ -108,9 +108,11 @@ function DankeOverlay({ onDone }: { onDone: () => void }) {
 /** Full-screen Danke, then reset the form (no lasting success card). */
 export function FormDankeThenReset({ onFinished }: { onFinished: () => void }) {
   const onFinishedRef = useRef(onFinished)
-  onFinishedRef.current = onFinished
-  const stableDone = useRef(() => {
+  useEffect(() => {
+    onFinishedRef.current = onFinished
+  }, [onFinished])
+  const stableDone = useCallback(() => {
     onFinishedRef.current()
-  }).current
+  }, [])
   return <DankeOverlay onDone={stableDone} />
 }
