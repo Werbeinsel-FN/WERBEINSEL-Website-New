@@ -15,11 +15,11 @@ const initial: FormState = { ok: false }
 const FORM_ID = 'bewerbung-form'
 
 const inputClass =
-  'h-[70px] w-full rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
+  'h-[70px] w-full rounded-card border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
 const inputErrorClass = 'border-red-600'
 
 const chipClass = (active: boolean) =>
-  `cursor-pointer rounded-full border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
+  `cursor-pointer rounded-pill border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
     active
       ? 'bg-brand-black text-brand-yellow'
       : 'bg-white text-brand-black hover:bg-brand-black hover:text-brand-yellow'
@@ -184,7 +184,7 @@ function ApplicationFormInner({
       </fieldset>
 
       <div className="mt-12 w-full" data-field="datei">
-        <label className="flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[24px] border-[1.7px] border-dashed border-brand-black bg-white px-12 py-12 text-center transition hover:bg-brand-card-light/50">
+        <label className="flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-2 rounded-card border-[1.7px] border-dashed border-brand-black bg-white px-12 py-12 text-center transition hover:bg-brand-card-light/50">
           <UploadIcon />
           <span className="font-poppins text-base font-semibold text-brand-black">
             {file?.name || 'Lebenslauf & Arbeitsproben hier ablegen *'}
@@ -223,7 +223,7 @@ function ApplicationFormInner({
           onChange={(e) => setNachricht(e.target.value)}
           placeholder="Möchtest du uns noch etwas mitteilen? (optional)"
           rows={8}
-          className="min-h-[260px] w-full resize-y rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black"
+          className="min-h-[260px] w-full resize-y rounded-card border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black"
         />
       </div>
 
@@ -258,7 +258,7 @@ function ApplicationFormInner({
       <button
         type="submit"
         disabled={pending}
-        className="mt-12 inline-flex h-[62px] items-center justify-center whitespace-nowrap rounded-full bg-brand-black px-8 font-poppins text-lg font-bold text-brand-yellow transition hover:bg-black/90 disabled:opacity-50 sm:px-12 sm:text-xl"
+        className="mt-12 inline-flex h-[62px] items-center justify-center whitespace-nowrap rounded-pill bg-brand-black px-8 font-poppins text-lg font-bold text-brand-yellow transition hover:bg-black/90 disabled:opacity-50 sm:px-12 sm:text-xl"
       >
         {pending ? 'WIRD GESENDET …' : 'BEWERBUNG ABSENDEN'}
       </button>

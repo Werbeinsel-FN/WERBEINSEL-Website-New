@@ -55,7 +55,7 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
           <div className="mt-8 space-y-6 md:mt-8">{body}</div>
         ) : null}
         {media ? (
-          <div className="relative mx-auto mt-10 aspect-[16/10] w-full max-w-2xl overflow-hidden rounded-3xl">
+          <div className="relative mx-auto mt-10 aspect-[16/10] w-full max-w-2xl overflow-hidden rounded-card">
             <Image
               src={media.url}
               alt={media.alt}

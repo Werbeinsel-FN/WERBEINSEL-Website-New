@@ -118,7 +118,7 @@ export function Header({ items, sticky = true }: HeaderProps) {
         <button
           ref={menuBtnRef}
           type="button"
-          className={`wi-menu-pill flex items-center overflow-hidden rounded-full bg-brand-yellow py-2 pl-2 pr-6 text-brand-black shadow-[0_12px_40px_rgba(0,0,0,0.28)] sm:py-2.5 sm:pl-2.5 sm:pr-8 ${
+          className={`wi-menu-pill flex items-center overflow-hidden rounded-pill bg-brand-yellow py-2 pl-2 pr-6 text-brand-black shadow-[0_12px_40px_rgba(0,0,0,0.28)] sm:py-2.5 sm:pl-2.5 sm:pr-8 ${
             open ? 'pointer-events-none' : 'pointer-events-auto'
           }`}
           aria-expanded={open}
@@ -127,11 +127,11 @@ export function Header({ items, sticky = true }: HeaderProps) {
           tabIndex={open ? -1 : 0}
           onClick={toggle}
         >
-          <span className="wi-menu-ball grid shrink-0 place-items-center rounded-full bg-brand-black" aria-hidden>
+          <span className="wi-menu-ball grid shrink-0 place-items-center rounded-pill bg-brand-black" aria-hidden>
             <span className="wi-menu-lines flex flex-col items-center justify-center">
-              <span className="wi-menu-line block rounded-full bg-brand-yellow" />
-              <span className="wi-menu-line block rounded-full bg-brand-yellow" />
-              <span className="wi-menu-line block rounded-full bg-brand-yellow" />
+              <span className="wi-menu-line block rounded-pill bg-brand-yellow" />
+              <span className="wi-menu-line block rounded-pill bg-brand-yellow" />
+              <span className="wi-menu-line block rounded-pill bg-brand-yellow" />
             </span>
           </span>
           <span className="wi-menu-label font-unbounded font-extrabold uppercase tracking-[-0.02em]">
@@ -158,7 +158,7 @@ export function Header({ items, sticky = true }: HeaderProps) {
           <button
             type="button"
             onClick={close}
-            className="absolute right-5 top-5 z-10 grid h-12 w-12 place-items-center rounded-full bg-brand-yellow text-brand-black transition hover:scale-105 sm:right-8 sm:top-8 sm:h-14 sm:w-14"
+            className="absolute right-5 top-5 z-10 grid h-12 w-12 place-items-center rounded-pill bg-brand-yellow text-brand-black transition hover:scale-105 sm:right-8 sm:top-8 sm:h-14 sm:w-14"
             aria-label="Menü schließen"
           >
             <span className="font-unbounded text-3xl leading-none sm:text-4xl" aria-hidden>
@@ -185,7 +185,7 @@ export function Header({ items, sticky = true }: HeaderProps) {
                     <Link
                       href={link.url}
                       onClick={close}
-                      className="wi-menu-link group mx-auto flex w-full max-w-full items-center justify-center rounded-full text-center font-unbounded font-extrabold uppercase tracking-tight text-brand-yellow transition duration-200"
+                      className="wi-menu-link group mx-auto flex w-full max-w-full items-center justify-center rounded-pill text-center font-unbounded font-extrabold uppercase tracking-tight text-brand-yellow transition duration-200"
                     >
                       {link.label}
                     </Link>

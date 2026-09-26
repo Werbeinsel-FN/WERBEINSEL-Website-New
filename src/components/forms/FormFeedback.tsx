@@ -48,7 +48,7 @@ export function FormErrorSummary({
     <div
       data-form-alert
       role="alert"
-      className="mt-6 w-full max-w-[560px] rounded-[16px] border border-red-600/40 bg-red-50 px-5 py-4 text-center"
+      className="mt-6 w-full max-w-[560px] rounded-card border border-red-600/40 bg-red-50 px-5 py-4 text-center"
     >
       <p className="font-poppins text-sm font-semibold text-red-700">
         {state.message ||

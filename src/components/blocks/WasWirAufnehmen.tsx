@@ -364,7 +364,7 @@ export function WasWirAufnehmen({
 
   return (
     <section className="bg-white py-section">
-      <Container className="flex flex-col items-center gap-12">
+      <Container className="flex flex-col items-center gap-stack">
         <h2 className="heading-section w-full text-center text-brand-black">
           {ueberschrift}
         </h2>
@@ -373,7 +373,7 @@ export function WasWirAufnehmen({
           {list.map((item) => (
             <article
               key={item.titel}
-              className="@container flex min-w-0 flex-col justify-between gap-10 rounded-[24px] bg-brand-black p-10 xl:h-[720px]"
+              className="@container flex min-w-0 flex-col justify-between gap-10 rounded-card bg-brand-black p-card xl:h-[720px]"
             >
               <CardGraphic name={item.icon as IconKey} />
               <div className="flex min-w-0 flex-col gap-2.5">

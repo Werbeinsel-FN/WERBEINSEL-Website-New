@@ -49,7 +49,7 @@ function MarqueePill({
 
   return (
     <span
-      className={`inline-flex h-[95px] w-[180px] shrink-0 items-center justify-center rounded-full px-6 sm:h-[120px] sm:w-[240px] sm:px-8 md:h-[190px] md:w-[360px] md:px-12 ${
+      className={`inline-flex h-[95px] w-[180px] shrink-0 items-center justify-center rounded-pill px-6 sm:h-[120px] sm:w-[240px] sm:px-8 md:h-[190px] md:w-[360px] md:px-12 ${
         dark
           ? 'bg-brand-black text-white'
           : 'bg-white text-brand-black ring-1 ring-brand-black'
@@ -138,7 +138,7 @@ export function Marquee({ eyebrow, ueberschrift, untertitel, names, items }: Mar
         ) : null}
       </Container>
 
-      <div className="mt-10 flex flex-col gap-5 md:mt-20 md:gap-8" aria-hidden>
+      <div className="mt-stack flex flex-col gap-5 md:gap-8" aria-hidden>
         {rows.map((row, i) => (
           <MarqueeRow
             key={`row-${i}`}

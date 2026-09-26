@@ -67,8 +67,8 @@ export function Kategorien({
         >
           {list.map((kat) => {
             const className = isYellow
-              ? 'inline-flex items-center justify-center rounded-full bg-brand-black px-6 py-3 font-poppins text-sm font-semibold leading-[1.5] text-brand-yellow'
-              : 'inline-flex items-center justify-center rounded-full bg-brand-black px-6 py-3 font-poppins text-sm font-semibold text-white transition hover:bg-brand-yellow hover:text-brand-black'
+              ? 'inline-flex items-center justify-center rounded-pill bg-brand-black px-6 py-3 font-poppins text-sm font-semibold leading-[1.5] text-brand-yellow'
+              : 'inline-flex items-center justify-center rounded-pill bg-brand-black px-6 py-3 font-poppins text-sm font-semibold text-white transition hover:bg-brand-yellow hover:text-brand-black'
             return (
               <li key={kat.name}>
                 {kat.link ? (

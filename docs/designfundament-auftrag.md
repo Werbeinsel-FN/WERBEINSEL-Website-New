@@ -280,6 +280,40 @@ Seitenlängen: bei 390 px 100–420 px kürzer, bei 810 px 300–1000 px kürzer
 - Rundungen auf die drei Tokens aus 5.6 vereinheitlichen.
 - **Fertig, wenn:** keine `rounded-[…]`-Sonderwerte mehr vorhanden sind.
 
+**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+
+- **Umgesetzt:**
+  - **Karten-Innenabstand → `p-card`:** 9 Kartentypen in USP, Full-Service, Formate, Services-Raster, Kanäle, Online-Kampagnen, Was wir aufnehmen/bekleben/gestalten.
+  - **Abstand zwischen Karten → `gap-gap`:** 8 Raster bzw. Slider.
+  - **Überschrift → Inhalt → `mt-stack`/`gap-stack`/`mb-stack`:** 22 Stellen.
+  - **Rundungen:** `rounded-[24px]` und `rounded-3xl` → `rounded-card`, `rounded-full` und `rounded-[28px]` (56-px-Kreis) → `rounded-pill`, `rounded-[40px]` → `rounded-panel`, `rounded-[20px]` (Schritt-Slider) und `rounded-[16px]` (Fehlermeldung im Formular) → `rounded-card`.
+- **Bewusst belassen:** Formularfelder, Job-Akkordeon, Listen ohne Kartenhintergrund (Betreuung, Transporter-Vorteile, Jobs-Vorteile, Kontakt), Abstände in den Rechtstexten und innerhalb der Karten.
+
+Sichtbare Änderungen (px, Tokens: Karte 24 → 40, Raster 16 → 32, Überschrift → Inhalt 32 → 64):
+
+| | 390 | 810 | 1024 | 1440 | 1920 |
+|---|---|---|---|---|---|
+| Innenabstand USP-Karten | 20 → 24 | 24 → 28 | 24 → 31 | **56 → 35** | **56 → 40** |
+| Innenabstand Full-Service-Karten | 24 → 24 | 32 → 28 | 32 → 31 | 40 → 35 | 40 → 40 |
+| Innenabstand Services-Raster (`/services`) | 20 → 24 | 24 → 28 | 24 → 31 | 32 → 35 | 32 → 40 |
+| Innenabstand Formate-Karten | 24 → 24 | 28 → 28 | 28 → 31 | 28 → 35 | 28 → 40 |
+| Abstand zwischen Karten, Services-Raster | 24 → 16 | 32 → 20 | 32 → 23 | 32 → 27 | 32 → 32 |
+| Abstand zwischen Karten, USP | 20 → 16 | 24 → 20 | 20 → 23 | 32 → 27 | 32 → 32 |
+| Abstand zwischen Karten, Full-Service | 16 → 16 | 20 → 20 | 20 → 23 | 24 → 27 | 24 → 32 |
+| Abstand zwischen Karten, Leistungs-Slider (Startseite) | 24 → 16 | 24 → 20 | 20 → 23 | 24 → 27 | 24 → 32 |
+| Überschrift → Inhalt, Services-Raster, Jobs | 40 → 32 | 64 → 41 | 64 → 45 | 64 → 54 | 64 → 64 |
+| Überschrift → Inhalt, USP, Full-Service | 40 → 32 | 56 → 41 | 56 → 45 | 56 → 54 | 56 → 64 |
+| Überschrift → Inhalt, Leistungs-Slider, Kunden-Laufband | 48/40 → 32 | 80 → 41 | 64/80 → 45 | 64/80 → 54 | 64/80 → 64 |
+| Überschrift → Inhalt, Referenzen, Formate, FAQ, Kontakt | 48 → 32 | 48/64 → 41 | 48/64 → 45 | 48/64 → 54 | 48/64 → 64 |
+| Rundung Bild im Schritt-Slider | 20 → 24 | 20 → 24 | 20 → 24 | 24 → 24 | 24 → 24 |
+
+Seitenlängen: meist 10–85 px kürzer, bei 1920 px teils 15–50 px länger. Keine Überläufe, kein abgeschnittener Text. Die Blöcke Kanäle, Online-Kampagnen und Was wir aufnehmen/bekleben/gestalten kommen in den Seed-Inhalten nicht vor; ihre Karten gehen von festen 40 px bzw. 20–32 px Innenabstand ebenfalls auf 24–40 px (sichtbar erst mit der Testseite aus T7).
+
+⚠️ **Zur Prüfung auf der Vorschau:**
+1. **USP-Karten bei 1440/1920 px:** Der Innenabstand sinkt von 56 auf 35/40 px. Das nimmt den 2xl-Sprung aus T5 zurück und liegt noch unter dem Stand vor T5 (40 px).
+2. **Abstände zwischen Karten:** Auf Tablet und Laptop werden sie enger, zum Beispiel im Services-Raster bei 1024 px 23 statt 32 px.
+3. **Überschrift → Inhalt auf Tablet:** Die Abstände werden deutlich enger, zum Beispiel beim Leistungs-Slider und beim Kunden-Laufband bei 810 px 41 statt 80 px.
+
 ### T7 – CMS-Blöcke prüfen
 - Alle 24 Blöcke unter `src/components/blocks/` mit den neuen Komponenten gegenprüfen, damit neue Leistungsseiten im CMS automatisch sauber aussehen.
 - **Testseite** anlegen, die alle 24 CMS-Blöcke mit Beispielinhalten zeigt (ohne Datenbank, aus den Seed-Daten), und in `scripts/screenshots.mjs` aufnehmen. Viele Blöcke – darunter alle mit SVG-Illustrationen (Kanäle, Online-Kampagnen, Was wir aufnehmen/bekleben/gestalten, Ein Motiv, Echt nicht generiert, Transporter) – kommen auf keiner Seed-Seite vor und fehlen deshalb bisher in den Screenshot-Vergleichen. Die Testseite darf nicht öffentlich erreichbar oder indexiert sein (z. B. nur im Entwicklungsmodus oder mit `noindex` und ohne Link).

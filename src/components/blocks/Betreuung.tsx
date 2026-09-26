@@ -19,7 +19,7 @@ export function Betreuung({
 
   return (
     <section className="bg-brand-black py-section">
-      <Container className="flex flex-col items-center gap-12 md:gap-16">
+      <Container className="flex flex-col items-center gap-stack">
         <h2 className="heading-section w-full text-center text-brand-yellow">
           {ueberschrift}
         </h2>
@@ -33,7 +33,7 @@ export function Betreuung({
                 className="@container flex min-w-0 flex-1 flex-col items-center gap-5 text-center"
               >
                 <span
-                  className="grid size-14 shrink-0 place-items-center rounded-full bg-brand-yellow sm:size-[76px]"
+                  className="grid size-14 shrink-0 place-items-center rounded-pill bg-brand-yellow sm:size-[76px]"
                   aria-hidden
                 >
                   <span className="font-unbounded text-card font-extrabold leading-[1.1] text-brand-black">

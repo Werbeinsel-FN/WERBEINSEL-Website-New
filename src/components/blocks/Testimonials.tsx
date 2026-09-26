@@ -169,7 +169,7 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
               aria-selected={i === selected}
               aria-label={`Zitat ${i + 1}`}
               onClick={() => emblaApi?.scrollTo(i)}
-              className={`rounded-full p-0 transition-all ${
+              className={`rounded-pill p-0 transition-all ${
                 i === selected
                   ? 'h-3 flex-1 bg-brand-yellow lg:w-8 lg:flex-none'
                   : 'h-3 flex-1 bg-white/35 hover:bg-white/50 lg:w-3 lg:flex-none'

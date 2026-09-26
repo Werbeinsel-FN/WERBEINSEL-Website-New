@@ -34,7 +34,7 @@ function ServiceCard({
   const media = resolveMedia(slide.bild, slide.titel)
   const card = (
     <article
-      className="relative h-full w-full overflow-hidden rounded-[24px] bg-brand-black"
+      className="relative h-full w-full overflow-hidden rounded-card bg-brand-black"
       role="group"
       aria-roledescription="slide"
       aria-label={`${index + 1} von ${total}: ${slide.titel}`}
@@ -138,7 +138,7 @@ export function ServicesSlider({
         </div>
 
         {/* Desktop: 4 cards, skaliert (Figma 382×679 auf Artboard 2908 → kleiner auf Laptop) */}
-        <div className="mt-12 hidden justify-center gap-4 overflow-x-auto px-2 md:mt-16 md:gap-5 lg:flex xl:gap-6">
+        <div className="mt-stack hidden justify-center gap-gap overflow-x-auto px-2 lg:flex">
           {slides.map((slide, i) => (
             <div
               key={`${slide.titel}-${i}`}
@@ -150,9 +150,9 @@ export function ServicesSlider({
         </div>
 
         {/* Tablet / Mobile: carousel */}
-        <div className="mt-12 md:mt-20 lg:hidden" aria-roledescription="carousel">
+        <div className="mt-stack lg:hidden" aria-roledescription="carousel">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6">
+            <div className="flex gap-gap">
               {slides.map((slide, i) => (
                 <div
                   key={`${slide.titel}-m-${i}`}

@@ -36,13 +36,13 @@ export function FormateMaterial({
           </h2>
         ) : null}
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-stack grid gap-gap sm:grid-cols-2 lg:grid-cols-3">
           {list.map((format, i) => {
             const media = resolveMedia(format.bild, format.name)
             return (
               <article
                 key={`${format.name}-${i}`}
-                className="overflow-hidden rounded-3xl bg-brand-card-dark"
+                className="overflow-hidden rounded-card bg-brand-card-dark"
               >
                 {media ? (
                   <div className="relative aspect-[16/10]">
@@ -55,7 +55,7 @@ export function FormateMaterial({
                     />
                   </div>
                 ) : null}
-                <div className="p-6 md:p-7">
+                <div className="p-card">
                   <h3 className="font-unbounded text-xl font-extrabold text-white">{format.name}</h3>
                   {format.beschreibung ? (
                     <p className="mt-3 font-poppins text-sm leading-relaxed text-white/65 md:text-base">

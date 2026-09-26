@@ -443,13 +443,13 @@ export function Kanaele({
           ) : null}
         </div>
 
-        <div className="mt-10 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="mt-stack grid w-full grid-cols-1 gap-gap sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {list.map((item) => {
             const icon = item.icon as IconKey
             return (
               <article
                 key={item.titel}
-                className="@container flex min-w-0 flex-col gap-6 rounded-[24px] bg-brand-black p-5 sm:gap-8 sm:p-6 xl:p-8"
+                className="@container flex min-w-0 flex-col gap-6 rounded-card bg-brand-black p-card sm:gap-8"
               >
                 <div className="flex flex-col gap-4 xl:gap-6">
                   <LogoIcon name={icon} />

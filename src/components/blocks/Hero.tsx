@@ -94,7 +94,7 @@ export function Hero({
       <div className="absolute inset-0 bg-black/40" aria-hidden />
 
       <div className="relative z-10 flex items-center justify-center px-gutter py-14 md:py-24">
-        <div className="w-full max-w-[1100px] rounded-[40px] bg-brand-yellow px-6 py-10 text-center sm:px-12 sm:py-12 md:p-16">
+        <div className="w-full max-w-[1100px] rounded-panel bg-brand-yellow px-6 py-10 text-center sm:px-12 sm:py-12 md:p-16">
           <h1 className="heading-hero mx-auto max-w-[972px] whitespace-pre-line font-black text-brand-black">
             {titel}
           </h1>

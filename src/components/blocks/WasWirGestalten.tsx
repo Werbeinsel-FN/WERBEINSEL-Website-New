@@ -289,7 +289,7 @@ export function WasWirGestalten({
 
   return (
     <section className="bg-white py-section">
-      <Container className="flex flex-col items-center gap-10 md:gap-12">
+      <Container className="flex flex-col items-center gap-stack">
         <h2 className="heading-section w-full text-center text-brand-black">
           {ueberschrift}
         </h2>
@@ -299,7 +299,7 @@ export function WasWirGestalten({
             {list.map((item) => (
               <article
                 key={item.titel}
-                className="@container flex min-w-0 flex-col justify-between gap-8 overflow-hidden rounded-[24px] bg-brand-black p-6 sm:p-8 lg:p-6 xl:min-h-[720px] xl:p-10"
+                className="@container flex min-w-0 flex-col justify-between gap-8 overflow-hidden rounded-card bg-brand-black p-card xl:min-h-[720px]"
               >
                 <CardGraphic name={item.icon as IconKey} />
                 <div className="flex min-w-0 flex-col gap-2">

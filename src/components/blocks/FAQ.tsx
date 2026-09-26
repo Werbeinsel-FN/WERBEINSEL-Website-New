@@ -44,7 +44,7 @@ function AccordionItem({
         >
           <span>{item.frage}</span>
           <span
-            className={`circle mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-yellow text-brand-black transition ${open ? 'rotate-45' : ''}`}
+            className={`circle mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-pill bg-brand-yellow text-brand-black transition ${open ? 'rotate-45' : ''}`}
             aria-hidden
           >
             +
@@ -96,7 +96,7 @@ export function FAQ({
         ) : null}
 
         {layout === 'zweiSpalten' ? (
-          <div className="mt-12 grid gap-8 md:grid-cols-2 md:gap-x-12 md:gap-y-10">
+          <div className="mt-stack grid gap-8 md:grid-cols-2 md:gap-x-12 md:gap-y-10">
             {list.map((item, i) => (
               <div key={`${item.frage}-${i}`}>
                 <h3 className="font-unbounded text-lg font-extrabold text-white md:text-xl">
@@ -109,7 +109,7 @@ export function FAQ({
             ))}
           </div>
         ) : (
-          <div className="mt-10 max-w-3xl">
+          <div className="mt-stack max-w-3xl">
             {list.map((item, i) => (
               <AccordionItem
                 key={`${item.frage}-${i}`}

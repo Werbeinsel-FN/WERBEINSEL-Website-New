@@ -63,7 +63,7 @@ export function Reichweite({
 
           {karteZeigen ? (
             <div
-              className="flex min-h-[280px] items-center justify-center rounded-3xl bg-brand-black/10 ring-1 ring-brand-black/10 md:min-h-[360px]"
+              className="flex min-h-[280px] items-center justify-center rounded-card bg-brand-black/10 ring-1 ring-brand-black/10 md:min-h-[360px]"
               role="img"
               aria-label="Kartenplatzhalter – OpenStreetMap"
             >

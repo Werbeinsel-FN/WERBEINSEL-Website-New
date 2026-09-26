@@ -94,7 +94,7 @@ export function Footer({ tagline, spalten, socials }: FooterProps) {
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="grid h-14 w-14 shrink-0 place-items-center rounded-[28px] bg-brand-yellow text-brand-black transition hover:scale-105"
+                      className="grid h-14 w-14 shrink-0 place-items-center rounded-pill bg-brand-yellow text-brand-black transition hover:scale-105"
                       aria-label={s.plattform}
                       title={s.plattform}
                     >

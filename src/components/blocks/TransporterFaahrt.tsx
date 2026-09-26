@@ -65,7 +65,7 @@ export function TransporterFaahrt({
 
   return (
     <section className="bg-brand-black py-section">
-      <Container className="flex flex-col items-center gap-12 md:gap-16">
+      <Container className="flex flex-col items-center gap-stack">
         <div className="flex w-full flex-col items-center gap-5 text-center">
           <h2 className="heading-section text-brand-yellow">
             {ueberschrift}

@@ -15,7 +15,7 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
 
   return (
     <section className="flex flex-col items-center self-stretch bg-brand-black py-section text-white">
-      <Container className="flex flex-col items-start gap-10 md:gap-14">
+      <Container className="flex flex-col items-start gap-stack">
         {/* Figma: gap 56 zwischen Blöcken */}
         <div className="flex w-full flex-col items-start gap-6 md:gap-14">
           {eyebrow ? (
@@ -43,14 +43,14 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
         </div>
 
         {points.length ? (
-          <div className="grid w-full grid-cols-1 items-stretch gap-5 sm:gap-6 lg:grid-cols-3 lg:gap-5 xl:gap-8">
+          <div className="grid w-full grid-cols-1 items-stretch gap-gap lg:grid-cols-3">
             {points.map((point, i) => (
               <article
                 key={`${point.titel}-${i}`}
-                className="@container flex h-full min-w-0 flex-col items-start gap-4 overflow-hidden rounded-[24px] bg-brand-card-dark p-5 sm:p-6 md:gap-5 xl:p-10 2xl:p-14"
+                className="@container flex h-full min-w-0 flex-col items-start gap-4 overflow-hidden rounded-card bg-brand-card-dark p-card md:gap-5"
               >
                 <span
-                  className="block size-5 shrink-0 rounded-full bg-brand-yellow xl:size-6"
+                  className="block size-5 shrink-0 rounded-pill bg-brand-yellow xl:size-6"
                   aria-hidden
                 />
                 {/* min-w-0 + cqi: lange Wörter bleiben in der Karte, keine Auto-Silbentrennung */}

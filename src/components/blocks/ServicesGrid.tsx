@@ -22,7 +22,7 @@ function ServiceOverviewCard({ item }: { item: ServiceGridItem }) {
   const multiLineSub = Boolean(item.kurztext?.includes('\n'))
 
   const card = (
-    <article className="@container relative flex h-auto min-h-[420px] w-full min-w-0 flex-col justify-between overflow-hidden rounded-[24px] bg-brand-black p-5 sm:min-h-[520px] sm:p-6 xl:h-[720px] xl:min-h-0 xl:p-8">
+    <article className="@container relative flex h-auto min-h-[420px] w-full min-w-0 flex-col justify-between overflow-hidden rounded-card bg-brand-black p-card sm:min-h-[520px] xl:h-[720px] xl:min-h-0">
       {media ? (
         <Image
           src={media.url}
@@ -43,7 +43,7 @@ function ServiceOverviewCard({ item }: { item: ServiceGridItem }) {
         aria-hidden
       />
 
-      <span className="relative z-10 grid size-9 shrink-0 place-items-center rounded-full bg-brand-yellow font-poppins text-xs font-semibold leading-[1.5] tracking-[0.7px] text-brand-black sm:size-10 sm:text-sm">
+      <span className="relative z-10 grid size-9 shrink-0 place-items-center rounded-pill bg-brand-yellow font-poppins text-xs font-semibold leading-[1.5] tracking-[0.7px] text-brand-black sm:size-10 sm:text-sm">
         {item.nr}
       </span>
 
@@ -88,7 +88,7 @@ export function ServicesGrid({ ueberschrift, items }: ServicesGridProps) {
         </h2>
 
         {/* 4 Spalten erst ab xl – mehr Platz pro Karte */}
-        <div className="mt-10 grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 md:mt-16 xl:grid-cols-4">
+        <div className="mt-stack grid w-full grid-cols-1 gap-gap sm:grid-cols-2 xl:grid-cols-4">
           {items.map((item) => (
             <ServiceOverviewCard key={item.nr} item={item} />
           ))}

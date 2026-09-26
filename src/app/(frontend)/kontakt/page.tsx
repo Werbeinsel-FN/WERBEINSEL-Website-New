@@ -44,7 +44,7 @@ export default async function KontaktPage() {
       {/* Direktkontakt – Figma: padding 128, icons 80, Label/Meta + Body/Lead */}
       <section className="flex flex-col items-stretch bg-brand-black py-section text-white">
         <Container className="flex flex-col items-center">
-          <h2 className="heading-section mb-12 whitespace-pre-line text-center text-brand-yellow md:mb-16">
+          <h2 className="heading-section mb-stack whitespace-pre-line text-center text-brand-yellow">
             {kontakt.contactTitle}
           </h2>
 
@@ -62,7 +62,7 @@ export default async function KontaktPage() {
               icon="mail"
             />
             <div className="flex flex-col items-center gap-4 text-center">
-              <span className="circle grid size-20 shrink-0 place-items-center rounded-full bg-brand-whatsapp text-white">
+              <span className="circle grid size-20 shrink-0 place-items-center rounded-pill bg-brand-whatsapp text-white">
                 <ChatBubbleIcon />
               </span>
               <p className="font-unbounded text-lg font-extrabold leading-[1.5] uppercase text-brand-yellow">
@@ -72,7 +72,7 @@ export default async function KontaktPage() {
                 href={`https://wa.me/${wa}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-brand-whatsapp px-6 py-3 font-poppins text-base font-semibold text-white transition hover:brightness-110"
+                className="inline-flex items-center justify-center rounded-pill bg-brand-whatsapp px-6 py-3 font-poppins text-base font-semibold text-white transition hover:brightness-110"
               >
                 {kontakt.cards.whatsappCta}
               </a>
@@ -110,7 +110,7 @@ function ContactCol({
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className="flex flex-col items-center gap-4 text-center transition hover:opacity-90"
     >
-      <span className="circle grid size-20 shrink-0 place-items-center rounded-full bg-brand-yellow text-brand-black">
+      <span className="circle grid size-20 shrink-0 place-items-center rounded-pill bg-brand-yellow text-brand-black">
         {icon === 'phone' && <PhoneIcon />}
         {icon === 'mail' && <MailIcon />}
         {icon === 'pin' && <PinIcon />}

@@ -339,11 +339,11 @@ export function OnlineKampagnen({
           ) : null}
         </div>
 
-        <div className="mt-10 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-stack grid w-full grid-cols-1 gap-gap sm:grid-cols-2 lg:grid-cols-3">
           {list.map((item) => (
             <article
               key={item.titel}
-              className="@container flex min-w-0 flex-col justify-between gap-10 rounded-[24px] bg-brand-black p-10 lg:h-[979px]"
+              className="@container flex min-w-0 flex-col justify-between gap-10 rounded-card bg-brand-black p-card lg:h-[979px]"
             >
               <CardGraphic name={item.icon as IconKey} />
               <div className="flex min-w-0 flex-col gap-2">

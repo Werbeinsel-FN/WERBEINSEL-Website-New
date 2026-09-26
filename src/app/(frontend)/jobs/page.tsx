@@ -59,7 +59,7 @@ export default async function JobsPage() {
           <h2 className="heading-section text-center text-brand-black">
             {jobs.openingsTitle}
           </h2>
-          <div className="mt-10 w-full md:mt-16">
+          <div className="mt-stack w-full">
             <JobAccordion jobs={active} />
           </div>
         </Container>
@@ -71,10 +71,10 @@ export default async function JobsPage() {
             {jobs.process.ueberschrift}
           </h2>
 
-          <ol className="mt-10 grid w-full grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 md:mt-16 lg:grid-cols-4">
+          <ol className="mt-stack grid w-full grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {jobs.process.schritte.map((s, i) => (
               <li key={s.titel} className="flex min-w-0 flex-col items-center px-1 text-center">
-                <span className="circle mb-4 grid size-20 shrink-0 place-items-center rounded-full bg-brand-yellow font-unbounded text-lead font-extrabold leading-none text-brand-black">
+                <span className="circle mb-4 grid size-20 shrink-0 place-items-center rounded-pill bg-brand-yellow font-unbounded text-lead font-extrabold leading-none text-brand-black">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="font-unbounded text-step font-bold leading-[1.5] text-white">
@@ -100,7 +100,7 @@ export default async function JobsPage() {
           <p className="body-lead mx-auto mt-4 max-w-[537px] text-center text-brand-black">
             {jobs.formSubtitle}
           </p>
-          <div className="mt-10 w-full md:mt-12">
+          <div className="mt-stack w-full">
             <ApplicationForm positions={positions} formOptions={formOptions} />
           </div>
         </Container>

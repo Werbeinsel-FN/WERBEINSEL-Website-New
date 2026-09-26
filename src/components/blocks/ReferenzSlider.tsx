@@ -76,7 +76,7 @@ export function ReferenzSlider({
     return (
       <section
         id={sectionId || undefined}
-        className="flex flex-col gap-12 bg-white py-section"
+        className="flex flex-col gap-stack bg-white py-section"
         aria-label={ueberschrift || 'Referenzen'}
       >
         <Container>
@@ -103,7 +103,7 @@ export function ReferenzSlider({
   return (
     <section
       id={sectionId || undefined}
-      className="flex flex-col gap-12 bg-white py-section"
+      className="flex flex-col gap-stack bg-white py-section"
       aria-roledescription="carousel"
       aria-label={ueberschrift || 'Referenzen'}
     >
@@ -137,7 +137,7 @@ export function ReferenzSlider({
             {slides.map((slide, i) => {
               const media = resolveMedia(slide.bild, slide.titel)
               const inner = (
-                <article className="h-full w-full overflow-hidden rounded-[24px] bg-brand-card-light">
+                <article className="h-full w-full overflow-hidden rounded-card bg-brand-card-light">
                   <div className="relative h-full w-full overflow-hidden">
                     {media ? (
                       <Image
@@ -175,7 +175,7 @@ export function ReferenzSlider({
           onClick={() => emblaApi?.scrollPrev()}
           disabled={!canPrev}
           aria-label="Vorherige Folie"
-          className="absolute top-1/2 left-3 z-10 grid size-14 -translate-y-1/2 place-items-center rounded-full bg-brand-yellow text-brand-black shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition disabled:opacity-40 sm:left-6 sm:size-[76px]"
+          className="absolute top-1/2 left-3 z-10 grid size-14 -translate-y-1/2 place-items-center rounded-pill bg-brand-yellow text-brand-black shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition disabled:opacity-40 sm:left-6 sm:size-[76px]"
         >
           <Chevron dir="left" />
         </button>
@@ -184,7 +184,7 @@ export function ReferenzSlider({
           onClick={() => emblaApi?.scrollNext()}
           disabled={!canNext}
           aria-label="Nächste Folie"
-          className="absolute top-1/2 right-3 z-10 grid size-14 -translate-y-1/2 place-items-center rounded-full bg-brand-yellow text-brand-black shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition disabled:opacity-40 sm:right-6 sm:size-[76px]"
+          className="absolute top-1/2 right-3 z-10 grid size-14 -translate-y-1/2 place-items-center rounded-pill bg-brand-yellow text-brand-black shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition disabled:opacity-40 sm:right-6 sm:size-[76px]"
         >
           <Chevron dir="right" />
         </button>

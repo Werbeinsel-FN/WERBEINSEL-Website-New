@@ -69,8 +69,8 @@ export function StepSlider({ eyebrow, schritte }: Props) {
     >
       <Container className="py-section">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-stretch lg:gap-10 xl:gap-14 2xl:gap-[120px]">
-          <div className="relative w-full min-w-0 overflow-hidden rounded-[20px] lg:w-[min(48%,420px)] lg:shrink-0 xl:w-[min(46%,520px)] 2xl:w-[min(100%,760px)] 2xl:rounded-[24px]">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] sm:aspect-[3/4] lg:aspect-[3/4] 2xl:aspect-[760/1013] 2xl:rounded-[24px]">
+          <div className="relative w-full min-w-0 overflow-hidden rounded-card lg:w-[min(48%,420px)] lg:shrink-0 xl:w-[min(46%,520px)] 2xl:w-[min(100%,760px)]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card sm:aspect-[3/4] lg:aspect-[3/4] 2xl:aspect-[760/1013]">
               {foto ? (
                 <>
                   <Image
@@ -122,14 +122,14 @@ export function StepSlider({ eyebrow, schritte }: Props) {
                   {`SCHRITT ${nummer} / ${totalLabel}`}
                 </p>
                 <div
-                  className="h-1.5 w-full overflow-hidden rounded-full bg-brand-control sm:h-2"
+                  className="h-1.5 w-full overflow-hidden rounded-pill bg-brand-control sm:h-2"
                   role="progressbar"
                   aria-valuemin={1}
                   aria-valuemax={total}
                   aria-valuenow={selected + 1}
                 >
                   <div
-                    className="h-full rounded-full bg-brand-yellow transition-[width] duration-300"
+                    className="h-full rounded-pill bg-brand-yellow transition-[width] duration-300"
                     style={{ width: `${((selected + 1) / total) * 100}%` }}
                   />
                 </div>
@@ -141,7 +141,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
                   onClick={prev}
                   disabled={selected === 0}
                   aria-label="Vorheriger Schritt"
-                  className="grid size-11 place-items-center rounded-full bg-brand-control text-white transition hover:bg-brand-control-hover disabled:opacity-40 sm:size-12 lg:size-14 xl:size-16 2xl:size-[130px]"
+                  className="grid size-11 place-items-center rounded-pill bg-brand-control text-white transition hover:bg-brand-control-hover disabled:opacity-40 sm:size-12 lg:size-14 xl:size-16 2xl:size-[130px]"
                 >
                   <Chevron dir="left" />
                 </button>
@@ -150,7 +150,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
                   onClick={next}
                   disabled={selected === total - 1}
                   aria-label="Nächster Schritt"
-                  className="grid size-11 place-items-center rounded-full bg-brand-yellow text-brand-black transition hover:bg-brand-yellow/90 disabled:opacity-40 sm:size-12 lg:size-14 xl:size-16 2xl:size-[130px]"
+                  className="grid size-11 place-items-center rounded-pill bg-brand-yellow text-brand-black transition hover:bg-brand-yellow/90 disabled:opacity-40 sm:size-12 lg:size-14 xl:size-16 2xl:size-[130px]"
                 >
                   <Chevron dir="right" />
                 </button>

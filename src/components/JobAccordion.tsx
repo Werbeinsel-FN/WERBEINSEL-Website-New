@@ -48,7 +48,7 @@ export function JobAccordion({ jobs }: { jobs: Job[] }) {
         return (
           <article
             key={job.id}
-            className="w-full overflow-hidden rounded-[24px] border-[1.7px] border-brand-black bg-white"
+            className="w-full overflow-hidden rounded-card border-[1.7px] border-brand-black bg-white"
           >
             <button
               type="button"
@@ -64,7 +64,7 @@ export function JobAccordion({ jobs }: { jobs: Job[] }) {
                   {job.badges?.map((b, i) => (
                     <span
                       key={b}
-                      className={`inline-flex items-center rounded-full px-4 py-2 font-poppins text-sm font-semibold leading-none ${
+                      className={`inline-flex items-center rounded-pill px-4 py-2 font-poppins text-sm font-semibold leading-none ${
                         i === 0
                           ? 'bg-brand-yellow text-brand-black'
                           : 'bg-brand-card-light text-brand-black'
@@ -94,7 +94,7 @@ export function JobAccordion({ jobs }: { jobs: Job[] }) {
                 <div className="mt-6 flex items-center justify-center border-t-[1.7px] border-brand-black pt-6 md:mt-8 md:pt-[26px] lg:justify-start">
                   <Link
                     href="#bewerbung"
-                    className="inline-flex h-[54px] items-center justify-center rounded-full bg-brand-black px-8 font-poppins text-base font-bold text-brand-yellow transition hover:bg-black/90"
+                    className="inline-flex h-[54px] items-center justify-center rounded-pill bg-brand-black px-8 font-poppins text-base font-bold text-brand-yellow transition hover:bg-black/90"
                   >
                     Jetzt bewerben
                   </Link>
@@ -120,7 +120,7 @@ function List({ title, items }: { title: string; items?: string[] }) {
             className="flex gap-3 font-poppins text-sm leading-[1.5] text-brand-black md:text-base"
           >
             <span
-              className="mt-2 size-2 shrink-0 rounded-full bg-brand-yellow"
+              className="mt-2 size-2 shrink-0 rounded-pill bg-brand-yellow"
               aria-hidden
             />
             {item}

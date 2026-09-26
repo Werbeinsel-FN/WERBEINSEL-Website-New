@@ -60,14 +60,14 @@ export function CookieConsent() {
           <button
             type="button"
             onClick={() => save({ necessary: true, analytics: false, decided: true })}
-            className="rounded-full border border-black/20 px-5 py-3 font-poppins text-sm font-semibold"
+            className="rounded-pill border border-black/20 px-5 py-3 font-poppins text-sm font-semibold"
           >
             Nur notwendige
           </button>
           <button
             type="button"
             onClick={() => save({ necessary: true, analytics: true, decided: true })}
-            className="rounded-full bg-black px-5 py-3 font-poppins text-sm font-bold text-brand-yellow"
+            className="rounded-pill bg-black px-5 py-3 font-poppins text-sm font-bold text-brand-yellow"
           >
             Analyse erlauben
           </button>

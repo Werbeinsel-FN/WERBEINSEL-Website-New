@@ -15,11 +15,11 @@ const initial: FormState = { ok: false }
 const FORM_ID = 'kontakt-form'
 
 const inputClass =
-  'h-[70px] w-full rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
+  'h-[70px] w-full rounded-card border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black'
 const inputErrorClass = 'border-red-600'
 
 const chipClass = (active: boolean) =>
-  `cursor-pointer rounded-full border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
+  `cursor-pointer rounded-pill border-[1.7px] border-brand-black px-6 py-4 font-poppins text-base font-semibold leading-[1.5] transition ${
     active
       ? 'bg-brand-black text-brand-yellow'
       : 'bg-white text-brand-black hover:bg-brand-black hover:text-brand-yellow'
@@ -191,7 +191,7 @@ function ContactFormInner({
           onChange={(e) => setNachricht(e.target.value)}
           placeholder="Ihre Nachricht an uns (optional)"
           rows={8}
-          className="min-h-[260px] w-full resize-y rounded-[24px] border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black"
+          className="min-h-[260px] w-full resize-y rounded-card border-[1.7px] border-brand-black bg-white px-8 py-5 font-poppins text-lg font-medium leading-[1.5] text-brand-black outline-none placeholder:text-brand-black/70 focus:border-brand-black"
         />
       </div>
 
@@ -226,7 +226,7 @@ function ContactFormInner({
       <button
         type="submit"
         disabled={pending}
-        className="mt-8 inline-flex h-[62px] items-center justify-center rounded-full bg-brand-black px-12 font-poppins text-xl font-bold text-brand-yellow transition hover:bg-black/90 disabled:opacity-50"
+        className="mt-8 inline-flex h-[62px] items-center justify-center rounded-pill bg-brand-black px-12 font-poppins text-xl font-bold text-brand-yellow transition hover:bg-black/90 disabled:opacity-50"
       >
         {pending ? 'WIRD GESENDET …' : 'ANFRAGE SENDEN'}
       </button>

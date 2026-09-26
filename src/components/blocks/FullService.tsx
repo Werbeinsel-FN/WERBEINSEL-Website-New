@@ -15,7 +15,7 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
   return (
     <section className="flex flex-col items-center self-stretch bg-white py-section">
       {/* Figma: max 1780, gap 56, align flex-start, padding 128 */}
-      <Container className="flex flex-col items-start gap-10 md:gap-14">
+      <Container className="flex flex-col items-start gap-stack">
         <div className="flex w-full flex-col items-start gap-6 md:gap-14">
           {eyebrow ? (
             <p className="font-poppins text-sm font-bold uppercase tracking-[0.12em] text-brand-on-light md:text-base">
@@ -37,13 +37,13 @@ export function FullService({ eyebrow, ueberschrift, text, schritte }: FullServi
         </div>
 
         {steps.length ? (
-          <ol className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-5 xl:gap-6">
+          <ol className="grid w-full grid-cols-1 gap-gap sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {steps.map((step, i) => {
               const nummer = String(i + 1).padStart(2, '0')
               return (
                 <li
                   key={`${step.titel}-${i}`}
-                  className="@container flex min-w-0 flex-col items-start gap-4 rounded-[24px] bg-brand-card-light p-6 sm:p-8 xl:p-10"
+                  className="@container flex min-w-0 flex-col items-start gap-4 rounded-card bg-brand-card-light p-card"
                 >
                   {/* Unbounded 40/900 yellow */}
                   <span
