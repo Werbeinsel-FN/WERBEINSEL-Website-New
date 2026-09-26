@@ -82,7 +82,7 @@ export function ComingSoonClient() {
   return (
     <>
       <style>{`
-  :root{ --yellow:#FFED00; --black:#000; --wa:#25D366;
+  :root{ --yellow:#FFED00; --black:#000;
     --unb:var(--font-unbounded), system-ui, sans-serif; --pop:var(--font-poppins), system-ui, sans-serif; }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{min-height:100%}
@@ -130,7 +130,6 @@ export function ComingSoonClient() {
   .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border-radius:999px; font-weight:600; font-size:15px; text-decoration:none; transition:transform .15s ease; border:none; cursor:pointer; font-family:inherit}
   .btn:hover{transform:translateY(-2px)}
   .btn-dark{background:#000; color:var(--yellow)}
-  .btn-wa{background:var(--wa); color:#fff}
   .btn-line{background:transparent; color:#000; border:2px solid #000}
   .foot{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-top:clamp(26px,3.5vw,34px); padding-top:18px; border-top:2px solid #000; font-size:12px; font-weight:500; align-items:center}
   .foot button{background:none; border:none; padding:0; font:inherit; color:#000; text-decoration:underline; cursor:pointer; opacity:.55}
@@ -211,14 +210,6 @@ export function ComingSoonClient() {
 
           <div className="cta">
             <span className="hint">Schon ein Projekt?</span>
-            <a
-              className="btn btn-wa"
-              href="https://wa.me/491752000227"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              WhatsApp
-            </a>
             <a className="btn btn-dark" href="tel:+4975417005744">
               Anrufen
             </a>

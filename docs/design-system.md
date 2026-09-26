@@ -37,7 +37,6 @@ Eigene Media Queries nutzen nur diese Werte. Geprüft wird in **390, 810, 1024, 
 | `brand-divider` | #333333 | Linien auf Schwarz |
 | `brand-control` / `brand-control-hover` | #595959 / #6A6A6A | Slider-Steuerung auf Schwarz |
 | `brand-error` | #8A0000 | Fehlermeldungen |
-| `brand-whatsapp` | #25D366 | nur WhatsApp |
 
 Nutzbar mit allen Farb-Utilities, z. B. `bg-brand-yellow`, `text-brand-muted`, `border-brand-divider`, `fill-brand-yellow` (SVG).
 Hero ohne Bild: `style={{ background: 'var(--gradient-hero-fallback)' }}`.

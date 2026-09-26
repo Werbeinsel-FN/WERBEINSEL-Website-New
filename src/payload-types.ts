@@ -1451,10 +1451,6 @@ export interface Einstellungen {
   url?: string | null;
   telefon?: string | null;
   email?: string | null;
-  /**
-   * Für den „Chat starten"-Deeplink.
-   */
-  whatsapp?: string | null;
   adresse?: {
     strasse?: string | null;
     plz?: string | null;
@@ -1591,8 +1587,6 @@ export interface KontaktSeite {
   cards?: {
     telefonLabel?: string | null;
     emailLabel?: string | null;
-    whatsappLabel?: string | null;
-    whatsappCta?: string | null;
     adresseLabel?: string | null;
   };
   updatedAt?: string | null;
@@ -1720,7 +1714,6 @@ export interface EinstellungenSelect<T extends boolean = true> {
   url?: T;
   telefon?: T;
   email?: T;
-  whatsapp?: T;
   adresse?:
     | T
     | {
@@ -1869,8 +1862,6 @@ export interface KontaktSeiteSelect<T extends boolean = true> {
     | {
         telefonLabel?: T;
         emailLabel?: T;
-        whatsappLabel?: T;
-        whatsappCta?: T;
         adresseLabel?: T;
       };
   updatedAt?: T;

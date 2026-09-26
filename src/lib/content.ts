@@ -168,7 +168,6 @@ export async function getSiteChrome(): Promise<SiteChrome> {
         url: e?.url || seedEinstellungen.url,
         telefon: e?.telefon || seedEinstellungen.telefon,
         email: e?.email || seedEinstellungen.email,
-        whatsapp: e?.whatsapp || seedEinstellungen.whatsapp,
         adresse: {
           strasse: e?.adresse?.strasse || seedEinstellungen.adresse.strasse,
           plz: e?.adresse?.plz || seedEinstellungen.adresse.plz,
@@ -378,8 +377,6 @@ export async function getKontaktContent() {
       cards: {
         telefonLabel: s?.cards?.telefonLabel || seedKontakt.cards.telefonLabel,
         emailLabel: s?.cards?.emailLabel || seedKontakt.cards.emailLabel,
-        whatsappLabel: s?.cards?.whatsappLabel || seedKontakt.cards.whatsappLabel,
-        whatsappCta: s?.cards?.whatsappCta || seedKontakt.cards.whatsappCta,
         adresseLabel: s?.cards?.adresseLabel || seedKontakt.cards.adresseLabel,
       },
     }

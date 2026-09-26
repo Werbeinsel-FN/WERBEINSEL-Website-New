@@ -27,8 +27,6 @@ export const KontaktSeite: GlobalConfig = {
       fields: [
         { name: 'telefonLabel', type: 'text', label: 'Telefon-Label' },
         { name: 'emailLabel', type: 'text', label: 'E-Mail-Label' },
-        { name: 'whatsappLabel', type: 'text', label: 'WhatsApp-Label' },
-        { name: 'whatsappCta', type: 'text', label: 'WhatsApp-Button' },
         { name: 'adresseLabel', type: 'text', label: 'Adresse-Label' },
       ],
     },

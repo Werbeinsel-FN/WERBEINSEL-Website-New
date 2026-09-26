@@ -8,7 +8,6 @@ const config: Config = {
         brand: {
           yellow: 'var(--color-yellow)',
           black: 'var(--color-black)',
-          whatsapp: 'var(--color-whatsapp)',
           muted: 'var(--color-text-muted)',
           'card-dark': 'var(--color-card-dark)',
           'card-light': 'var(--color-card-light)',

@@ -18,7 +18,6 @@ export const Einstellungen: GlobalConfig = {
     },
     { name: 'telefon', type: 'text', label: 'Telefon' },
     { name: 'email', type: 'text', label: 'E-Mail' },
-    { name: 'whatsapp', type: 'text', label: 'WhatsApp-Nummer', admin: { description: 'Für den „Chat starten"-Deeplink.' } },
     {
       name: 'adresse', type: 'group', label: 'Adresse',
       fields: [

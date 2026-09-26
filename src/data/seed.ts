@@ -19,7 +19,6 @@ export const navigation = {
 export const einstellungen = {
   telefon: '+49 (0) 123 456 789',
   email: 'info@werbeinsel.de',
-  whatsapp: '+49123456789',
   adresse: {
     strasse: 'Musterstraße 123',
     plz: '12345',
@@ -304,8 +303,6 @@ export const kontakt = {
   cards: {
     telefonLabel: 'TELEFON',
     emailLabel: 'E-MAIL',
-    whatsappLabel: 'WHATSAPP',
-    whatsappCta: 'Chat starten',
     adresseLabel: 'ADRESSE',
   },
 }

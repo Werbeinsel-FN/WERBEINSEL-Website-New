@@ -7,7 +7,7 @@ import { Section } from '@/components/ui/Section'
 
 export const metadata = buildMetadata({
   title: 'Kontakt',
-  description: 'Projekt anfragen bei WERBEINSEL – Telefon, E-Mail, WhatsApp.',
+  description: 'Projekt anfragen bei WERBEINSEL – Telefon, E-Mail, Adresse.',
   path: '/kontakt',
 })
 
@@ -17,7 +17,6 @@ export default async function KontaktPage() {
     getSiteChrome(),
     getFormOptions(),
   ])
-  const wa = einstellungen.whatsapp.replace(/\D/g, '')
   const mapsQuery = encodeURIComponent(
     `${einstellungen.adresse.strasse}, ${einstellungen.adresse.plz} ${einstellungen.adresse.ort}`,
   )
@@ -50,7 +49,8 @@ export default async function KontaktPage() {
             {kontakt.contactTitle}
           </Heading>
 
-          <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {/* 3 Spalten ab lg; darunter 2 Spalten, die übrig bleibende letzte Karte geht über die volle Breite */}
+          <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 sm:max-lg:[&>*:last-child:nth-child(odd)]:col-span-2 lg:grid-cols-3 lg:gap-8">
             <ContactCol
               label={kontakt.cards.telefonLabel}
               href={`tel:${einstellungen.telefon}`}
@@ -63,22 +63,6 @@ export default async function KontaktPage() {
               value={einstellungen.email}
               icon="mail"
             />
-            <div className="flex flex-col items-center gap-4 text-center">
-              <span className="circle grid size-20 shrink-0 place-items-center rounded-pill bg-brand-whatsapp text-white">
-                <ChatBubbleIcon />
-              </span>
-              <p className="font-unbounded text-lg font-extrabold leading-[1.5] uppercase text-brand-yellow">
-                {kontakt.cards.whatsappLabel}
-              </p>
-              <a
-                href={`https://wa.me/${wa}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-pill bg-brand-whatsapp px-6 py-3 font-poppins text-base font-semibold text-white transition hover:brightness-110"
-              >
-                {kontakt.cards.whatsappCta}
-              </a>
-            </div>
             <ContactCol
               label={kontakt.cards.adresseLabel}
               href={`https://www.openstreetmap.org/search?query=${mapsQuery}`}
@@ -147,14 +131,6 @@ function PinIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor" aria-hidden>
       <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
-    </svg>
-  )
-}
-
-function ChatBubbleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-9 w-9" fill="currentColor" aria-hidden>
-      <path d="M12 3c-4.97 0-9 3.58-9 8 0 2.4 1.2 4.55 3.1 6.05L5 21l4.35-1.75c.85.25 1.73.4 2.65.4 4.97 0 9-3.58 9-8s-4.03-8-9-8z" />
     </svg>
   )
 }

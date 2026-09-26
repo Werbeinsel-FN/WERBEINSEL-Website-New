@@ -17,7 +17,6 @@
   --color-control: #595959; /* Slider-Steuerung auf Schwarz */
   --color-control-hover: #6A6A6A;
   --color-error: #8A0000;
-  --color-whatsapp: #25D366;
   /* Ersatzhintergrund für Hero ohne Bild */
   --gradient-hero-fallback: radial-gradient(ellipse at 30% 40%, #3a3a3a 0%, #111 45%, #000 100%);
 

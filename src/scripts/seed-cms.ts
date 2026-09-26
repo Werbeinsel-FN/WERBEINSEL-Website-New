@@ -237,7 +237,6 @@ async function main() {
       url: einstellungen.url,
       telefon: einstellungen.telefon,
       email: einstellungen.email,
-      whatsapp: einstellungen.whatsapp,
       adresse: einstellungen.adresse,
       socials: einstellungen.socials,
       formServices: formOptions.services.map((label) => ({ label })),
