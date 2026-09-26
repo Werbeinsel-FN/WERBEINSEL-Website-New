@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type CTAProps = {
   ueberschrift: string
@@ -13,21 +15,19 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
   const isYellow = yellow !== false
 
   return (
-    <section
-      className={`flex flex-col items-stretch justify-center self-stretch py-section ${
-        isYellow ? 'bg-brand-yellow' : 'bg-brand-black'
-      }`}
+    <Section
+      background={isYellow ? 'yellow' : 'black'}
+      className="flex flex-col items-stretch justify-center self-stretch"
     >
       <Container className="flex flex-col items-center text-center">
-        <h2
-          className={`heading-section mx-auto whitespace-pre-line uppercase ${
-            isYellow
-              ? 'max-w-[900px] text-brand-black'
-              : 'max-w-[1200px] text-brand-yellow'
+        <Heading
+          size="section"
+          className={`mx-auto whitespace-pre-line ${
+            isYellow ? 'max-w-[900px] text-brand-black' : 'max-w-[1200px] text-brand-yellow'
           }`}
         >
           {ueberschrift}
-        </h2>
+        </Heading>
         {text ? (
           <p
             className={`body-lead mx-auto mt-6 whitespace-pre-line ${
@@ -53,6 +53,6 @@ export function CTA({ ueberschrift, text, button, yellow = true }: CTAProps) {
           </div>
         ) : null}
       </Container>
-    </section>
+    </Section>
   )
 }

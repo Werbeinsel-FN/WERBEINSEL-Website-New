@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type TransporterPunkt = {
   titel: string
@@ -64,12 +66,12 @@ export function TransporterFaahrt({
   const list = punkte?.filter((p) => p?.titel) ?? []
 
   return (
-    <section className="bg-brand-black py-section">
+    <Section background="black">
       <Container className="flex flex-col items-center gap-stack">
         <div className="flex w-full flex-col items-center gap-5 text-center">
-          <h2 className="heading-section text-brand-yellow">
+          <Heading size="section" className="text-brand-yellow">
             {ueberschrift}
-          </h2>
+          </Heading>
           {text ? (
             <p className="body-lead max-w-[1120px] text-white">
               {text}
@@ -86,11 +88,11 @@ export function TransporterFaahrt({
                 key={punkt.titel}
                 className="flex min-w-0 flex-1 flex-col items-start gap-2.5 border-t-[3px] border-brand-yellow pt-5"
               >
-                <h3 className="w-full font-unbounded text-2xl font-bold leading-[1.5] text-brand-yellow [text-transform:none]">
+                <h3 className="w-full font-unbounded text-step font-bold leading-[1.5] text-brand-yellow [text-transform:none]">
                   {punkt.titel}
                 </h3>
                 {punkt.text ? (
-                  <p className="w-full font-poppins text-base font-normal leading-[1.5] text-brand-muted">
+                  <p className="w-full font-poppins text-body font-normal leading-[1.5] text-brand-muted">
                     {punkt.text}
                   </p>
                 ) : null}
@@ -99,6 +101,6 @@ export function TransporterFaahrt({
           </div>
         ) : null}
       </Container>
-    </section>
+    </Section>
   )
 }

@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 type IconKey = 'instagram' | 'tiktok' | 'facebook' | 'google' | 'youtube'
 
@@ -430,14 +432,14 @@ export function Kanaele({
   if (!list.length) return null
 
   return (
-    <section className="bg-brand-yellow py-section">
+    <Section background="yellow">
       <Container className="flex flex-col items-center">
         <div className="w-full text-center">
-          <h2 className="heading-section text-brand-black">
+          <Heading size="section" className="text-brand-black">
             {ueberschrift}
-          </h2>
+          </Heading>
           {untertitel ? (
-            <p className="mt-4 font-poppins text-base font-normal leading-[1.5] text-brand-black md:mt-6">
+            <p className="mt-4 font-poppins text-body font-normal leading-[1.5] text-brand-black md:mt-6">
               {untertitel}
             </p>
           ) : null}
@@ -458,11 +460,11 @@ export function Kanaele({
                   </div>
                 </div>
                 <div className="flex min-w-0 flex-col gap-2">
-                  <h3 className="font-unbounded text-[clamp(1rem,8cqi,1.375rem)] font-extrabold leading-[1.15] tracking-normal text-brand-yellow [text-transform:none]">
+                  <h3 className="font-unbounded text-cq-title font-extrabold leading-[1.15] tracking-normal text-brand-yellow [text-transform:none]">
                     {item.titel}
                   </h3>
                   {item.text ? (
-                    <p className="font-poppins text-[clamp(0.75rem,4.5cqi,0.875rem)] font-normal leading-[1.5] text-brand-muted">
+                    <p className="font-poppins text-cq-body font-normal leading-[1.5] text-brand-muted">
                       {item.text}
                     </p>
                   ) : null}
@@ -472,6 +474,6 @@ export function Kanaele({
           })}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

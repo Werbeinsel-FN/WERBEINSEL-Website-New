@@ -6,6 +6,8 @@ import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { resolveMedia, type MediaLike } from '@/lib/media'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type ServiceSlideItem = {
   titel: string
@@ -60,13 +62,14 @@ function ServiceCard({
         aria-hidden
       />
       {/* Figma: padding 32, flex-end, Heading/Card 28 yellow · Label/Card 16 white.
-          Titelgröße relativ zur Kartenbreite (cqi), damit lange Wörter wie „Plakatwerbung“ immer passen. */}
+          Titelgröße relativ zur Kartenbreite (cqi), mind. 20 px; die Karten sind so breit, dass
+          „Plakatwerbung“ in jeder Breite in eine Zeile passt. */}
       <div className="@container absolute inset-0 flex flex-col items-start justify-end p-5 md:p-6 xl:p-8">
-        <h3 className="w-full whitespace-pre-line text-center font-unbounded text-[clamp(0.75rem,9cqi,1.75rem)] font-extrabold leading-[1.1] text-brand-yellow">
+        <h3 className="w-full whitespace-pre-line text-center font-unbounded text-cq-title font-extrabold leading-[1.1] text-brand-yellow">
           {slide.titel}
         </h3>
         {slide.kurztext ? (
-          <p className="mt-1 w-full text-center font-poppins text-[clamp(0.8rem,1vw,1rem)] font-medium leading-[1.3] text-white">
+          <p className="mt-1 w-full text-center font-poppins text-cq-body font-medium leading-[1.3] text-white">
             {slide.kurztext}
           </p>
         ) : null}
@@ -121,43 +124,43 @@ export function ServicesSlider({
    * - Heading/Card 28 Unbounded yellow · Label/Card 16 Poppins white
    */
   return (
-    <section
+    <Section
+      background="yellow"
       id="leistungen"
-      className="bg-brand-yellow py-section"
       aria-label={ueberschrift || 'Leistungen'}
     >
       <Container>
         <div className="mx-auto max-w-text text-center">
           {eyebrow ? (
-            <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/60 uppercase">
+            <p className="mb-3 font-poppins text-small font-bold tracking-[0.2em] text-brand-black/60 uppercase">
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="heading-section text-brand-black">
+          <Heading size="section" className="text-brand-black">
             {ueberschrift || 'Was wir machen'}
-          </h2>
+          </Heading>
         </div>
 
-        {/* Desktop: 4 cards, skaliert (Figma 382×679 auf Artboard 2908 → kleiner auf Laptop) */}
-        <div className="mt-stack hidden justify-center gap-gap overflow-x-auto px-2 lg:flex">
+        {/* Desktop ab 1280 px: 4 Karten füllen die Breite, max. 382×679 wie in Figma */}
+        <div className="mt-stack hidden justify-center gap-gap xl:flex">
           {slides.map((slide, i) => (
             <div
               key={`${slide.titel}-${i}`}
-              className="aspect-[382/679] w-[clamp(200px,18vw,300px)] shrink-0"
+              className="aspect-[382/679] min-w-0 max-w-[382px] flex-1"
             >
               <ServiceCard slide={slide} index={i} total={slides.length} />
             </div>
           ))}
         </div>
 
-        {/* Tablet / Mobile: carousel */}
-        <div className="mt-stack lg:hidden" aria-roledescription="carousel">
+        {/* Handy, Tablet und kleiner Laptop (bis 1279 px): Karussell */}
+        <div className="mt-stack xl:hidden" aria-roledescription="carousel">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex gap-gap">
               {slides.map((slide, i) => (
                 <div
                   key={`${slide.titel}-m-${i}`}
-                  className="min-w-0 flex-[0_0_78%] sm:flex-[0_0_45%]"
+                  className="min-w-0 flex-[0_0_78%] sm:flex-[0_0_45%] lg:flex-[0_0_30%]"
                 >
                   <div className="aspect-[382/679]">
                     <ServiceCard
@@ -173,6 +176,6 @@ export function ServicesSlider({
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

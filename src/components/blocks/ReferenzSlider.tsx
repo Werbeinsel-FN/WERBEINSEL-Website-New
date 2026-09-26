@@ -6,6 +6,8 @@ import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { resolveMedia, type MediaLike } from '@/lib/media'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type ReferenzSlideItem = {
   titel: string
@@ -74,21 +76,22 @@ export function ReferenzSlider({
   // Auch ohne Bilder die Struktur-Sektion zeigen (Lastenheft: Inhalte folgen später)
   if (!slides.length) {
     return (
-      <section
+      <Section
+        background="white"
         id={sectionId || undefined}
-        className="flex flex-col gap-stack bg-white py-section"
+        className="flex flex-col gap-stack"
         aria-label={ueberschrift || 'Referenzen'}
       >
         <Container>
           <div className="text-center">
             {eyebrow ? (
-              <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
+              <p className="mb-3 font-poppins text-small font-bold tracking-[0.2em] text-brand-muted uppercase">
                 {eyebrow}
               </p>
             ) : null}
-            <h2 className="heading-section whitespace-pre-line text-brand-black">
+            <Heading size="section" className="whitespace-pre-line text-brand-black">
               {ueberschrift}
-            </h2>
+            </Heading>
             {untertitel ? (
               <p className="body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black">
                 {untertitel}
@@ -96,32 +99,33 @@ export function ReferenzSlider({
             ) : null}
           </div>
         </Container>
-      </section>
+      </Section>
     )
   }
 
   return (
-    <section
+    <Section
+      background="white"
       id={sectionId || undefined}
-      className="flex flex-col gap-stack bg-white py-section"
+      className="flex flex-col gap-stack"
       aria-roledescription="carousel"
       aria-label={ueberschrift || 'Referenzen'}
     >
       <Container>
         <div className="text-center">
           {eyebrow ? (
-            <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
+            <p className="mb-3 font-poppins text-small font-bold tracking-[0.2em] text-brand-muted uppercase">
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="heading-section whitespace-pre-line text-brand-black">
+          <Heading size="section" className="whitespace-pre-line text-brand-black">
             {ueberschrift}
-          </h2>
+          </Heading>
           {untertitel ? (
             <p
               className={
                 untertitelKlein
-                  ? 'mx-auto mt-4 text-center font-poppins text-base font-normal leading-[1.5] text-brand-black md:mt-6'
+                  ? 'mx-auto mt-4 text-center font-poppins text-body font-normal leading-[1.5] text-brand-black md:mt-6'
                   : 'body-lead mx-auto mt-4 max-w-[567px] whitespace-pre-line text-center text-brand-black'
               }
             >
@@ -189,6 +193,6 @@ export function ReferenzSlider({
           <Chevron dir="right" />
         </button>
       </div>
-    </section>
+    </Section>
   )
 }

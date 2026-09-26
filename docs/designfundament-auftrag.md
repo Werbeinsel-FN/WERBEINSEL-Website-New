@@ -114,7 +114,18 @@ Durchgehend mitwachsend von **390 px bis 1920 px** Bildschirmbreite, wie bei zwe
 | `--text-button` | 16 → 20 px | `clamp(1rem, 0.9363rem + 0.2614vw, 1.25rem)` | 17 / 19 |
 | `--text-client` | 14 → 18 px | `clamp(0.875rem, 0.8113rem + 0.2614vw, 1.125rem)` | 15 / 17 |
 
-Überschriften: Laufweite `-0.02em`; Zeilenhöhe `0.95` (Hero), `1.1` (Sektion), `1.15` (kleinere Überschriften).
+**Kartenschriften relativ zur Kartenbreite** (ergänzt in T7b; `cqi` = 1 % der Breite des nächsten `@container`, nur innerhalb von Karten mit `@container` verwenden):
+
+| Token | Klein → Groß | Wert | Einsatz |
+|---|---|---|---|
+| `--text-cq-title` | 20 → 28 px | `clamp(1.25rem, 8cqi, 1.75rem)` | Kartentitel |
+| `--text-cq-body` | 14 → 18 px | `clamp(0.875rem, 5cqi, 1.125rem)` | Kartentext |
+| `--text-cq-label` | 14 → 28 px | `clamp(0.875rem, 6cqi, 1.75rem)` | Beschriftung unter großen Zahlen |
+| `--text-cq-caption` | 11 → 14 px | `clamp(0.7rem, 2.5cqi, 0.875rem)` | kleine Bildunterschriften |
+| `--text-cq-number` | 28 → 40 px | `clamp(1.75rem, 12cqi, 2.5rem)` | Schrittnummern „01“ in Karten |
+| `--text-cq-stat` | 40 → 130 px | `clamp(2.5rem, 22cqi, 8.125rem)` | große Kennzahlen, „01“ im Schritt-Slider |
+
+Überschriften: Laufweite `-0.02em`; Zeilenhöhe `0.95` (Hero), `1.1` (Sektion), `1.15` (kleinere Überschriften). Umgesetzt in der Komponente `Heading`; die früheren Klassen `.heading-hero`/`.heading-section` entfallen (T7b).
 Schriften: **Unbounded** (800, 900) für Überschriften, **Poppins** (400, 500, 600, 700) für alles andere. Beide bleiben lokal eingebunden (`next/font/local`).
 
 ### 5.3 Abstände
@@ -351,17 +362,70 @@ Titelgröße im Leistungs-Slider der Startseite (px):
 
 „Plakatwerbung“ steht dadurch überall in einer Zeile statt „Plakat-werbung“.
 
-⚠️ **Zur Prüfung auf der Vorschau:**
-1. **Kartentitel im Leistungs-Slider:** auf dem Desktop kleiner (bei 1024 px 13,7 px), auf Handy/Tablet größer. Die Karten selbst bleiben unverändert (auf dem Desktop max. 300 px). Alternative: Karten auf dem Desktop breiter machen.
-2. **`echtNichtGeneriert` bei 1024–1279 px:** Die drei Punkte stehen untereinander neben der Grafik.
-3. **Testseite** `/test-bloecke` auf der Vorschau ansehen.
+**Ergebnis der Prüfung auf der Vorschau:**
+1. **Kartentitel im Leistungs-Slider:** auf dem Desktop zu klein → Alternative umgesetzt in T7b (Karten auf dem Desktop breiter, Titel mind. 20 px).
+2. ✅ **`echtNichtGeneriert` bei 1024–1279 px:** Punkte untereinander freigegeben.
 
-**Offene Befunde ohne Fehlerwirkung (nicht geändert, Entscheidung offen):**
+**Offene Befunde ohne Fehlerwirkung** (auf Wunsch in T7b erledigt, außer Weiß/Schwarz):
 - **Feste Tailwind-Schriftgrößen:** gut 30 Stellen in 17 Blöcken (`text-sm` bis `text-2xl`, z. B. Karten- und FAQ-Titel, Formate, Reichweite) statt Tokens aus 5.2. Umstellung wäre sichtbar.
 - **Eigene fließende Größen:** 31 `clamp()`-Werte mit Container-Einheiten (`cqi`) in Karten. Sie funktionieren, liegen aber außerhalb des Token-Systems.
 - **`Heading`-Komponente ungenutzt:** Die Blöcke nutzen weiterhin `.heading-section`/`.heading-hero` statt `<Heading>`. Die Werte weichen leicht von 5.2 ab (Zeilenhöhe 1 statt 1,1, Laufweite −0,01 statt −0,02 em); eine Vereinheitlichung wäre sichtbar.
 - **`Section`-Komponente ungenutzt:** Die Blöcke setzen `py-section` direkt am `<section>` (gleiches Ergebnis).
 - **Weiß und Schwarz:** `text-white`, `bg-white` usw. nutzen bereits die Tokens, weil `tokens.css` `--color-white`/`--color-black` setzt; kein Handlungsbedarf.
+
+### T7b – Tokens und Komponenten in allen Blöcken
+
+Auftrag nach Prüfung von T7: Karten im Leistungs-Slider breiter; offene Befunde aus T7 erledigen.
+
+**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+
+1. **Leistungs-Slider (Startseite):**
+   - **Ab 1280 px:** 4 Karten nebeneinander, sie füllen die Breite, max. 382 px wie in Figma.
+   - **Bis 1279 px:** Karussell, ab 1024 px mit ca. 3 sichtbaren Karten.
+   - **Titel:** `text-cq-title`; mind. 20 px, alle Titel in einer Zeile.
+2. **Feste Tailwind-Schriftgrößen → Tokens** (34 Stellen), nach Rolle:
+   - Eyebrows und Labels → `text-small`
+   - Fließtext → `text-body`
+   - Karten- und FAQ-Titel mit fester Größe → `text-step` bzw. `text-card`
+3. **`cqi`-Größen → 6 zentrale Tokens** (Tabelle in 5.2):
+   - alle 23 Kartengrößen
+   - „01“ im Schritt-Slider: jetzt relativ zum Bild; das Bild ist dafür `@container`
+   - Titel im Schritt-Slider → `text-section`, mit Silbentrennung
+4. **Überschriften und Sektionen:**
+   - `.heading-section` an 5.2 angeglichen, danach alle 33 Überschriften auf `<Heading>` umgestellt und die Klassen `.heading-*` entfernt.
+   - 35 Sektionen auf `<Section>` umgestellt. `<Section background={null}>` erlaubt einen eigenen Hintergrund (Hero mit CMS-Farbe).
+   - Hero mit Bild und Schritt-Slider bleiben `<section>`, weil ihr Abstand innen liegt (sonst Umbau).
+   - Die Umstellung auf die Komponenten allein ist unsichtbar (per Screenshot geprüft).
+5. **Nachgeholt aus T6:** Die Kartenraster von Was wir aufnehmen/bekleben/gestalten nutzen jetzt ebenfalls `gap-gap`.
+
+**Bewusst belassen:**
+- Das große Zitat in `Testimonials` (`clamp(1.35rem, 2.8vw, 2.5rem)`): keine Karte, keine feste Tailwind-Größe.
+- `body-lead` für Einleitungstexte.
+
+Sichtbare Änderungen (px):
+
+| Stelle | 390 | 810 | 1024 | 1440 | 1920 |
+|---|---|---|---|---|---|
+| Leistungs-Slider: Kartenbreite | 273 | 339 | 184 → 286 (Karussell) | 259 → 315 | 300 → 382 |
+| Leistungs-Slider: Titel | 21 → 20 | 26 → 23 | 13,7 → 20 | 17,6 → 20 | 21 → 25 |
+| Sektionsüberschriften: Zeilenhöhe / Laufweite | 1 → 1,1 / −0,01 → −0,02 em | gleich | gleich | gleich | gleich |
+| Kartentitel (alle `cqi`-Karten) | vorher 14–20 → 20 | → 20–22 | → 20–24 | → 20–26 | → bis 28 |
+| Kartentext (alle `cqi`-Karten) | vorher 10–14 → 14 | → 14–16 | → 14–17 | → 14–18 | → bis 18 (USP vorher bis 24) |
+| Schritt-Slider „01“ | 55 → 77 | 72 → 130 | 60 → 92 | 201 → 130 | 268 → 130 |
+| Schritt-Slider Titel | 20 → 28 | 26 → 36 | 28 → 40 | 50 → 47 | 64 → 56 |
+| FAQ-Fragen, Kundenstimmen-Firma | 18 → 18 | 20 → 20 | 20 → 20,5 | 20 → 22 | 20 → 24 |
+| Punkte in Echt/Transporter (h3) | 24 → 18 | 24 → 20 | 24 → 20,5 | 24 → 22 | 24 → 24 |
+| Fließtext in Blöcken (vorher 16) | 16 | 16,5 | 17 | 17,5 | 18 |
+| Full-Service-Eyebrow | 14 | 16 → 14 | 16 → 14 | 16 → 14 | 16 → 14 |
+| Formate: Titel / Text | 20 / 14 → 20 / 16 | 20 / 16 → 22 / 16,5 | → 23 / 17 | → 25,5 / 17,5 | → 28 / 18 |
+
+Seitenlängen: meist 5–85 px länger (Zeilenhöhe der Überschriften); Startseite auf dem Desktop 140–200 px länger (breitere, dadurch höhere Leistungskarten). Keine Überläufe, kein abgeschnittener Text, keine Brüche mitten im Wort (geprüft auf allen Seiten und der Testseite in allen fünf Breiten).
+
+⚠️ **Zur Prüfung auf der Vorschau:**
+1. **Leistungs-Slider:** breitere Karten ab 1280 px und Karussell bei 1024–1279 px.
+2. **Schritt-Slider:** „01“ auf dem Handy/Tablet deutlich größer, ab 1440 px kleiner; Titel auf dem Handy größer.
+3. **Kartenschriften:** Titel überall mind. 20 px, Text mind. 14 px – vor allem in schmalen Karten (Services-Raster, USP auf dem Handy, Testseite: Kanäle, Was wir bekleben/gestalten).
+4. **Sektionsüberschriften:** Zeilenhöhe 1,1 und engere Laufweite.
 
 ### T8 – Absicherung
 - Playwright-Screenshot-Tests für alle Seiten in den fünf Prüfbreiten dauerhaft einrichten.

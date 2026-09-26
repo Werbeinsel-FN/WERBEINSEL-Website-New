@@ -62,6 +62,17 @@ describe('Section', () => {
     expect(el.className).toContain(text)
   })
 
+  it('setzt bei background={null} keine Hintergrund- und Textfarbe', () => {
+    render(
+      <Section data-testid="s" background={null} style={{ backgroundColor: '#123456' }}>
+        Inhalt
+      </Section>,
+    )
+    const el = screen.getByTestId('s')
+    expect(el.className).toBe('py-section')
+    expect(el.style.backgroundColor).toBe('rgb(18, 52, 86)')
+  })
+
   it('übernimmt Tag und zusätzliche Klassen', () => {
     render(
       <Section data-testid="s" as="div" className="relative" id="kontakt">

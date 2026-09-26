@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type EchtNichtGeneriertPunkt = {
   titel: string
@@ -81,16 +83,16 @@ export function EchtNichtGeneriert({
   const list = punkte?.filter((p) => p?.titel) ?? []
 
   return (
-    <section className="bg-brand-black py-section">
+    <Section background="black">
       <Container className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-[88px]">
         <div className="w-full max-w-[min(100%,440px)] shrink-0 lg:w-[min(100%,440px)]">
           <Graphic />
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col items-start gap-6">
-          <h2 className="heading-section w-full text-brand-yellow">
+          <Heading size="section" className="w-full text-brand-yellow">
             {ueberschrift}
-          </h2>
+          </Heading>
 
           {text ? (
             <p className="body-lead w-full max-w-[1188px] text-white">
@@ -105,11 +107,11 @@ export function EchtNichtGeneriert({
                   key={punkt.titel}
                   className="flex min-w-0 flex-1 flex-col items-start gap-2.5 border-t-[3px] border-brand-yellow pt-5"
                 >
-                  <h3 className="w-full font-unbounded text-2xl font-bold leading-[1.5] text-brand-yellow [text-transform:none]">
+                  <h3 className="w-full font-unbounded text-step font-bold leading-[1.5] text-brand-yellow [text-transform:none]">
                     {punkt.titel}
                   </h3>
                   {punkt.text ? (
-                    <p className="w-full font-poppins text-base font-normal leading-[1.5] text-brand-muted">
+                    <p className="w-full font-poppins text-body font-normal leading-[1.5] text-brand-muted">
                       {punkt.text}
                     </p>
                   ) : null}
@@ -119,6 +121,6 @@ export function EchtNichtGeneriert({
           ) : null}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

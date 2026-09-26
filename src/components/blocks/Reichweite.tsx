@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type StadtItem = { name: string; region?: string | null }
 
@@ -20,22 +22,22 @@ export function Reichweite({
   const cities = staedte?.filter((s) => s?.name) ?? []
 
   return (
-    <section className="py-section bg-brand-yellow">
+    <Section background="yellow">
       <Container>
         <div className={`grid gap-12 ${karteZeigen ? 'lg:grid-cols-2 lg:items-start' : ''}`}>
           <div>
             {eyebrow ? (
-              <p className="mb-3 font-poppins text-sm font-bold tracking-[0.2em] text-brand-black/55 uppercase">
+              <p className="mb-3 font-poppins text-small font-bold tracking-[0.2em] text-brand-black/55 uppercase">
                 {eyebrow}
               </p>
             ) : null}
             {ueberschrift ? (
-              <h2 className="heading-section text-brand-black">
+              <Heading size="section" className="text-brand-black">
                 {ueberschrift}
-              </h2>
+              </Heading>
             ) : null}
             {text ? (
-              <p className="mt-5 max-w-[42ch] font-poppins text-base leading-relaxed text-brand-black/80 md:text-lg">
+              <p className="mt-5 max-w-[42ch] font-poppins text-body leading-relaxed text-brand-black/80">
                 {text}
               </p>
             ) : null}
@@ -45,7 +47,7 @@ export function Reichweite({
                 {cities.map((stadt) => (
                   <li
                     key={`${stadt.name}-${stadt.region || ''}`}
-                    className="font-poppins text-base font-medium text-brand-black md:text-lg"
+                    className="font-poppins text-body font-medium text-brand-black"
                   >
                     {stadt.name}
                     {stadt.region ? (
@@ -56,7 +58,7 @@ export function Reichweite({
               </ul>
             ) : null}
 
-            <p className="mt-8 max-w-[48ch] font-poppins text-sm leading-relaxed text-brand-black/55">
+            <p className="mt-8 max-w-[48ch] font-poppins text-small leading-relaxed text-brand-black/55">
               Kartendarstellung ggf. über OpenStreetMap – ohne Google Maps (DSGVO).
             </p>
           </div>
@@ -67,15 +69,15 @@ export function Reichweite({
               role="img"
               aria-label="Kartenplatzhalter – OpenStreetMap"
             >
-              <p className="px-6 text-center font-poppins text-sm text-brand-black/60">
+              <p className="px-6 text-center font-poppins text-small text-brand-black/60">
                 Karte folgt
                 <br />
-                <span className="text-xs">(OpenStreetMap / Leaflet)</span>
+                <span className="text-small">(OpenStreetMap / Leaflet)</span>
               </p>
             </div>
           ) : null}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

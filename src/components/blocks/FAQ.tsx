@@ -4,6 +4,8 @@ import { useId, useState } from 'react'
 import { JsonLd } from '@/components/JsonLd'
 import { faqPageJsonLd } from '@/lib/seo'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type FAQItem = { frage: string; antwort: string }
 
@@ -40,7 +42,7 @@ function AccordionItem({
           aria-expanded={open}
           aria-controls={panelId}
           onClick={onToggle}
-          className="flex w-full items-start justify-between gap-4 py-5 text-left font-unbounded text-lg font-extrabold text-white transition hover:text-brand-yellow md:text-xl"
+          className="flex w-full items-start justify-between gap-4 py-5 text-left font-unbounded text-step font-extrabold text-white transition hover:text-brand-yellow"
         >
           <span>{item.frage}</span>
           <span
@@ -59,7 +61,7 @@ function AccordionItem({
         className={open ? 'pb-6' : undefined}
       >
         {open ? (
-          <p className="max-w-[60ch] font-poppins text-base leading-relaxed text-white/70">
+          <p className="max-w-[60ch] font-poppins text-body leading-relaxed text-white/70">
             {item.antwort}
           </p>
         ) : null}
@@ -81,28 +83,28 @@ export function FAQ({
   if (!list.length) return null
 
   return (
-    <section className="py-section bg-brand-black text-white">
+    <Section background="black">
       <JsonLd data={buildFaqJsonLd(list)} />
       <Container>
         {eyebrow ? (
-          <p className="mb-4 font-poppins text-sm font-bold tracking-[0.2em] text-brand-yellow uppercase">
+          <p className="mb-4 font-poppins text-small font-bold tracking-[0.2em] text-brand-yellow uppercase">
             {eyebrow}
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="max-w-[18ch] heading-section text-white">
+          <Heading size="section" className="max-w-[18ch] text-white">
             {ueberschrift}
-          </h2>
+          </Heading>
         ) : null}
 
         {layout === 'zweiSpalten' ? (
           <div className="mt-stack grid gap-8 md:grid-cols-2 md:gap-x-12 md:gap-y-10">
             {list.map((item, i) => (
               <div key={`${item.frage}-${i}`}>
-                <h3 className="font-unbounded text-lg font-extrabold text-white md:text-xl">
+                <h3 className="font-unbounded text-step font-extrabold text-white">
                   {item.frage}
                 </h3>
-                <p className="mt-3 font-poppins text-base leading-relaxed text-white/70">
+                <p className="mt-3 font-poppins text-body leading-relaxed text-white/70">
                   {item.antwort}
                 </p>
               </div>
@@ -123,6 +125,6 @@ export function FAQ({
           </div>
         )}
       </Container>
-    </section>
+    </Section>
   )
 }

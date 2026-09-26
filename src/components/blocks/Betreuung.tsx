@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type BetreuungSchritt = {
   titel: string
@@ -18,11 +20,11 @@ export function Betreuung({
   if (!steps.length) return null
 
   return (
-    <section className="bg-brand-black py-section">
+    <Section background="black">
       <Container className="flex flex-col items-center gap-stack">
-        <h2 className="heading-section w-full text-center text-brand-yellow">
+        <Heading size="section" className="w-full text-center text-brand-yellow">
           {ueberschrift}
-        </h2>
+        </Heading>
 
         <ol className="flex w-full flex-col gap-10 sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-6 xl:gap-8">
           {steps.map((step, i) => {
@@ -40,11 +42,11 @@ export function Betreuung({
                     {nummer}
                   </span>
                 </span>
-                <h3 className="font-unbounded text-[clamp(1.125rem,6cqi,1.75rem)] font-extrabold leading-[1.1] tracking-normal text-white [text-transform:none]">
+                <h3 className="font-unbounded text-cq-title font-extrabold leading-[1.1] tracking-normal text-white [text-transform:none]">
                   {step.titel}
                 </h3>
                 {step.text ? (
-                  <p className="max-w-[405px] font-poppins text-[clamp(0.8125rem,4cqi,1rem)] font-normal leading-[1.5] text-brand-muted">
+                  <p className="max-w-[405px] font-poppins text-cq-body font-normal leading-[1.5] text-brand-muted">
                     {step.text}
                   </p>
                 ) : null}
@@ -53,6 +55,6 @@ export function Betreuung({
           })}
         </ol>
       </Container>
-    </section>
+    </Section>
   )
 }

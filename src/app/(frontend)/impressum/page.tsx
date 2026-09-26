@@ -3,6 +3,7 @@ import { Hero } from '@/components/blocks/Hero'
 import { getImpressumContent } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
 import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 
 export const metadata = buildMetadata({
   title: 'Impressum',
@@ -40,7 +41,7 @@ export default async function ImpressumPage() {
     <>
       <Hero variante="einfach" titel={impressum.hero.titel} />
 
-      <section className="bg-white py-section">
+      <Section background="white">
         <Container variant="text" className="flex flex-col items-center gap-12 text-center md:gap-16">
           <Block title={impressum.angabenTitel}>
             <p className={label}>{impressum.firma}</p>
@@ -88,7 +89,7 @@ export default async function ImpressumPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
     </>
   )
 }

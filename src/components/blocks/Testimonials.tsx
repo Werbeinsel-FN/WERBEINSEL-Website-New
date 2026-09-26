@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type TestimonialItem = {
   zitat: string
@@ -93,14 +95,15 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
   if (!list.length) return null
 
   return (
-    <section
-      className="relative flex min-h-[480px] flex-col justify-center bg-brand-black py-section text-white md:min-h-[640px] lg:min-h-[820px]"
+    <Section
+      background="black"
+      className="relative flex min-h-[480px] flex-col justify-center md:min-h-[640px] lg:min-h-[820px]"
       aria-roledescription="carousel"
       aria-label={ueberschrift || 'Kundenstimmen'}
     >
       {ueberschrift ? (
         <Container>
-          <h2 className="heading-section mb-stack text-center text-white">{ueberschrift}</h2>
+          <Heading size="section" className="mb-stack text-center text-white">{ueberschrift}</Heading>
         </Container>
       ) : null}
 
@@ -143,11 +146,11 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
                   <footer className="flex w-full flex-col items-center pt-10 md:pt-12">
                     <cite className="not-italic">
                       {item.firma ? (
-                        <span className="block font-poppins text-lg font-bold leading-[1.5] text-white md:text-xl">
+                        <span className="block font-poppins text-step font-bold leading-[1.5] text-white">
                           {item.firma}
                         </span>
                       ) : null}
-                      <span className="mt-0 block font-poppins text-base font-normal leading-[1.5] text-white/80">
+                      <span className="mt-0 block font-poppins text-body font-normal leading-[1.5] text-white/80">
                         {item.autor}
                       </span>
                     </cite>
@@ -201,6 +204,6 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
           </button>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

@@ -5,6 +5,8 @@ import { JsonLd } from '@/components/JsonLd'
 import { getJobsContent, getFormOptions, getSiteChrome } from '@/lib/content'
 import { buildMetadata, jobPostingJsonLd } from '@/lib/seo'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export const metadata = buildMetadata({
   title: 'Jobs',
@@ -43,33 +45,33 @@ export default async function JobsPage() {
         />
       ))}
 
-      <section className="flex flex-col items-stretch bg-brand-yellow py-section text-brand-black">
+      <Section background="yellow" className="flex flex-col items-stretch">
         <Container className="flex flex-col items-center text-center">
-          <h1 className="heading-hero mx-auto max-w-[675px] whitespace-pre-line uppercase text-brand-black">
+          <Heading size="hero" className="mx-auto max-w-[675px] whitespace-pre-line text-brand-black">
             {jobs.hero.titel}
-          </h1>
+          </Heading>
           <p className="body-lead mx-auto mt-6 max-w-[700px] whitespace-pre-line text-brand-black">
             {jobs.hero.untertitel}
           </p>
         </Container>
-      </section>
+      </Section>
 
-      <section className="flex flex-col items-stretch bg-white py-section">
+      <Section background="white" className="flex flex-col items-stretch">
         <Container className="flex flex-col items-center">
-          <h2 className="heading-section text-center text-brand-black">
+          <Heading size="section" className="text-center text-brand-black">
             {jobs.openingsTitle}
-          </h2>
+          </Heading>
           <div className="mt-stack w-full">
             <JobAccordion jobs={active} />
           </div>
         </Container>
-      </section>
+      </Section>
 
-      <section className="flex flex-col items-stretch bg-brand-black py-section text-white">
+      <Section background="black" className="flex flex-col items-stretch">
         <Container className="flex flex-col items-center">
-          <h2 className="heading-section text-center text-white">
+          <Heading size="section" className="text-center text-white">
             {jobs.process.ueberschrift}
-          </h2>
+          </Heading>
 
           <ol className="mt-stack grid w-full grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {jobs.process.schritte.map((s, i) => (
@@ -90,13 +92,13 @@ export default async function JobsPage() {
             ))}
           </ol>
         </Container>
-      </section>
+      </Section>
 
-      <section className="flex flex-col items-stretch bg-white py-section" id="bewerbung">
+      <Section background="white" className="flex flex-col items-stretch" id="bewerbung">
         <Container className="flex flex-col items-center">
-          <h2 className="heading-section text-center text-brand-black">
+          <Heading size="section" className="text-center text-brand-black">
             {jobs.formTitle}
-          </h2>
+          </Heading>
           <p className="body-lead mx-auto mt-4 max-w-[537px] text-center text-brand-black">
             {jobs.formSubtitle}
           </p>
@@ -104,7 +106,7 @@ export default async function JobsPage() {
             <ApplicationForm positions={positions} formOptions={formOptions} />
           </div>
         </Container>
-      </section>
+      </Section>
 
       <CTA {...jobs.cta} yellow={false} />
     </>

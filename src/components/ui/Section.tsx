@@ -6,8 +6,8 @@ type SectionProps = {
   children: ReactNode
   className?: string
   as?: 'section' | 'div' | 'article' | 'aside'
-  /** Hintergrund läuft über die volle Breite; Inhalt mit <Container> begrenzen. */
-  background?: SectionBackground
+  /** Hintergrund läuft über die volle Breite; Inhalt mit <Container> begrenzen. null = eigener Hintergrund (z. B. per style) */
+  background?: SectionBackground | null
 } & Omit<HTMLAttributes<HTMLElement>, 'children'>
 
 const backgroundClasses: Record<SectionBackground, string> = {
@@ -24,7 +24,16 @@ export function Section({
   ...rest
 }: SectionProps) {
   return (
-    <Tag className={`py-section ${backgroundClasses[background]} ${className}`.trim()} {...rest}>
+    <Tag
+      className={[
+        'py-section',
+        background ? backgroundClasses[background] : '',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      {...rest}
+    >
       {children}
     </Tag>
   )

@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 type IconKey = 'events' | 'social' | 'image' | 'website'
 
@@ -363,13 +365,13 @@ export function WasWirAufnehmen({
   if (!list.length) return null
 
   return (
-    <section className="bg-white py-section">
+    <Section background="white">
       <Container className="flex flex-col items-center gap-stack">
-        <h2 className="heading-section w-full text-center text-brand-black">
+        <Heading size="section" className="w-full text-center text-brand-black">
           {ueberschrift}
-        </h2>
+        </Heading>
 
-        <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid w-full grid-cols-1 gap-gap sm:grid-cols-2 xl:grid-cols-4">
           {list.map((item) => (
             <article
               key={item.titel}
@@ -377,11 +379,11 @@ export function WasWirAufnehmen({
             >
               <CardGraphic name={item.icon as IconKey} />
               <div className="flex min-w-0 flex-col gap-2.5">
-                <h3 className="font-unbounded text-[clamp(1.25rem,8cqi,1.75rem)] font-extrabold leading-[1.1] tracking-normal text-brand-yellow [text-transform:none]">
+                <h3 className="font-unbounded text-cq-title font-extrabold leading-[1.1] tracking-normal text-brand-yellow [text-transform:none]">
                   {item.titel}
                 </h3>
                 {item.text ? (
-                  <p className="font-poppins text-[clamp(0.875rem,4.5cqi,1rem)] font-normal leading-[1.5] text-brand-muted">
+                  <p className="font-poppins text-cq-body font-normal leading-[1.5] text-brand-muted">
                     {item.text}
                   </p>
                 ) : null}
@@ -390,6 +392,6 @@ export function WasWirAufnehmen({
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

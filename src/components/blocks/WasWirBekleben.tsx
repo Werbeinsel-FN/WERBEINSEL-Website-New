@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 type IconKey = 'fahrzeug' | 'schaufenster' | 'schilder' | 'bauzaun'
 
@@ -257,14 +259,14 @@ export function WasWirBekleben({
   if (!list.length) return null
 
   return (
-    <section className="bg-white py-section">
+    <Section background="white">
       <Container className="flex flex-col items-center gap-stack">
-        <h2 className="heading-section w-full text-center text-brand-black">
+        <Heading size="section" className="w-full text-center text-brand-black">
           {ueberschrift}
-        </h2>
+        </Heading>
 
         <div className="w-full">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-4 xl:gap-8">
+          <div className="grid grid-cols-1 gap-gap sm:grid-cols-2 lg:grid-cols-4">
             {list.map((item) => (
               <article
                 key={item.titel}
@@ -272,11 +274,11 @@ export function WasWirBekleben({
               >
                 <CardGraphic name={item.icon as IconKey} />
                 <div className="flex min-w-0 flex-col gap-2">
-                  <h3 className="font-unbounded text-[clamp(0.875rem,9cqi,1.75rem)] font-extrabold leading-[1.15] tracking-normal text-brand-yellow [text-transform:none] [overflow-wrap:anywhere]">
+                  <h3 className="font-unbounded text-cq-title font-extrabold leading-[1.15] tracking-normal text-brand-yellow [text-transform:none] [overflow-wrap:anywhere]">
                     {item.titel}
                   </h3>
                   {item.text ? (
-                    <p className="font-poppins text-[clamp(0.75rem,5.5cqi,1rem)] font-normal leading-[1.5] text-brand-muted">
+                    <p className="font-poppins text-cq-body font-normal leading-[1.5] text-brand-muted">
                       {item.text}
                     </p>
                   ) : null}
@@ -286,6 +288,6 @@ export function WasWirBekleben({
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

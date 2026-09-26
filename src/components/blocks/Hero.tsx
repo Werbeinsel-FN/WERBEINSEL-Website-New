@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { resolveMedia, type MediaLike } from '@/lib/media'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 type HeroButton = {
   label: string
@@ -30,16 +32,15 @@ export function Hero({
 
   if (variante === 'einfach') {
     return (
-      <section
-        className={`flex flex-col items-stretch justify-center self-stretch py-section ${
-          hintergrund ? '' : 'bg-brand-yellow'
-        }`}
+      <Section
+        background={hintergrund ? null : 'yellow'}
+        className="flex flex-col items-stretch justify-center self-stretch"
         style={hintergrund ? { backgroundColor: hintergrund } : undefined}
       >
         <Container className="flex flex-col items-center gap-6 text-center">
-          <h1 className="heading-hero mx-auto w-full font-black uppercase text-brand-black xl:whitespace-nowrap">
+          <Heading size="hero" className="mx-auto w-full text-brand-black xl:whitespace-nowrap">
             {titel}
-          </h1>
+          </Heading>
           {untertitel ? (
             <p className="body-lead mx-auto max-w-[1000px] whitespace-pre-line text-brand-black">
               {untertitel}
@@ -61,7 +62,7 @@ export function Hero({
             </div>
           ) : null}
         </Container>
-      </section>
+      </Section>
     )
   }
 
@@ -95,9 +96,9 @@ export function Hero({
 
       <div className="relative z-10 flex items-center justify-center px-gutter py-14 md:py-24">
         <div className="w-full max-w-[1100px] rounded-panel bg-brand-yellow px-6 py-10 text-center sm:px-12 sm:py-12 md:p-16">
-          <h1 className="heading-hero mx-auto max-w-[972px] whitespace-pre-line font-black text-brand-black">
+          <Heading size="hero" className="mx-auto max-w-[972px] whitespace-pre-line text-brand-black">
             {titel}
-          </h1>
+          </Heading>
           {untertitel ? (
             <p className="body-lead mx-auto mt-6 max-w-[413px] whitespace-pre-line text-brand-black">
               {untertitel}

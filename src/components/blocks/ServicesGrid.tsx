@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { resolveMedia, type MediaLike } from '@/lib/media'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type ServiceGridItem = {
   nr?: string | null
@@ -43,7 +45,7 @@ function ServiceOverviewCard({ item }: { item: ServiceGridItem }) {
         aria-hidden
       />
 
-      <span className="relative z-10 grid size-9 shrink-0 place-items-center rounded-pill bg-brand-yellow font-poppins text-xs font-semibold leading-[1.5] tracking-[0.7px] text-brand-black sm:size-10 sm:text-sm">
+      <span className="relative z-10 grid size-9 shrink-0 place-items-center rounded-pill bg-brand-yellow font-poppins text-small font-semibold leading-[1.5] tracking-[0.7px] text-brand-black sm:size-10">
         {item.nr}
       </span>
 
@@ -52,12 +54,12 @@ function ServiceOverviewCard({ item }: { item: ServiceGridItem }) {
           {item.kategorie}
         </p>
         {/* Skaliert mit Kartenbreite – keine Wortzerstückelung */}
-        <h3 className="mt-1.5 w-full max-w-full whitespace-pre-line font-unbounded text-[clamp(1.05rem,7.2cqi,1.75rem)] font-extrabold leading-[1.15] text-white [overflow-wrap:normal] [word-break:keep-all] hyphens-none">
+        <h3 className="mt-1.5 w-full max-w-full whitespace-pre-line font-unbounded text-cq-title font-extrabold leading-[1.15] text-white [overflow-wrap:normal] [word-break:keep-all] hyphens-none">
           {item.titel}
         </h3>
         {item.kurztext ? (
           <p
-            className={`mt-1.5 w-full font-poppins font-medium leading-[1.3] text-brand-muted text-[clamp(0.65rem,3.4cqi,1rem)] ${
+            className={`mt-1.5 w-full font-poppins font-medium leading-[1.3] text-brand-muted text-cq-body ${
               multiLineSub ? 'whitespace-pre-line' : 'whitespace-nowrap'
             }`}
           >
@@ -81,11 +83,11 @@ function ServiceOverviewCard({ item }: { item: ServiceGridItem }) {
 
 export function ServicesGrid({ ueberschrift, items }: ServicesGridProps) {
   return (
-    <section className="flex flex-col items-stretch self-stretch bg-white py-section">
+    <Section background="white" className="flex flex-col items-stretch self-stretch">
       <Container className="flex flex-col items-center">
-        <h2 className="heading-section max-w-full text-center text-brand-black">
+        <Heading size="section" className="max-w-full text-center text-brand-black">
           {ueberschrift}
-        </h2>
+        </Heading>
 
         {/* 4 Spalten erst ab xl – mehr Platz pro Karte */}
         <div className="mt-stack grid w-full grid-cols-1 gap-gap sm:grid-cols-2 xl:grid-cols-4">
@@ -94,6 +96,6 @@ export function ServicesGrid({ ueberschrift, items }: ServicesGridProps) {
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

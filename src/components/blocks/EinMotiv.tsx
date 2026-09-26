@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type FormatItem = {
   label: string
@@ -172,12 +174,12 @@ export function EinMotiv({
   const list = items?.length ? items : DEFAULT_ITEMS
 
   return (
-    <section className="bg-brand-black py-section">
+    <Section background="black">
       <Container className="flex flex-col items-center">
         <div className="flex w-full flex-col items-center gap-5 text-center">
-          <h2 className="heading-section text-brand-yellow">
+          <Heading size="section" className="text-brand-yellow">
             {ueberschrift}
-          </h2>
+          </Heading>
           {text ? (
             <p className="body-lead max-w-[1100px] text-white">
               {text}
@@ -193,7 +195,7 @@ export function EinMotiv({
                 className="flex min-w-0 shrink flex-col items-center gap-2 sm:gap-3"
               >
                 <FormatGraphic name={item.icon} />
-                <p className="w-full text-center font-poppins text-[clamp(0.7rem,2.5cqi,0.875rem)] font-normal leading-[1.5] text-brand-muted">
+                <p className="w-full text-center font-poppins text-cq-caption font-normal leading-[1.5] text-brand-muted">
                   {item.label}
                 </p>
               </div>
@@ -201,6 +203,6 @@ export function EinMotiv({
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

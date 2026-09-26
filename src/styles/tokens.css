@@ -33,6 +33,17 @@
   --text-button: clamp(1rem, 0.9363rem + 0.2614vw, 1.25rem); /* 16 → 20 */
   --text-client: clamp(0.875rem, 0.8113rem + 0.2614vw, 1.125rem); /* 14 → 18 */
 
+  /*
+   * Kartenschriften relativ zur Kartenbreite (cqi = 1 % der Breite des nächsten @container).
+   * Nur in Elementen mit @container-Vorfahren verwenden (Klasse @container an der Karte).
+   */
+  --text-cq-title: clamp(1.25rem, 8cqi, 1.75rem); /* 20 → 28, Kartentitel */
+  --text-cq-body: clamp(0.875rem, 5cqi, 1.125rem); /* 14 → 18, Kartentext */
+  --text-cq-label: clamp(0.875rem, 6cqi, 1.75rem); /* 14 → 28, Beschriftung unter großen Zahlen */
+  --text-cq-caption: clamp(0.7rem, 2.5cqi, 0.875rem); /* 11 → 14, kleine Bildunterschriften */
+  --text-cq-number: clamp(1.75rem, 12cqi, 2.5rem); /* 28 → 40, Schrittnummern „01“ */
+  --text-cq-stat: clamp(2.5rem, 22cqi, 8.125rem); /* 40 → 130, große Kennzahlen */
+
   /* 5.3 Abstände */
   --space-section: 52px; /* Stufen: 52 / 68 / 115, siehe Media Queries unten */
   --space-stack: clamp(2rem, 1.49rem + 2.092vw, 4rem); /* 32 → 64 */

@@ -2,6 +2,8 @@ import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { resolveMedia, type MediaLike } from '@/lib/media'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type TextblockProps = {
   eyebrow?: string | null
@@ -39,17 +41,17 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
 
   /* Figma Section / About: padding 128px, heading 840/56 Unbounded 800, Body/Lead 22/500 */
   return (
-    <section className="bg-white py-section">
+    <Section background="white">
       <Container className="text-center">
         {eyebrow ? (
-          <p className="mb-4 font-poppins text-sm font-bold tracking-[0.2em] text-brand-muted uppercase">
+          <p className="mb-4 font-poppins text-small font-bold tracking-[0.2em] text-brand-muted uppercase">
             {eyebrow}
           </p>
         ) : null}
         {ueberschrift ? (
-          <h2 className="heading-section mx-auto max-w-[840px] whitespace-pre-line text-brand-black">
+          <Heading size="section" className="mx-auto max-w-[840px] whitespace-pre-line text-brand-black">
             {ueberschrift}
-          </h2>
+          </Heading>
         ) : null}
         {body ? (
           <div className="mt-8 space-y-6 md:mt-8">{body}</div>
@@ -66,6 +68,6 @@ export function Textblock({ eyebrow, ueberschrift, text, children, bild }: Textb
           </div>
         ) : null}
       </Container>
-    </section>
+    </Section>
   )
 }

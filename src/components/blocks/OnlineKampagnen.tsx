@@ -1,4 +1,6 @@
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 type IconKey = 'zielgruppe' | 'motive' | 'auswertung'
 
@@ -326,14 +328,14 @@ export function OnlineKampagnen({
   if (!list.length) return null
 
   return (
-    <section className="bg-white py-section">
+    <Section background="white">
       <Container className="flex flex-col items-center">
         <div className="w-full text-center">
-          <h2 className="heading-section text-brand-black">
+          <Heading size="section" className="text-brand-black">
             {ueberschrift}
-          </h2>
+          </Heading>
           {untertitel ? (
-            <p className="mx-auto mt-4 max-w-[900px] font-poppins text-sm font-normal leading-[1.5] text-brand-black sm:text-base md:mt-6">
+            <p className="mx-auto mt-4 max-w-[900px] font-poppins text-body font-normal leading-[1.5] text-brand-black md:mt-6">
               {untertitel}
             </p>
           ) : null}
@@ -347,11 +349,11 @@ export function OnlineKampagnen({
             >
               <CardGraphic name={item.icon as IconKey} />
               <div className="flex min-w-0 flex-col gap-2">
-                <h3 className="font-unbounded text-[clamp(1.05rem,7cqi,1.75rem)] font-extrabold leading-[1.1] tracking-normal text-brand-yellow [text-transform:none]">
+                <h3 className="font-unbounded text-cq-title font-extrabold leading-[1.1] tracking-normal text-brand-yellow [text-transform:none]">
                   {item.titel}
                 </h3>
                 {item.text ? (
-                  <p className="font-poppins text-[clamp(0.8125rem,4.2cqi,1rem)] font-normal leading-[1.5] text-brand-muted">
+                  <p className="font-poppins text-cq-body font-normal leading-[1.5] text-brand-muted">
                     {item.text}
                   </p>
                 ) : null}
@@ -360,6 +362,6 @@ export function OnlineKampagnen({
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

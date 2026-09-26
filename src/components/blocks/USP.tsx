@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export type USPBeleg = { titel: string; text: string }
 
@@ -14,7 +16,7 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
   const points = belegpunkte?.filter((b) => b?.titel)?.slice(0, 3) ?? []
 
   return (
-    <section className="flex flex-col items-center self-stretch bg-brand-black py-section text-white">
+    <Section background="black" className="flex flex-col items-center self-stretch">
       <Container className="flex flex-col items-start gap-stack">
         {/* Figma: gap 56 zwischen Blöcken */}
         <div className="flex w-full flex-col items-start gap-6 md:gap-14">
@@ -26,9 +28,9 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
           ) : null}
 
           {/* Unbounded 56/800 white, lh 118% */}
-          <h2 className="heading-section w-full max-w-full whitespace-pre-line text-white">
+          <Heading size="section" className="w-full max-w-full whitespace-pre-line text-white">
             {ueberschrift}
-          </h2>
+          </Heading>
 
           {typeof text === 'string' && text ? (
             /* Poppins 32/400 brand-muted, max 1400 */
@@ -54,11 +56,11 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
                   aria-hidden
                 />
                 {/* min-w-0 + cqi: lange Wörter bleiben in der Karte, keine Auto-Silbentrennung */}
-                <h3 className="w-full min-w-0 max-w-full whitespace-pre-line font-unbounded text-[clamp(0.95rem,6.2cqi,1.75rem)] font-extrabold leading-[1.2] text-white hyphens-none [hyphenate-character:''] [overflow-wrap:normal] [word-break:normal]">
+                <h3 className="w-full min-w-0 max-w-full whitespace-pre-line font-unbounded text-cq-title font-extrabold leading-[1.2] text-white hyphens-none [hyphenate-character:''] [overflow-wrap:normal] [word-break:normal]">
                   {point.titel}
                 </h3>
                 {point.text ? (
-                  <p className="w-full min-w-0 max-w-full whitespace-pre-line font-poppins text-[clamp(0.75rem,4.4cqi,1.5rem)] font-normal leading-[1.45] text-brand-muted hyphens-none">
+                  <p className="w-full min-w-0 max-w-full whitespace-pre-line font-poppins text-cq-body font-normal leading-[1.45] text-brand-muted hyphens-none">
                     {point.text}
                   </p>
                 ) : null}
@@ -67,6 +69,6 @@ export function USP({ eyebrow, ueberschrift, text, belegpunkte }: USPProps) {
           </div>
         ) : null}
       </Container>
-    </section>
+    </Section>
   )
 }

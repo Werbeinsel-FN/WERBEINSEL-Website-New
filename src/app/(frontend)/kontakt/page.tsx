@@ -2,6 +2,8 @@ import { ContactForm } from '@/components/forms/ContactForm'
 import { getKontaktContent, getSiteChrome, getFormOptions } from '@/lib/content'
 import { buildMetadata } from '@/lib/seo'
 import { Container } from '@/components/ui/Container'
+import { Heading } from '@/components/ui/Heading'
+import { Section } from '@/components/ui/Section'
 
 export const metadata = buildMetadata({
   title: 'Kontakt',
@@ -23,30 +25,30 @@ export default async function KontaktPage() {
   return (
     <>
       {/* Hero – gelb, Display/Hero + Body/Lead (Figma) */}
-      <section className="flex flex-col items-stretch bg-brand-yellow py-section text-brand-black">
+      <Section background="yellow" className="flex flex-col items-stretch">
         <Container className="flex flex-col items-center text-center">
-          <h1 className="heading-hero mx-auto max-w-[640px] whitespace-pre-line uppercase text-brand-black">
+          <Heading size="hero" className="mx-auto max-w-[640px] whitespace-pre-line text-brand-black">
             {kontakt.hero.titel}
-          </h1>
+          </Heading>
           <p className="body-lead mx-auto mt-6 max-w-[625px] whitespace-pre-line text-brand-black">
             {kontakt.hero.untertitel}
           </p>
         </Container>
-      </section>
+      </Section>
 
       {/* Formular – Figma: max 1700, padding 0 32 */}
-      <section className="bg-white py-section">
+      <Section background="white">
         <Container className="flex flex-col items-center">
           <ContactForm formOptions={formOptions} />
         </Container>
-      </section>
+      </Section>
 
       {/* Direktkontakt – Figma: padding 128, icons 80, Label/Meta + Body/Lead */}
-      <section className="flex flex-col items-stretch bg-brand-black py-section text-white">
+      <Section background="black" className="flex flex-col items-stretch">
         <Container className="flex flex-col items-center">
-          <h2 className="heading-section mb-stack whitespace-pre-line text-center text-brand-yellow">
+          <Heading size="section" className="mb-stack whitespace-pre-line text-center text-brand-yellow">
             {kontakt.contactTitle}
-          </h2>
+          </Heading>
 
           <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             <ContactCol
@@ -86,7 +88,7 @@ export default async function KontaktPage() {
             />
           </div>
         </Container>
-      </section>
+      </Section>
     </>
   )
 }

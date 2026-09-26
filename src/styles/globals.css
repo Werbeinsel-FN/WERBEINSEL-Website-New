@@ -36,6 +36,12 @@
   --text-small: var(--text-small);
   --text-button: var(--text-button);
   --text-client: var(--text-client);
+  --text-cq-title: var(--text-cq-title);
+  --text-cq-body: var(--text-cq-body);
+  --text-cq-label: var(--text-cq-label);
+  --text-cq-caption: var(--text-cq-caption);
+  --text-cq-number: var(--text-cq-number);
+  --text-cq-stat: var(--text-cq-stat);
 
   --spacing-section: var(--space-section);
   --spacing-stack: var(--space-stack);
@@ -114,18 +120,7 @@
 }
 
 @layer utilities {
-  .heading-hero {
-    font-size: var(--text-hero);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.02em; /* Figma: -1.76px at 88px */
-  }
-
-  .heading-section {
-    font-size: var(--text-section);
-    line-height: 1;
-    letter-spacing: -0.01em;
-  }
+  /* Überschriften: components/ui/Heading.tsx (Größen hero | section | sub | card | step) */
 
   .body-lead {
     font-family: var(--font-poppins), system-ui, sans-serif;

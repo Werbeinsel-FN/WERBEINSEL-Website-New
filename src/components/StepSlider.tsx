@@ -70,7 +70,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
       <Container className="py-section">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-stretch lg:gap-10 xl:gap-14 2xl:gap-[120px]">
           <div className="relative w-full min-w-0 overflow-hidden rounded-card lg:w-[min(48%,420px)] lg:shrink-0 xl:w-[min(46%,520px)] 2xl:w-[min(100%,760px)]">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card sm:aspect-[3/4] lg:aspect-[3/4] 2xl:aspect-[760/1013]">
+            <div className="@container relative aspect-[4/3] w-full overflow-hidden rounded-card sm:aspect-[3/4] lg:aspect-[3/4] 2xl:aspect-[760/1013]">
               {foto ? (
                 <>
                   <Image
@@ -94,7 +94,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
                 <div className="absolute inset-0 bg-brand-card-dark" />
               )}
               <span
-                className="absolute bottom-1 left-3 font-unbounded text-[clamp(2.75rem,14vw,4.5rem)] font-black leading-[0.9] text-brand-yellow sm:left-4 lg:text-6xl xl:text-7xl 2xl:bottom-4 2xl:left-11 2xl:text-[clamp(6rem,14vw,18.75rem)]"
+                className="absolute bottom-1 left-3 font-unbounded text-cq-stat font-black leading-[0.9] text-brand-yellow sm:left-4 2xl:bottom-4 2xl:left-11"
                 aria-hidden
               >
                 {nummer}
@@ -109,7 +109,7 @@ export function StepSlider({ eyebrow, schritte }: Props) {
               </p>
             ) : null}
 
-            <h3 className="mt-3 max-w-full whitespace-pre-line break-words font-unbounded text-[clamp(1.25rem,3.2vw,1.75rem)] font-extrabold leading-[1.15] text-white hyphens-none sm:mt-4 lg:text-[1.75rem] xl:text-[2rem] 2xl:mt-8 2xl:text-[clamp(2.5rem,3.5vw,4rem)] 2xl:leading-[1.08]">
+            <h3 className="mt-3 max-w-full whitespace-pre-line break-words font-unbounded text-section font-extrabold leading-[1.15] text-white sm:mt-4 2xl:mt-8 2xl:leading-[1.08]">
               {step?.titel}
             </h3>
             <p className="mt-3 max-w-[900px] whitespace-pre-line font-poppins text-lead font-normal leading-[1.5] text-brand-muted lg:mt-4 2xl:mt-8">
