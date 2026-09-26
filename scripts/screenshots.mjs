@@ -25,6 +25,8 @@ const PAGES = [
   ['leistungen-grafikdesign', '/leistungen/grafikdesign'],
   ['leistungen-folierung', '/leistungen/folierung'],
   ['leistungen-social-media', '/leistungen/social-media'],
+  // Testseite mit allen CMS-Blöcken (nur lokal und in der Vorschau erreichbar)
+  ['test-bloecke', '/test-bloecke'],
 ]
 
 fs.mkdirSync(outDir, { recursive: true })

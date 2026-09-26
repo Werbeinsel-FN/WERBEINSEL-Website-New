@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
+import { Container } from '@/components/ui/Container'
 
 export type TestimonialItem = {
   zitat: string
@@ -98,7 +99,9 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
       aria-label={ueberschrift || 'Kundenstimmen'}
     >
       {ueberschrift ? (
-        <h2 className="heading-section mb-12 text-center text-white">{ueberschrift}</h2>
+        <Container>
+          <h2 className="heading-section mb-stack text-center text-white">{ueberschrift}</h2>
+        </Container>
       ) : null}
 
       {/* Desktop: arrows on the sides */}
@@ -120,7 +123,7 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
         <ChevronRightIcon />
       </button>
 
-      <div className="mx-auto w-full max-w-[900px] px-6 md:px-10 lg:px-8">
+      <Container variant="text">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {list.map((item, i) => (
@@ -197,7 +200,7 @@ export function Testimonials({ ueberschrift, testimonials, items }: Testimonials
             <ChevronRightIcon className="h-12 w-12 md:h-16 md:w-16" />
           </button>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

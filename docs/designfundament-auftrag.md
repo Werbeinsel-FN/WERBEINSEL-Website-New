@@ -280,7 +280,7 @@ Seitenlängen: bei 390 px 100–420 px kürzer, bei 810 px 300–1000 px kürzer
 - Rundungen auf die drei Tokens aus 5.6 vereinheitlichen.
 - **Fertig, wenn:** keine `rounded-[…]`-Sonderwerte mehr vorhanden sind.
 
-**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+**Stand der Umsetzung (auf der Vorschau geprüft und freigegeben)**
 
 - **Umgesetzt:**
   - **Karten-Innenabstand → `p-card`:** 9 Kartentypen in USP, Full-Service, Formate, Services-Raster, Kanäle, Online-Kampagnen, Was wir aufnehmen/bekleben/gestalten.
@@ -309,7 +309,7 @@ Sichtbare Änderungen (px, Tokens: Karte 24 → 40, Raster 16 → 32, Überschri
 
 Seitenlängen: meist 10–85 px kürzer, bei 1920 px teils 15–50 px länger. Keine Überläufe, kein abgeschnittener Text. Die Blöcke Kanäle, Online-Kampagnen und Was wir aufnehmen/bekleben/gestalten kommen in den Seed-Inhalten nicht vor; ihre Karten gehen von festen 40 px bzw. 20–32 px Innenabstand ebenfalls auf 24–40 px (sichtbar erst mit der Testseite aus T7).
 
-⚠️ **Zur Prüfung auf der Vorschau:**
+✅ **Auf der Vorschau geprüft und freigegeben** (bleiben wie umgesetzt):
 1. **USP-Karten bei 1440/1920 px:** Der Innenabstand sinkt von 56 auf 35/40 px. Das nimmt den 2xl-Sprung aus T5 zurück und liegt noch unter dem Stand vor T5 (40 px).
 2. **Abstände zwischen Karten:** Auf Tablet und Laptop werden sie enger, zum Beispiel im Services-Raster bei 1024 px 23 statt 32 px.
 3. **Überschrift → Inhalt auf Tablet:** Die Abstände werden deutlich enger, zum Beispiel beim Leistungs-Slider und beim Kunden-Laufband bei 810 px 41 statt 80 px.
@@ -319,6 +319,49 @@ Seitenlängen: meist 10–85 px kürzer, bei 1920 px teils 15–50 px länger. K
 - **Testseite** anlegen, die alle 24 CMS-Blöcke mit Beispielinhalten zeigt (ohne Datenbank, aus den Seed-Daten), und in `scripts/screenshots.mjs` aufnehmen. Viele Blöcke – darunter alle mit SVG-Illustrationen (Kanäle, Online-Kampagnen, Was wir aufnehmen/bekleben/gestalten, Ein Motiv, Echt nicht generiert, Transporter) – kommen auf keiner Seed-Seite vor und fehlen deshalb bisher in den Screenshot-Vergleichen. Die Testseite darf nicht öffentlich erreichbar oder indexiert sein (z. B. nur im Entwicklungsmodus oder mit `noindex` und ohne Link).
 - Bekannt aus T5: Hero-Überschrift „PLAKATWERBUNG“ läuft bei 390 px über (Seite 8 px zu breit); `Testimonials` hat noch einen eigenen Wrapper `max-w-[900px]` mit festen Rändern.
 - **Fertig, wenn:** jeder Block in allen fünf Prüfbreiten ohne Überlauf und ohne abgeschnittenen Text dargestellt wird.
+
+**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+
+- **Testseite `/test-bloecke`:**
+  - Inhalt: alle 24 CMS-Blocktypen über `RenderBlocks`, dazu Hero, Zahlen und CTA in je zwei Varianten, also 27 Abschnitte, jeweils mit einer grauen Kennzeichnung („Block n / 27 · Typ“). Beispielinhalte stehen in `src/data/block-test.ts` und enthalten bewusst lange deutsche Wörter.
+  - Erreichbarkeit: nur lokal (`next dev`) und in Vorschau-Umgebungen (`VERCEL_ENV=preview` oder `SITE_ENV=preview`, siehe `src/lib/preview.ts` und `.env.example`). In der Produktion antwortet sie mit 404, geprüft mit einem Produktions-Build.
+  - Auffindbarkeit: `noindex, nofollow`, nicht in Navigation oder Sitemap.
+  - Aufgenommen in `scripts/screenshots.mjs`.
+- **Ausgangsbasis:** Aufnahmen aller Seiten und der Testseite vor den Korrekturen in `screenshots/t7-basis/`.
+- **Prüfung:**
+  - Jeder Abschnitt in allen fünf Breiten automatisch auf Text über Kasten- bzw. Bildschirmrand und auf abgeschnittenen Text geprüft.
+  - Zusätzlich auf allen Seiten auf Wörter, die ohne Trennstrich über zwei Zeilen gebrochen werden.
+  - Die Aufnahmen durchgesehen.
+
+Befunde und Korrekturen:
+
+| Block | Befund | Korrektur | Sichtbar |
+|---|---|---|---|
+| `echtNichtGeneriert` | 1024–1279 px: Grafik (440 px) steht neben dem Text, die drei Punkte bekommen je ca. 120 px; „Authen\|tisch“, „Nutzun\|gsrech\|te“ ohne Trennstrich gebrochen, „Uneingeschränkt“ ragt 15 px über | Drei Spalten nur bis 1023 px (untereinander mit Grafik) und ab 1280 px; dazwischen untereinander | nur 1024–1279 px |
+| `servicesSlider` (Startseite) | Kartentitel wachsen mit der Bildschirmbreite (`1.5vw`), die Karten sind aber auf 300 px begrenzt; „Plakatwerbung“ passt auf dem Desktop nie, bei 1920 px bricht „Drucksache\|n“ | Titelgröße relativ zur Kartenbreite (`9cqi`, max. 28 px) | ja, siehe unten |
+| `testimonialsBlock` | eigener Wrapper `max-w-[900px]` mit festen Rändern; Überschrift ohne Seitenrand | `<Container variant="text">` (Inhalt 840 statt 836–852 px); Überschrift im `<Container>`, Abstand `mb-stack` | kaum |
+| übrige 21 Blöcke | keine Überläufe, kein abgeschnittener Text, keine Brüche mitten im Wort | – | – |
+
+Titelgröße im Leistungs-Slider der Startseite (px):
+
+| | 390 | 810 | 1024 | 1440 | 1920 |
+|---|---|---|---|---|---|
+| vorher | 17,6 | 17,6 | 17,6 | 21,6 | 28 |
+| nachher | 21 | 26 | 13,7 | 17,6 | 21 |
+
+„Plakatwerbung“ steht dadurch überall in einer Zeile statt „Plakat-werbung“.
+
+⚠️ **Zur Prüfung auf der Vorschau:**
+1. **Kartentitel im Leistungs-Slider:** auf dem Desktop kleiner (bei 1024 px 13,7 px), auf Handy/Tablet größer. Die Karten selbst bleiben unverändert (auf dem Desktop max. 300 px). Alternative: Karten auf dem Desktop breiter machen.
+2. **`echtNichtGeneriert` bei 1024–1279 px:** Die drei Punkte stehen untereinander neben der Grafik.
+3. **Testseite** `/test-bloecke` auf der Vorschau ansehen.
+
+**Offene Befunde ohne Fehlerwirkung (nicht geändert, Entscheidung offen):**
+- **Feste Tailwind-Schriftgrößen:** gut 30 Stellen in 17 Blöcken (`text-sm` bis `text-2xl`, z. B. Karten- und FAQ-Titel, Formate, Reichweite) statt Tokens aus 5.2. Umstellung wäre sichtbar.
+- **Eigene fließende Größen:** 31 `clamp()`-Werte mit Container-Einheiten (`cqi`) in Karten. Sie funktionieren, liegen aber außerhalb des Token-Systems.
+- **`Heading`-Komponente ungenutzt:** Die Blöcke nutzen weiterhin `.heading-section`/`.heading-hero` statt `<Heading>`. Die Werte weichen leicht von 5.2 ab (Zeilenhöhe 1 statt 1,1, Laufweite −0,01 statt −0,02 em); eine Vereinheitlichung wäre sichtbar.
+- **`Section`-Komponente ungenutzt:** Die Blöcke setzen `py-section` direkt am `<section>` (gleiches Ergebnis).
+- **Weiß und Schwarz:** `text-white`, `bg-white` usw. nutzen bereits die Tokens, weil `tokens.css` `--color-white`/`--color-black` setzt; kein Handlungsbedarf.
 
 ### T8 – Absicherung
 - Playwright-Screenshot-Tests für alle Seiten in den fünf Prüfbreiten dauerhaft einrichten.

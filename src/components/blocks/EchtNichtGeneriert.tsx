@@ -99,7 +99,7 @@ export function EchtNichtGeneriert({
           ) : null}
 
           {list.length ? (
-            <div className="mt-0 grid w-full grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-8">
+            <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
               {list.map((punkt) => (
                 <div
                   key={punkt.titel}

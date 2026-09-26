@@ -59,9 +59,10 @@ function ServiceCard({
         }}
         aria-hidden
       />
-      {/* Figma: padding 32, flex-end, Heading/Card 28 yellow · Label/Card 16 white */}
-      <div className="absolute inset-0 flex flex-col items-start justify-end p-5 md:p-6 xl:p-8">
-        <h3 className="w-full whitespace-pre-line text-center font-unbounded text-[clamp(1.1rem,1.5vw,1.75rem)] font-extrabold leading-[1.1] text-brand-yellow">
+      {/* Figma: padding 32, flex-end, Heading/Card 28 yellow · Label/Card 16 white.
+          Titelgröße relativ zur Kartenbreite (cqi), damit lange Wörter wie „Plakatwerbung“ immer passen. */}
+      <div className="@container absolute inset-0 flex flex-col items-start justify-end p-5 md:p-6 xl:p-8">
+        <h3 className="w-full whitespace-pre-line text-center font-unbounded text-[clamp(0.75rem,9cqi,1.75rem)] font-extrabold leading-[1.1] text-brand-yellow">
           {slide.titel}
         </h3>
         {slide.kurztext ? (
