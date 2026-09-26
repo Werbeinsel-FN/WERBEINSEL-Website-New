@@ -76,6 +76,19 @@
     @apply font-unbounded font-extrabold leading-[1.15];
   }
 
+  /*
+   * Lange Wörter in Überschriften mit Trennstrich umbrechen (lang="de"), z. B. PLAKAT-WERBUNG.
+   * Nur Wörter ab 12 Zeichen, mindestens 6 Zeichen vor und nach dem Trennstrich.
+   * break-words als Rückfall für Browser ohne deutsches Trennwörterbuch: nie über den Rand laufen.
+   */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply hyphens-auto break-words;
+    hyphenate-limit-chars: 12 6 6;
+  }
+
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-brand-yellow;
   }

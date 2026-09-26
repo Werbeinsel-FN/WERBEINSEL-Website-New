@@ -235,7 +235,7 @@ Seiten werden bei 810–1440 px um 20–75 px länger; bei 390 px teils kürzer 
 - **Achtung 1440 px:** Mit 2xl ab 1400 px greifen dort alle bisherigen `2xl:`-Stile. Ohne Anpassung rückt der Inhalt von Kopfzeile, Reichweite, Formate und FAQ (`.container-site`) von ca. 112 auf 32 px an den Rand, der Schritt-Slider (`StepSlider.tsx`) springt in die große Variante (Bild bis 760 px, Pfeile 130 px, 200 px Innenabstand) und die USP-Karten erhalten `2xl:p-14`. Diese Stellen gemeinsam mit den Containern umstellen und gezielt prüfen.
 - **Fertig, wenn:** keine festen `max-w-[…px]`-Werte für Seitenbreiten mehr im Code.
 
-**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+**Stand der Umsetzung (auf der Vorschau geprüft und freigegeben)**
 
 - **Umgesetzt:**
   - Breakpoints sm 660 / 2xl 1400, Menü-Media-Query 640 → 660.
@@ -261,14 +261,19 @@ Sichtbare Änderungen:
 | Kundenstimmen (vorher 64/96/160, Mindesthöhen bleiben) | 64 → 52 | 96 → 68 | 160 → 115 | 160 → 115 | 160 → 115 |
 | Schritt-Slider oben/unten (vorher 56/80/96/200) | 56 → 52 | 80 → 68 | 80 → 115 | 96 → 115 | 200 → 115 |
 
-⚠️ **Zur Prüfung auf der Vorschau (1440 px):**
+✅ **Auf der Vorschau geprüft und freigegeben (1440 px)** (bleiben wie umgesetzt):
 1. **Schritt-Slider:** springt durch 2xl ab 1400 px in die große Variante – Bild bis 760 px breit, sehr große „01“, Pfeile 130 px, Abstand Bild–Text 120 px. Leistungsseiten werden bei 1440 px dadurch ca. 230–330 px länger.
 2. **USP-Karten:** Innenabstand 40 → 56 px (`2xl:p-14`).
 3. **Seitenrand:** überall einheitlich 50 px; Kopfzeile, Reichweite, Formate und FAQ rücken von 112 auf 50 px nach außen und fluchten jetzt mit dem restlichen Inhalt.
 
 Seitenlängen: bei 390 px 100–420 px kürzer, bei 810 px 300–1000 px kürzer (Sektionsabstände), bei 1920 px 70–300 px kürzer.
 
-**Bekannter Fehler, verstärkt:** Die Hero-Überschrift „PLAKATWERBUNG“ ist bei 390 px 378 px breit und läuft über; durch den einheitlichen Seitenrand (20 statt 16 px) wächst der Überlauf der Seite von 4 auf 8 px. Behebung in T7.
+**Bekannter Fehler, verstärkt:** Die Hero-Überschrift „PLAKATWERBUNG“ ist bei 390 px 378 px breit und läuft über; durch den einheitlichen Seitenrand (20 statt 16 px) wuchs der Überlauf der Seite von 4 auf 8 px. Behoben direkt nach T5 per Silbentrennung für Überschriften:
+
+- `h1`–`h4` erhalten in `globals.css` `hyphens: auto` (Seitensprache `de`) mit `hyphenate-limit-chars: 12 6 6` – nur Wörter ab 12 Zeichen, mindestens 6 Zeichen vor und nach dem Trennstrich. Ergebnis: „PLAKAT-WERBUNG“; kurze Wörter wie „WERBUNG.“ oder „dieser“ werden nie getrennt.
+- Rückfall `overflow-wrap: break-word` für Browser ohne deutsches Trennwörterbuch: Wörter brechen dort notfalls ohne Trennstrich um, laufen aber nie über den Rand.
+- Nebenwirkungen: Die Kartentitel „Plakatwerbung“ im Leistungs-Slider der Startseite (1024–1920 px) waren breiter als ihre Überschrift und liefen über; sie trennen jetzt „Plakat-werbung“. Auf `/datenschutz` trennt Chrome bei 390 px „verantwort-lichen“, obwohl das Wort auch in die nächste Zeile passen würde (Chrome trennt am Zeilenende, sobald ein langes Wort nicht mehr ganz passt).
+- Geprüft: alle 133 Überschriften auf allen 11 Seiten bei 390 px ohne Überlauf, keine Seite breiter als der Bildschirm. Getestet in Chromium; Safari und Firefox noch auf echten Geräten prüfen.
 
 ### T6 – Abstände und Rundungen
 - Karten-Innenabstände, Abstände zwischen Überschrift und Inhalt sowie zwischen Karten auf die Tokens aus 5.3 umstellen.
