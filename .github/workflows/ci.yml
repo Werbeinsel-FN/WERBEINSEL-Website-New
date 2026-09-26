@@ -9,6 +9,21 @@ jobs:
     env:
       # Nur für den Build in der CI, kein echtes Geheimnis. Ohne DATABASE_URL läuft die Seite mit den Seed-Inhalten.
       PAYLOAD_SECRET: ci-build-ohne-datenbank
+    services:
+      # Nur für den DB-Integrationstest; wird nach dem Lauf verworfen
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: werbeinsel
+          POSTGRES_PASSWORD: werbeinsel
+          POSTGRES_DB: werbeinsel_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U werbeinsel"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,9 +41,11 @@ jobs:
       - name: Unit-Tests
         run: npm run test:unit
 
-      # Braucht eine Datenbank und schlägt ohne DATABASE_URL fehl (Abschnitt 9 im Auftrag).
-      - name: DB-Integrationstest (bekannter Fehler, nicht blockierend)
-        continue-on-error: true
+      # Eigene Wegwerf-Datenbank aus dem postgres-Dienst oben, nie die Produktionsdatenbank.
+      # DATABASE_URL gilt nur für diesen Schritt; der Build läuft weiter mit den Seed-Inhalten.
+      - name: DB-Integrationstest
+        env:
+          DATABASE_URL: postgres://werbeinsel:werbeinsel@localhost:5432/werbeinsel_test
         run: npx cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts tests/int/api.int.spec.ts
 
       - name: Build

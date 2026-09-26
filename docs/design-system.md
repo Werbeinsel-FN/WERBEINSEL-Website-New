@@ -173,8 +173,8 @@ npx playwright show-report   #    Vorher/Nachher/Differenz je Seite und Breite
 |---|---|
 | `npm run lint` | ESLint |
 | `npm run test:unit` | Komponententests ohne Datenbank (`tests/int/ui.int.spec.tsx`) |
-| `npm run test:int` | alle Integrationstests, inkl. DB-Test (braucht Datenbank) |
+| `npm run test:int` | alle Integrationstests; der DB-Test läuft nur mit `DATABASE_URL` auf `localhost`, sonst wird er übersprungen |
 | `npm run test:e2e -- --project=chromium` | Grundtest aller Seiten im Browser: Status 200, Titel, genau eine `h1`, keine Konsolenfehler (`tests/e2e/frontend.e2e.spec.ts`) |
 | `npm run build` | Produktions-Build |
 
-Die GitHub-CI (`.github/workflows/ci.yml`) führt Typprüfung, Lint, Unit-Tests und Build aus; jeder Fehler dort bricht ab. Ein bekannter, noch offener Fehler (DB-Test ohne Datenbank) läuft in einem eigenen, klar benannten Schritt sichtbar mit, blockiert aber nicht (siehe Abschnitt 9 im Auftrag). Wird er behoben, den Schritt in `ci.yml` blockierend machen.
+Die GitHub-CI (`.github/workflows/ci.yml`) führt Typprüfung, Lint, Unit-Tests, den DB-Integrationstest und den Build aus; jeder Fehler dort bricht ab. Der DB-Test nutzt einen eigenen Postgres-Container, der nach dem Lauf verworfen wird. Er bricht ab, wenn `DATABASE_URL` nicht auf `localhost` zeigt, damit er nie gegen die Produktionsdatenbank läuft.
