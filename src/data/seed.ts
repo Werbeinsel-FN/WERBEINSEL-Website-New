@@ -7,10 +7,8 @@ export const navigation = {
       url: '/services',
       children: [
         { label: 'Plakatwerbung', url: '/leistungen/plakatwerbung' },
+        { label: 'Folierung & Beschriftung', url: '/leistungen/folierung' },
         { label: 'Foto & Video', url: '/leistungen/foto-video' },
-        { label: 'Grafikdesign', url: '/leistungen/grafikdesign' },
-        { label: 'Folierung', url: '/leistungen/folierung' },
-        { label: 'Social Media', url: '/leistungen/social-media' },
       ],
     },
     { label: 'Jobs', url: '/jobs' },
@@ -45,8 +43,7 @@ export const footer = {
             { label: 'Services', url: '/services' },
             { label: 'Plakatierung', url: '/leistungen/plakatwerbung' },
             { label: 'Folierung', url: '/leistungen/folierung' },
-            { label: 'Digitale Werbemittel', url: '/leistungen/social-media' },
-            { label: 'Drucksachen', url: '/leistungen/grafikdesign' },
+            { label: 'Foto & Video', url: '/leistungen/foto-video' },
             { label: 'Arbeiten', url: '/#arbeiten' },
             { label: 'Prozess', url: '/leistungen/plakatwerbung' },
             { label: 'Kontakt', url: '/kontakt' },
@@ -79,7 +76,7 @@ export const home = {
     variante: 'bildKarte' as const,
     bild: { url: '/images/figma/hero-bg.png', alt: 'WERBEINSEL Außenwerbung' },
     titel: 'Ihre Werbung.\nUnser\nHandwerk.',
-    untertitel: 'Plakat. Folie. Digital.\nSichtbarkeit für Marken in der Region.',
+    untertitel: 'Plakat. Folie. Pixel.\nSichtbarkeit für Marken in der Region.',
     buttons: [
       { label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' as const },
       { label: 'Services ansehen', url: '/services', stil: 'secondary' as const },
@@ -107,16 +104,11 @@ export const home = {
         bild: { url: '/images/figma/service-folie.png', alt: 'Folierung & Beschriftung' },
       },
       {
-        titel: 'Digitale\nWerbemittel',
-        kurztext: 'Screens. Social Media. Online-Kampagnen.',
-        link: '/leistungen/social-media',
-        bild: { url: '/images/figma/service-digital.png', alt: 'Digitale Werbemittel' },
-      },
-      {
-        titel: 'Drucksachen',
-        kurztext: 'Flyer. Broschüren. Geschäftsausstattung.',
-        link: '/leistungen/grafikdesign',
-        bild: { url: '/images/figma/service-druck.png', alt: 'Drucksachen' },
+        titel: 'Foto & Video',
+        kurztext: 'Events. Ausstellungen. Imagefilme.',
+        link: '/leistungen/foto-video',
+        // Platzhalter, später durch ein eigenes Konzertfoto ersetzen
+        bild: { url: '/images/figma/service-foto.png', alt: 'Foto & Video' },
       },
     ],
   },
@@ -433,7 +425,7 @@ export const servicesPage = {
     untertitel:
       'Von der ersten Idee bis zur fertigen Montage – alles aus einer Hand. Klassische Außenwerbung und moderne Sichtbarkeit für die Region.',
   },
-  sectionTitle: 'VIER DISZIPLINEN, EIN ANSPRUCH',
+  sectionTitle: 'DREI DISZIPLINEN, EIN ANSPRUCH',
   items: [
     {
       nr: '01',
@@ -453,19 +445,12 @@ export const servicesPage = {
     },
     {
       nr: '03',
-      kategorie: 'DIGITAL',
-      titel: 'Digitale\nWerbemittel',
-      kurztext: 'Screens. Social Media. Online-\nKampagnen.',
-      link: '/leistungen/social-media',
-      bild: { url: '/images/figma/service-digital.png', alt: 'Digitale Werbemittel' },
-    },
-    {
-      nr: '04',
-      kategorie: 'PRINT',
-      titel: 'Drucksachen',
-      kurztext: 'Flyer. Broschüren. Geschäftsausstattung.',
-      link: '/leistungen/grafikdesign',
-      bild: { url: '/images/figma/service-druck.png', alt: 'Drucksachen' },
+      kategorie: 'CONTENT',
+      titel: 'Foto & Video',
+      kurztext: 'Events. Ausstellungen. Imagefilme.',
+      link: '/leistungen/foto-video',
+      // Platzhalter, später durch ein eigenes Konzertfoto ersetzen
+      bild: { url: '/images/figma/service-foto.png', alt: 'Foto & Video' },
     },
   ],
   cta: {
@@ -478,7 +463,7 @@ export const servicesPage = {
 export { leistungen, leistungenSlugs, type LeistungSlug } from './leistungen-struktur'
 
 export const formOptions = {
-  services: ['Außenwerbung', 'Beschriftung', 'Grafikdesign', 'Webdesign'],
+  services: ['Plakatwerbung', 'Folierung & Beschriftung', 'Foto & Video', 'Sonstiges'],
   budgets: ['< 1.000€', '1.000€ - 5.000€', '5.000€ - 10.000€', '> 10.000€'],
   zeitraeume: ['sofort', 'innerhalb 1 Monat', '1-3 Monate', '> 3 Monate'],
   verfuegbarAb: ['sofort', 'nächsten Monat', 'in 3 Monaten', 'flexibel'],

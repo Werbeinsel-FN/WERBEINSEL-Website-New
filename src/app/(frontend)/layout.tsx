@@ -15,7 +15,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = buildMetadata({
   title: undefined,
   description:
-    'WERBEINSEL – Außenwerbung, Plakat, Folierung, Grafikdesign, Foto & Video und Social Media.',
+    'WERBEINSEL – Plakatwerbung, Folierung & Beschriftung sowie Foto & Video.',
   path: '/',
 })
 

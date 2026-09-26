@@ -8,7 +8,7 @@ export async function generateMetadata() {
     title: 'Startseite',
     description:
       page?.metaDescription ||
-      'WERBEINSEL – Ihre Agentur für klassische Werbung. Plakat, Folie, Digital – Sichtbarkeit für Marken in der Region.',
+      'WERBEINSEL – Ihre Agentur für klassische Werbung. Plakat, Folie, Pixel – Sichtbarkeit für Marken in der Region.',
     path: '/',
   })
 }

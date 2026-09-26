@@ -16,7 +16,7 @@ export const blockTestSections: Array<{ name: string; block: PageBlock }> = [
       variante: 'bildKarte',
       bild: bild('/images/figma/hero-bg.png', 'Plakatwand in der Stadt'),
       titel: 'Ihre Werbung.\nUnser\nHandwerk.',
-      untertitel: 'Plakat. Folie. Digital.\nSichtbarkeit für Marken in der Region.',
+      untertitel: 'Plakat. Folie. Pixel.\nSichtbarkeit für Marken in der Region.',
       buttons: [
         { label: 'Projekt anfragen', url: '/kontakt', stil: 'primary' },
         { label: 'Services ansehen', url: '/services', stil: 'secondary' },

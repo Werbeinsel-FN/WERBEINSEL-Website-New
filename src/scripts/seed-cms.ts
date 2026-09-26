@@ -414,7 +414,7 @@ async function main() {
     titel: 'Startseite',
     slug: 'home',
     metaDescription:
-      'WERBEINSEL – Ihre Agentur für klassische Werbung. Plakat, Folie, Digital – Sichtbarkeit für Marken in der Region.',
+      'WERBEINSEL – Ihre Agentur für klassische Werbung. Plakat, Folie, Pixel – Sichtbarkeit für Marken in der Region.',
     blocks: [
       home.hero,
       home.about,

@@ -3,7 +3,7 @@ import { einstellungen as seedEinstellungen } from '@/data/seed'
 
 const SITE_NAME = 'WERBEINSEL'
 const DEFAULT_DESCRIPTION =
-  'WERBEINSEL – Außenwerbung, Plakat, Folierung, Grafikdesign, Foto & Video und Social Media.'
+  'WERBEINSEL – Plakatwerbung, Folierung & Beschriftung sowie Foto & Video.'
 
 type EinstellungenLike = {
   firma?: string

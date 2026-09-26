@@ -9,7 +9,7 @@ import { Section } from '@/components/ui/Section'
 export const metadata = buildMetadata({
   title: 'Services',
   description:
-    'Unsere Leistungen: Plakatwerbung, Folierung & Beschriftung, digitale Werbemittel und Drucksachen – alles aus einer Hand.',
+    'Unsere Leistungen: Plakatwerbung, Folierung & Beschriftung sowie Foto & Video – alles aus einer Hand.',
   path: '/services',
 })
 

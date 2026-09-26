@@ -89,8 +89,8 @@ export function ServicesGrid({ ueberschrift, items }: ServicesGridProps) {
           {ueberschrift}
         </Heading>
 
-        {/* 4 Spalten erst ab xl – mehr Platz pro Karte */}
-        <div className="mt-stack grid w-full grid-cols-1 gap-gap sm:grid-cols-2 xl:grid-cols-4">
+        {/* 3 Spalten erst ab xl; darunter 2 Spalten, eine übrig bleibende letzte Karte geht über die volle Breite */}
+        <div className="mt-stack grid w-full grid-cols-1 gap-gap sm:grid-cols-2 sm:max-xl:[&>*:last-child:nth-child(odd)]:col-span-2 xl:grid-cols-3">
           {items.map((item) => (
             <ServiceOverviewCard key={item.nr} item={item} />
           ))}

@@ -18,6 +18,7 @@ const PUBLIC_BY_FILENAME: Record<string, string> = {
   'service-folie.png': '/images/figma/service-folie.png',
   'service-digital.png': '/images/figma/service-digital.png',
   'service-druck.png': '/images/figma/service-druck.png',
+  'service-foto.png': '/images/figma/service-foto.png',
   'work-1.png': '/images/figma/work-1.png',
   'work-2.png': '/images/figma/work-2.png',
   'work-3.png': '/images/figma/work-3.png',
