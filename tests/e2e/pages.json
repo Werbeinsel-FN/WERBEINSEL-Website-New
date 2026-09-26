@@ -9,9 +9,7 @@
     ["datenschutz", "/datenschutz"],
     ["leistungen-plakatwerbung", "/leistungen/plakatwerbung"],
     ["leistungen-foto-video", "/leistungen/foto-video"],
-    ["leistungen-grafikdesign", "/leistungen/grafikdesign"],
     ["leistungen-folierung", "/leistungen/folierung"],
-    ["leistungen-social-media", "/leistungen/social-media"],
     ["test-bloecke", "/test-bloecke"]
   ]
 }

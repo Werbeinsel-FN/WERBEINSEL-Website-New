@@ -6,9 +6,7 @@
 export const leistungenSlugs = [
   'plakatwerbung',
   'foto-video',
-  'grafikdesign',
   'folierung',
-  'social-media',
 ] as const
 
 export type LeistungSlug = (typeof leistungenSlugs)[number]
@@ -164,47 +162,6 @@ export const leistungen: Record<
     ],
   },
 
-  grafikdesign: {
-    titel: 'Grafikdesign',
-    metaDescription: 'Grafikdesign – WERBEINSEL. (Struktur / Inhalte folgen)',
-    blocks: [
-      {
-        blockType: 'hero',
-        variante: 'einfach',
-        titel: 'GRAFIKDESIGN',
-        untertitel: PH,
-        buttons: [],
-      },
-      {
-        blockType: 'referenzSlider',
-        ueberschrift: 'REFERENZEN',
-        untertitel: PH,
-        kategorie: 'grafik',
-      },
-      {
-        blockType: 'textblock',
-        ueberschrift: 'Ein Motiv',
-        text: PH,
-      },
-      {
-        blockType: 'schrittSlider',
-        eyebrow: 'SO LÄUFT IHR DESIGN-PROJEKT',
-        schritte: phSteps(['Briefing', 'Entwurf', 'Ausarbeitung', 'Übergabe']),
-      },
-      {
-        blockType: 'textblock',
-        ueberschrift: 'Leistungen',
-        text: PH,
-      },
-      {
-        blockType: 'cta',
-        ueberschrift: 'NÄCHSTER SCHRITT',
-        text: PH,
-        button: { label: 'Kontakt', url: '/kontakt' },
-      },
-    ],
-  },
-
   folierung: {
     titel: 'Folierung',
     metaDescription: 'Folierung – WERBEINSEL. (Struktur / Inhalte folgen)',
@@ -236,42 +193,6 @@ export const leistungen: Record<
         blockType: 'textblock',
         ueberschrift: 'Leistungen',
         text: PH,
-      },
-      {
-        blockType: 'cta',
-        ueberschrift: 'NÄCHSTER SCHRITT',
-        text: PH,
-        button: { label: 'Kontakt', url: '/kontakt' },
-      },
-    ],
-  },
-
-  'social-media': {
-    titel: 'Social Media',
-    metaDescription: 'Social Media Marketing – WERBEINSEL. (Struktur / Inhalte folgen)',
-    blocks: [
-      {
-        blockType: 'hero',
-        variante: 'einfach',
-        titel: 'SOCIAL MEDIA',
-        untertitel: PH,
-        buttons: [],
-      },
-      {
-        blockType: 'textblock',
-        ueberschrift: 'Content und Kanäle',
-        text: PH,
-      },
-      {
-        blockType: 'schrittSlider',
-        eyebrow: 'SO LÄUFT IHR SOCIAL MEDIA',
-        schritte: phSteps(['Strategie', 'Content', 'Veröffentlichung', 'Auswertung']),
-      },
-      {
-        blockType: 'referenzSlider',
-        ueberschrift: 'REFERENZEN',
-        untertitel: PH,
-        kategorie: 'social',
       },
       {
         blockType: 'cta',

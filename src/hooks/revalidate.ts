@@ -1,17 +1,10 @@
 import type { CollectionAfterChangeHook, GlobalAfterChangeHook } from 'payload'
+import { leistungenSlugs } from '@/data/leistungen-struktur'
 import { ALL_SITE_PATHS, revalidateSite } from '@/lib/revalidate'
 
 function pagePathFromSlug(slug: string | null | undefined): string {
   if (!slug || slug === 'home') return '/'
-  if (
-    [
-      'plakatwerbung',
-      'foto-video',
-      'grafikdesign',
-      'folierung',
-      'social-media',
-    ].includes(slug)
-  ) {
+  if ((leistungenSlugs as readonly string[]).includes(slug)) {
     return `/leistungen/${slug}`
   }
   return `/${slug}`

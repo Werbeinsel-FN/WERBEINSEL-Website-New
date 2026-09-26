@@ -1,4 +1,5 @@
 import { revalidatePath } from 'next/cache'
+import { leistungenSlugs } from '@/data/leistungen-struktur'
 
 /** Nach CMS-Änderungen Frontend-Cache leeren. */
 export function revalidateSite(paths: string[] = ['/']) {
@@ -26,9 +27,5 @@ export const ALL_SITE_PATHS = [
   '/jobs',
   '/impressum',
   '/datenschutz',
-  '/leistungen/plakatwerbung',
-  '/leistungen/foto-video',
-  '/leistungen/grafikdesign',
-  '/leistungen/folierung',
-  '/leistungen/social-media',
+  ...leistungenSlugs.map((slug) => `/leistungen/${slug}`),
 ]
