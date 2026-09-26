@@ -41,9 +41,7 @@ npm run dev
 | `/datenschutz` | Fertig (Rechtstext Platzhalter) |
 | `/leistungen/plakatwerbung` | Struktur / Vorlage |
 | `/leistungen/foto-video` | Struktur |
-| `/leistungen/grafikdesign` | Struktur |
 | `/leistungen/folierung` | Struktur |
-| `/leistungen/social-media` | Struktur |
 | `/admin` | Payload CMS |
 
 ## Projektstruktur

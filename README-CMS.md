@@ -53,9 +53,7 @@ src/
 | Startseite | `home` | `/` | fertig (Inhalte) |
 | Plakatwerbung | `plakatwerbung` | `/leistungen/plakatwerbung` | **STRUKTUR** (Vorlage + Platzhalter) |
 | Foto & Video | `foto-video` | `/leistungen/foto-video` | **STRUKTUR** |
-| Grafikdesign | `grafikdesign` | `/leistungen/grafikdesign` | **STRUKTUR** |
 | Folierung | `folierung` | `/leistungen/folierung` | **STRUKTUR** |
-| Social Media | `social-media` | `/leistungen/social-media` | **STRUKTUR** |
 
 Leistungsseiten: laut Lastenheft nur Routen + Block-Gerüst. Echte Texte/Bilder später im Admin unter **Seiten** nachpflegen.
 
