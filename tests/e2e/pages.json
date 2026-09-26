@@ -1,0 +1,17 @@
+{
+  "widths": [390, 810, 1024, 1440, 1920],
+  "pages": [
+    ["start", "/"],
+    ["services", "/services"],
+    ["jobs", "/jobs"],
+    ["kontakt", "/kontakt"],
+    ["impressum", "/impressum"],
+    ["datenschutz", "/datenschutz"],
+    ["leistungen-plakatwerbung", "/leistungen/plakatwerbung"],
+    ["leistungen-foto-video", "/leistungen/foto-video"],
+    ["leistungen-grafikdesign", "/leistungen/grafikdesign"],
+    ["leistungen-folierung", "/leistungen/folierung"],
+    ["leistungen-social-media", "/leistungen/social-media"],
+    ["test-bloecke", "/test-bloecke"]
+  ]
+}

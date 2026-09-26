@@ -1,0 +1,7 @@
+{
+  "src/components/forms/FormFeedback.tsx": {
+    "react-hooks/refs": {
+      "count": 2
+    }
+  }
+}

@@ -1,4 +1,4 @@
-﻿name: CI
+name: CI
 on:
   pull_request:
   push:
@@ -6,6 +6,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    env:
+      # Nur für den Build in der CI, kein echtes Geheimnis. Ohne DATABASE_URL läuft die Seite mit den Seed-Inhalten.
+      PAYLOAD_SECRET: ci-build-ohne-datenbank
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -13,4 +16,28 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx tsc --noEmit
+
+      - name: Typprüfung
+        run: npx tsc --noEmit
+
+      # Bekannte Lint-Fehler stehen in eslint-suppressions.json (Abschnitt 9 im Auftrag).
+      # Neue Fehler lassen diesen Schritt fehlschlagen; nach Behebung meldet ESLint den überflüssigen Eintrag.
+      - name: Lint
+        run: npm run lint
+
+      - name: Bekannte Lint-Fehler anzeigen (nicht blockierend, siehe docs/designfundament-auftrag.md Abschnitt 9)
+        continue-on-error: true
+        run: |
+          echo '{}' > "$RUNNER_TEMP/keine-vermerke.json"
+          npx eslint . --suppressions-location "$RUNNER_TEMP/keine-vermerke.json"
+
+      - name: Unit-Tests
+        run: npm run test:unit
+
+      # Braucht eine Datenbank und schlägt ohne DATABASE_URL fehl (Abschnitt 9 im Auftrag).
+      - name: DB-Integrationstest (bekannter Fehler, nicht blockierend)
+        continue-on-error: true
+        run: npx cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts tests/int/api.int.spec.ts
+
+      - name: Build
+        run: npm run build

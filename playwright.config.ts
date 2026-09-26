@@ -19,10 +19,15 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+  /* Referenzbilder der Screenshot-Tests: lokal, nicht im Repository (siehe docs/design-system.md) */
+  snapshotPathTemplate: 'screenshots/baseline/{platform}/{arg}{ext}',
+  expect: {
+    /* Ganzseitige Aufnahmen langer Seiten brauchen länger als die Standard-5-Sekunden */
+    timeout: 60_000,
+  },
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -30,11 +35,20 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      testIgnore: /visual\.e2e\.spec\.ts/,
       use: { ...devices['Desktop Chrome'], channel: 'chromium' },
+    },
+    {
+      /* Screenshot-Tests aller Seiten in den fünf Prüfbreiten (npm run test:visual) */
+      name: 'visual',
+      testMatch: /visual\.e2e\.spec\.ts/,
+      timeout: 180_000,
+      /* Standard-Chromium von Playwright (headless), wie scripts/screenshots.mjs */
+      use: { ...devices['Desktop Chrome'] },
     },
   ],
   webServer: {
-    command: 'pnpm dev',
+    command: 'npm run dev',
     reuseExistingServer: true,
     url: 'http://localhost:3000',
   },

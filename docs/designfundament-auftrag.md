@@ -1,6 +1,6 @@
 # WERBEINSEL Website – Designfundament
 
-**Status:** Entwurf, Werte nach zwetschke.de ausgerichtet (von Kristijan so gewünscht). Umsetzung erst nach Freigabe.
+**Status:** ✅ Abgeschlossen am 26.09.2026 – T1 bis T8 (inkl. T7b) umgesetzt und auf der Vorschau von `develop` freigegeben. Übernahme nach `main` erst nach ausdrücklicher Freigabe durch Kristijan. Offene Punkte für die nächste Aufgabe: Abschnitt 9. Werte nach zwetschke.de ausgerichtet (von Kristijan so gewünscht).
 **Repository:** `Werbeinsel-FN/WERBEINSEL-Website-New` (Next.js 16, Payload 3, Tailwind 4)
 **Stand der Analyse:** Commit `39c328f` („Use brand color tokens for menu hover pill styles“)
 
@@ -377,7 +377,7 @@ Titelgröße im Leistungs-Slider der Startseite (px):
 
 Auftrag nach Prüfung von T7: Karten im Leistungs-Slider breiter; offene Befunde aus T7 erledigen.
 
-**Stand der Umsetzung (Entwurf, zur Prüfung auf der Vorschau)**
+**Stand der Umsetzung (auf der Vorschau geprüft und freigegeben)**
 
 1. **Leistungs-Slider (Startseite):**
    - **Ab 1280 px:** 4 Karten nebeneinander, sie füllen die Breite, max. 382 px wie in Figma.
@@ -421,7 +421,7 @@ Sichtbare Änderungen (px):
 
 Seitenlängen: meist 5–85 px länger (Zeilenhöhe der Überschriften); Startseite auf dem Desktop 140–200 px länger (breitere, dadurch höhere Leistungskarten). Keine Überläufe, kein abgeschnittener Text, keine Brüche mitten im Wort (geprüft auf allen Seiten und der Testseite in allen fünf Breiten).
 
-⚠️ **Zur Prüfung auf der Vorschau:**
+✅ **Auf der Vorschau geprüft und freigegeben** (bleiben wie umgesetzt):
 1. **Leistungs-Slider:** breitere Karten ab 1280 px und Karussell bei 1024–1279 px.
 2. **Schritt-Slider:** „01“ auf dem Handy/Tablet deutlich größer, ab 1440 px kleiner; Titel auf dem Handy größer.
 3. **Kartenschriften:** Titel überall mind. 20 px, Text mind. 14 px – vor allem in schmalen Karten (Services-Raster, USP auf dem Handy, Testseite: Kanäle, Was wir bekleben/gestalten).
@@ -431,6 +431,23 @@ Seitenlängen: meist 5–85 px länger (Zeilenhöhe der Überschriften); Startse
 - Playwright-Screenshot-Tests für alle Seiten in den fünf Prüfbreiten dauerhaft einrichten.
 - GitHub-Workflow `ci.yml` erweitern: Lint, Unit-Tests, `npm run build`.
 - Kurze Dokumentation `docs/design-system.md`: welche Tokens es gibt und wie neue Seiten sie nutzen.
+
+**Stand der Umsetzung (freigegeben)**
+
+- **Screenshot-Tests:**
+  - Umfang: `tests/e2e/visual.e2e.spec.ts`, alle 11 Seiten und `/test-bloecke` in den fünf Prüfbreiten, also 60 Tests. Die Seitenliste steht in `tests/e2e/pages.json` und gilt auch für `scripts/screenshots.mjs`.
+  - Jeder Test prüft zusätzlich, dass die Seite nicht breiter als der Bildschirm ist.
+  - Aufrufe: `npm run test:visual:update` (Referenz anlegen), `npm run test:visual` (vergleichen).
+  - Stabilisierung: Kopfzeile während der Aufnahme fest oben, Menü-Pille und Next.js-Hinweis ausgeblendet, reduzierte Bewegung, Warten auf Schriften und alle Bilder.
+  - Schwellen: höchstens 100 abweichende Pixel, Farbtoleranz 0,05.
+  - Geprüft: 60 von 60 grün auf unverändertem Code; eine um 4 px geänderte Kartenrundung wird erkannt.
+  - Referenzbilder liegen lokal unter `screenshots/baseline/<Betriebssystem>/` (ca. 23 MB, abhängig vom Betriebssystem) und bewusst nicht im Repository. Die CI führt die Screenshot-Tests nicht aus (bestätigt; späterer Ausbau über ein festes Docker-Image möglich).
+- **CI (`ci.yml`), blockierend:** Typprüfung, Lint, Unit-Tests (`npm run test:unit`, ohne DB-Test) und Build (mit Platzhalter-`PAYLOAD_SECRET`, ohne Datenbank; lokal ohne `.env` geprüft).
+- **Bekannte Fehler aus Abschnitt 9, nicht versteckt:**
+  - Die zwei Lint-Fehler stehen in `eslint-suppressions.json`. Neue Fehler lassen die CI trotzdem fehlschlagen, und nach der Behebung verlangt ESLint das Entfernen des Eintrags.
+  - Ein eigener, nicht blockierender Schritt zeigt die Lint-Fehler bei jedem Lauf an. Ebenso läuft der DB-Test sichtbar als eigener, nicht blockierender Schritt mit.
+- **Weitere Anpassungen:** `package.json`: `test:unit`, `test:visual`, `test:visual:update`; `test` nutzt `npm` statt `pnpm`. Playwright startet den Dev-Server mit `npm run dev`.
+- **Dokumentation:** `docs/design-system.md`.
 
 ---
 
@@ -462,4 +479,6 @@ Seitenlängen: meist 5–85 px länger (Zeilenhöhe der Überschriften); Startse
 
 - **Lint-Fehler** in `src/components/forms/FormFeedback.tsx`, Zeilen 111–112 (`react-hooks/refs`: „Cannot access refs during render“). Bestanden schon vor T1; `npm run lint` läuft deshalb bis dahin nicht fehlerfrei.
 - **npm-audit-Hinweise** aus `npm ci` prüfen und beheben.
-- **Test `tests/int/api.int.spec.ts` schlägt lokal fehl:** Ohne `DATABASE_URL` versucht Payload eine Postgres-Verbindung zu `localhost:5432` („cannot connect to Postgres“). `npm run test:int` läuft deshalb lokal nicht vollständig durch. Test so anpassen, dass er ohne Datenbank übersprungen wird oder eine eigene Testdatenbank nutzt – nie die Produktionsdatenbank.
+- **Test `tests/int/api.int.spec.ts` schlägt lokal fehl:** Ohne `DATABASE_URL` versucht Payload eine Postgres-Verbindung zu `localhost:5432` („cannot connect to Postgres“). `npm run test:int` läuft deshalb lokal nicht vollständig durch. Test so anpassen, dass er ohne Datenbank übersprungen wird oder eine eigene Testdatenbank nutzt – nie die Produktionsdatenbank. In der CI läuft er als nicht blockierender Schritt; danach blockierend machen.
+- **Lint-Vermerke entfernen:** Nach Behebung der Lint-Fehler `npx eslint . --prune-suppressions` ausführen und den nicht blockierenden Anzeige-Schritt aus `ci.yml` entfernen.
+- **Vorlagen-Test `tests/e2e/frontend.e2e.spec.ts`:** stammt unverändert aus der Payload-Vorlage und erwartet den Titel „Payload Blank Template“; schlägt deshalb fehl. `admin.e2e.spec.ts` legt einen Testnutzer über Payload an und braucht eine Datenbank. Beide ersetzen oder entfernen.

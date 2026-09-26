@@ -12,22 +12,10 @@ if (!outDir) {
 }
 
 const BASE = 'http://localhost:3000'
-const WIDTHS = [390, 810, 1024, 1440, 1920]
-const PAGES = [
-  ['start', '/'],
-  ['services', '/services'],
-  ['jobs', '/jobs'],
-  ['kontakt', '/kontakt'],
-  ['impressum', '/impressum'],
-  ['datenschutz', '/datenschutz'],
-  ['leistungen-plakatwerbung', '/leistungen/plakatwerbung'],
-  ['leistungen-foto-video', '/leistungen/foto-video'],
-  ['leistungen-grafikdesign', '/leistungen/grafikdesign'],
-  ['leistungen-folierung', '/leistungen/folierung'],
-  ['leistungen-social-media', '/leistungen/social-media'],
-  // Testseite mit allen CMS-Blöcken (nur lokal und in der Vorschau erreichbar)
-  ['test-bloecke', '/test-bloecke'],
-]
+// Seiten und Prüfbreiten gemeinsam mit den Screenshot-Tests (tests/e2e/visual.e2e.spec.ts)
+const { widths: WIDTHS, pages: PAGES } = JSON.parse(
+  fs.readFileSync(new URL('../tests/e2e/pages.json', import.meta.url), 'utf8'),
+)
 
 fs.mkdirSync(outDir, { recursive: true })
 const browser = await chromium.launch()
